@@ -15,3 +15,14 @@ vim.o.smartcase  = true
 
 --Make line numbers default
 vim.wo.number = true
+
+--Use hybrid numbers in normal mode and 
+--absolute line numbers in insert mode.
+vim.api.nvim_exec([[
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+augroup END
+]], false)
+
