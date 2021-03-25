@@ -11,8 +11,8 @@ require('lualine').setup{
     lualine_a = { {'mode', upper = true} },
     lualine_b = { {'branch', icon = ''} },
     lualine_c = { {'filename', file_status = true} },
-    lualine_x = { 'encoding', 'fileformat', 'filetype' },
-    lualine_y = { 'progress' },
+    lualine_x = { {'diagnostics', sources = {'nvim_lsp'}} },
+    lualine_y = { 'encoding', 'fileformat', 'filetype' },
     lualine_z = { 'location' },
   },
   inactive_sections = {
