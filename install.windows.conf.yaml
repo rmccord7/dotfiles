@@ -1,0 +1,11 @@
+- default:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    $LOCALAPPDATA\nvim: $USERPROFILE\dotfiles\nvim
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]

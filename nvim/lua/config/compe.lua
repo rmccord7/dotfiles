@@ -1,3 +1,6 @@
+--Set options
+vim.o.completeopt = "menuone,noselect"
+
 require'compe'.setup {
   enabled = true;
   autocomplete = true;
@@ -18,12 +21,10 @@ require'compe'.setup {
     calc = true;
     nvim_lsp = true;
     nvim_lua = true;
-    vsnip = false;
-    treesitter = true;
+    vsnip = true;
+    treesitter = false;
   };
 }
---Set options
-vim.o.completeopt = "menuone,noselect"
 
 --Mappings
 local t = function(str)

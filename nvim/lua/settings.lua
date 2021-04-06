@@ -1,10 +1,10 @@
 -- Formatting options
-vim.o.expandtab    = true -- Expands tabs to spaces
-vim.o.smartindent  = true -- Smarter indentation
-vim.o.tabstop      = 4
-vim.o.softtabstop  = 4
-vim.o.shiftwidth   = 4
-vim.o.wrap         = false
+vim.o.expandtab   = true -- Expands tabs to spaces
+vim.o.smartindent = true -- Smarter indentation
+vim.o.tabstop     = 2
+vim.o.softtabstop = 2
+vim.o.shiftwidth  = 2
+vim.o.wrap        = false
 
 --Do not save when switching buffers
 vim.o.hidden = true
@@ -26,3 +26,6 @@ augroup numbertoggle
 augroup END
 ]], false)
 
+--Show whitespace
+vim.wo.list = true
+vim.o.listchars = "extends:›,precedes:‹,nbsp:·,trail:·"

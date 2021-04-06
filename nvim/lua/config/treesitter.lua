@@ -18,7 +18,7 @@ require'nvim-treesitter.configs'.setup {
   },
   refactor = {
     highlight_definitions = { enable = true },
-    highlight_current_scope = { enable = true },
+    highlight_current_scope = { enable = false },
     smart_rename = {
       enable = true,
       keymaps = {
@@ -41,12 +41,21 @@ require'nvim-treesitter.configs'.setup {
       enable = true,
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner",
-        ["ib"] = "@block.inner",
-        ["ab"] = "@block.outer",
+        ['af'] = '@function.outer',
+        ['if'] = '@function.inner',
+        ['aC'] = '@class.outer',
+        ['iC'] = '@class.inner',
+        ['ac'] = '@conditional.outer',
+        ['ic'] = '@conditional.inner',
+        ['ae'] = '@block.outer',
+        ['ie'] = '@block.inner',
+        ['al'] = '@loop.outer',
+        ['il'] = '@loop.inner',
+        ['is'] = '@statement.inner',
+        ['as'] = '@statement.outer',
+        ['ad'] = '@comment.outer',
+        ['am'] = '@call.outer',
+        ['im'] = '@call.inner',
 
         -- Or you can define your own textobjects like this
         ["iF"] = {
