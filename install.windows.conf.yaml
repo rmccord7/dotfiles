@@ -5,7 +5,7 @@
 - clean: ['~']
 
 - link:
-    $LOCALAPPDATA\nvim: $USERPROFILE\dotfiles\nvim
+    $LOCALAPPDATA\nvim: $USERPROFILE\dotfiles\neovim
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

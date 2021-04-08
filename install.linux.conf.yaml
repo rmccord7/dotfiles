@@ -7,7 +7,7 @@
 - link:
 
     #neovim
-    ~/.config/nvim: nvim
+    ~/.config/nvim: neovim
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
