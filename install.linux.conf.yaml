@@ -5,16 +5,19 @@
 - clean: ['~']
 
 - link:
-    #Bash
+    # Bash
     ~/.bashrc: bash/.bashrc
     ~/.bash_aliases: bash/.bash_aliases
     
-    #neovim
+    # neovim
     ~/.config/nvim: neovim
 
-    #perforce
+    # perforce
     ~/.p4enviro: perforce/.p4enviro
     ~/.p4ignore: perforce/.p4ignore
+
+    # powerline
+    ~/.config/powerline: powerline
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
