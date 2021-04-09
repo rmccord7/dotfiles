@@ -9,8 +9,8 @@ vim.api.nvim_set_keymap('i', 'jk', '<ESC>', { noremap = true})
 vim.api.nvim_set_keymap('i', 'kj', '<ESC>', { noremap = true})
 
 --Quick controls for cycling buffers
-vim.api.nvim_set_keymap('', '<C-n>', ':bn<CR>', { noremap = false})
-vim.api.nvim_set_keymap('', '<C-m>', ':bp<CR>', { noremap = false})
+--vim.api.nvim_set_keymap('', '<C-n>', ':bn<CR>', { noremap = false})
+--vim.api.nvim_set_keymap('', '<C-m>', ':bp<CR>', { noremap = false})
 
 -- Map to remove search highlights
 vim.api.nvim_set_keymap('', '<C-h>', '<C-h> :nohl<CR>', { noremap = false, silent = true})

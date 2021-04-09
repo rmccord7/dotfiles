@@ -12,6 +12,7 @@ vim.o.hidden = true
 --Case insensitive searching UNLESS /C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase  = true
+vim.o.inccommand = "split"
 
 --Make line numbers default
 vim.wo.number = true

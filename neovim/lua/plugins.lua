@@ -105,4 +105,32 @@ return require('packer').startup(function()
     'nfvs/vim-perforce',
   }
 
+  use {
+    'nathanaelkane/vim-indent-guides',
+  }
+
+  use {
+    'Yggdroot/indentLine',
+  }
+
+  use {
+    'tpope/vim-fugitive',
+  }
+
+  use {
+    'tpope/vim-surround',
+  }
+
+  use {
+    'tpope/vim-repeat',
+  }
+
+  use {
+    'tpope/vim-unimpaired',
+  }
+
+  use {
+    'tomtom/tcomment_vim',
+  }
+
 end)

@@ -1,4 +1,4 @@
 *.swp
 *~
-nvim/plugin
-nvim/pack
+neovim/plugin
+neovim/pack

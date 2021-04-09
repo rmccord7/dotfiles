@@ -1,0 +1,54 @@
+gnore perforce files.
+.p4ignore
+.p4config
+.p4enviro
+
+# Ignore object files, shared libraries, executables
+*.obj
+*.lib
+*.dll
+*.exe
+*.o
+*.a
+*.so
+*.d
+
+# Ignore visual studio generated files.
+*.user
+*.ncb
+*.htm
+*.filters
+*.ilk
+*.pdb
+*.exp
+*.lastbuildstate
+*.log
+*.tlog
+unsuccessfulbuild
+*.res
+*.idb
+*.suo
+*.db*
+*.opendb
+*.ipch
+
+# Ignore the distribution directory.
+Distribution\
+distribution\
+Dist\
+
+# Ignore slickedit generated files.
+SlickEdit\
+*.vpj
+*.vpw
+*.vpwhist
+*.vtg
+
+# Ignore temporary Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore text files.
+*.txt
