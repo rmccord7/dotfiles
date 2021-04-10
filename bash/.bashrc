@@ -122,10 +122,10 @@ export PATH=$PATH:/local/mnt/opt/vce
 # Disable bell
 bind 'set bell-style none'
 
-# Add this to your PATH if its not already declared
-export PATH=$PATH:$HOME/.local/bin
- 
-# Powerline configuration
+ #Powerline configuration
+ export PY_USER_BIN=$(python -c 'import site; print(site.USER_BASE + "/bin")')
+ export PATH=$PY_USER_BIN:$PATH
+
 if [ -f $HOME/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh ]; then
     $HOME/.local/bin/powerline-daemon -q
     POWERLINE_BASH_CONTINUATION=1
