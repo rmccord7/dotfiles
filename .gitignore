@@ -1,4 +1,4 @@
 *.swp
 *~
-neovim/plugin
-neovim/pack
+neovim/plugin/
+neovim/pack/
