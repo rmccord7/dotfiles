@@ -1,10 +1,10 @@
 -- Formatting options
-vim.o.expandtab   = true -- Expands tabs to spaces
-vim.o.smartindent = true -- Smarter indentation
-vim.o.tabstop     = 2
-vim.o.softtabstop = 2
-vim.o.shiftwidth  = 2
-vim.o.wrap        = false
+vim.bo.expandtab   = true -- Expands tabs to spaces
+vim.bo.smartindent = true -- Smarter indentation
+vim.bo.tabstop     = 2
+vim.bo.softtabstop = 2
+vim.bo.shiftwidth  = 2
+vim.wo.wrap        = false
 
 --Do not save when switching buffers
 vim.o.hidden = true
@@ -17,7 +17,10 @@ vim.o.inccommand = "split"
 --Make line numbers default
 vim.wo.number = true
 
---Use hybrid numbers in normal mode and 
+--Completion options
+vim.o.completeopt = "menuone,noselect"
+
+--Use hybrid numbers in normal mode and
 --absolute line numbers in insert mode.
 vim.api.nvim_exec([[
 augroup numbertoggle

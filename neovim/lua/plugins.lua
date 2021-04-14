@@ -14,45 +14,85 @@ return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-  -- Completion and linting
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    config = [[require('config.treesitter')]],
-    requires = {
-    'nvim-treesitter/nvim-treesitter-refactor',
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    'nvim-treesitter/playground',
-    'romgrk/nvim-treesitter-context',
-    'p00f/nvim-ts-rainbow'
-    },
-    run = ':TSUpdate'
-  }
-
-  --BarBar
-  use {
-    'romgrk/barbar.nvim',
-    config = [[require('config.barbar')]],
-    requires = {'kyazdani42/nvim-web-devicons'}
-  }
-
-  --BarBar
-  use {
-    'kyazdani42/nvim-tree.lua',
-    config = [[require('config.tree')]],
-    requires = {'kyazdani42/nvim-web-devicons'}
-  }
-
-  --Lualine
+  -- IDE stuff
   use {
     'hoob3rt/lualine.nvim',
     config = [[require('config.lualine')]],
     requires = {'kyazdani42/nvim-web-devicons'}
   }
 
-  --Compe
+  use {
+    'romgrk/barbar.nvim',
+    config = [[require('config.barbar')]],
+    requires = {'kyazdani42/nvim-web-devicons'}
+  }
+
+  use {
+    'kyazdani42/nvim-tree.lua',
+    config = [[require('config.tree')]],
+    requires = {'kyazdani42/nvim-web-devicons'}
+  }
+
+  use {
+    'Yggdroot/indentLine',
+  }
+
+  use {
+    'airblade/vim-rooter',
+    config = [[require('config.rooter')]],
+  }
+
+  -- tpope
+  use {
+    'tpope/vim-surround',
+    'tpope/vim-repeat',
+    'tpope/vim-unimpaired',
+    'tomtom/tcomment_vim',
+  }
+
+  -- Misc
+  use {
+    'junegunn/vim-easy-align',
+    config = [[require('config.easy-align')]],
+  }
+
+  use {
+    'phaazon/hop.nvim',
+    config = [[require('config.hop')]],
+  }
+
+  -- Fuzzy finder
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = {
+      {'nvim-lua/popup.nvim'},
+      {'nvim-lua/plenary.nvim'},
+      {'nvim-telescope/telescope-fzy-native.nvim'}
+    }
+  }
+
+  -- Completion
+  use {
+    'nvim-lua/completion-nvim',
+    requires = {
+      {
+        'hrsh7th/vim-vsnip',
+        config = [[require('config.vsnip')]]
+      },
+      'hrsh7th/vim-vsnip-integ',
+    },
+    disable = true
+  }
+
   use {
     'hrsh7th/nvim-compe',
-    config = [[require('config.compe')]]
+    config = [[require('config.compe')]],
+    requires = {
+      {
+        'hrsh7th/vim-vsnip',
+        config = [[require('config.vsnip')]]
+      },
+    }
   }
 
   --LSP
@@ -66,71 +106,37 @@ return require('packer').startup(function()
     'nvim-lua/lsp-status.nvim',
   }
 
-  --Telecope
+  -- Treesitter
   use {
-    'nvim-telescope/telescope.nvim',
-    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}, {'nvim-telescope/telescope-fzy-native.nvim'}}
+    'nvim-treesitter/nvim-treesitter',
+    config = [[require('config.treesitter')]],
+    requires = {
+    'nvim-treesitter/nvim-treesitter-refactor',
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    'nvim-treesitter/playground',
+    'romgrk/nvim-treesitter-context',
+    'p00f/nvim-ts-rainbow'
+    },
+    run = ':TSUpdate'
   }
 
-  use {
-    'hrsh7th/vim-vsnip',
-    requires = {{'rafamadriz/friendly-snippets'}}
-  }
-
-  use {
-    'mhinz/vim-signify',
-  }
-
-  use {
-    'junegunn/vim-easy-align',
-    config = [[require('config.easy-align')]],
-  }
-
-  use {
-    'phaazon/hop.nvim',
-    config = [[require('config.hop')]],
-  }
-
-  use {
-    'airblade/vim-rooter',
-    config = [[require('config.rooter')]],
-  }
-
+  -- build support
   use {
     'ilyachur/cmake4vim',
     config = [[require('config.cmake')]]
   }
 
-  use {
-    'nfvs/vim-perforce',
-  }
-
-  use {
-    'nathanaelkane/vim-indent-guides',
-  }
-
-  use {
-    'Yggdroot/indentLine',
-  }
-
+  -- git and version control
   use {
     'tpope/vim-fugitive',
   }
 
   use {
-    'tpope/vim-surround',
+    'mhinz/vim-signify',
+    opt = true
   }
 
   use {
-    'tpope/vim-repeat',
+    'nfvs/vim-perforce',
   }
-
-  use {
-    'tpope/vim-unimpaired',
-  }
-
-  use {
-    'tomtom/tcomment_vim',
-  }
-
 end)
