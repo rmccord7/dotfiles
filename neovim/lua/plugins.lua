@@ -71,19 +71,6 @@ return require('packer').startup(function()
     }
   }
 
-  -- Completion
-  use {
-    'nvim-lua/completion-nvim',
-    requires = {
-      {
-        'hrsh7th/vim-vsnip',
-        config = [[require('config.vsnip')]]
-      },
-      'hrsh7th/vim-vsnip-integ',
-    },
-    disable = true
-  }
-
   use {
     'hrsh7th/nvim-compe',
     config = [[require('config.compe')]],
