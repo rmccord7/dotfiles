@@ -60,18 +60,19 @@ local function on_attach(client)
   vim.api.nvim_buf_set_keymap(0, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', {noremap = true, silent = true})
   vim.api.nvim_buf_set_keymap(0, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', {noremap = true, silent = true})
   vim.api.nvim_buf_set_keymap(0, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', {noremap = true, silent = true})
-  vim.api.nvim_buf_set_keymap(0, 'n', '<c-s>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', {noremap = true, silent = true})
-  vim.api.nvim_buf_set_keymap(0, 'n', 'gTD', '<cmd>lua vim.lsp.buf.type_definition()<cr>', {noremap = true, silent = true})
+  vim.api.nvim_buf_set_keymap(0, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', {noremap = true, silent = true})
+  vim.api.nvim_buf_set_keymap(0, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<cr>', {noremap = true, silent = true})
   vim.api.nvim_buf_set_keymap(0, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', {noremap = true, silent = true})
   vim.api.nvim_buf_set_keymap(0, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', {noremap = true, silent = true})
-  vim.api.nvim_buf_set_keymap(0, 'n', 'gA', '<cmd>lua vim.lsp.buf.code_action()<cr>', {noremap = true, silent = true})
+  vim.api.nvim_buf_set_keymap(0, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>', {noremap = true, silent = true})
   vim.api.nvim_buf_set_keymap(0, 'n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>', {noremap = true, silent = true})
-  vim.api.nvim_buf_set_keymap(0, 'n', '<leader>E', '<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>', {noremap = true, silent = true})
-  vim.api.nvim_buf_set_keymap(0, 'n', ']e', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', {noremap = true, silent = true})
-  vim.api.nvim_buf_set_keymap(0, 'n', '[e', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', {noremap = true, silent = true})
+  vim.api.nvim_buf_set_keymap(0, 'n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>', {noremap = true, silent = true})
+  vim.api.nvim_buf_set_keymap(0, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', {noremap = true, silent = true})
+  vim.api.nvim_buf_set_keymap(0, 'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', {noremap = true, silent = true})
 
   if client.resolved_capabilities.document_formatting then
-    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<cr>', {noremap = true, silent = true})
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<cr>', {noremap = true, silent = true})
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>F', '<cmd>lua vim.lsp.buf.range_formatting()<cr>', {noremap = true, silent = true})
   end
 
   if client.resolved_capabilities.document_highlight == true then
@@ -81,6 +82,13 @@ local function on_attach(client)
     vim.cmd('au CursorMoved <buffer> lua vim.lsp.buf.clear_references()')
     vim.cmd('augroup END')
   end
+
+  require "lsp_signature".on_attach({
+        bind = true, -- This is mandatory, otherwise border config won't get registered.
+        handler_opts = {
+          border = "single"
+        }
+  })
 end
 
 local servers = {
@@ -102,6 +110,7 @@ local snippet_capabilities = {
 }
 
 for server, config in pairs(servers) do
+  config.root_dir = lspconfig.util.root_pattern('compile_commands.json', 'compile_flags.txt', '.git')
   config.on_attach = on_attach
   config.capabilities = vim.tbl_deep_extend('keep', config.capabilities or {},
                                             lsp_status.capabilities, snippet_capabilities)

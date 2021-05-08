@@ -1,3 +1,6 @@
+-- Enable TC
+vim.o.termguicolors = true
+
 -- Formatting options
 vim.bo.expandtab   = true -- Expands tabs to spaces
 vim.bo.smartindent = true -- Smarter indentation
@@ -19,6 +22,9 @@ vim.wo.number = true
 
 --Completion options
 vim.o.completeopt = "menuone,noselect"
+
+--No highlight when searching
+vim.o.hlsearch = false
 
 --Use hybrid numbers in normal mode and
 --absolute line numbers in insert mode.

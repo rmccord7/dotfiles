@@ -2,7 +2,7 @@ require'nvim-treesitter.install'.compilers = { "clang" }
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
-    disable = {},
+    disable = {"cpp"},
   },
   incremental_selection = {
     enable = true,
@@ -43,8 +43,8 @@ require'nvim-treesitter.configs'.setup {
         -- You can use the capture groups defined in textobjects.scm
         ['af'] = '@function.outer',
         ['if'] = '@function.inner',
-        ['aC'] = '@class.outer',
-        ['iC'] = '@class.inner',
+        ['aC'] = '@comment.outer',
+        ['iC'] = '@comment.inner',
         ['ac'] = '@conditional.outer',
         ['ic'] = '@conditional.inner',
         ['ae'] = '@block.outer',
@@ -78,19 +78,19 @@ require'nvim-treesitter.configs'.setup {
       enable = true,
       goto_next_start = {
         ["]m"] = "@function.outer",
-        ["]]"] = "@class.outer",
+        ["]]"] = "@comment.outer",
       },
       goto_next_end = {
         ["]M"] = "@function.outer",
-        ["]["] = "@class.outer",
+        ["]["] = "@comment.outer",
       },
       goto_previous_start = {
         ["[m"] = "@function.outer",
-        ["[["] = "@class.outer",
+        ["[["] = "@comment.outer",
       },
       goto_previous_end = {
         ["[M"] = "@function.outer",
-        ["[]"] = "@class.outer",
+        ["[]"] = "@comment.outer",
       },
     },
   },

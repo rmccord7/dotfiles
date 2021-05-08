@@ -1,43 +1,49 @@
---Remap space as leader key
+-- Remap space as leader key
 vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent=true})
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
---Map jk/kj to <esc>. Note that this causes small visual pauses when actually
---typing j or k
+-- Map jk/kj to <esc>. Note that this causes small visual pauses when actually
+-- typing j or k
 vim.api.nvim_set_keymap('i', 'jk', '<ESC>', { noremap = true})
 vim.api.nvim_set_keymap('i', 'kj', '<ESC>', { noremap = true})
 
---Quick controls for cycling buffers
---vim.api.nvim_set_keymap('', '<C-n>', ':bn<CR>', { noremap = false})
---vim.api.nvim_set_keymap('', '<C-m>', ':bp<CR>', { noremap = false})
+-- Reselect last put text
+vim.api.nvim_set_keymap('n', 'gV', '\'[v\']', { noremap = true})
 
 -- Map to remove search highlights
-vim.api.nvim_set_keymap('', '<C-h>', '<C-h> :nohl<CR>', { noremap = false, silent = true})
+--vim.api.nvim_set_keymap('', '<leader>h', '<C-h> :nohl<CR>', { noremap = false, silent = true})
 
---Remove all trailing whitespace by pressing F5
+-- Remove all trailing whitespace by pressing F5
 vim.api.nvim_set_keymap('n', "<F5>", [[<cmd>let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><cr>]], { noremap = true, silent = true})
 
---Compe
+-- Compe
 vim.api.nvim_set_keymap('i', "<C-Space>", [[compe#complete()]], {noremap = true, silent = true, expr = true})
 vim.api.nvim_set_keymap('i', "<CR>", [[compe#confirm()]], {noremap = true, silent = true, expr = true})
 vim.api.nvim_set_keymap('i', "<C-e>", [[compe#close('<C-e>')]], {noremap = true, silent = true, expr = true})
-vim.api.nvim_set_keymap('i', "<C-f>", [[compe#scroll({'delta'" +4})]], {noremap = true, silent = true, expr = true})
-vim.api.nvim_set_keymap('i', "<C-d>", [[compe#scroll({'delta'" +4})]], {noremap = true, silent = true, expr = true})
+--vim.api.nvim_set_keymap('i', "<C-f>", [[compe#scroll({'delta'" +4})]], {noremap = true, silent = true, expr = true})
+--vim.api.nvim_set_keymap('i', "<C-d>", [[compe#scroll({'delta'" +4})]], {noremap = true, silent = true, expr = true})
 
 vim.api.nvim_set_keymap('i', "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap('s', "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap('i', "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap('s', "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
---Telescope
-vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>fb', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>fh', [[<cmd>lua require('telescope.builtin').help_tags()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>fc', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>fo', [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>fr', [[<cmd>lua require('telescope.builtin').registers()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>ft', [[<cmd>lua require('telescope.builtin').treesitter()<cr>]], { noremap = true, silent = true})
+-- Telescope
+vim.api.nvim_set_keymap('n', '<leader>sf', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>sh', [[<cmd>lua require('telescope.builtin').help_tags()<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>so', [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>sr', [[<cmd>lua require('telescope.builtin').registers()<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>st', [[<cmd>lua require('telescope.builtin').treesitter()<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>sc', [[<cmd>lua require('telescope.builtin').command_history()<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>sh', [[<cmd>lua require('telescope.builtin').search_history()<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>su', [[<cmd>lua require('telescope.builtin').commands()<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>sq', [[<cmd>lua require('telescope.builtin').quickfix()<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>sl', [[<cmd>lua require('telescope.builtin').loclist()<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>sk', [[<cmd>lua require('telescope.builtin').keymaps()<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>sm', [[<cmd>lua require('telescope.builtin').marks()<cr>]], { noremap = true, silent = true})
 
 vim.api.nvim_set_keymap('n', '<leader>gc', [[<cmd>lua require('telescope.builtin').git_commits()<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>gb', [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], { noremap = true, silent = true})
@@ -50,8 +56,61 @@ vim.api.nvim_set_keymap('n', '<leader>lr', [[<cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap('n', '<leader>ld', [[<cmd>lua require('telescope.builtin').lsp_document_diagnostics()<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>lw', [[<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>]], { noremap = true, silent = true})
 
---Hop
-vim.api.nvim_set_keymap('n', 's', [[<cmd>HopChar1<cr>]], { noremap = true, silent = true})
+-- Hop
+vim.api.nvim_set_keymap('n', 's', [[<cmd>HopChar2<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>h', [[<cmd>HopChar1<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>l', [[<cmd>HopLine<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>w', [[<cmd>HopWord<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>/', [[<cmd>HoePattern<cr>]], { noremap = true, silent = true})
 
 vim.api.nvim_set_keymap('n', '<leader>t', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>tr', ':NvimTreeRefresh<CR>', { noremap = true, silent = true })
+
+-- Map to align C variable declarations by both identifier and = when visually
+-- selected
+vim.api.nvim_set_keymap('x', '<leader>ad', 'gadgvga=', {})
+
+-- VSnip
+vim.api.nvim_set_keymap("i" , "<C-l>" , "vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'" , { noremap = false , expr = true })
+vim.api.nvim_set_keymap("s" , "<C-l>" , "vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'" , { noremap = false , expr = true })
+
+-- BarBar
+--    Move to previous/next
+vim.api.nvim_set_keymap('n', '<A-,>', ':BufferPrevious<CR>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<A-.>', ':BufferNext<CR>', { noremap = true, silent = true})
+
+--    Re-order to previous/next
+vim.api.nvim_set_keymap('n', '<A-<>', ':BufferMovePrevious<CR>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<A->>', ':BufferMoveNext<CR>', { noremap = true, silent = true})
+
+--    Goto buffer in position
+vim.api.nvim_set_keymap('n', '<A-1>', ':BufferGoto 1<CR>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<A-2>', ':BufferGoto 2<CR>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<A-3>', ':BufferGoto 3<CR>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<A-4>', ':BufferGoto 4<CR>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<A-5>', ':BufferGoto 5<CR>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<A-6>', ':BufferGoto 6<CR>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<A-7>', ':BufferGoto 7<CR>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<A-8>', ':BufferGoto 8<CR>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<A-9>', ':BufferLast 9<CR>', { noremap = true, silent = true})
+
+--    Close buffer
+vim.api.nvim_set_keymap('n', '<A-c>', ':BufferClose<CR>', { noremap = true, silent = true})
+
+-- Magic buffer-picking mode
+vim.api.nvim_set_keymap('n', '<C-s>', ':BufferPick<CR>', { noremap = true, silent = true})
+
+-- Miniyank
+vim.api.nvim_set_keymap('', 'p', '<Plug>(miniyank-autoput)', {})
+vim.api.nvim_set_keymap('', 'P', '<Plug>(miniyank-autoPut)', {})
+
+vim.api.nvim_set_keymap('', '<leader>n', '<Plug>(miniyank-cycle)', {})
+vim.api.nvim_set_keymap('', '<leader>N', '<Plug>(miniyank-cycleback)', {})
+
+--LSP trouble
+vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>LspTroubleToggle<cr>", {silent = true, noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>LspTroubleToggle lsp_workspace_diagnostics<cr>", {silent = true, noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>LspTroubleToggle lsp_document_diagnostics<cr>", {silent = true, noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>LspTroubleToggle loclist<cr>", {silent = true, noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>LspTroubleToggle quickfix<cr>", {silent = true, noremap = true})
+vim.api.nvim_set_keymap("n", "gR", "<cmd>LspTrouble lsp_references<cr>", {silent = true, noremap = true})

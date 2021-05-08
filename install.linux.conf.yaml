@@ -8,7 +8,10 @@
     # Bash
     ~/.bashrc: bash/.bashrc
     ~/.bash_aliases: bash/.bash_aliases
-    
+
+    # Tmux
+    ~/.tmux.conf: tmux/tmux.conf
+
     # neovim
     ~/.config/nvim: neovim
 

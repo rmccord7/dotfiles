@@ -1,7 +1,15 @@
-vim.api.nvim_exec(
-[[
-let bufferline = get(g:, 'bufferline', {})
-let bufferline.icon_separator_active = '|'
-let bufferline.icon_separator_inactive = '|'
-]],
-false)
+-- Can't create/update/delete dictionary directly in lua.
+local bufferline = {
+	animation = true,
+  auto_hide = false,
+	icons = 'both',
+  icon_custom_colors = false,
+  icon_separator_active = '|',
+  icon_separator_inactive = '|',
+  closable = false,
+	clickable = false,
+	letters = 'asdfjkl;ghnmxcbziowerutyqpASDFJKLGHNMXCBZIOWERUTYQP',
+	semantic_letters = true,
+}
+
+vim.g.bufferline = bufferline

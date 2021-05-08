@@ -2,7 +2,7 @@ require'nvim-web-devicons'.setup{}
 
 require('lualine').setup{
   options = {
-    theme = 'auto',
+    theme = 'material-nvim',
     section_separators = {'', ''},
     component_separators = {'', ''},
     icons_enabled = true,
@@ -11,7 +11,7 @@ require('lualine').setup{
     lualine_a = { {'mode', upper = true} },
     lualine_b = { {'branch', icon = ''} },
     lualine_c = { {'filename', file_status = true} },
-    lualine_x = { {'diagnostics', sources = {'nvim_lsp'}} },
+    lualine_x = { {'diagnostics', sources = {'nvim_lsp'}, color_error = '#FF3737', color_warn = '#FAD200', color_info = '#55AAFF'} },
     lualine_y = { 'encoding', 'fileformat', 'filetype' },
     lualine_z = { 'location' },
   },
