@@ -93,6 +93,7 @@ end
 
 local servers = {
   clangd = {
+    root_dir = lspconfig.util.root_pattern('compile_commands.json', 'compile_flags.txt', '.git'),
     handlers = lsp_status.extensions.clangd.setup(),
     init_options = {
       clangdFileStatus = true,
@@ -102,7 +103,13 @@ local servers = {
     }
   },
   cmake = {},
-  pyls = {},
+  pyls = {
+    settings = {
+      pyls = {
+        configurationSources = {enum = { "pyflakes" }, type = "string"}
+      }
+    }
+  },
 }
 
 local snippet_capabilities = {
@@ -110,7 +117,6 @@ local snippet_capabilities = {
 }
 
 for server, config in pairs(servers) do
-  config.root_dir = lspconfig.util.root_pattern('compile_commands.json', 'compile_flags.txt', '.git')
   config.on_attach = on_attach
   config.capabilities = vim.tbl_deep_extend('keep', config.capabilities or {},
                                             lsp_status.capabilities, snippet_capabilities)
