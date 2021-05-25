@@ -189,58 +189,6 @@ return require('packer').startup(function()
     config = [[require('config.cmake')]]
   }
 
-  -- git and version control
-  use {'pwntester/octo.nvim', config=function()
-    require"octo".setup({
-      date_format = "%Y %b %d %I:%M %p %Z";   -- Date format
-      remote_order = {"upstream", "origin"};  -- Order to resolve the remote for the current working directory
-      qf_height = 11;                         -- Percent (when 0 < value < 1) or absolute (when value > 1) height of quickfix window
-      user_icon = " ";                       -- Icon used to signal user names
-      reaction_viewer_hint_icon = "";        -- Icon as alternative or to complement the highlighting of reactions by the viewer himself
-      left_bubble_delimiter = "";            -- Left (unicode) character to draw a bubble for labels etc.
-      right_bubble_delimiter = "";           -- Right (unicode) character to draw a bubble for labels etc.
-      github_hostname = "";                   -- Host name to use for non-public GHE (GitHub Enterprise) instances
-      snippet_context_lines = 4;              -- Number of additional lines displayed from the diff-hunk for single-line comments
-      mappings = {
-        reload = "<C-r>";                     -- reload issue/PR
-        open_in_browser = "<C-o>";            -- open issue/PR in browser
-        goto_issue = "<space>gi";             -- navigate to a local repo issue
-        close = "<space>ic";                  -- close issue/PR
-        reopen = "<space>io";                 -- reopen issue/PR
-        list_issues = "<space>il";            -- list open issues on same repo
-        list_commits = "<space>pc";           -- list PR commits
-        list_changed_files = "<space>pf";     -- list PR changed files
-        show_pr_diff = "<space>pd";           -- show PR diff
-        checkout_pr = "<space>po";            -- checkout PR
-        merge_pr = "<space>pm";               -- merge PR
-        add_reviewer = "<space>va";           -- add reviewer
-        remove_reviewer = "<space>vd";        -- remove reviewer
-        add_assignee = "<space>aa";           -- add assignee
-        remove_assignee = "<space>ad";        -- remove assignee
-        add_label = "<space>la";              -- add label
-        remove_label = "<space>ld";           -- remove label
-        add_comment = "<space>ca";            -- add comment
-        delete_comment = "<space>cd";         -- delete comment
-        add_suggestion = "<space>sa";         -- add review suggestion
-        react_hooray = "<space>rp";           -- add/remove 🎉 reaction
-        react_heart = "<space>rh";            -- add/remove ❤️ reaction
-        react_eyes = "<space>re";             -- add/remove 👀 reaction
-        react_thumbs_up = "<space>r+";        -- add/remove 👍 reaction
-        react_thumbs_down = "<space>r-";      -- add/remove 👎 reaction
-        react_rocket = "<space>rr";           -- add/remove 🚀 reaction
-        react_laugh = "<space>rl";            -- add/remove 😄 reaction
-        react_confused = "<space>rc";         -- add/remove 😕 reaction
-        next_changed_file = "]q";             -- go to next file
-        prev_change_file = "[q";              -- go to previous file
-        next_comment = "]c";                  -- go to next change
-        prev_comment = "[c";                  -- go to previous change
-        next_thread = "]t";                   -- go to previous comment thread
-        prev_thread = "[t";                   -- go to next comment thread
-        close_tab = "<C-c>";                  -- close review tab
-      }
-    })
-  end}
-
   use {
     'tpope/vim-fugitive',
   }
