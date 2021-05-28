@@ -1,8 +1,8 @@
 require'nvim-treesitter.install'.compilers = { "clang" }
 require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "c", "cpp", "python", "lua", "yaml", "json", "bash", "rust" },
   highlight = {
     enable = true,
-    disable = {"cpp"},
   },
   incremental_selection = {
     enable = true,

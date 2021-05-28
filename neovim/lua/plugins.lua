@@ -173,14 +173,33 @@ return require('packer').startup(function()
   use {
     'nvim-treesitter/nvim-treesitter',
     config = [[require('config.treesitter')]],
-    requires = {
-    'nvim-treesitter/nvim-treesitter-refactor',
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    'nvim-treesitter/playground',
-    'romgrk/nvim-treesitter-context',
-    'p00f/nvim-ts-rainbow'
-    },
     run = ':TSUpdate'
+  }
+
+  use {
+    'nvim-treesitter/nvim-treesitter-refactor',
+    requires = { 'nvim-treesitter/nvim-treesitter' }
+  }
+
+  use {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    requires = { 'nvim-treesitter/nvim-treesitter' }
+  }
+
+  use {
+    'nvim-treesitter/playground',
+    requires = { 'nvim-treesitter/nvim-treesitter' }
+  }
+
+  use {
+    'romgrk/nvim-treesitter-context',
+    requires = { 'nvim-treesitter/nvim-treesitter' },
+    opt = true
+  }
+
+  use {
+    'p00f/nvim-ts-rainbow',
+    requires = { 'nvim-treesitter/nvim-treesitter' }
   }
 
   -- build support
@@ -200,4 +219,10 @@ return require('packer').startup(function()
   use {
     'nfvs/vim-perforce',
   }
-end)
+end, {
+  display = {
+    open_fn = function()
+      return require('packer.util').float({ border = 'single' })
+    end
+  }
+})
