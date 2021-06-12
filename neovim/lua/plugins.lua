@@ -63,6 +63,22 @@ return require('packer').startup(function()
     'ray-x/lsp_signature.nvim',
   }
 
+  use {
+    'machakann/vim-sandwich',
+  }
+
+  use {
+    'ludovicchabant/vim-gutentags',
+    config = [[require('config.gutentags')]]
+  }
+
+  use {
+    'skywind3000/gutentags_plus',
+    opt = true,
+    requires = {'ludovicchabant/vim-gutentags'},
+    config = [[require('config.gutentags')]]
+  }
+
   -- colors
   use {
     'rmccord7/material.nvim',
@@ -71,13 +87,6 @@ return require('packer').startup(function()
 
   use {
     'norcalli/nvim-colorizer.lua',
-  }
-
-  -- tpope
-  use {
-    'tpope/vim-surround',
-    'tpope/vim-repeat',
-    'tpope/vim-unimpaired',
   }
 
   -- Misc
