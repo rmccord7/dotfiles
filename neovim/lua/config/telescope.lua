@@ -1,5 +1,3 @@
-require('modules.telescope.dotfiles')
-
 require('telescope').setup{
   defaults = {
     vimgrep_arguments = {
@@ -52,4 +50,4 @@ require('telescope').setup{
 
 --Load native lua fzy since it is faster than the defaults.
 require('telescope').load_extension('fzy_native')
-require('telescope').load_extension('dotfiles')
+require'telescope'.load_extension('dotfiles')
