@@ -44,6 +44,7 @@ vim.api.nvim_set_keymap('n', '<leader>sq', [[<cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap('n', '<leader>sl', [[<cmd>lua require('telescope.builtin').loclist()<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>sk', [[<cmd>lua require('telescope.builtin').keymaps()<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>sm', [[<cmd>lua require('telescope.builtin').marks()<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>fd', [[<cmd>lua Telescope dotfiles path='..os.getenv("HOME")..'/.dotfiles<cr>]], { noremap = true, silent = true})
 
 vim.api.nvim_set_keymap('n', '<leader>gc', [[<cmd>lua require('telescope.builtin').git_commits()<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>gb', [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], { noremap = true, silent = true})
