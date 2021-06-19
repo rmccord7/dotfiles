@@ -33,6 +33,9 @@ augroup numbertoggle
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
   autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+  autocmd TermOpen * startinsert
+  autocmd TermOpen * :set nonumber norelativenumber
+  autocmd TermOpen * nnoremap <buffer> <C-c> i<C-c>
 augroup END
 ]], false)
 

@@ -100,6 +100,21 @@ return require('packer').startup(function()
     config = [[require('config.hop')]],
   }
 
+  use {
+    'ggandor/lightspeed.nvim',
+    opt = true,
+  }
+
+  use {
+    'rmagatti/session-lens',
+    requires = {
+      {'rmagatti/auto-session'},
+    },
+    config = function()
+      require('session-lens').setup({--[[your custom config--]]})
+    end
+  }
+
   -- Fuzzy finder
   use {
     'nvim-telescope/telescope.nvim',
@@ -127,6 +142,10 @@ return require('packer').startup(function()
     'neovim/nvim-lspconfig',
     config = [[require('config.lsp')]],
     requires = {'onsails/lspkind-nvim'}
+  }
+
+  use {
+    'glepnir/lspsaga.nvim',
   }
 
   use {
@@ -204,7 +223,6 @@ return require('packer').startup(function()
   use {
     'romgrk/nvim-treesitter-context',
     requires = { 'nvim-treesitter/nvim-treesitter' },
-    opt = true
   }
 
   use {
