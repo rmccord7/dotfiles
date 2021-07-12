@@ -7,6 +7,7 @@ vim.g.material_italic_variables = false
 vim.g.material_contrast = true
 vim.g.material_borders = false
 vim.g.material_disable_background = false
+vim.g.material_custom_colors = {comments = '#5A6077'}
 
 -- Load the colorscheme
 require('material').set()

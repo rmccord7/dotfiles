@@ -35,7 +35,6 @@ return require('packer').startup(function()
 
   use {
     'lukas-reineke/indent-blankline.nvim',
-    branch = 'lua'
   }
 
   use {
@@ -81,7 +80,7 @@ return require('packer').startup(function()
 
   -- colors
   use {
-    'rmccord7/material.nvim',
+    'marko-cerovac/material.nvim',
     config = [[require('config.material')]]
   }
 
@@ -98,11 +97,11 @@ return require('packer').startup(function()
   use {
     'phaazon/hop.nvim',
     config = [[require('config.hop')]],
+    opt = true
   }
 
   use {
     'ggandor/lightspeed.nvim',
-    opt = true,
   }
 
   use {

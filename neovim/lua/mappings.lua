@@ -59,8 +59,8 @@ vim.api.nvim_set_keymap('n', '<leader>ld', [[<cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap('n', '<leader>lw', [[<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>]], { noremap = true, silent = true})
 
 -- Hop
-vim.api.nvim_set_keymap('n', 's', [[<cmd>HopChar2<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', 'S', [[<cmd>HopLine<cr>]], { noremap = true, silent = true})
+--vim.api.nvim_set_keymap('n', 's', [[<cmd>HopChar2<cr>]], { noremap = true, silent = true})
+--vim.api.nvim_set_keymap('n', 'S', [[<cmd>HopLine<cr>]], { noremap = true, silent = true})
 
 vim.api.nvim_set_keymap('n', '<leader>t', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>tr', ':NvimTreeRefresh<CR>', { noremap = true, silent = true })
@@ -113,3 +113,18 @@ vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>LspTroubleToggle lsp_document_d
 vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>LspTroubleToggle loclist<cr>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>LspTroubleToggle quickfix<cr>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap("n", "gR", "<cmd>LspTrouble lsp_references<cr>", {silent = true, noremap = true})
+
+--Lightspeed
+function repeat_ft(reverse)
+  local ls = require'lightspeed'
+  ls.ft['instant-repeat?'] = true
+  ls.ft:to(reverse, ls.ft['prev-t-like?'])
+end
+vim.api.nvim_set_keymap('n', ';', '<cmd>lua repeat_ft(false)<cr>',
+		    {noremap = true, silent = true})
+vim.api.nvim_set_keymap('x', ';', '<cmd>lua repeat_ft(false)<cr>',
+		    {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', ',', '<cmd>lua repeat_ft(true)<cr>',
+		    {noremap = true, silent = true})
+vim.api.nvim_set_keymap('x', ',', '<cmd>lua repeat_ft(true)<cr>',
+		    {noremap = true, silent = true})
