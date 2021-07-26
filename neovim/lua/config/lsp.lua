@@ -104,13 +104,7 @@ local servers = {
     }
   },
   cmake = {},
-  pyls = {
-    settings = {
-      pyls = {
-        configurationSources = {enum = { "pyflakes" }, type = "string"}
-      }
-    }
-  },
+  pyright = {},
 }
 
 local snippet_capabilities = {

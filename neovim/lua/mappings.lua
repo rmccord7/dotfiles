@@ -31,9 +31,9 @@ vim.api.nvim_set_keymap('s', "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
 -- Telescope
 vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>bf', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>fb', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>ft', [[<cmd>lua require('telescope.builtin').help_tags()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>fb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>bf', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>fo', [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>fr', [[<cmd>lua require('telescope.builtin').registers()<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>tf', [[<cmd>lua require('telescope.builtin').treesitter()<cr>]], { noremap = true, silent = true})
@@ -128,3 +128,18 @@ vim.api.nvim_set_keymap('n', ',', '<cmd>lua repeat_ft(true)<cr>',
 		    {noremap = true, silent = true})
 vim.api.nvim_set_keymap('x', ',', '<cmd>lua repeat_ft(true)<cr>',
 		    {noremap = true, silent = true})
+
+vim.api.nvim_exec(
+[[
+let g:sandwich_no_default_key_mappings = 1
+silent! nmap <unique><silent> <leader>sd <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+silent! nmap <unique><silent> <leader>sr <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+silent! nmap <unique><silent> <leader>sdb <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+silent! nmap <unique><silent> <leader>srb <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+
+let g:operator_sandwich_no_default_key_mappings = 1
+silent! map <unique> <leader>sa <Plug>(operator-sandwich-add)
+silent! xmap <unique> <leader>sd <Plug>(operator-sandwich-delete)
+silent! xmap <unique> <leader>sr <Plug>(operator-sandwich-replace)
+]],
+false)

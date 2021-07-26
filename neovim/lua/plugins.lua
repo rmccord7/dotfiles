@@ -114,6 +114,28 @@ return require('packer').startup(function()
     end
   }
 
+  use {
+    'folke/twilight.nvim',
+    config = function()
+      require("twilight").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+
+  use {
+    "folke/zen-mode.nvim",
+    config = function()
+      require("zen-mode").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+
   -- Fuzzy finder
   use {
     'nvim-telescope/telescope.nvim',
