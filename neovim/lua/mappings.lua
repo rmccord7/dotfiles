@@ -29,6 +29,10 @@ vim.api.nvim_set_keymap('s', "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap('i', "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap('s', "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
+-- ss1pwn
+vim.api.nvim_set_keymap('n', '<F9>', [[<cmd>lua require('ss1pwn.comment').next_bad_comment()<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('v', '<F10>', [[<cmd>lua require('ss1pwn.comment').format_comment()<cr>]], { noremap = true, silent = true})
+
 -- Telescope
 vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>fb', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true, silent = true})

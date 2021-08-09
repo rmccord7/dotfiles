@@ -48,6 +48,7 @@ return require('packer').startup(function()
 
   use {
     'b3nj5m1n/kommentary',
+    config = [[require('config.kommentary')]],
   }
 
   use {
@@ -76,6 +77,16 @@ return require('packer').startup(function()
     opt = true,
     requires = {'ludovicchabant/vim-gutentags'},
     config = [[require('config.gutentags')]]
+  }
+
+  use {
+    "lazytanuki/nvim-mapper",
+    config = function() require("nvim-mapper").setup{} end,
+    before = "telescope.nvim"
+  }
+
+  use {
+    'rmccord7/ss1pwn',
   }
 
   -- colors

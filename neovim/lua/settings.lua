@@ -2,11 +2,11 @@
 vim.o.termguicolors = true
 
 -- Formatting options
-vim.bo.expandtab   = true -- Expands tabs to spaces
-vim.bo.smartindent = true -- Smarter indentation
-vim.bo.tabstop     = 2
-vim.bo.softtabstop = 2
-vim.bo.shiftwidth  = 2
+vim.o.expandtab   = true -- Expands tabs to spaces
+vim.o.smartindent = true -- Smarter indentation
+vim.o.tabstop     = 2
+vim.o.softtabstop = 2
+vim.o.shiftwidth  = 2
 vim.wo.wrap        = false
 
 --Do not save when switching buffers

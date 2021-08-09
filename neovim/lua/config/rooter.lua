@@ -1,1 +1,1 @@
-vim.g.rooter_patterns = {'.git', '.p4config', 'compile_commands.json'}
+vim.g.rooter_patterns = {'.git', '.p4config', '.p4.conf', 'compile_commands.json'}
