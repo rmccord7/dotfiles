@@ -1,4 +1,4 @@
-gnore perforce files.
+# Ignore perforce files.
 .p4ignore
 .p4config
 .p4enviro
@@ -36,6 +36,9 @@ unsuccessfulbuild
 Distribution\
 distribution\
 Dist\
+Distribution/
+distribution/
+Dist/
 
 # Ignore slickedit generated files.
 SlickEdit\
@@ -45,6 +48,7 @@ SlickEdit\
 *.vtg
 
 # Ignore temporary Python files
+__pycache__\
 __pycache__/
 *.pyc
 *.pyo
@@ -52,3 +56,15 @@ __pycache__/
 
 # Ignore text files.
 *.txt
+
+# Ignore cmake binary directories
+out*/
+out*\
+
+# Ignore tag files
+tags
+tags.*
+
+# Ignore clangd
+.clangd/
+compile_commands.json

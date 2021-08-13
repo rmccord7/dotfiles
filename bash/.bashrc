@@ -115,6 +115,7 @@ xinput --set-button-map 12 1 2 3 4 5 7 6
 
 # Set Perforce Config
 export P4CONFIG=.p4.conf
+export P4IGNORE=.p4ignore
 
 # Add VCE to PATH
 export PATH=$PATH:/local/mnt/opt/vce

@@ -32,6 +32,7 @@ vim.api.nvim_set_keymap('s', "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 -- ss1pwn
 vim.api.nvim_set_keymap('n', '<F9>', [[<cmd>lua require('ss1pwn.comment').next_bad_comment()<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('v', '<F10>', [[<cmd>lua require('ss1pwn.comment').format_comment()<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('v', '<F11>', [[<cmd>lua require('ss1pwn.comment').format_all_comments()<cr>]], { noremap = true, silent = true})
 
 -- Telescope
 vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true})
@@ -62,10 +63,12 @@ vim.api.nvim_set_keymap('n', '<leader>lr', [[<cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap('n', '<leader>ld', [[<cmd>lua require('telescope.builtin').lsp_document_diagnostics()<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>lw', [[<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>]], { noremap = true, silent = true})
 
--- Hop
---vim.api.nvim_set_keymap('n', 's', [[<cmd>HopChar2<cr>]], { noremap = true, silent = true})
---vim.api.nvim_set_keymap('n', 'S', [[<cmd>HopLine<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>ls', [[<cmd>SearchSession<cr>]], { noremap = true, silent = true})
 
+-- Symbol Outline
+vim.api.nvim_set_keymap('n', '<leader>so', [[<cmd>SymbolsOutline<cr>]], { noremap = true, silent = true})
+
+-- Nvim Tree
 vim.api.nvim_set_keymap('n', '<leader>t', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>tr', ':NvimTreeRefresh<CR>', { noremap = true, silent = true })
 
