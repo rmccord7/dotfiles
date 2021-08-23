@@ -23,6 +23,7 @@ return require('packer').startup(function()
 
   use {
     'romgrk/barbar.nvim',
+    opt = true,
     config = [[require('config.barbar')]],
     requires = {'kyazdani42/nvim-web-devicons'}
   }
@@ -57,10 +58,6 @@ return require('packer').startup(function()
   }
 
   use {
-    'folke/which-key.nvim',
-  }
-
-  use {
     'ray-x/lsp_signature.nvim',
   }
 
@@ -84,6 +81,13 @@ return require('packer').startup(function()
     "lazytanuki/nvim-mapper",
     config = function() require("nvim-mapper").setup{} end,
     before = "telescope.nvim"
+  }
+
+  use {
+    "AckslD/nvim-neoclip.lua",
+    config = function()
+        require('neoclip').setup()
+    end,
   }
 
   use {

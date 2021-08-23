@@ -114,11 +114,12 @@ export GLOBCFLAGS="-Wno-pointer-to-int-cast -Wno-int-to-pointer-cast -fno-strict
 xinput --set-button-map 12 1 2 3 4 5 7 6
 
 # Set Perforce Config
-export P4CONFIG=.p4.conf
+export P4CONFIG=.p4config
 export P4IGNORE=.p4ignore
+export P4DIFF="nvim -d"
 
-# Add VCE to PATH
-export PATH=$PATH:/local/mnt/opt/vce
+# VCE path
+export VCE_PATH=/prj/qct/asw/qctss/linux/bin/vce
 
 # Disable bell
 bind 'set bell-style none'

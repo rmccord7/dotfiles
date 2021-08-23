@@ -7,7 +7,7 @@ vim.o.smartindent = true -- Smarter indentation
 vim.o.tabstop     = 2
 vim.o.softtabstop = 2
 vim.o.shiftwidth  = 2
-vim.wo.wrap        = false
+vim.wo.wrap       = false
 
 --Do not save when switching buffers
 vim.o.hidden = true
