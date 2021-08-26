@@ -18,16 +18,16 @@ vim.api.nvim_set_keymap('n', 'gV', '\'[v\']', { noremap = true})
 vim.api.nvim_set_keymap('n', "<F5>", [[<cmd>let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><cr>]], { noremap = true, silent = true})
 
 -- Compe
-vim.api.nvim_set_keymap('i', "<C-Space>", [[compe#complete()]], {noremap = true, silent = true, expr = true})
-vim.api.nvim_set_keymap('i', "<CR>", [[compe#confirm()]], {noremap = true, silent = true, expr = true})
-vim.api.nvim_set_keymap('i', "<C-e>", [[compe#close('<C-e>')]], {noremap = true, silent = true, expr = true})
+-- vim.api.nvim_set_keymap('i', "<C-Space>", [[compe#complete()]], {noremap = true, silent = true, expr = true})
+-- vim.api.nvim_set_keymap('i', "<CR>", [[compe#confirm()]], {noremap = true, silent = true, expr = true})
+-- vim.api.nvim_set_keymap('i', "<C-e>", [[compe#close('<C-e>')]], {noremap = true, silent = true, expr = true})
 --vim.api.nvim_set_keymap('i', "<C-f>", [[compe#scroll({'delta'" +4})]], {noremap = true, silent = true, expr = true})
 --vim.api.nvim_set_keymap('i', "<C-d>", [[compe#scroll({'delta'" +4})]], {noremap = true, silent = true, expr = true})
 
-vim.api.nvim_set_keymap('i', "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap('s', "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap('i', "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-vim.api.nvim_set_keymap('s', "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+-- vim.api.nvim_set_keymap('i', "<Tab>", "v:lua.tab_complete()", {expr = true})
+-- vim.api.nvim_set_keymap('s', "<Tab>", "v:lua.tab_complete()", {expr = true})
+-- vim.api.nvim_set_keymap('i', "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+-- vim.api.nvim_set_keymap('s', "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
 -- ss1pwn
 vim.api.nvim_set_keymap('n', '<F9>', [[<cmd>lua require('ss1pwn.comment').next_bad_comment()<cr>]], { noremap = true, silent = true})

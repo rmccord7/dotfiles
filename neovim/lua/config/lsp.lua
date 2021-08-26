@@ -92,6 +92,10 @@ local function on_attach(client)
   })
 end
 
+-- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
+capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
 local servers = {
   clangd = {
     root_dir = lspconfig.util.root_pattern('compile_commands.json', 'compile_flags.txt', '.git'),
@@ -107,13 +111,10 @@ local servers = {
   pyright = {},
 }
 
-local snippet_capabilities = {
-  textDocument = {completion = {completionItem = {snippetSupport = true}}}
-}
-
 for server, config in pairs(servers) do
   config.on_attach = on_attach
   config.capabilities = vim.tbl_deep_extend('keep', config.capabilities or {},
-                                            lsp_status.capabilities, snippet_capabilities)
+                                            lsp_status.capabilities,
+                                            capabilities)
   lspconfig[server].setup(config)
 end

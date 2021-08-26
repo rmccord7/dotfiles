@@ -21,7 +21,7 @@ vim.o.inccommand = "split"
 vim.wo.number = true
 
 --Completion options
-vim.o.completeopt = "menuone,noselect"
+-- vim.o.completeopt = "menu,menuone,noselect"
 
 --No highlight when searching
 vim.o.hlsearch = false
