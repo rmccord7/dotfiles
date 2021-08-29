@@ -45,6 +45,7 @@ cmp.setup {
   sources = {
     { name = 'vsnip' },
     { name = 'nvim_lsp' },
+    { name = 'tags' },
     { name = 'nvim_lua' },
     { name = 'buffer' },
     { name = 'path' },

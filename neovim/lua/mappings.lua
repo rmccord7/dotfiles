@@ -8,26 +8,45 @@ vim.g.maplocalleader = " "
 vim.api.nvim_set_keymap('i', 'jk', '<ESC>', { noremap = true})
 vim.api.nvim_set_keymap('i', 'kj', '<ESC>', { noremap = true})
 
+-- Keep cursor cetered on search and join.
+vim.api.nvim_set_keymap('n', 'n', 'nzzzv', {noremap = true})
+vim.api.nvim_set_keymap('n', 'N', 'Nzzzv', {noremap = true})
+vim.api.nvim_set_keymap('n', 'J', 'mzJ\'z', {noremap = true})
+
+-- Don't undo everything.
+vim.api.nvim_set_keymap('i', '.', '.<c-g>u', {noremap = true})
+vim.api.nvim_set_keymap('i', ',', ',<c-g>u', {noremap = true})
+vim.api.nvim_set_keymap('i', '!', '!<c-g>u', {noremap = true})
+vim.api.nvim_set_keymap('i', '?', '?<c-g>u', {noremap = true})
+
+-- Return from relative number jumping.
+vim.api.nvim_set_keymap('n', 'j', [[(v:count > 5 ? "m'" . v:count : "") . 'j']], {noremap = true, expr = true})
+vim.api.nvim_set_keymap('n', 'k', [[(v:count > 5 ? "m'" . v:count : "") . 'k']], {noremap = true, expr = true})
+
+--Moving text
+vim.api.nvim_set_keymap('v', 'J', [[:m '>+1<CR>gv=gv]], {noremap = true})
+vim.api.nvim_set_keymap('v', 'K', [[:m '<-2<CR>gv=gv]], {noremap = true})
+vim.api.nvim_set_keymap('i', '<C-j>', [[<esc>:m .+1<CR>==]], {noremap = true})
+vim.api.nvim_set_keymap('i', '<C-k>', [[<esc>:m .-2<CR>==]], {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>k', [[:m .-2<CR>==]], {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>j', [[:m .+1<CR>==]], {noremap = true})
+
+-- Change word. Set next word for quick search/replace..
+vim.api.nvim_set_keymap('n', 'cn', [[*''cgn]], {noremap = true})
+vim.api.nvim_set_keymap('n', 'cN', [[*''cgN]], {noremap = true})
+
 -- Reselect last put text
 vim.api.nvim_set_keymap('n', 'gV', '\'[v\']', { noremap = true})
+
+-- Insert new line without leaving normal mode.
+vim.api.nvim_set_keymap('n', '<leader>o', [[:<C-u>call append(line("."), repeat([""], v:count1))<CR>]], {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>O', [[:<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>]], {noremap = true, silent = true})
 
 -- Map to remove search highlights
 --vim.api.nvim_set_keymap('', '<leader>h', '<C-h> :nohl<CR>', { noremap = false, silent = true})
 
 -- Remove all trailing whitespace by pressing F5
-vim.api.nvim_set_keymap('n', "<F5>", [[<cmd>let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><cr>]], { noremap = true, silent = true})
-
--- Compe
--- vim.api.nvim_set_keymap('i', "<C-Space>", [[compe#complete()]], {noremap = true, silent = true, expr = true})
--- vim.api.nvim_set_keymap('i', "<CR>", [[compe#confirm()]], {noremap = true, silent = true, expr = true})
--- vim.api.nvim_set_keymap('i', "<C-e>", [[compe#close('<C-e>')]], {noremap = true, silent = true, expr = true})
---vim.api.nvim_set_keymap('i', "<C-f>", [[compe#scroll({'delta'" +4})]], {noremap = true, silent = true, expr = true})
---vim.api.nvim_set_keymap('i', "<C-d>", [[compe#scroll({'delta'" +4})]], {noremap = true, silent = true, expr = true})
-
--- vim.api.nvim_set_keymap('i', "<Tab>", "v:lua.tab_complete()", {expr = true})
--- vim.api.nvim_set_keymap('s', "<Tab>", "v:lua.tab_complete()", {expr = true})
--- vim.api.nvim_set_keymap('i', "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
--- vim.api.nvim_set_keymap('s', "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+--vim.api.nvim_set_keymap('n', "<F5>", [[<cmd>let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><cr>]], { noremap = true, silent = true})
 
 -- ss1pwn
 vim.api.nvim_set_keymap('n', '<F9>', [[<cmd>lua require('ss1pwn.comment').next_bad_comment()<cr>]], { noremap = true, silent = true})

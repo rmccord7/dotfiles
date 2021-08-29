@@ -165,7 +165,7 @@ return require('packer').startup(function()
 
   use {
     'hrsh7th/nvim-cmp',
-    config = [[require('config.compe')]],
+    config = [[require('config.cmp')]],
     requires = {
       {
         'hrsh7th/vim-vsnip',
@@ -174,6 +174,7 @@ return require('packer').startup(function()
       {'hrsh7th/cmp-buffer'},
       {'hrsh7th/cmp-nvim-lua'},
       {'hrsh7th/cmp-nvim-lsp'},
+      {'quangnguyen30192/cmp-nvim-tags'},
       {'hrsh7th/cmp-path'},
       {'hrsh7th/cmp-vsnip'},
     }
