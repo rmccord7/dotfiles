@@ -1,5 +1,5 @@
-local cmp = require('cmp')
 local lspkind = require('lspkind')
+local cmp = require('cmp')
 
 cmp.setup {
   snippet = {
@@ -11,8 +11,8 @@ cmp.setup {
 
   -- You must set mapping if you want.
   mapping = {
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-p>'] = cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Insert}),
+    ['<C-n>'] = cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Insert}),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
@@ -22,8 +22,8 @@ cmp.setup {
       select = true,
     }),
     ['<Tab>'] = function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
+      if cmp.visible() then
+        cmp.select_next_item()
       elseif vim.fn['vsnip#available']() == 1 then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>(vsnip-expand-or-jump)', true, true, true), '')
       else
@@ -31,8 +31,8 @@ cmp.setup {
       end
     end,
     ['<S-Tab>'] = function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
+      if cmp.visible() then
+        cmp.select_prev_item()
       elseif vim.fn['vsnip#available']() == 1 then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>(vsnip-jump-prev)', true, true, true), '')
       else
@@ -44,16 +44,25 @@ cmp.setup {
   -- You should specify your *installed* sources.
   sources = {
     { name = 'vsnip' },
+    { name = 'treesitter' },
+    { name = 'buffer' },
     { name = 'nvim_lsp' },
     { name = 'tags' },
     { name = 'nvim_lua' },
-    { name = 'buffer' },
     { name = 'path' },
   },
 
   formatting = {
     format = function(entry, vim_item)
       vim_item.kind = lspkind.presets.default[vim_item.kind]
+
+      vim_item.menu = ({
+        buffer = "[Buffer]",
+        nvim_lsp = "[LSP]",
+        vsnip = "[vsnip]",
+        nvim_lua = "[Lua]",
+      })[entry.source.name]
+
       return vim_item
     end
   },

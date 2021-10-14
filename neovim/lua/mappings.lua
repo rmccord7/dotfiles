@@ -8,10 +8,14 @@ vim.g.maplocalleader = " "
 vim.api.nvim_set_keymap('i', 'jk', '<ESC>', { noremap = true})
 vim.api.nvim_set_keymap('i', 'kj', '<ESC>', { noremap = true})
 
--- Keep cursor cetered on search and join.
+-- Keep cursor centered on search, motions, and join.
 vim.api.nvim_set_keymap('n', 'n', 'nzzzv', {noremap = true})
 vim.api.nvim_set_keymap('n', 'N', 'Nzzzv', {noremap = true})
 vim.api.nvim_set_keymap('n', 'J', 'mzJ\'z', {noremap = true})
+vim.api.nvim_set_keymap('n', '[c', '[czz', {noremap = true})
+vim.api.nvim_set_keymap('n', ']c', ']czz', {noremap = true})
+vim.api.nvim_set_keymap('n', '[m', '[mzz', {noremap = true})
+vim.api.nvim_set_keymap('n', ']m', ']mzz', {noremap = true})
 
 -- Don't undo everything.
 vim.api.nvim_set_keymap('i', '.', '.<c-g>u', {noremap = true})
@@ -139,21 +143,6 @@ vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>LspTroubleToggle lsp_document_d
 vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>LspTroubleToggle loclist<cr>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>LspTroubleToggle quickfix<cr>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap("n", "gR", "<cmd>LspTrouble lsp_references<cr>", {silent = true, noremap = true})
-
---Lightspeed
-function repeat_ft(reverse)
-  local ls = require'lightspeed'
-  ls.ft['instant-repeat?'] = true
-  ls.ft:to(reverse, ls.ft['prev-t-like?'])
-end
-vim.api.nvim_set_keymap('n', ';', '<cmd>lua repeat_ft(false)<cr>',
-		    {noremap = true, silent = true})
-vim.api.nvim_set_keymap('x', ';', '<cmd>lua repeat_ft(false)<cr>',
-		    {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', ',', '<cmd>lua repeat_ft(true)<cr>',
-		    {noremap = true, silent = true})
-vim.api.nvim_set_keymap('x', ',', '<cmd>lua repeat_ft(true)<cr>',
-		    {noremap = true, silent = true})
 
 vim.api.nvim_exec(
 [[

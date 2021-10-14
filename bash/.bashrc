@@ -134,3 +134,5 @@ if [ -f $HOME/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerli
     POWERLINE_BASH_SELECT=1
     source $HOME/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 fi
+
+alias luamake=/usr2/rmccord/bin/lua-language-server/3rd/luamake/luamake

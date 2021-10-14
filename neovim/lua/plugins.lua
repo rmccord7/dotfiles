@@ -1,31 +1,33 @@
---Run packer compile whenever this file is written.
+local fn = vim.fn
+local packer_bootstrap = false
+
+-- Run packer compile whenever this file is written.
 vim.cmd('autocmd BufWritePost plugins.lua PackerCompile')
 
-local execute = vim.api.nvim_command
-local fn = vim.fn
-
+-- Install packer if it is not installed.
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
-  execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
+  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
-return require('packer').startup(function()
+return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
   -- IDE stuff
   use {
-    'hoob3rt/lualine.nvim',
-    config = [[require('config.lualine')]],
-    requires = {'kyazdani42/nvim-web-devicons'}
+    'famiu/feline.nvim',
+    config = [[require('config.feline')]],
+    requires = {'kyazdani42/nvim-web-devicons'},
   }
 
   use {
-    'romgrk/barbar.nvim',
-    opt = true,
-    config = [[require('config.barbar')]],
-    requires = {'kyazdani42/nvim-web-devicons'}
+    'lewis6991/gitsigns.nvim',
+    requires = {'nvim-lua/plenary.nvim'},
+    config = function()
+      require('gitsigns').setup()
+    end
   }
 
   use {
@@ -91,13 +93,19 @@ return require('packer').startup(function()
   }
 
   use {
+    'tpope/vim-abolish',
+  }
+
+  use {
     'rmccord7/ss1pwn',
   }
 
   -- colors
   use {
     'marko-cerovac/material.nvim',
-    config = [[require('config.material')]]
+    config = [[require('config.material')]],
+    --commit = '9ada17bb847a83f8356934a314a793bfe3c9a712',
+    before = "feline.nvim"
   }
 
   use {
@@ -111,13 +119,8 @@ return require('packer').startup(function()
   }
 
   use {
-    'phaazon/hop.nvim',
-    config = [[require('config.hop')]],
-    opt = true
-  }
-
-  use {
     'ggandor/lightspeed.nvim',
+    config = [[require('config.lightspeed')]],
   }
 
   use {
@@ -127,28 +130,6 @@ return require('packer').startup(function()
     },
     config = function()
       require('session-lens').setup({--[[your custom config--]]})
-    end
-  }
-
-  use {
-    'folke/twilight.nvim',
-    config = function()
-      require("twilight").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
-    end
-  }
-
-  use {
-    "folke/zen-mode.nvim",
-    config = function()
-      require("zen-mode").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
     end
   }
 
@@ -177,7 +158,9 @@ return require('packer').startup(function()
       {'quangnguyen30192/cmp-nvim-tags'},
       {'hrsh7th/cmp-path'},
       {'hrsh7th/cmp-vsnip'},
-    }
+      {'ray-x/cmp-treesitter'},
+    },
+    before = 'nvim-lspconfig',
   }
 
   --LSP
@@ -196,49 +179,8 @@ return require('packer').startup(function()
   }
 
   use {
-  "folke/lsp-trouble.nvim",
-  requires = "kyazdani42/nvim-web-devicons",
-  config = function()
-    require("trouble").setup {
-      {
-        height = 10, -- height of the trouble list
-        icons = true, -- use devicons for filenames
-        mode = "lsp_workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
-        fold_open = "", -- icon used for open folds
-        fold_closed = "", -- icon used for closed folds
-        action_keys = { -- key mappings for actions in the trouble list
-            close = "q", -- close the list
-            cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
-            refresh = "r", -- manually refresh
-            jump = {"<cr>", "<tab>"}, -- jump to the diagnostic or open / close folds
-            jump_close = {"o"}, -- jump to the diagnostic and close the list
-            toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
-            toggle_preview = "P", -- toggle auto_preview
-            hover = "K", -- opens a small poup with the full multiline message
-            preview = "p", -- preview the diagnostic location
-            close_folds = {"zM", "zm"}, -- close all folds
-            open_folds = {"zR", "zr"}, -- open all folds
-            toggle_fold = {"zA", "za"}, -- toggle fold of current file
-            previous = "k", -- preview item
-            next = "j" -- next item
-        },
-        indent_lines = true, -- add an indent guide below the fold icons
-        auto_open = false, -- automatically open the list when you have diagnostics
-        auto_close = false, -- automatically close the list when you have no diagnostics
-        auto_preview = true, -- automatyically preview the location of the diagnostic. <esc> to close preview and go back to last window
-        auto_fold = false, -- automatically fold a file trouble list at creation
-        signs = {
-            -- icons / text used for a diagnostic
-            error = "",
-            warning = "",
-            hint = "",
-            information = "",
-            other = "﫠"
-        },
-        use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
-      }
-    }
-  end
+    "folke/lsp-trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
   }
 
   -- Treesitter
@@ -290,10 +232,10 @@ return require('packer').startup(function()
   use {
     'nfvs/vim-perforce',
   }
-end, {
-  display = {
-    open_fn = function()
-      return require('packer.util').float({ border = 'single' })
-    end
-  }
-})
+
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
+  if packer_bootstrap then
+    require('packer').sync()
+  end
+end)

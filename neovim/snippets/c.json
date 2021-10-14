@@ -1,8 +1,13 @@
 {
+  "blk": {
+    "prefix": "blk",
+    "body": ["{", "}"],
+    "description": "Code snippet for if statement"
+  },
   "for": {
     "prefix": "for",
     "body": [
-      "for(${size_t} ${i} = ${1:0}; ${i} < ${2:length}; ${i}++)",
+      "for(${Index} = ${1:0}; ${Index} < ${2:length}; ${Index}++)",
       "{",
       "\t$3",
       "}"
@@ -26,17 +31,17 @@
   },
   "if": {
     "prefix": "if",
-    "body": ["if($1)", "{", "\t$2", "}"],
+    "body": ["if($1)", "{", "}"],
     "description": "Code snippet for if statement"
   },
   "else": {
     "prefix": "else",
-    "body": ["else", "{", "\t$1", "}"],
+    "body": ["else", "{", "}"],
     "description": "Code snippet for else statement"
   },
   "else if": {
     "prefix": "else if",
-    "body": ["else if($1)", "{", "\t$2", "}"],
+    "body": ["else if($1)", "{", "}"],
     "description": "Code snippet for else-if statement"
   },
   "enum": {
@@ -66,7 +71,7 @@
   },
   "switch": {
     "prefix": "switch",
-    "body": ["switch (${switch_on})", "{", "default:", "\tbreak;$1", "}"],
+    "body": ["switch($1)", "{", "\tdefault:", "\t\tbreak;", "}"],
     "description": "Code snippet for switch statement"
   },
   "union": {

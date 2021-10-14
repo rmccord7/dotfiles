@@ -1,6 +1,15 @@
+local global = require('global')
 local lspconfig = require('lspconfig')
 local lsp_status = require('lsp-status')
 local lspkind = require('lspkind')
+
+-- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
+local sumneko_root_path = global.home .. "/bin/lua-language-server"
+local sumneko_binary = sumneko_root_path .. "/bin/" .. "Linux" .. "/lua-language-server"
+
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
 
 local kind_symbols = {
   Text = '',
@@ -72,8 +81,8 @@ local function on_attach(client)
   vim.api.nvim_buf_set_keymap(0, 'n', 'gh', '<cmd>lua require"lspsaga.provider".lsp_finder()<cr>', {noremap = true, silent = true})
 
   if client.resolved_capabilities.document_formatting then
-    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<cr>', {noremap = true, silent = true})
-    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>F', '<cmd>lua vim.lsp.buf.range_formatting()<cr>', {noremap = true, silent = true})
+    --vim.api.nvim_buf_set_keymap(0, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<cr>', {noremap = true, silent = true})
+    --vim.api.nvim_buf_set_keymap(0, 'n', '<leader>F', '<cmd>lua vim.lsp.buf.range_formatting()<cr>', {noremap = true, silent = true})
   end
 
   if client.resolved_capabilities.document_highlight == true then
@@ -109,6 +118,28 @@ local servers = {
   },
   cmake = {},
   pyright = {},
+  sumneko_lua = {
+    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
+    root_dir = lspconfig.util.root_pattern('.git'),
+    settings = {
+      Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+          version = 'LuaJIT',
+          -- Setup your lua path
+          path = runtime_path,
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = {'vim'},
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = vim.api.nvim_get_runtime_file("", true),
+        },
+      },
+    },
+  },
 }
 
 for server, config in pairs(servers) do
