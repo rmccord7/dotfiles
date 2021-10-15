@@ -124,12 +124,17 @@ return require('packer').startup(function(use)
   }
 
   use {
+    'rmagatti/auto-session',
+    config = [[require('config.auto-session')]],
+  }
+
+  use {
     'rmagatti/session-lens',
     requires = {
       {'rmagatti/auto-session'},
     },
     config = function()
-      require('session-lens').setup({--[[your custom config--]]})
+      require('session-lens').setup({})
     end
   }
 
