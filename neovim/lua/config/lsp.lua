@@ -76,8 +76,10 @@ local function on_attach(client)
   vim.api.nvim_buf_set_keymap(0, 'v', '<leader>ca', '<cmd>lua require("lspsaga.codeaction").range_code_action()<cr>', {noremap = true, silent = true})
   vim.api.nvim_buf_set_keymap(0, 'n', 'cd', '<cmd>require"lspsaga.diagnostic".show_line_diagnostics()<cr>', {noremap = true, silent = true})
   vim.api.nvim_buf_set_keymap(0, 'n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>', {noremap = true, silent = true})
-  vim.api.nvim_buf_set_keymap(0, 'n', ']e', '<cmd>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_next()<cr>', {noremap = true, silent = true})
-  vim.api.nvim_buf_set_keymap(0, 'n', '[e', '<cmd>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_prev()<cr>', {noremap = true, silent = true})
+  --vim.api.nvim_buf_set_keymap(0, 'n', ']e', '<cmd>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_next()<cr>', {noremap = true, silent = true})
+  --vim.api.nvim_buf_set_keymap(0, 'n', '[e', '<cmd>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_prev()<cr>', {noremap = true, silent = true})
+  vim.api.nvim_buf_set_keymap(0, 'n', ']e', '<cmd>Lspsaga diagnostic_jump_next<cr>', {noremap = true, silent = true})
+  vim.api.nvim_buf_set_keymap(0, 'n', '[e', '<cmd>Lspsaga diagnostic_jump_prev<cr>', {noremap = true, silent = true})
   vim.api.nvim_buf_set_keymap(0, 'n', 'gh', '<cmd>lua require"lspsaga.provider".lsp_finder()<cr>', {noremap = true, silent = true})
 
   if client.resolved_capabilities.document_formatting then

@@ -176,7 +176,8 @@ return require('packer').startup(function(use)
   }
 
   use {
-    'glepnir/lspsaga.nvim',
+    --'glepnir/lspsaga.nvim',
+    'tami5/lspsaga.nvim',
   }
 
   use {
@@ -218,6 +219,11 @@ return require('packer').startup(function(use)
   use {
     'p00f/nvim-ts-rainbow',
     requires = { 'nvim-treesitter/nvim-treesitter' }
+  }
+
+  use {
+    'luukvbaal/stabilize.nvim',
+    config = function() require("stabilize").setup() end
   }
 
   -- build support
