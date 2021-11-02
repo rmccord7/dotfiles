@@ -2,7 +2,7 @@
 
 set -e
 
-CONFIG="install.linux.conf.yaml"
+CONFIG="yaml/install.mac.conf.yaml"
 DOTBOT_DIR="dotbot"
 
 DOTBOT_BIN="bin/dotbot"

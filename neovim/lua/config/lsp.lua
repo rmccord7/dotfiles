@@ -5,7 +5,15 @@ local lspkind = require('lspkind')
 
 -- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
 local sumneko_root_path = global.home .. "/bin/lua-language-server"
-local sumneko_binary = sumneko_root_path .. "/bin/" .. "Linux" .. "/lua-language-server"
+
+local sumneko_binary
+if global.is_linux or global.is_windows then
+  sumneko_binary = sumneko_root_path .. "/bin/" .. global.os_name .. "/lua-language-server"
+else
+  if global.is_mac then
+    sumneko_binary = sumneko_root_path .. "/bin/macOS/lua-language-server"
+  end
+end
 
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
@@ -82,11 +90,6 @@ local function on_attach(client)
   vim.api.nvim_buf_set_keymap(0, 'n', '[e', '<cmd>Lspsaga diagnostic_jump_prev<cr>', {noremap = true, silent = true})
   vim.api.nvim_buf_set_keymap(0, 'n', 'gh', '<cmd>lua require"lspsaga.provider".lsp_finder()<cr>', {noremap = true, silent = true})
 
-  if client.resolved_capabilities.document_formatting then
-    --vim.api.nvim_buf_set_keymap(0, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<cr>', {noremap = true, silent = true})
-    --vim.api.nvim_buf_set_keymap(0, 'n', '<leader>F', '<cmd>lua vim.lsp.buf.range_formatting()<cr>', {noremap = true, silent = true})
-  end
-
   if client.resolved_capabilities.document_highlight == true then
     vim.cmd('augroup lsp_aucmds')
     vim.cmd('au CursorHold <buffer> lua vim.lsp.buf.document_highlight()')
@@ -103,8 +106,9 @@ local function on_attach(client)
   })
 end
 
--- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
-capabilities = vim.lsp.protocol.make_client_capabilities()
+-- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers.
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local servers = {

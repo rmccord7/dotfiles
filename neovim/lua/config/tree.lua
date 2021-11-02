@@ -1,4 +1,3 @@
-vim.g.nvim_tree_ignore = { '.git', 'out', 'dist' }
 vim.g.nvim_tree_show_icons = {
 	git = 1,
 	folders = 1,
@@ -12,7 +11,7 @@ vim.g.nvim_tree_icons = {
 		staged = "✓",
 		unmerged = "",
 		renamed = "➜",
-		untracked = "★"
+		untracked = "?"
 	},
 	folder = {
 		default = "",
@@ -21,4 +20,11 @@ vim.g.nvim_tree_icons = {
 }
 
 require'nvim-tree'.setup {
+  filters = {
+    custom = {
+      '.git',
+      'out',
+      'dist'
+    },
+  },
 }
