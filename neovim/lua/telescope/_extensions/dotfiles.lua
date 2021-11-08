@@ -12,7 +12,7 @@ local dotfiles_list = function(opts)
   for file in p:lines() do
     table.insert(list,file)
   end
-  local nvim_conf = io.popen('rg --files '.. global.home .. global.path_sep .. '/dotfiles')
+  local nvim_conf = io.popen('rg --files ' .. global.home .. global.path_sep .. 'dotfiles')
   for file in nvim_conf:lines() do
     table.insert(list,file)
   end

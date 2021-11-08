@@ -74,6 +74,9 @@ plugins=(
   git
   zsh-autosuggestions
   dirhistory
+  zsh-syntax-highlighting
+  k
+  autojump
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -109,7 +112,10 @@ alias ll='ls -alF'
 
 alias luamake=/Users/rmccord/lua-language-server/3rd/luamake/luamake
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
 # Starship
 eval "$(starship init zsh)"
+
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
