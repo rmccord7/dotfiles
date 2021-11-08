@@ -1,12 +1,10 @@
-[memory_usage]
-disabled = false
-threshold = -1
-symbol = " "
-style = "bold dimmed green"
+# Replace the "❯" symbol in the prompt with "➜"
+[character]                            # The name of the module we are configuring is "character"
+success_symbol = "[➜](bold green)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
 
-[time]
-disabled = false
-format = '🕙[\[ $time \]]($style) '
-time_format = "%T"
-utc_time_offset = "-5"
-time_range = "10:00:00-14:00:00"
+[lua]
+disabled = true
+
+[python]
+python_binary = "python3"
+detect_extensions = []
