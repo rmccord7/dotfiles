@@ -124,15 +124,7 @@ export VCE_PATH=/prj/qct/asw/qctss/linux/bin/vce
 # Disable bell
 bind 'set bell-style none'
 
- #Powerline configuration
- export PY_USER_BIN=$(python -c 'import site; print(site.USER_BASE + "/bin")')
- export PATH=$PY_USER_BIN:$PATH
-
-if [ -f $HOME/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh ]; then
-    $HOME/.local/bin/powerline-daemon -q
-    POWERLINE_BASH_CONTINUATION=1
-    POWERLINE_BASH_SELECT=1
-    source $HOME/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
-fi
+# Starship
+eval "$(starship init bash)"
 
 alias luamake=/usr2/rmccord/bin/lua-language-server/3rd/luamake/luamake
