@@ -44,9 +44,9 @@ cmp.setup {
   -- You should specify your *installed* sources.
   sources = {
     { name = 'vsnip' },
-    { name = 'treesitter' },
-    { name = 'buffer' },
+    --{ name = 'treesitter' },
     { name = 'nvim_lsp' },
+    --{ name = 'buffer' },
     { name = 'tags' },
     { name = 'nvim_lua' },
     { name = 'path' },
