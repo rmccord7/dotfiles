@@ -168,6 +168,19 @@ return require('packer').startup(function(use)
     before = 'nvim-lspconfig',
   }
 
+  --Harpoon
+  use {
+    'brandoncc/telescope-harpoon.nvim',
+    requires = {
+      {'ThePrimeagen/harpoon'},
+      {'nvim-lua/plenary.nvim'},
+      {'nvim-telescope/telescope.nvim'},
+    },
+    config = function()
+      require('harpoon').setup({})
+    end
+  }
+
   --LSP
   use {
     'neovim/nvim-lspconfig',
