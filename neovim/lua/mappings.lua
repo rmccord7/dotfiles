@@ -3,6 +3,9 @@ vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent=true})
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Packer
+vim.api.nvim_set_keymap('n', '<leader>ps', [[<cmd>PackerSync<cr>]], { noremap = true, silent = true})
+
 -- Use float winoow for ex mode
 vim.api.nvim_set_keymap("n", ":", [[<cmd>lua require('fine-cmdline').open()<cr>]], {silent = true, noremap = true})
 

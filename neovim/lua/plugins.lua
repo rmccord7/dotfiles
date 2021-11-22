@@ -108,7 +108,6 @@ return require('packer').startup(function(use)
   use {
     'marko-cerovac/material.nvim',
     config = [[require('config.material')]],
-    --commit = '9ada17bb847a83f8356934a314a793bfe3c9a712',
     before = "feline.nvim"
   }
 
