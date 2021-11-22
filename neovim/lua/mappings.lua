@@ -3,6 +3,9 @@ vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent=true})
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Use float winoow for ex mode
+vim.api.nvim_set_keymap("n", ":", [[<cmd>lua require('fine-cmdline').open()<cr>]], {silent = true, noremap = true})
+
 -- Map jk/kj to <esc>. Note that this causes small visual pauses when actually
 -- typing j or k
 vim.api.nvim_set_keymap('i', 'jk', '<ESC>', { noremap = true})
@@ -94,6 +97,12 @@ vim.api.nvim_set_keymap('n', '<leader>so', [[<cmd>SymbolsOutline<cr>]], { norema
 -- Symbol Outline
 vim.api.nvim_set_keymap('n', '<leader>"', [[<cmd>Telescope neoclip<cr>]], { noremap = true, silent = true})
 
+-- Treesitter text objects
+vim.api.nvim_set_keymap('n', ']m', [[<cmd>TSTextobjectGotoNextStart @function.outer<cr>zz]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', ']M', [[<cmd>TSTextobjectGotoNextEnd @function.outer<cr>zz]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '[m', [[<cmd>TSTextobjectGotoPreviousStart @function.outer<cr>zz]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '[M', [[<cmd>TSTextobjectGotoPreviousEnd @function.outer<cr>zz]], { noremap = true, silent = true})
+
 -- Nvim Tree
 vim.api.nvim_set_keymap('n', '<leader>t', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>tr', ':NvimTreeRefresh<CR>', { noremap = true, silent = true })
@@ -121,6 +130,7 @@ vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>LspTroubleToggle loclist<cr>", 
 vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>LspTroubleToggle quickfix<cr>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap("n", "gR", "<cmd>LspTrouble lsp_references<cr>", {silent = true, noremap = true})
 
+-- Sandwich
 vim.api.nvim_exec(
 [[
 let g:sandwich_no_default_key_mappings = 1

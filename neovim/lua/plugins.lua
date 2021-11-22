@@ -185,6 +185,23 @@ return require('packer').startup(function(use)
     end
   }
 
+  use {
+    'VonHeikemen/fine-cmdline.nvim',
+    config = function()
+      require('fine-cmdline').setup({
+        popup = {
+          position = {
+            row = '50%',
+            col = '50%',
+          },
+        },
+      })
+    end,
+    requires = {
+      {'MunifTanjim/nui.nvim'}
+    }
+  }
+
   --LSP
   use {
     'neovim/nvim-lspconfig',
