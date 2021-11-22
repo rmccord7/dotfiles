@@ -8,3 +8,38 @@ disabled = true
 [python]
 python_binary = "python3"
 detect_extensions = []
+
+[cmake]
+disabled = true
+
+[custom.p4client]
+description = "Displays current perforce client"
+command = """
+cat $(find_up.sh . -iname ".p4config") | grep P4CLIENT | cut -d "=" -f 2
+"""
+style = 'red'
+shell = ["bash","--noprofile"]
+when = """
+if [ $(find_up.sh . -iname ".p4config") ]; then
+  exit 0
+fi
+exit 1
+"""
+format = "client [$output](green) "
+
+[custom.p4port]
+description = "Displays current perforce client"
+command = """
+cat $(find_up.sh . -iname ".p4config") | grep P4PORT | cut -d "=" -f 2
+"""
+style = 'red'
+shell = ["bash","--noprofile"]
+when = """
+if [ $(find_up.sh . -iname ".p4config") ]; then
+  exit 0
+fi
+exit 1
+"""
+format = "at [$output](green) "
+
+  #export $(cat $(p4config) | xargs) > /dev/null

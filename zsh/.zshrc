@@ -77,6 +77,7 @@ plugins=(
   zsh-syntax-highlighting
   k
   autojump
+  colored-man-pages
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -111,6 +112,11 @@ alias python=python3
 alias ll='ls -alF'
 
 alias luamake=/Users/rmccord/lua-language-server/3rd/luamake/luamake
+
+# Perforce
+export P4CONFIG=.p4config
+export P4IGNORE=.p4ignore
+export P4DIFF="nvim -d"
 
 # Starship
 eval "$(starship init zsh)"
