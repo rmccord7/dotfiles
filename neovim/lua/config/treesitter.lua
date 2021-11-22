@@ -76,22 +76,6 @@ require'nvim-treesitter.configs'.setup {
     },
     move = {
       enable = true,
-      goto_next_start = {
-        ["]m"] = "@function.outer",
-        ["]]"] = "@comment.outer",
-      },
-      goto_next_end = {
-        ["]M"] = "@function.outer",
-        ["]["] = "@comment.outer",
-      },
-      goto_previous_start = {
-        ["[m"] = "@function.outer",
-        ["[["] = "@comment.outer",
-      },
-      goto_previous_end = {
-        ["[M"] = "@function.outer",
-        ["[]"] = "@comment.outer",
-      },
     },
   },
   rainbow = {

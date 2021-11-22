@@ -108,7 +108,6 @@ return require('packer').startup(function(use)
   use {
     'marko-cerovac/material.nvim',
     config = [[require('config.material')]],
-    --commit = '9ada17bb847a83f8356934a314a793bfe3c9a712',
     before = "feline.nvim"
   }
 
@@ -183,6 +182,23 @@ return require('packer').startup(function(use)
     config = function()
       require('harpoon').setup({})
     end
+  }
+
+  use {
+    'VonHeikemen/fine-cmdline.nvim',
+    config = function()
+      require('fine-cmdline').setup({
+        popup = {
+          position = {
+            row = '50%',
+            col = '50%',
+          },
+        },
+      })
+    end,
+    requires = {
+      {'MunifTanjim/nui.nvim'}
+    }
   }
 
   --LSP
