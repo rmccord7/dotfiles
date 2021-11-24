@@ -1,3 +1,5 @@
+Utils = require('utils')
+
 -- Enable TC
 vim.o.termguicolors = true
 
@@ -21,24 +23,56 @@ vim.o.inccommand = "split"
 vim.wo.number = true
 
 --Completion options
--- vim.o.completeopt = "menu,menuone,noselect"
+vim.o.completeopt = "menu,menuone,noselect"
 
 --No highlight when searching
 vim.o.hlsearch = false
 
---Use hybrid numbers in normal mode and
---absolute line numbers in insert mode.
-vim.api.nvim_exec([[
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
-  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
-  autocmd TermOpen * startinsert
-  autocmd TermOpen * :set nonumber norelativenumber
-  autocmd TermOpen * nnoremap <buffer> <C-c> i<C-c>
-augroup END
-]], false)
-
 --Show whitespace
 vim.wo.list = true
 vim.o.listchars = "extends:›,precedes:‹,nbsp:·,trail:·"
+
+-- Default grep command
+-- Prefer ripgrep over grep
+if vim.fn.executable('rg') == 1 then
+    vim.opt.grepprg = 'rg --vimgrep --smart-case'
+else
+    vim.opt.grepprg = 'grep -nH'
+end
+
+-- Folding (with Treesitter)
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').]] ..
+                   [[' ... '.trim(getline(v:foldend)).]] ..
+                   [[' ('.(v:foldend-v:foldstart).' lines folded...)']]
+vim.opt.fillchars = "fold: "
+vim.opt.foldlevel = 99
+vim.opt.foldnestmax = 3
+vim.opt.foldminlines = 4
+
+-- Persistent undo
+vim.opt.undofile = true
+
+-- Auto read file changes
+vim.opt.autoread = true
+
+-- Wildmenu
+vim.opt.wildmode = {'longest', 'list', 'full'}
+vim.opt.wildmenu = true
+
+--Use hybrid numbers in normal mode and
+--absolute line numbers in insert mode.
+Utils.create_augroup({
+    { 'BufEnter,FocusGained,InsertLeave,WinEnter', '*', 'if &nu && mode() != "i" | set rnu   | endif' },
+    { 'BufLeave,FocusLost,InsertEnter,WinLeave', '*', 'if &nu | set nornu | endif' },
+    { 'TermOpen', '*', 'startinsert' },
+    { 'TermOpen', '*', ':set nonumber norelativenumber' },
+    { 'TermOpen', '*', 'nnoremap <buffer> <C-c> i<C-c>' }
+}, 'NumberLines')
+
+-- Create directory on save if it doesn't exist.
+Utils.create_augroup({
+    { 'BufWritePre', '*', 'lua require("utils").create_file_directory_structure()' }
+}, 'MkdirOnSave')
+
