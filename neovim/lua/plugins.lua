@@ -48,10 +48,14 @@ return require('packer').startup(function(use)
   use {
     "ahmedkhalf/project.nvim",
     config = function()
-      require("project_nvim").setup {
-        patterns = {'.git', '.p4config', '.p4.conf', 'compile_commands.json'}
+      require('project_nvim').setup {
+        patterns = {'.git', '.p4config', '.p4.conf', 'compile_commands.json'},
       }
     end
+  }
+
+  use {
+    "editorconfig/editorconfig-vim",
   }
 
   use {
