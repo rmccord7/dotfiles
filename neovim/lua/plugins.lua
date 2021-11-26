@@ -167,6 +167,7 @@ return require('packer').startup(function(use)
       {'hrsh7th/cmp-path'},
       {'hrsh7th/cmp-vsnip'},
       {'ray-x/cmp-treesitter'},
+      {'lukas-reineke/cmp-under-comparator'},
     },
     before = 'nvim-lspconfig',
   }
@@ -199,6 +200,18 @@ return require('packer').startup(function(use)
     requires = {
       {'MunifTanjim/nui.nvim'}
     }
+  }
+
+  use {
+    'rcarriga/nvim-notify',
+    config = function()
+      require('notify').setup({
+        stages = "fade",
+        background_colour = require('material.colors').bg
+      })
+
+      vim.notify = require 'notify'
+    end,
   }
 
   --LSP

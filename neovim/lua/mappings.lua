@@ -1,137 +1,154 @@
+local map = require('utils').map
+
 -- Remap space as leader key
-vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent=true})
+map('', '<Space>', '<Nop>')
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Packer
-vim.api.nvim_set_keymap('n', '<leader>ps', [[<cmd>PackerSync<cr>]], { noremap = true, silent = true})
+map('n', '<leader>ps', [[<cmd>PackerSync<CR>]], {silent = true})
 
 -- Use float winoow for ex mode
-vim.api.nvim_set_keymap("n", ":", [[<cmd>lua require('fine-cmdline').open()<cr>]], {silent = true, noremap = true})
+map("n", ":", [[<cmd>lua require('fine-cmdline').open()<CR>]], {silent = true})
+
+-- Ex-mode is weird and not useful so it seems better to repeat the last macro
+map('n', 'Q', '@@')
 
 -- Map jk/kj to <esc>. Note that this causes small visual pauses when actually
 -- typing j or k
-vim.api.nvim_set_keymap('i', 'jk', '<ESC>', { noremap = true})
-vim.api.nvim_set_keymap('i', 'kj', '<ESC>', { noremap = true})
+map('i', 'jk', '<ESC>')
+map('i', 'kj', '<ESC>')
 
 -- Keep cursor centered on search, motions, and join.
-vim.api.nvim_set_keymap('n', 'n', 'nzzzv', {noremap = true})
-vim.api.nvim_set_keymap('n', 'N', 'Nzzzv', {noremap = true})
-vim.api.nvim_set_keymap('n', 'J', 'mzJ\'z', {noremap = true})
-vim.api.nvim_set_keymap('n', '[c', '[czz', {noremap = true})
-vim.api.nvim_set_keymap('n', ']c', ']czz', {noremap = true})
-vim.api.nvim_set_keymap('n', '[m', '[mzz', {noremap = true})
-vim.api.nvim_set_keymap('n', ']m', ']mzz', {noremap = true})
+map('n', 'n', 'nzzzv')
+map('n', 'N', 'Nzzzv')
+map('n', 'J', 'mzJ\'z')
+map('n', '[c', '[czz')
+map('n', ']c', ']czz')
+map('n', '[m', '[mzz')
+map('n', ']m', ']mzz')
 
 -- Don't undo everything.
-vim.api.nvim_set_keymap('i', '.', '.<c-g>u', {noremap = true})
-vim.api.nvim_set_keymap('i', ',', ',<c-g>u', {noremap = true})
-vim.api.nvim_set_keymap('i', '!', '!<c-g>u', {noremap = true})
-vim.api.nvim_set_keymap('i', '?', '?<c-g>u', {noremap = true})
+map('i', '.', '.<c-g>u')
+map('i', ',', ',<c-g>u')
+map('i', '!', '!<c-g>u')
+map('i', '?', '?<c-g>u')
 
 -- Return from relative number jumping.
-vim.api.nvim_set_keymap('n', 'j', [[(v:count > 5 ? "m'" . v:count : "") . 'j']], {noremap = true, expr = true})
-vim.api.nvim_set_keymap('n', 'k', [[(v:count > 5 ? "m'" . v:count : "") . 'k']], {noremap = true, expr = true})
+map('n', 'j', [[(v:count > 5 ? "m'" . v:count : "") . 'j']], {expr = true})
+map('n', 'k', [[(v:count > 5 ? "m'" . v:count : "") . 'k']], {expr = true})
 
 --Moving text
-vim.api.nvim_set_keymap('v', 'J', [[:m '>+1<CR>gv=gv]], {noremap = true})
-vim.api.nvim_set_keymap('v', 'K', [[:m '<-2<CR>gv=gv]], {noremap = true})
-vim.api.nvim_set_keymap('i', '<C-j>', [[<esc>:m .+1<CR>==]], {noremap = true})
-vim.api.nvim_set_keymap('i', '<C-k>', [[<esc>:m .-2<CR>==]], {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>k', [[:m .-2<CR>==]], {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>j', [[:m .+1<CR>==]], {noremap = true})
+map('v', 'J', [[:m '>+1<CR>gv=gv]])
+map('v', 'K', [[:m '<-2<CR>gv=gv]])
+map('i', '<C-j>', [[<esc>:m .+1<CR>==]])
+map('i', '<C-k>', [[<esc>:m .-2<CR>==]])
+map('n', '<leader>k', [[:m .-2<CR>==]])
+map('n', '<leader>j', [[:m .+1<CR>==]])
 
 -- Change word. Set next word for quick search/replace..
-vim.api.nvim_set_keymap('n', 'cn', [[*''cgn]], {noremap = true})
-vim.api.nvim_set_keymap('n', 'cN', [[*''cgN]], {noremap = true})
+map('n', 'cn', [[*''cgn]])
+map('n', 'cN', [[*''cgN]])
 
 -- Reselect last put text
-vim.api.nvim_set_keymap('n', 'gV', '\'[v\']', { noremap = true})
+map('n', 'gV', '\'[v\']')
 
 -- Insert new line without leaving normal mode.
-vim.api.nvim_set_keymap('n', '<leader>o', [[:<C-u>call append(line("."), repeat([""], v:count1))<CR>]], {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>O', [[:<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>]], {noremap = true, silent = true})
+map('n', '<leader>o', [[:<C-u>call append(line("."), repeat([""], v:count1))<CR>]])
+map('n', '<leader>O', [[:<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>]])
 
 -- Map to remove search highlights
---vim.api.nvim_set_keymap('', '<leader>h', '<C-h> :nohl<CR>', { noremap = false, silent = true})
+--map('', '<leader>h', '<C-h> :nohl<CR>', {silent = true})
 
 -- Remove all trailing whitespace by pressing F5
---vim.api.nvim_set_keymap('n', "<F5>", [[<cmd>let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><cr>]], { noremap = true, silent = true})
+--map('n', "<F5>", [[<cmd>let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>]], {silent = true})
 
 -- ss1pwn
-vim.api.nvim_set_keymap('n', '<F9>', [[<cmd>lua require('ss1pwn.comment').next_bad_comment()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('v', '<F10>', [[<cmd>lua require('ss1pwn.comment').format_comment()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('v', '<F11>', [[<cmd>lua require('ss1pwn.comment').format_all_comments()<cr>]], { noremap = true, silent = true})
+map('n', '<F9>', [[<cmd>lua require('ss1pwn.comment').next_bad_comment()<CR>]], {silent = true})
+map('v', '<F10>', [[<cmd>lua require('ss1pwn.comment').format_comment()<CR>]], {silent = true})
+map('v', '<F11>', [[<cmd>lua require('ss1pwn.comment').format_all_comments()<CR>]], {silent = true})
 
 -- Telescope
-vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>fb', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>ft', [[<cmd>lua require('telescope.builtin').help_tags()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>bf', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>fo', [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>fr', [[<cmd>lua require('telescope.builtin').registers()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>tf', [[<cmd>lua require('telescope.builtin').treesitter()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>fc', [[<cmd>lua require('telescope.builtin').command_history()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>fs', [[<cmd>lua require('telescope.builtin').search_history()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>lc', [[<cmd>lua require('telescope.builtin').commands()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>fq', [[<cmd>lua require('telescope.builtin').quickfix()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>fl', [[<cmd>lua require('telescope.builtin').loclist()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>fk', [[<cmd>lua require('telescope.builtin').keymaps()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>fm', [[<cmd>lua require('telescope.builtin').marks()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>fg', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>fd', [[<cmd>Telescope dotfiles path='..os.getenv("HOME")..'/.dotfiles<cr>]], { noremap = true, silent = true})
+map('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<CR>]], {silent = true})
+map('n', '<leader>lb', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], {silent = true})
+map('n', '<leader>ft', [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], {silent = true})
+map('n', '<leader>bf', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], {silent = true})
+map('n', '<leader>fo', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], {silent = true})
+map('n', '<leader>fr', [[<cmd>lua require('telescope.builtin').registers()<CR>]], {silent = true})
+map('n', '<leader>tf', [[<cmd>lua require('telescope.builtin').treesitter()<CR>]], {silent = true})
+map('n', '<leader>fh', [[<cmd>lua require('telescope.builtin').command_history()<CR>]], {silent = true})
+map('n', '<leader>fs', [[<cmd>lua require('telescope.builtin').search_history()<CR>]], {silent = true})
+map('n', '<leader>fc', [[<cmd>lua require('telescope.builtin').commands()<CR>]], {silent = true})
+map('n', '<leader>fq', [[<cmd>lua require('telescope.builtin').quickfix()<CR>]], {silent = true})
+map('n', '<leader>fl', [[<cmd>lua require('telescope.builtin').loclist()<CR>]], {silent = true})
+map('n', '<leader>fk', [[<cmd>lua require('telescope.builtin').keymaps()<CR>]], {silent = true})
+map('n', '<leader>fm', [[<cmd>lua require('telescope.builtin').marks()<CR>]], {silent = true})
+map('n', '<leader>fg', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], {silent = true})
+map('n', '<leader>fd', [[<cmd>Telescope dotfiles path='..os.getenv("HOME")..'/.dotfiles<CR>]], {silent = true})
 
-vim.api.nvim_set_keymap('n', '<leader>gc', [[<cmd>lua require('telescope.builtin').git_commits()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>gb', [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>gs', [[<cmd>lua require('telescope.builtin').git_status()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>gp', [[<cmd>lua require('telescope.builtin').git_bcommits()<cr>]], { noremap = true, silent = true})
+map('n', '<leader>gc', [[<cmd>lua require('telescope.builtin').git_commits()<CR>]], {silent = true})
+map('n', '<leader>gb', [[<cmd>lua require('telescope.builtin').git_branches()<CR>]], {silent = true})
+map('n', '<leader>gs', [[<cmd>lua require('telescope.builtin').git_status()<CR>]], {silent = true})
+map('n', '<leader>gp', [[<cmd>lua require('telescope.builtin').git_bcommits()<CR>]], {silent = true})
 
-vim.api.nvim_set_keymap('n', '<leader>lf', [[<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>lc', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>lr', [[<cmd>lua require('telescope.builtin').lsp_references()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>ld', [[<cmd>lua require('telescope.builtin').lsp_document_diagnostics()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>lw', [[<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>]], { noremap = true, silent = true})
+map('n', '<leader>lf', [[<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<CR>]], {silent = true})
+map('n', '<leader>lc', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], {silent = true})
+map('n', '<leader>lr', [[<cmd>lua require('telescope.builtin').lsp_references()<CR>]], {silent = true})
+map('n', '<leader>ld', [[<cmd>lua require('telescope.builtin').lsp_document_diagnostics()<CR>]], {silent = true})
+map('n', '<leader>lw', [[<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<CR>]], {silent = true})
 
-vim.api.nvim_set_keymap('n', '<leader>ls', [[<cmd>SearchSession<cr>]], { noremap = true, silent = true})
-
--- Symbol Outline
-vim.api.nvim_set_keymap('n', '<leader>so', [[<cmd>SymbolsOutline<cr>]], { noremap = true, silent = true})
+map('n', '<leader>ls', [[<cmd>SearchSession<CR>]], {silent = true})
 
 -- Symbol Outline
-vim.api.nvim_set_keymap('n', '<leader>"', [[<cmd>Telescope neoclip<cr>]], { noremap = true, silent = true})
+map('n', '<leader>so', [[<cmd>SymbolsOutline<CR>]], {silent = true})
+
+-- Symbol Outline
+map('n', '<leader>"', [[<cmd>Telescope neoclip<CR>]], {silent = true})
 
 -- Treesitter text objects
-vim.api.nvim_set_keymap('n', ']m', [[<cmd>TSTextobjectGotoNextStart @function.outer<cr>zz]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', ']M', [[<cmd>TSTextobjectGotoNextEnd @function.outer<cr>zz]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '[m', [[<cmd>TSTextobjectGotoPreviousStart @function.outer<cr>zz]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '[M', [[<cmd>TSTextobjectGotoPreviousEnd @function.outer<cr>zz]], { noremap = true, silent = true})
+map('n', ']m', [[<cmd>TSTextobjectGotoNextStart @function.outer<CR>zz]], {silent = true})
+map('n', ']M', [[<cmd>TSTextobjectGotoNextEnd @function.outer<CR>zz]], {silent = true})
+map('n', '[m', [[<cmd>TSTextobjectGotoPreviousStart @function.outer<CR>zz]], {silent = true})
+map('n', '[M', [[<cmd>TSTextobjectGotoPreviousEnd @function.outer<CR>zz]], {silent = true})
 
 -- Nvim Tree
-vim.api.nvim_set_keymap('n', '<leader>t', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>tr', ':NvimTreeRefresh<CR>', { noremap = true, silent = true })
+map('n', '<leader>t', ':NvimTreeToggle<CR>', {silent = true})
+map('n', '<leader>tr', ':NvimTreeRefresh<CR>', {silent = true })
 
 -- Map to align C variable declarations by both identifier and = when visually
 -- selected
-vim.api.nvim_set_keymap('x', '<leader>ad', 'gadgvga=', {})
+map('x', '<leader>ad', 'gadgvga=')
 
 -- VSnip
-vim.api.nvim_set_keymap("i" , "<C-l>" , "vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'" , { noremap = false , expr = true })
-vim.api.nvim_set_keymap("s" , "<C-l>" , "vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'" , { noremap = false , expr = true })
+map("i" , "<C-l>" , "vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'" , {expr = true })
+map("s" , "<C-l>" , "vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'" , {expr = true })
 
 -- Miniyank
-vim.api.nvim_set_keymap('', 'p', '<Plug>(miniyank-autoput)', {})
-vim.api.nvim_set_keymap('', 'P', '<Plug>(miniyank-autoPut)', {})
+map('', 'p', '<Plug>(miniyank-autoput)')
+map('', 'P', '<Plug>(miniyank-autoPut)')
 
-vim.api.nvim_set_keymap('', '<leader>n', '<Plug>(miniyank-cycle)', {})
-vim.api.nvim_set_keymap('', '<leader>N', '<Plug>(miniyank-cycleback)', {})
+map('', '<leader>n', '<Plug>(miniyank-cycle)')
+map('', '<leader>N', '<Plug>(miniyank-cycleback)')
 
 --LSP trouble
-vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>LspTroubleToggle<cr>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>LspTroubleToggle lsp_workspace_diagnostics<cr>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>LspTroubleToggle lsp_document_diagnostics<cr>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>LspTroubleToggle loclist<cr>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>LspTroubleToggle quickfix<cr>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "gR", "<cmd>LspTrouble lsp_references<cr>", {silent = true, noremap = true})
+map("n", "<leader>xx", "<cmd>LspTroubleToggle<CR>", {silent = true})
+map("n", "<leader>xw", "<cmd>LspTroubleToggle lsp_workspace_diagnostics<CR>", {silent = true})
+map("n", "<leader>xd", "<cmd>LspTroubleToggle lsp_document_diagnostics<CR>", {silent = true})
+map("n", "<leader>xl", "<cmd>LspTroubleToggle loclist<CR>", {silent = true})
+map("n", "<leader>xq", "<cmd>LspTroubleToggle quickfix<CR>", {silent = true})
+map("n", "gR", "<cmd>LspTrouble lsp_references<CR>", {silent = true})
+
+-- Harpoon
+map('n', '<leader>oa', [[<cmd>lua require'harpoon.mark'.add_file()<CR>]], {silent = true})
+map('n', '<leader>ot', [[<cmd>lua require'harpoon.ui'.toggle_quick_menu()<CR>]], {silent = true})
+
+map('n', '<leader>oh', [[<cmd>lua require'harpoon.ui'.nav_file(1)<CR>]], {silent = true})
+map('n', '<leader>on', [[<cmd>lua require'harpoon.ui'.nav_file(2)<CR>]], {silent = true})
+map('n', '<leader>oe', [[<cmd>lua require'harpoon.ui'.nav_file(3)<CR>]], {silent = true})
+map('n', '<leader>oi', [[<cmd>lua require'harpoon.ui'.nav_file(4)<CR>]], {silent = true})
+
+map('n', '<leader>ou', [[<cmd>lua require'harpoon.term'.gotoTerminal(2)<CR>]], {silent = true})
+map('n', '<leader>ol', [[<cmd>lua require'harpoon.term'.gotoTerminal(1)<CR>]], {silent = true})
 
 -- Sandwich
 vim.api.nvim_exec(
