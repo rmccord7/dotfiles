@@ -6,13 +6,8 @@ local conf       = require('telescope.config').values
 local global     = require('global')
 
 local dotfiles_list = function(opts)
-  local dir  = opts.path or ''
   local list = {}
-  local p    = io.popen('rg --files --hidden ' .. dir)
-  for file in p:lines() do
-    table.insert(list,file)
-  end
-  local nvim_conf = io.popen('rg --files ' .. global.home .. global.path_sep .. 'dotfiles')
+  local nvim_conf = io.popen('rg -g \'!dotbot/\' --files ' .. global.home .. global.path_sep .. 'dotfiles')
   for file in nvim_conf:lines() do
     table.insert(list,file)
   end

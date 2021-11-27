@@ -63,16 +63,22 @@ vim.opt.wildmenu = true
 
 --Use hybrid numbers in normal mode and
 --absolute line numbers in insert mode.
-Utils.create_augroup({
+Utils.create_augroup(
+  {
     { 'BufEnter,FocusGained,InsertLeave,WinEnter', '*', 'if &nu && mode() != "i" | set rnu   | endif' },
     { 'BufLeave,FocusLost,InsertEnter,WinLeave', '*', 'if &nu | set nornu | endif' },
     { 'TermOpen', '*', 'startinsert' },
     { 'TermOpen', '*', ':set nonumber norelativenumber' },
     { 'TermOpen', '*', 'nnoremap <buffer> <C-c> i<C-c>' }
-}, 'NumberLines')
+  },
+  'hybrid_num_aucmds'
+)
 
 -- Create directory on save if it doesn't exist.
-Utils.create_augroup({
+Utils.create_augroup(
+  {
     { 'BufWritePre', '*', 'lua require("utils").create_file_directory_structure()' }
-}, 'MkdirOnSave')
+  },
+  'create_dir_aucmds'
+)
 

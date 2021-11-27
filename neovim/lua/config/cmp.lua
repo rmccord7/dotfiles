@@ -2,6 +2,34 @@ local lspkind = require('lspkind')
 local cmp = require('cmp')
 local types = require "cmp.types"
 
+-- Use our own symbols for lsp
+local symbol_map = {
+  Text = '',
+  Method = 'Ƒ',
+  Function = 'ƒ',
+  Constructor = '',
+  Variable = '',
+  Class = '',
+  Interface = 'ﰮ',
+  Module = '',
+  Property = '',
+  Unit = '',
+  Value = '',
+  Enum = '了',
+  Keyword = '',
+  Snippet = '﬌',
+  Color = '',
+  File = '',
+  Folder = '',
+  EnumMember = '',
+  Constant = '',
+  Struct = '',
+  Event = "",
+  Operator = "",
+  TypeParameter = ""
+}
+
+-- Kind comparator function
 local function kind_cmp(entry1, entry2)
     local kind1 = entry1:get_kind()
     kind1 = kind1 == types.lsp.CompletionItemKind.Text and 100 or kind1
@@ -77,18 +105,18 @@ cmp.setup {
   },
 
   formatting = {
-    format = function(entry, vim_item)
-      vim_item.kind = lspkind.presets.default[vim_item.kind]
-
-      vim_item.menu = ({
-        buffer = "[Buffer]",
-        nvim_lsp = "[LSP]",
-        vsnip = "[vsnip]",
-        nvim_lua = "[Lua]",
-      })[entry.source.name]
-
-      return vim_item
-    end
+    format = lspkind.cmp_format(
+      {
+        symbol_map = symbol_map,
+        with_text = true,
+        menu = ({
+          buffer = "[Buffer]",
+          nvim_lsp = "[LSP]",
+          vsnip = "[vsnip]",
+          nvim_lua = "[Lua]",
+        })
+      }
+    )
   },
 
   sorting = {

@@ -164,6 +164,7 @@ return require('packer').startup(function(use)
         'hrsh7th/vim-vsnip',
         config = [[require('config.vsnip')]]
       },
+      {'onsails/lspkind-nvim'},
       {'hrsh7th/cmp-buffer'},
       {'hrsh7th/cmp-nvim-lua'},
       {'hrsh7th/cmp-nvim-lsp'},
@@ -222,11 +223,9 @@ return require('packer').startup(function(use)
   use {
     'neovim/nvim-lspconfig',
     config = [[require('config.lsp')]],
-    requires = {'onsails/lspkind-nvim'}
   }
 
   use {
-    --'glepnir/lspsaga.nvim',
     'tami5/lspsaga.nvim',
   }
 

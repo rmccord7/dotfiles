@@ -21,7 +21,11 @@ function M.map(modes, key, result, options)
     options.buffer = nil
 
     if type(modes) == "string" then
+      if modes == '' then
+        modes = {}
+      else
         modes = { modes }
+      end
     end
 
     for i = 1, #modes do
