@@ -120,15 +120,15 @@ map('n', '<leader>tr', ':NvimTreeRefresh<CR>', {silent = true })
 map('x', '<leader>ad', 'gadgvga=')
 
 -- VSnip
-map("i" , "<C-l>" , "vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'" , {expr = true })
-map("s" , "<C-l>" , "vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'" , {expr = true })
+map('i' , '<C-l>' , "vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'" , {expr = true })
+map('s' , '<C-l>' , "vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'" , {expr = true })
 
 -- Miniyank
-map('', 'p', '<Plug>(miniyank-autoput)')
-map('', 'P', '<Plug>(miniyank-autoPut)')
+map('', 'p', '<Plug>(miniyank-autoput)', {noremap = false})
+map('', 'P', '<Plug>(miniyank-autoPut)', {noremap = false})
 
-map('', '<leader>n', '<Plug>(miniyank-cycle)')
-map('', '<leader>N', '<Plug>(miniyank-cycleback)')
+map('', '<leader>p', '<Plug>(miniyank-cycle)', {noremap = false})
+map('', '<leader>P', '<Plug>(miniyank-cycleback)', {noremap = false})
 
 --LSP trouble
 map("n", "<leader>xx", "<cmd>LspTroubleToggle<CR>", {silent = true})

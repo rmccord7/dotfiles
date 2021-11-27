@@ -9,7 +9,7 @@ function M.merge(t1, t2)
 end
 
 -- Map commands
-function M.map(modes, key, result, options)
+function M.map(mode, key, result, options)
     options = M.merge({
         noremap = true,
         silent = false,
@@ -17,23 +17,12 @@ function M.map(modes, key, result, options)
         nowait = false,
     }, options or {})
 
-    local buffer = options.buffer
-    options.buffer = nil
+    if options.buffer then
+      options.buffer = nil
 
-    if type(modes) == "string" then
-      if modes == '' then
-        modes = {}
-      else
-        modes = { modes }
-      end
-    end
-
-    for i = 1, #modes do
-        if buffer then
-            vim.api.nvim_buf_set_keymap(0, modes[i], key, result, options)
-        else
-            vim.api.nvim_set_keymap(modes[i], key, result, options)
-        end
+      vim.api.nvim_buf_set_keymap(0, mode, key, result, options)
+    else
+      vim.api.nvim_set_keymap(mode, key, result, options)
     end
 end
 
