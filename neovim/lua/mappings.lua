@@ -102,7 +102,7 @@ map('n', '<leader>ls', [[<cmd>SearchSession<CR>]], {silent = true})
 -- Symbol Outline
 map('n', '<leader>so', [[<cmd>SymbolsOutline<CR>]], {silent = true})
 
--- Symbol Outline
+-- Neoclip
 map('n', '<leader>"', [[<cmd>Telescope neoclip<CR>]], {silent = true})
 
 -- Treesitter text objects
@@ -139,16 +139,16 @@ map("n", "<leader>xq", "<cmd>LspTroubleToggle quickfix<CR>", {silent = true})
 map("n", "gR", "<cmd>LspTrouble lsp_references<CR>", {silent = true})
 
 -- Harpoon
-map('n', '<leader>oa', [[<cmd>lua require'harpoon.mark'.add_file()<CR>]], {silent = true})
-map('n', '<leader>ot', [[<cmd>lua require'harpoon.ui'.toggle_quick_menu()<CR>]], {silent = true})
+map('n', '<leader>je', [[<cmd>lua require'harpoon.mark'.add_file()<CR>]], {silent = true})
+map('n', '<leader>jr', [[<cmd>lua require'harpoon.ui'.toggle_quick_menu()<CR>]], {silent = true})
 
-map('n', '<leader>oh', [[<cmd>lua require'harpoon.ui'.nav_file(1)<CR>]], {silent = true})
-map('n', '<leader>on', [[<cmd>lua require'harpoon.ui'.nav_file(2)<CR>]], {silent = true})
-map('n', '<leader>oe', [[<cmd>lua require'harpoon.ui'.nav_file(3)<CR>]], {silent = true})
-map('n', '<leader>oi', [[<cmd>lua require'harpoon.ui'.nav_file(4)<CR>]], {silent = true})
+map('n', '<leader>ja', [[<cmd>lua require'harpoon.ui'.nav_file(1)<CR>]], {silent = true})
+map('n', '<leader>js', [[<cmd>lua require'harpoon.ui'.nav_file(2)<CR>]], {silent = true})
+map('n', '<leader>jd', [[<cmd>lua require'harpoon.ui'.nav_file(3)<CR>]], {silent = true})
+map('n', '<leader>jf', [[<cmd>lua require'harpoon.ui'.nav_file(4)<CR>]], {silent = true})
 
-map('n', '<leader>ou', [[<cmd>lua require'harpoon.term'.gotoTerminal(2)<CR>]], {silent = true})
-map('n', '<leader>ol', [[<cmd>lua require'harpoon.term'.gotoTerminal(1)<CR>]], {silent = true})
+map('n', '<leader>ju', [[<cmd>lua require'harpoon.term'.gotoTerminal(2)<CR>]], {silent = true})
+map('n', '<leader>jl', [[<cmd>lua require'harpoon.term'.gotoTerminal(1)<CR>]], {silent = true})
 
 -- Sandwich
 vim.api.nvim_exec(
