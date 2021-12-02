@@ -117,6 +117,7 @@ alias luamake=/Users/rmccord/lua-language-server/3rd/luamake/luamake
 export P4CONFIG=.p4config
 export P4IGNORE=.p4ignore
 export P4DIFF="nvim -d"
+export P4MERGE="bash ~/bin/nvim_merge.sh"
 
 # Starship
 eval "$(starship init zsh)"
