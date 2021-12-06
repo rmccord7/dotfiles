@@ -13,7 +13,6 @@ local themes = require 'telescope.themes'
 -- Files to ignore with `file_ignore_patterns`
 local ignored_files = {
   '.git/.*', -- Ignore git directories
-  'dotbot/*', -- Ignore dotbot in dotfiles
   '%.svg',
   '%.png',
   '%.jpeg',
@@ -50,6 +49,7 @@ local default_picker_opts = {
     end,
 
   },
+
   git_branches = {
     attach_mappings = function(_, local_map)
       local_map('i', '<c-o>', actions.git_checkout)
@@ -144,8 +144,6 @@ local custom = function(mapping, picker_name, builtin_name, opts)
 end
 
 -- my telescope builtins mappings
--- TODO: move some of my lspconfig mappings to use telescope's lsp pickers instead
--- i.e. references and definition
 builtin('<leader>fb', 'file_browser')
 builtin('<leader>of', 'oldfiles')
 builtin('<leader>fw', 'grep_string')
@@ -173,6 +171,9 @@ custom('<leader>fa', 'find_files_all', 'find_files', {
 custom('<leader>fd', 'find_dotfiles', 'find_files', {
   cwd = '~/dotfiles',
   prompt_title = 'files in dotfiles',
+  file_ignore_patterns = {
+    'dotbot/*', -- Ignore dotbot in dotfiles
+  },
 })
 
 -- find in neovim config
