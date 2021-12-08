@@ -110,7 +110,8 @@ return require('packer').startup(function(use)
 
   -- colors
   use {
-    'marko-cerovac/material.nvim',
+    --'marko-cerovac/material.nvim',
+    'rmccord7/material.nvim',
     config = [[require('config.material')]],
     before = "feline.nvim"
   }
@@ -127,7 +128,10 @@ return require('packer').startup(function(use)
 
   use {
     'ggandor/lightspeed.nvim',
-    config = [[require('config.lightspeed')]],
+    config = function()
+      require('lightspeed').setup {
+      }
+    end
   }
 
   use {
