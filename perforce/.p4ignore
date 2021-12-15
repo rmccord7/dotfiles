@@ -66,5 +66,10 @@ tags
 tags.*
 
 # Ignore clangd
+.clangd
 .clangd/
+.cache/
 compile_commands.json
+
+# Ignore tmp files
+tmp.*

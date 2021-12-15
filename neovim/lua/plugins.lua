@@ -131,6 +131,9 @@ return require('packer').startup(function(use)
     config = function()
       require('lightspeed').setup {
       }
+      vim.cmd('doautocmd User LightspeedEnter nohlsearch')
+      vim.cmd('doautocmd User LightspeedEnter TSBufDisable rainbow')
+      vim.cmd('doautocmd User LightspeedLeave TSBufEnable rainbow')
     end
   }
 
