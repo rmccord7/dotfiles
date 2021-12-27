@@ -147,7 +147,7 @@ components.active[2][1] = {
 -- diagnosticErrors
 components.active[2][2] = {
   provider = 'diagnostic_errors',
-  enabled = function() return lsp.diagnostics_exist('Error') end,
+  enabled = function() return lsp.diagnostics_exist('ERROR') end,
   hl = {
     fg = 'red',
     style = 'bold'
@@ -157,7 +157,7 @@ components.active[2][2] = {
 -- diagnosticWarn
 components.active[2][3] = {
   provider = 'diagnostic_warnings',
-  enabled = function() return lsp.diagnostics_exist('Warning') end,
+  enabled = function() return lsp.diagnostics_exist('WARN') end,
   hl = {
     fg = 'yellow',
     style = 'bold'
@@ -167,7 +167,7 @@ components.active[2][3] = {
 -- diagnosticHint
 components.active[2][4] = {
   provider = 'diagnostic_hints',
-  enabled = function() return lsp.diagnostics_exist('Hint') end,
+  enabled = function() return lsp.diagnostics_exist('HINT') end,
   hl = {
     fg = 'cyan',
     style = 'bold'
@@ -176,7 +176,7 @@ components.active[2][4] = {
 -- diagnosticInfo
 components.active[2][5] = {
   provider = 'diagnostic_info',
-  enabled = function() return lsp.diagnostics_exist('Information') end,
+  enabled = function() return lsp.diagnostics_exist('INFO') end,
   hl = {
     fg = 'skyblue',
     style = 'bold'

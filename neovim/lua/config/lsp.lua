@@ -108,6 +108,12 @@ local lsp_servers = {
     single_file_support = true
   },
 
+  rust_analyzer = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    single_file_support = true
+  },
+
   sumneko_lua = {
     on_attach = on_attach,
     capabilities = capabilities,
