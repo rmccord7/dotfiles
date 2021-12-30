@@ -45,7 +45,7 @@ local function on_attach(client)
     Utils.create_buf_augroup(
       {
         { 'CursorHold', 'lua vim.lsp.buf.document_highlight()' },
-        { 'CursorHold', 'lua vim.lsp.diagnostic.show_line_diagnostics()' },
+        { 'CursorHold', 'lua vim.diagnostic.open_float({scope="line"})' },
         { 'CursorMoved', 'lua vim.lsp.buf.clear_references()' },
       },
       'lsp_aucmds'
