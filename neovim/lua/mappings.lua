@@ -9,7 +9,7 @@ vim.g.maplocalleader = " "
 map('n', '<leader>ps', [[<cmd>PackerSync<CR>]], {silent = true})
 
 -- Use float winoow for ex mode
-map("n", ":", [[<cmd>lua require('fine-cmdline').open()<CR>]], {silent = true})
+map("n", "<CR>", [[<cmd>lua require('fine-cmdline').open()<CR>]], {silent = true})
 
 -- Ex-mode is weird and not useful so it seems better to repeat the last macro
 map('n', 'Q', '@@')
