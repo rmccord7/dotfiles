@@ -124,6 +124,17 @@ require('telescope').setup{
       override_file_sorter = true,
       case_mode = 'smart_case',
     },
+    file_browser = {
+      theme = "ivy",
+      mappings = {
+        ["i"] = {
+          -- your custom insert mode mappings
+        },
+        ["n"] = {
+          -- your custom normal mode mappings
+        },
+      },
+    },
   },
 }
 
@@ -144,7 +155,6 @@ local custom = function(mapping, picker_name, builtin_name, opts)
 end
 
 -- my telescope builtins mappings
-builtin('<leader>fb', 'file_browser')
 builtin('<leader>of', 'oldfiles')
 builtin('<leader>fw', 'grep_string')
 builtin('<leader>gw', 'live_grep') -- grep word
@@ -253,5 +263,6 @@ require('telescope').load_extension('mapper')
 require('telescope').load_extension('neoclip')
 require('telescope').load_extension('harpoon')
 require('telescope').load_extension('projects')
+require('telescope').load_extension('file_browser')
 
 return ts

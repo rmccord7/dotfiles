@@ -56,13 +56,6 @@ require'nvim-treesitter.configs'.setup {
         ['ad'] = '@comment.outer',
         ['am'] = '@call.outer',
         ['im'] = '@call.inner',
-
-        -- Or you can define your own textobjects like this
-        ["iF"] = {
-          python = "(function_definition) @function",
-          cpp = "(function_definition) @function",
-          c = "(function_definition) @function",
-        },
       },
     },
     swap = {

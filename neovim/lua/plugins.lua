@@ -4,12 +4,13 @@ local packer_bootstrap = false
 -- Run packer compile whenever this file is written.
 vim.cmd('autocmd BufWritePost plugins.lua PackerCompile')
 
+-- Broken
 -- Install packer if it is not installed.
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-
-if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-end
+-- local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+--
+-- if fn.empty(fn.glob(install_path)) > 0 then
+--   packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+-- end
 
 return require('packer').startup(function(use)
   -- Packer can manage itself
@@ -41,6 +42,7 @@ return require('packer').startup(function(use)
   }
 
   use {
+    branch = 'fix_breaking_changes',
     'simrat39/symbols-outline.nvim',
     config = [[require('config.symbols-outline')]],
   }
@@ -167,7 +169,8 @@ return require('packer').startup(function(use)
     requires = {
       {'nvim-lua/popup.nvim'},
       {'nvim-lua/plenary.nvim'},
-      {'nvim-telescope/telescope-fzy-native.nvim'}
+      {'nvim-telescope/telescope-fzy-native.nvim'},
+      {'nvim-telescope/telescope-file-browser.nvim'}
     },
     config = [[require('config.telescope')]],
   }
@@ -285,6 +288,7 @@ return require('packer').startup(function(use)
   }
 
   use {
+    opt = true,
     'romgrk/nvim-treesitter-context',
     requires = { 'nvim-treesitter/nvim-treesitter' },
   }

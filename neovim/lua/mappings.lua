@@ -69,6 +69,7 @@ map('v', '<F10>', [[<cmd>lua require('ss1pwn.comment').format_comment()<CR>]], {
 map('v', '<F11>', [[<cmd>lua require('ss1pwn.comment').format_all_comments()<CR>]], {silent = true})
 
 -- Telescope
+map('n', '<leader>fb', [[<cmd>Telescope file_browser<CR>]], {silent = true})
 --map('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<CR>]], {silent = true})
 --map('n', '<leader>lb', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], {silent = true})
 --map('n', '<leader>ft', [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], {silent = true})
