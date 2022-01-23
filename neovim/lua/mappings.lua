@@ -70,22 +70,6 @@ map('v', '<F11>', [[<cmd>lua require('ss1pwn.comment').format_all_comments()<CR>
 
 -- Telescope
 map('n', '<leader>fb', [[<cmd>Telescope file_browser<CR>]], {silent = true})
---map('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<CR>]], {silent = true})
---map('n', '<leader>lb', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], {silent = true})
---map('n', '<leader>ft', [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], {silent = true})
---map('n', '<leader>bf', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], {silent = true})
---map('n', '<leader>fo', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], {silent = true})
---map('n', '<leader>fr', [[<cmd>lua require('telescope.builtin').registers()<CR>]], {silent = true})
---map('n', '<leader>tf', [[<cmd>lua require('telescope.builtin').treesitter()<CR>]], {silent = true})
---map('n', '<leader>fh', [[<cmd>lua require('telescope.builtin').command_history()<CR>]], {silent = true})
---map('n', '<leader>fs', [[<cmd>lua require('telescope.builtin').search_history()<CR>]], {silent = true})
---map('n', '<leader>fc', [[<cmd>lua require('telescope.builtin').commands()<CR>]], {silent = true})
---map('n', '<leader>fq', [[<cmd>lua require('telescope.builtin').quickfix()<CR>]], {silent = true})
---map('n', '<leader>fl', [[<cmd>lua require('telescope.builtin').loclist()<CR>]], {silent = true})
---map('n', '<leader>fk', [[<cmd>lua require('telescope.builtin').keymaps()<CR>]], {silent = true})
---map('n', '<leader>fm', [[<cmd>lua require('telescope.builtin').marks()<CR>]], {silent = true})
---map('n', '<leader>fg', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], {silent = true})
---map('n', '<leader>fd', [[<cmd>Telescope dotfiles path='..os.getenv("HOME")..'/.dotfiles<CR>]], {silent = true})
 
 map('n', '<leader>gc', [[<cmd>lua require('telescope.builtin').git_commits()<CR>]], {silent = true})
 map('n', '<leader>gb', [[<cmd>lua require('telescope.builtin').git_branches()<CR>]], {silent = true})

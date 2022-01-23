@@ -42,7 +42,7 @@ return require('packer').startup(function(use)
   }
 
   use {
-    branch = 'fix_breaking_changes',
+    opt = true,
     'simrat39/symbols-outline.nvim',
     config = [[require('config.symbols-outline')]],
   }

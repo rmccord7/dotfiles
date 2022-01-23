@@ -22,11 +22,6 @@ local ignored_files = {
 
 -- Default picker options.
 local default_picker_opts = {
-  file_browser = {
-    prompt_title = 'working directory',
-    selection_strategy = 'row',
-  },
-
   grep_string = {
     prompt_title = 'word under cursor',
   },
@@ -125,7 +120,6 @@ require('telescope').setup{
       case_mode = 'smart_case',
     },
     file_browser = {
-      theme = "ivy",
       mappings = {
         ["i"] = {
           -- your custom insert mode mappings
@@ -188,7 +182,7 @@ custom('<leader>fd', 'find_dotfiles', 'find_files', {
 
 -- find in neovim config
 custom('<leader>fn', 'find_neovim', 'find_files', {
-  cwd = '~/dotfiles/nvim',
+  cwd = '~/dotfiles/neovim',
   prompt_title = 'files in neovim config',
 })
 
