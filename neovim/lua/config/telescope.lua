@@ -12,12 +12,18 @@ local themes = require 'telescope.themes'
 
 -- Files to ignore with `file_ignore_patterns`
 local ignored_files = {
-  '.git/.*', -- Ignore git directories
+  '.git/.*',
+  'tags',
   '%.svg',
   '%.png',
   '%.jpeg',
   '%.jpg',
   '%.ico',
+  '%.o',
+  '%.a',
+  '%.cmake',
+  '%.lib',
+  '%.so',
 }
 
 -- Default picker options.
@@ -76,17 +82,16 @@ require('telescope').setup{
     },
     mappings = {
       n = {
-        ['<c-x>'] = false,
-        ['<c-s>'] = actions.select_horizontal,
-        ['<c-q>'] = actions.send_to_qflist + actions.open_qflist,
-        ['<c-c>'] = actions.close,
+        ['<C-x>'] = false,
+        ['<C-s>'] = actions.select_horizontal,
+        ['<C-q>'] = actions.send_to_qflist,
+        ['<M-q>'] = actions.send_selected_to_qflist,
       },
       i = {
-        ['<c-x>'] = false,
-        ['<c-s>'] = actions.select_horizontal,
-        ['<c-q>'] = actions.send_to_qflist + actions.open_qflist,
-        ['<c-c>'] = actions.close,
-        ['<c-k>'] = actions.delete_buffer,
+        ['<C-x>'] = false,
+        ['<C-s>'] = actions.select_horizontal,
+        ['<C-q>'] = actions.send_to_qflist,
+        ['<M-q>'] = actions.send_selected_to_qflist,
       },
     },
     color_devicons = true,
@@ -114,10 +119,9 @@ require('telescope').setup{
     },
   },
   extensions = {
-    fzf = {
+    fzy_native = {
       override_generic_sorter = false,
       override_file_sorter = true,
-      case_mode = 'smart_case',
     },
     file_browser = {
       mappings = {
@@ -149,6 +153,7 @@ local custom = function(mapping, picker_name, builtin_name, opts)
 end
 
 -- my telescope builtins mappings
+builtin('<leader>ff', 'find_files')
 builtin('<leader>of', 'oldfiles')
 builtin('<leader>fw', 'grep_string')
 builtin('<leader>gw', 'live_grep') -- grep word
@@ -252,8 +257,6 @@ map('n', '<leader>pc', [[<cmd>lua require'config.telescope'.packer_commands()<CR
 
 --Load native lua fzy since it is faster than the defaults.
 require('telescope').load_extension('fzy_native')
-require('telescope').load_extension('session-lens')
-require('telescope').load_extension('mapper')
 require('telescope').load_extension('neoclip')
 require('telescope').load_extension('harpoon')
 require('telescope').load_extension('projects')

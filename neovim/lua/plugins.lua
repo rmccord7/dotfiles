@@ -24,27 +24,7 @@ return require('packer').startup(function(use)
   }
 
   use {
-    'lewis6991/gitsigns.nvim',
-    requires = {'nvim-lua/plenary.nvim'},
-    config = function()
-      require('gitsigns').setup()
-    end
-  }
-
-  use {
-    'kyazdani42/nvim-tree.lua',
-    config = [[require('config.tree')]],
-    requires = {'kyazdani42/nvim-web-devicons'}
-  }
-
-  use {
     'lukas-reineke/indent-blankline.nvim',
-  }
-
-  use {
-    opt = true,
-    'simrat39/symbols-outline.nvim',
-    config = [[require('config.symbols-outline')]],
   }
 
   use {
@@ -58,11 +38,6 @@ return require('packer').startup(function(use)
 
   use {
     "editorconfig/editorconfig-vim",
-  }
-
-  use {
-    'b3nj5m1n/kommentary',
-    config = [[require('config.kommentary')]],
   }
 
   use {
@@ -83,19 +58,6 @@ return require('packer').startup(function(use)
   }
 
   use {
-    'skywind3000/gutentags_plus',
-    opt = true,
-    requires = {'ludovicchabant/vim-gutentags'},
-    config = [[require('config.gutentags')]]
-  }
-
-  use {
-    "lazytanuki/nvim-mapper",
-    config = function() require("nvim-mapper").setup{} end,
-    before = "telescope.nvim"
-  }
-
-  use {
     "AckslD/nvim-neoclip.lua",
     config = function()
         require('neoclip').setup()
@@ -112,14 +74,17 @@ return require('packer').startup(function(use)
 
   -- colors
   use {
-    --'marko-cerovac/material.nvim',
-    'rmccord7/material.nvim',
+    'marko-cerovac/material.nvim',
     config = [[require('config.material')]],
     before = "feline.nvim"
   }
 
   use {
+    opt = true,
     'norcalli/nvim-colorizer.lua',
+    config = function()
+      require('colorizer').setup {}
+    end
   }
 
   -- Misc
@@ -136,21 +101,6 @@ return require('packer').startup(function(use)
       vim.cmd('doautocmd User LightspeedEnter nohlsearch')
       vim.cmd('doautocmd User LightspeedEnter TSBufDisable rainbow')
       vim.cmd('doautocmd User LightspeedLeave TSBufEnable rainbow')
-    end
-  }
-
-  use {
-    'rmagatti/auto-session',
-    config = [[require('config.auto-session')]],
-  }
-
-  use {
-    'rmagatti/session-lens',
-    requires = {
-      {'rmagatti/auto-session'},
-    },
-    config = function()
-      require('session-lens').setup({})
     end
   }
 
@@ -185,7 +135,7 @@ return require('packer').startup(function(use)
       },
       {'onsails/lspkind-nvim'},
       {'hrsh7th/cmp-buffer'},
-      {'hrsh7th/cmp-nvim-lua'},
+      {'hrsh7th/cmp-nvim-lua', ft = 'lua'},
       {'hrsh7th/cmp-nvim-lsp'},
       {'quangnguyen30192/cmp-nvim-tags'},
       {'hrsh7th/cmp-path'},
@@ -198,9 +148,8 @@ return require('packer').startup(function(use)
 
   --Harpoon
   use {
-    'brandoncc/telescope-harpoon.nvim',
+    'ThePrimeagen/harpoon',
     requires = {
-      {'ThePrimeagen/harpoon'},
       {'nvim-lua/plenary.nvim'},
       {'nvim-telescope/telescope.nvim'},
     },
@@ -210,6 +159,7 @@ return require('packer').startup(function(use)
   }
 
   use {
+    opt = true,
     'VonHeikemen/fine-cmdline.nvim',
     config = function()
       require('fine-cmdline').setup({
@@ -283,6 +233,7 @@ return require('packer').startup(function(use)
   }
 
   use {
+    opt = true,
     'nvim-treesitter/playground',
     requires = { 'nvim-treesitter/nvim-treesitter' }
   }
@@ -299,17 +250,17 @@ return require('packer').startup(function(use)
   }
 
   use {
+    opt = true,
     'luukvbaal/stabilize.nvim',
-    config = function() require("stabilize").setup() end
-  }
-
-  -- build support
-  use {
-    'ilyachur/cmake4vim',
-    config = [[require('config.cmake')]]
+    config = function()
+      require("stabilize").setup({
+        nested = 'QuickFixCmdPost,DiagnosticChanged *',
+      })
+    end,
   }
 
   use {
+    opt = true,
     'tpope/vim-fugitive',
   }
 
@@ -327,3 +278,4 @@ return require('packer').startup(function(use)
     require('packer').sync()
   end
 end)
+

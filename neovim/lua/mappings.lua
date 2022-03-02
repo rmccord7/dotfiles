@@ -116,12 +116,12 @@ map('', '<leader>p', '<Plug>(miniyank-cycle)', {noremap = false})
 map('', '<leader>P', '<Plug>(miniyank-cycleback)', {noremap = false})
 
 --LSP trouble
-map("n", "<leader>xx", "<cmd>LspTroubleToggle<CR>", {silent = true})
-map("n", "<leader>xw", "<cmd>LspTroubleToggle lsp_workspace_diagnostics<CR>", {silent = true})
-map("n", "<leader>xd", "<cmd>LspTroubleToggle lsp_document_diagnostics<CR>", {silent = true})
-map("n", "<leader>xl", "<cmd>LspTroubleToggle loclist<CR>", {silent = true})
-map("n", "<leader>xq", "<cmd>LspTroubleToggle quickfix<CR>", {silent = true})
-map("n", "gR", "<cmd>LspTrouble lsp_references<CR>", {silent = true})
+map("n", "<leader>xx", "<cmd>Trouble<CR>", {silent = true})
+map("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<CR>", {silent = true})
+map("n", "<leader>xd", "<cmd>Trouble document_diagnostics<CR>", {silent = true})
+map("n", "<leader>xq", "<cmd>Trouble quickfix<CR>", {silent = true})
+map("n", "<leader>xl", "<cmd>Trouble loclist<CR>", {silent = true})
+map("n", "gR", "<cmd>Trouble lsp_references<CR>", {silent = true})
 
 -- Harpoon
 map('n', '<leader>je', [[<cmd>lua require'harpoon.mark'.add_file()<CR>]], {silent = true})

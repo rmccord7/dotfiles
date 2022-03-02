@@ -1,4 +1,3 @@
-require'colorizer'.setup()
 require'nvim-web-devicons'.setup {}
 
 local colors = require('material.colors')
