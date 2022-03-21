@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 
 $CONFIG = "yaml/install.windows.conf.yaml"
-$DOTBOT_DIR = "dotbot"
+$DOTBOT_DIR = "../dotbot"
 
 $DOTBOT_BIN = "bin/dotbot"
 $BASEDIR = $PSScriptRoot
