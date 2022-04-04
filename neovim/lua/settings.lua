@@ -3,6 +3,12 @@ Utils = require('utils')
 -- Enable TC
 vim.o.termguicolors = true
 
+-- Neovide
+if vim.g.neovide == true then
+  vim.o.guifont            = 'Hack NF Mono:h12'
+  vim.go.neovide_fullscreen = true
+end
+
 -- Formatting options
 vim.o.expandtab   = true -- Expands tabs to spaces
 vim.o.smartindent = true -- Smarter indentation

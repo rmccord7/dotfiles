@@ -5,9 +5,9 @@ vim.g.material_style = 'deep ocean'
 
 require('material').setup({
   custom_colors = {
-    fg          = '#717CB4',
-    comments    = '#5A6077',
-    line_number = '#5A6077',
+    fg           = '#717CB4',
+    comments     = '#5A6077',
+    line_numbers = '#5A6077',
   },
   custom_highlights = {
     -- Command mode
