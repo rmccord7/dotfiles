@@ -5,8 +5,7 @@ vim.o.termguicolors = true
 
 -- Neovide
 if vim.g.neovide == true then
-  vim.o.guifont            = 'Hack NF Mono:h12'
-  vim.go.neovide_fullscreen = true
+  vim.o.guifont = 'Hack NF Mono:h12'
 end
 
 -- Formatting options
