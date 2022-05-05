@@ -28,9 +28,9 @@ exit 1
 format = "client [$output](green) "
 
 [custom.p4port]
-description = "Displays current perforce client"
+description = "Displays current perforce p4port"
 command = """
-cat $(find_up.sh . -iname ".p4config") | grep P4PORT | cut -d "=" -f 2
+cat $(find_up.sh . -iname ".p4enviro") | grep P4PORT | cut -d "=" -f 2
 """
 style = 'red'
 shell = ["bash","--noprofile"]

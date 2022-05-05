@@ -74,10 +74,10 @@ plugins=(
   git
   zsh-autosuggestions
   dirhistory
-  zsh-syntax-highlighting
   k
   autojump
   colored-man-pages
+  zsh-syntax-highlighting # Must be last
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -125,4 +125,7 @@ eval "$(starship init zsh)"
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+source ~/.dotfiles/lib/zsh-autoenv/autoenv.zsh
+source /home/rmccord/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
