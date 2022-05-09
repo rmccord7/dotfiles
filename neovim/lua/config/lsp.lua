@@ -40,7 +40,7 @@ local function on_attach(client)
   map('n', 'gh', '<cmd>lua require"lspsaga.provider".lsp_finder()<CR>', {buffer = true, silent = true})
 
   -- If LSP server supports document highlighting
-  if client.resolved_capabilities.document_highlight == true then
+  if client.server_capabilities.documentHighlight == true then
 
     Utils.create_buf_augroup(
       {
