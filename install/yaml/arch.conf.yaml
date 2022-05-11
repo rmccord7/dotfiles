@@ -1,0 +1,10 @@
+- yay:
+  - neovim-nightly-bin
+  - google-chrome
+  - lf
+
+- pacman:
+  - fd
+  - ripgrep
+  - tmux
+  - htop
