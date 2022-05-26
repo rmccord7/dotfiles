@@ -26,9 +26,9 @@ case $ID in
     echo "arch"
       "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}/.." -c "yaml/${ID}${SUFFIX}" --plugin-dir "${BASEDIR}/../dotbot-yay" "${@}"
       ;;
-  debian)
-    echo "debian"
-      "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}/.." -c "yaml/${ID}${SUFFIX}" --plugin-dir "${BASEDIR}/../dotbot_plugin_aptget" "${@}"
+  ubuntu)
+    echo "ubuntu"
+      "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}/.." -c "yaml/${ID}${SUFFIX}" --plugin-dir "${BASEDIR}/../dotbot-apt" "${@}"
       ;;
   *)
     echo "Unknown distro ID: $ID"

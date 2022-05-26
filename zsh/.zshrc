@@ -126,6 +126,9 @@ eval "$(starship init zsh)"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# Map CAPS to L'CTRL
+/usr/bin/setxkbmap -option "ctrl:nocaps"
+
 source ~/.dotfiles/lib/zsh-autoenv/autoenv.zsh
 source /home/rmccord/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
