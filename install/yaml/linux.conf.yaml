@@ -1,0 +1,24 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    # Fonts
+    ~/.local/share/fonts/hack: fonts/hack
+
+    # Zsh
+    ~/.zshrc: zsh/.zshrc
+
+    # Alcacritty
+    ~/.config/alacritty/alacritty.yml: alacritty/alacritty.yml
+
+    # Tmux
+    ~/.tmux.conf: tmux/tmux.conf
+
+    # Neovim
+    ~/.config/nvim: neovim
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]

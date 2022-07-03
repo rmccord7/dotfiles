@@ -1,3 +1,9 @@
+local ok, tree = pcall(require, "nvim-tree")
+
+if not ok then
+    return
+end
+
 vim.g.nvim_tree_show_icons = {
 	git = 1,
 	folders = 1,
@@ -19,7 +25,7 @@ vim.g.nvim_tree_icons = {
 	}
 }
 
-require'nvim-tree'.setup {
+tree.setup {
   filters = {
     custom = {
       '.git',

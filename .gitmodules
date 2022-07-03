@@ -1,3 +1,9 @@
 [submodule "dotbot"]
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
+[submodule "dotbot-yay"]
+	path = dotbot-yay
+	url = https://github.com/alexwh/dotbot-yay
+[submodule "dotbot-apt"]
+	path = dotbot-apt
+	url = https://github.com/bryant1410/dotbot-apt

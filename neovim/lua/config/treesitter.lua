@@ -1,3 +1,9 @@
+local _treesitter, _ = pcall(require, "nvim-treesitter")
+
+if not _treesitter then
+    return
+end
+
 require'nvim-treesitter.install'.compilers = { "clang" }
 require'nvim-treesitter.configs'.setup {
   ensure_installed = { "c", "cpp", "python", "lua", "yaml", "json", "bash", "rust" },
@@ -14,7 +20,7 @@ require'nvim-treesitter.configs'.setup {
     },
   },
   indent = {
-    enable = true
+    enable = false
   },
   refactor = {
     highlight_definitions = { enable = true },

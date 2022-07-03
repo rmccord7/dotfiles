@@ -16,6 +16,9 @@ else
   vim.g.python3_host_prog = '/usr/bin/python'
 end
 
+-- Status
+vim.o.laststatus = 3
+
 -- Formatting options
 vim.o.expandtab   = true -- Expands tabs to spaces
 vim.o.smartindent = true -- Smarter indentation
@@ -43,7 +46,7 @@ vim.o.hlsearch = false
 
 --Show whitespace
 vim.wo.list = true
-vim.o.listchars = "extends:›,precedes:‹,nbsp:·,trail:·"
+vim.o.listchars = "tab:››,extends:›,precedes:‹,nbsp:·,trail:·"
 
 -- Default grep command
 -- Prefer ripgrep over grep
@@ -77,21 +80,21 @@ vim.opt.wildmenu = true
 --Use hybrid numbers in normal mode and
 --absolute line numbers in insert mode.
 Utils.create_augroup(
+  'HYBRID_NUM_AUCMDS',
   {
-    { 'BufEnter,FocusGained,InsertLeave,WinEnter', '*', 'if &nu && mode() != "i" | set rnu   | endif' },
-    { 'BufLeave,FocusLost,InsertEnter,WinLeave', '*', 'if &nu | set nornu | endif' },
-    { 'TermOpen', '*', 'startinsert' },
-    { 'TermOpen', '*', ':set nonumber norelativenumber' },
-    { 'TermOpen', '*', 'nnoremap <buffer> <C-c> i<C-c>' }
-  },
-  'hybrid_num_aucmds'
+    { {'BufEnter','FocusGained','InsertLeave', 'WinEnter'}, {'*'}, 'if &nu && mode() != "i" | set rnu   | endif' },
+    { {'BufLeave', 'FocusLost', 'InsertEnter', 'WinLeave'}, {'*'}, 'if &nu | set nornu | endif' },
+    { {'TermOpen'}, {'*'}, 'startinsert' },
+    { {'TermOpen'}, {'*'}, ':set nonumber norelativenumber' },
+    { {'TermOpen'}, {'*'}, 'nnoremap <buffer> <C-c> i<C-c>' }
+  }
 )
 
 -- Create directory on save if it doesn't exist.
 Utils.create_augroup(
+  'CREATE_DIR_AUCMDS',
   {
-    { 'BufWritePre', '*', 'lua require("utils").create_file_directory_structure()' }
-  },
-  'create_dir_aucmds'
+    { {'BufWritePre'}, {'*'}, 'lua require("utils").create_file_directory_structure()' }
+  }
 )
 

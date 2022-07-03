@@ -55,7 +55,7 @@ __pycache__/
 *.pyd
 
 # Ignore text files.
-*.txt
+#*.txt
 
 # Ignore cmake binary directories
 out*/
@@ -73,3 +73,6 @@ compile_commands.json
 
 # Ignore tmp files
 tmp.*
+
+# Ignore autoenv.zsh
+.autoenv.zsh

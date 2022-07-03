@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME"/.oh-my-zsh"
@@ -17,7 +17,7 @@ ZSH_THEME="gnzh"
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
@@ -60,10 +60,15 @@ ENABLE_CORRECTION="true"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="dd/mm/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Configure tmux plugin
+ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOCONNECT=true
+ZSH_TMUX_AUTOQUIT=false
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -71,29 +76,45 @@ ENABLE_CORRECTION="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
-  zsh-autosuggestions
-  dirhistory
-  zsh-syntax-highlighting
-  k
-  autojump
-  colored-man-pages
+  zsh-autosuggestions # Zsh command uggestions
+  colored-man-pages # Adds color to man pages
+  dirhistory # Quick jump to previous visited directories
+  autojump # Quick jump to previous visited directories
+  pj # Project jump list
+  git # Git
+  k # Git status
+  tmux
+  extract # Extracts all types of archives
+  fzf
+  fzf-tab
+  zsh-syntax-highlighting # Must be last
 )
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export MANPATH="/usr/local/man:$MANPATH"
+if [ -d /usr/local/man ]; then
+  export MANPATH="/usr/local/man:$MANPATH"
+fi
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='nvim'
+if command -v nvim > /dev/null; then
+  if [[ -n $SSH_CONNECTION ]]; then
+    export EDITOR='nvim'
+  else
+    export EDITOR='nvim'
+  fi
 else
-  export EDITOR='nvim'
+    export EDITOR='vim'
+fi
+
+# Load local configuraiton.
+if [ -f "$HOME"/.zshrc.local ]; then
+  source $HOME/.zshrc.local
 fi
 
 # Compilation flags
@@ -103,26 +124,53 @@ fi
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+
 alias python=python3
 
-alias ll='ls -alF'
+alias zshrc="$EDITOR ~/.zshrc"
+
+if [ -f "$HOME"/.zshrc.local ]; then
+  alias zshlrc="$EDITOR ~/.zshrc.local"
+fi
+
+alias zsha="$EDITOR ~/.zshrc.aliases"
+
+if [ -f "$HOME"/.zshrc.local.aliases ]; then
+  alias zsha="$EDITOR ~/.zshrc.local.aliases"
+fi
+
+alias ls='ls -lF --color=auto'
+alias ll='ls -alF --color=auto'
 
 alias luamake=/Users/rmccord/lua-language-server/3rd/luamake/luamake
 
+# Load local aliases.
+if [ -f "$HOME"/.zshrc.local.aliases ]; then
+  source $HOME/.zshrc.local.aliases
+fi
+
 # Perforce
-export P4CONFIG=.p4config
-export P4IGNORE=.p4ignore
-export P4DIFF="nvim -d"
-export P4MERGE="bash ~/bin/nvim_merge.sh"
+if command -v p4 > /dev/null; then
+  export P4CONFIG=.p4config
+  export P4IGNORE=.p4ignore
+  export P4DIFF="$EDITOR -d"
+  export P4MERGE="bash ~/bin/nvim_merge.sh"
+fi
 
 # Starship
-eval "$(starship init zsh)"
+if command -v starship > /dev/null; then
+  eval "$(starship init zsh)"
+fi
 
-[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+# Autojump homebrew
+#[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+#test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+source ~/.dotfiles/lib/zsh-autoenv/autoenv.zsh
+source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

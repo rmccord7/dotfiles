@@ -1,0 +1,6 @@
+- apt:
+  - fd
+  - ripgrep
+  - tmux
+  - htop
+  - valgrind

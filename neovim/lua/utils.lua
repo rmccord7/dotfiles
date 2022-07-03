@@ -27,36 +27,35 @@ function M.map(mode, key, result, options)
 end
 
 -- Create an augroup
-function M.create_augroup(autocmds, name)
-  vim.cmd('augroup ' .. name)
-  vim.cmd('autocmd!')
+function M.create_augroup(name, autocmds)
+  local group = vim.api.nvim_create_augroup(name, {})
 
   for _, autocmd in ipairs(autocmds) do
-    vim.cmd('autocmd ' .. table.concat(autocmd, ' '))
+    vim.api.nvim_create_autocmd(
+      autocmd[1],
+      {
+        group = group,
+        pattern = autocmd[2],
+        command = autocmd[3]
+      }
+    )
   end
-
-  vim.cmd('augroup END')
 end
 
 -- Create a buffer-local augroup
-function M.create_buf_augroup(autocmds, name, bufnr)
-  local buftext
-
-  vim.cmd('augroup ' .. name)
-
-  if bufnr then
-    buftext = string.format("<buffer=%d>", bufnr)
-  else
-    buftext = "<buffer>"
-  end
-
-  vim.cmd('autocmd! * ' .. buftext)
+function M.create_buf_augroup(name, autocmds, bufnr)
+  local group = vim.api.nvim_create_augroup(name, {})
 
   for _, autocmd in ipairs(autocmds) do
-   vim.cmd(string.format("autocmd %s %s %s", autocmd[1], buftext, table.concat(autocmd, ' ', 2)))
+    vim.api.nvim_create_autocmd(
+      autocmd[1],
+      {
+        group = group,
+        buffer = bufnr,
+        command = autocmd[2]
+      }
+    )
   end
-
-  vim.cmd('augroup END')
 end
 
 -- Automatically create missing directories before save
