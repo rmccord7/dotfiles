@@ -67,7 +67,7 @@ HIST_STAMPS="dd/mm/yyyy"
 
 # Configure tmux plugin
 ZSH_TMUX_AUTOSTART=true
-ZSH_TMUX_AUTOCONNECT=false
+ZSH_TMUX_AUTOCONNECT=true
 ZSH_TMUX_AUTOQUIT=false
 
 # Which plugins would you like to load?
@@ -85,6 +85,8 @@ plugins=(
   k # Git status
   tmux
   extract # Extracts all types of archives
+  fzf
+  fzf-tab
   zsh-syntax-highlighting # Must be last
 )
 
@@ -137,10 +139,10 @@ if [ -f "$HOME"/.zshrc.local.aliases ]; then
   alias zsha="$EDITOR ~/.zshrc.local.aliases"
 fi
 
-alias ls='ls -lF'
-alias ll='ls -alF'
+alias ls='ls -lF --color=auto'
+alias ll='ls -alF --color=auto'
 
-#alias luamake=/Users/rmccord/lua-language-server/3rd/luamake/luamake
+alias luamake=/Users/rmccord/lua-language-server/3rd/luamake/luamake
 
 # Load local aliases.
 if [ -f "$HOME"/.zshrc.local.aliases ]; then
@@ -168,3 +170,7 @@ fi
 source ~/.dotfiles/lib/zsh-autoenv/autoenv.zsh
 source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

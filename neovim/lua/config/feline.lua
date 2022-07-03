@@ -1,6 +1,13 @@
 require'nvim-web-devicons'.setup {}
 
 local colors = require('material.colors')
+
+local ok, feline = pcall(require, "feline")
+
+if not ok then
+    return
+end
+
 local lsp = require('feline.providers.lsp')
 local vi_mode_utils = require('feline.providers.vi_mode')
 
@@ -295,7 +302,7 @@ components.active[3][8] = {
   },
 }
 
-require('feline').setup({
+feline.setup({
   default_bg = colors.bg,
   default_fg = colors.fg,
   vi_mode_colors = vi_mode_colors,

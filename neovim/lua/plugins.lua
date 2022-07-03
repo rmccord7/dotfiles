@@ -1,18 +1,43 @@
-local fn = vim.fn
-local packer_bootstrap = false
+local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    PACKER_BOOTSTRAP = vim.fn.system {
+        "git",
+        "clone",
+        "--depth",
+        "1",
+        "https://github.com/wbthomason/packer.nvim",
+        install_path,
+    }
+end
+
+vim.cmd [[packadd packer.nvim]]
+
+local ok, packer = pcall(require, "packer")
+
+if not ok then
+    return
+end
+
+packer.init {
+  display = {
+      open_fn = function()
+          return require("packer.util").float { border = "single" }
+      end,
+      prompt_border = "single",
+  },
+  git = {
+
+      clone_timeout = 600,
+  },
+  auto_clean = true,
+  compile_on_sync = true,
+}
 
 -- Run packer compile whenever this file is written.
 vim.cmd('autocmd BufWritePost plugins.lua PackerCompile')
 
--- Broken
--- Install packer if it is not installed.
--- local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
---
--- if fn.empty(fn.glob(install_path)) > 0 then
---   packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
--- end
-
-return require('packer').startup(function(use)
+return packer.startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
@@ -34,6 +59,10 @@ return require('packer').startup(function(use)
         patterns = {'.git', '.p4config', '.p4.conf', 'compile_commands.json'},
       }
     end
+  }
+
+  use {
+    "jose-elias-alvarez/null-ls.nvim",
   }
 
   use {
@@ -72,6 +101,20 @@ return require('packer').startup(function(use)
     'rmccord7/ss1pwn',
   }
 
+  use {
+    'windwp/nvim-autopairs',
+    config = function()
+      require ('config.autopairs')
+    end
+  }
+
+  use {
+    'toppair/reach.nvim',
+    config = function()
+      require('reach').setup {}
+    end
+  }
+
   -- colors
   use {
     'marko-cerovac/material.nvim',
@@ -93,7 +136,7 @@ return require('packer').startup(function(use)
     config = [[require('config.easy-align')]],
   }
 
-  use {
+  use{
     'ggandor/lightspeed.nvim',
     config = function()
       require('lightspeed').setup {
@@ -139,11 +182,26 @@ return require('packer').startup(function(use)
       {'hrsh7th/cmp-nvim-lsp'},
       {'quangnguyen30192/cmp-nvim-tags'},
       {'hrsh7th/cmp-path'},
-      {'hrsh7th/cmp-vsnip'},
+      {'saadparwaiz1/cmp_luasnip'},
       {'ray-x/cmp-treesitter'},
       {'lukas-reineke/cmp-under-comparator'},
     },
     before = 'nvim-lspconfig',
+  }
+
+  use {
+    "L3MON4D3/LuaSnip",
+    config = [[require('snippets')]],
+  }
+
+  use {
+    'simrat39/symbols-outline.nvim',
+    config = function()
+      require('symbols-outline').setup({
+        position = 'left',
+        auto_close = true
+      })
+    end,
   }
 
   --Harpoon
@@ -207,10 +265,6 @@ return require('packer').startup(function(use)
   }
 
   use {
-    'nvim-lua/lsp-status.nvim',
-  }
-
-  use {
     "folke/lsp-trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
   }
@@ -239,7 +293,6 @@ return require('packer').startup(function(use)
   }
 
   use {
-    opt = true,
     'romgrk/nvim-treesitter-context',
     requires = { 'nvim-treesitter/nvim-treesitter' },
   }
@@ -250,7 +303,6 @@ return require('packer').startup(function(use)
   }
 
   use {
-    opt = true,
     'luukvbaal/stabilize.nvim',
     config = function()
       require("stabilize").setup({
@@ -260,7 +312,6 @@ return require('packer').startup(function(use)
   }
 
   use {
-    opt = true,
     'tpope/vim-fugitive',
   }
 
@@ -274,7 +325,7 @@ return require('packer').startup(function(use)
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
-  if packer_bootstrap then
+  if PACKER_BOOTSTRAP then
     require('packer').sync()
   end
 end)

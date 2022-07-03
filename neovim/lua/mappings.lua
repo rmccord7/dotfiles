@@ -9,7 +9,7 @@ vim.g.maplocalleader = " "
 map('n', '<leader>ps', [[<cmd>PackerSync<CR>]], {silent = true})
 
 -- Use float winoow for ex mode
-map("n", "<CR>", [[<cmd>lua require('fine-cmdline').open()<CR>]], {silent = true})
+--map("n", "<CR>", [[<cmd>lua require('fine-cmdline').open()<CR>]], {silent = true})
 
 -- Ex-mode is weird and not useful so it seems better to repeat the last macro
 map('n', 'Q', '@@')
@@ -17,7 +17,7 @@ map('n', 'Q', '@@')
 -- Map jk/kj to <esc>. Note that this causes small visual pauses when actually
 -- typing j or k
 map('i', 'jk', '<ESC>')
-map('i', 'kj', '<ESC>')
+--map('i', 'kj', '<ESC>')
 
 -- Keep cursor centered on search, motions, and join.
 map('n', 'n', 'nzzzv')

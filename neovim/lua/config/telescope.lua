@@ -1,14 +1,18 @@
+local ok, telescope = pcall(require, "telescope")
+
+if not ok then
+    return
+end
+
 local ts = {}
 
 local map = require 'utils'.map
 local actions = require 'telescope.actions'
 local action_state = require 'telescope.actions.state'
---local previewers = require 'telescope.previewers'
 local pickers = require 'telescope.pickers'
 local sorters = require 'telescope.sorters'
 local finders = require 'telescope.finders'
 local themes = require 'telescope.themes'
---local conf = require('telescope.config').values
 
 -- Files to ignore with `file_ignore_patterns`
 local ignored_files = {
@@ -24,6 +28,8 @@ local ignored_files = {
   '%.cmake',
   '%.lib',
   '%.so',
+  'out/',
+  'out_single/',
 }
 
 -- Default picker options.
@@ -68,7 +74,7 @@ local default_picker_opts = {
   },
 }
 
-require('telescope').setup{
+telescope.setup{
   pickers = default_picker_opts,
   defaults = {
     vimgrep_arguments = {
