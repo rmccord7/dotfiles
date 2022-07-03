@@ -1,7 +1,12 @@
 local global   = {}
 local home     = os.getenv("HOME")
-local path_sep = global.is_windows and '\\' or '/'
 local os_name  = vim.loop.os_uname().sysname
+
+if os_name == "Windows_NT" then
+  os_name = "Windows"
+end
+
+local path_sep = os_name == 'Windows' and '\\' or '/'
 
 function global:load_variables()
   self.os_name     = os_name

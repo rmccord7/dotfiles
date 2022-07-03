@@ -62,17 +62,19 @@ local function on_attach(client)
 end
 
 -- Setup sumneko root path
-local sumneko_root_path = global.home .. "/bin/lua-language-server"
+local sumneko_root_path = global.home .. global.path_sep .. "bin" .. global.path_sep .. "lua_language_server"
+--print (sumneko_root_path)
 
 -- Setup sumneko binary path
 local sumneko_binary
 if global.is_linux or global.is_windows then
-  sumneko_binary = sumneko_root_path .. "/bin/" .. global.os_name .. "/lua-language-server"
+  sumneko_binary = sumneko_root_path .. global.path_sep .. "bin" .. global.path_sep .. "lua-language-server"
 else
   if global.is_mac then
     sumneko_binary = sumneko_root_path .. "/bin/macOS/lua-language-server"
   end
 end
+--print (sumneko_binary)
 
 -- Add lua directories to runtime path
 local runtime_path = vim.split(package.path, ';')
@@ -102,9 +104,10 @@ local lsp_servers = {
     single_file_support = true
   },
 
-  pyright = {
+  pylsp = {
     on_attach = on_attach,
     capabilities = capabilities,
+    root_dir = lspconfig.util.root_pattern('.p4config', 'compile_commands.json', 'compile_flags.txt', '.git'),
     single_file_support = true
   },
 
@@ -117,7 +120,7 @@ local lsp_servers = {
   sumneko_lua = {
     on_attach = on_attach,
     capabilities = capabilities,
-    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
+    cmd = {sumneko_binary, "-E", sumneko_root_path .. global.path_sep .. "main.lua"};
     root_dir = lspconfig.util.root_pattern('.git'),
     settings = {
       Lua = {

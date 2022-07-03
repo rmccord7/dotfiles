@@ -5,7 +5,10 @@
 - clean: ['~']
 
 - link:
+    $USERPROFILE\.config\starship: $USERPROFILE\dotfiles\starship\starship.toml
+    $LOCALAPPDATA\clangd: $USERPROFILE\dotfiles\clangd
     $LOCALAPPDATA\nvim: $USERPROFILE\dotfiles\neovim
+    $APPDATA\alacritty: $USERPROFILE\dotfiles\alacritty
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

@@ -1,11 +1,19 @@
 Utils = require('utils')
+Global = require('global')
 
 -- Enable TC
 vim.o.termguicolors = true
 
 -- Neovide
 if vim.g.neovide == true then
-  vim.o.guifont = 'Hack NF Mono:h12'
+  vim.o.guifont = 'Hack NF FC Ligatured:h09'
+end
+
+--Set python path
+if Global.is_windows == true then
+  vim.g.python3_host_prog = 'C:\\Users\\rmccord\\scoop\\apps\\python\\current\\python'
+else
+  vim.g.python3_host_prog = '/usr/bin/python'
 end
 
 -- Formatting options

@@ -1,2 +1,15 @@
 CompileFlags:
-  Add: [-Wall, -Wno-unused-function]
+  Add: [
+    -Wall,
+    -Wno-unused-function,
+    -Wno-cast-align,
+    -Wno-void-pointer-to-int-cast,
+    -Wno-implicit-fallthrough,
+    -Wno-covered-switch-default,
+    -Wno-reserved-identifier,
+    -Wno-cast-qual,
+    -Wno-switch-enum,
+    -Wno-unused-parameter,
+    -Wno-unused-macros,
+    -Wno-extra-semi-stmt,
+    ]

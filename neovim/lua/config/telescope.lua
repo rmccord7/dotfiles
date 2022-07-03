@@ -24,6 +24,11 @@ local ignored_files = {
   '%.cmake',
   '%.lib',
   '%.so',
+  '.cache/*',
+  'SDK_BIN/*',
+  'SRC/*',
+  'SRC_ESL/*',
+  'SRC_SODAQ/*',
 }
 
 -- Default picker options.

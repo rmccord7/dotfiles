@@ -67,7 +67,7 @@ window:
   #
   # Window opacity as a floating point number from `0.0` to `1.0`.
   # The value `0.0` is completely transparent and `1.0` is opaque.
-  opacity: .7
+  opacity: .8
 
   # Startup Mode (changes require restart)
   #
@@ -156,7 +156,7 @@ font:
     style: Bold Italic
 
   # Point size
-  size: 9.0
+  size: 10.0
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -325,6 +325,33 @@ draw_bold_text_with_bright_colors: false
   # regardless of their background color.
   #transparent_background_colors: false
 
+# Colors (New Moon)
+colors:
+  # Default colors
+  primary:
+    background: '#2D2D2D'
+    foreground: '#B3B9C5'
+  # Normal colors
+  normal:
+    black: '#2D2D2D'
+    red: '#F2777A'
+    green: '#92D192'
+    yellow: '#FFD479'
+    blue: '#6AB0F3'
+    magenta: '#E1A6F2'
+    cyan: '#76D4D6'
+    white: '#B3B9C5'
+  # Bright colors
+  bright:
+    black: '#777C85'
+    red: '#F2777A'
+    green: '#76D4D6'
+    yellow: '#FFEEA6'
+    blue: '#6AB0F3'
+    magenta: '#E1A6F2'
+    cyan: '#76D4D6'
+    white: '#FFFFFF'
+
 # Bell
 #
 # The bell is rung every time the BEL control character is received.
@@ -426,10 +453,10 @@ draw_bold_text_with_bright_colors: false
 #   - (macOS) /bin/bash --login
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
-#shell:
-#  program: /bin/bash
-#  args:
-#    - --login
+shell:
+  program: powershell
+  args:
+    - -nologo
 
 # Startup directory
 #

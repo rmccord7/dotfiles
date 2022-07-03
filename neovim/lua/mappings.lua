@@ -9,7 +9,7 @@ vim.g.maplocalleader = " "
 map('n', '<leader>ps', [[<cmd>PackerSync<CR>]], {silent = true})
 
 -- Use float winoow for ex mode
-map("n", "<CR>", [[<cmd>lua require('fine-cmdline').open()<CR>]], {silent = true})
+-- map("n", "<CR>", [[<cmd>lua require('fine-cmdline').open()<CR>]], {silent = true})
 
 -- Ex-mode is weird and not useful so it seems better to repeat the last macro
 map('n', 'Q', '@@')
@@ -82,11 +82,6 @@ map('n', '<leader>lr', [[<cmd>lua require('telescope.builtin').lsp_references()<
 map('n', '<leader>ld', [[<cmd>lua require('telescope.builtin').lsp_document_diagnostics()<CR>]], {silent = true})
 map('n', '<leader>lw', [[<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<CR>]], {silent = true})
 
-map('n', '<leader>ls', [[<cmd>SearchSession<CR>]], {silent = true})
-
--- Symbol Outline
-map('n', '<leader>so', [[<cmd>SymbolsOutline<CR>]], {silent = true})
-
 -- Neoclip
 map('n', '<leader>"', [[<cmd>Telescope neoclip<CR>]], {silent = true})
 
@@ -95,10 +90,6 @@ map('n', ']m', [[<cmd>TSTextobjectGotoNextStart @function.outer<CR>zz]], {silent
 map('n', ']M', [[<cmd>TSTextobjectGotoNextEnd @function.outer<CR>zz]], {silent = true})
 map('n', '[m', [[<cmd>TSTextobjectGotoPreviousStart @function.outer<CR>zz]], {silent = true})
 map('n', '[M', [[<cmd>TSTextobjectGotoPreviousEnd @function.outer<CR>zz]], {silent = true})
-
--- Nvim Tree
-map('n', '<leader>t', ':NvimTreeToggle<CR>', {silent = true})
-map('n', '<leader>tr', ':NvimTreeRefresh<CR>', {silent = true })
 
 -- Map to align C variable declarations by both identifier and = when visually
 -- selected
