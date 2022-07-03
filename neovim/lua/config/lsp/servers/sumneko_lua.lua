@@ -1,18 +1,20 @@
 local global = require('global')
 local lspconfig = require('lspconfig')
 
--- Setup sumneko root path
-local sumneko_root_path = global.home .. "/.local/bin/lua-language-server"
-
 -- Setup sumneko binary path
+local sumneko_root_path
 local sumneko_binary
+
 if global.is_linux  then
-  sumneko_binary = sumneko_root_path .. "/bin/lua-language-server"
-elseif global.is_Windows then
-  sumneko_binary = sumneko_root_path .. "/bin/" .. global.os_name .. "/lua-language-server"
+  sumneko_root_path = global.home .. "/.local/bin/lua-language-server"
+  sumneko_binary    = sumneko_root_path .. "/bin/lua-language-server"
+elseif global.is_windows then
+  sumneko_root_path = global.home .. "/bin/lua-language-server"
+  sumneko_binary    = sumneko_root_path .. "/bin/lua-language-server"
 else
   if global.is_mac then
-    sumneko_binary = sumneko_root_path .. "/bin/macOS/lua-language-server"
+    sumneko_root_path = global.home .. "/.local/bin/lua-language-server"
+    sumneko_binary    = sumneko_root_path .. "/bin/macOS/lua-language-server"
   end
 end
 
