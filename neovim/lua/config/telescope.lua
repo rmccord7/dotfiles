@@ -202,6 +202,12 @@ custom('<leader>fn', 'find_neovim', 'find_files', {
   prompt_title = 'files in neovim config',
 })
 
+-- find in neovim config
+custom('<leader>fp', 'find_pack', 'find_files', {
+  cwd = '~/.local/share/nvim/site/pack/packer',
+  prompt_title = 'files installed by packer',
+})
+
 -- grep inside of dotfiles
 custom('<leader>gid', 'grep_in_dotfiles', 'live_grep', {
   cwd = '~/dotfiles',
