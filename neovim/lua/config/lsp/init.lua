@@ -39,7 +39,7 @@ local function on_attach(client)
   map('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', {buffer = true, silent = true})
   map('n', ']e', '<cmd>Lspsaga diagnostic_jump_next<CR>zz', {buffer = true, silent = true})
   map('n', '[e', '<cmd>Lspsaga diagnostic_jump_prev<CR>zz', {buffer = true, silent = true})
-  map('n', 'gh', '<cmd>lua require"lspsaga.provider".lsp_finder()<CR>', {buffer = true, silent = true})
+  map('n', 'gh', '<cmd>lua require("lspsaga.finder").lsp_finder()<CR>', {buffer = true, silent = true})
 
   -- If LSP server supports document highlighting
   if client.server_capabilities.documentHighlight == true then

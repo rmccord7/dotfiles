@@ -79,6 +79,12 @@ map('n', '<leader>lr', [[<cmd>lua require('telescope.builtin').lsp_references()<
 map('n', '<leader>ld', [[<cmd>lua require('telescope.builtin').lsp_document_diagnostics()<CR>]], {silent = true})
 map('n', '<leader>lw', [[<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<CR>]], {silent = true})
 
+-- Nvim Tree
+map('n', '<leader>t', [[<cmd>NvimTreeToggle<CR>]], {silent = true})
+
+-- LSP Sage Symbols outline
+map('n', '<leader>so', [[<cmd>LSoutlineToggle<CR>]], {silent = true})
+
 -- Neoclip
 map('n', '<leader>"', [[<cmd>Telescope neoclip<CR>]], {silent = true})
 

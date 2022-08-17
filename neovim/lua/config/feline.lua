@@ -308,3 +308,44 @@ feline.setup({
   vi_mode_colors = vi_mode_colors,
   components = components,
 })
+
+-- Winbar
+components = {
+  active = {{}, {}},
+  inactive = {{}, {}},
+}
+
+components.active[2][1] = {
+  provider = {
+    name = 'file_info',
+    opts = {
+      type = 'unique'
+    },
+  },
+  hl = {
+    fg = 'skyblue',
+    bg = 'NONE',
+    style = 'bold',
+  },
+  icon = ''
+}
+
+components.inactive[2][1] = {
+  provider = {
+    name = 'file_info',
+    opts = {
+      type = 'unique'
+    },
+  },
+  hl = {
+    fg = colors.orange,
+    bg = 'NONE',
+    style = 'bold',
+  },
+  icon = ''
+}
+
+-- Setup feline.nvim winbar
+require('feline').winbar.setup {
+    components = components
+}

@@ -13,7 +13,7 @@ end
 if Global.is_windows == true then
   vim.g.python3_host_prog = 'C:\\Users\\rmccord\\scoop\\apps\\python\\current\\python'
 else
-  vim.g.python3_host_prog = '/usr/bin/python'
+  vim.g.python3_host_prog = '/usr/bin/python3'
 end
 
 -- Status
@@ -98,3 +98,8 @@ Utils.create_augroup(
   }
 )
 
+vim.filetype.add({
+  filename = {
+    ['.clangd'] = 'yaml'
+  }
+})

@@ -203,16 +203,6 @@ return packer.startup(function(use)
     config = [[require('snippets')]],
   }
 
-  use {
-    'simrat39/symbols-outline.nvim',
-    config = function()
-      require('symbols-outline').setup({
-        position = 'left',
-        auto_close = true
-      })
-    end,
-  }
-
   --Harpoon
   use {
     'ThePrimeagen/harpoon',
@@ -265,12 +255,36 @@ return packer.startup(function(use)
 
   --LSP
   use {
+    'williamboman/mason.nvim',
+    config = function()
+      require('mason').setup()
+    end,
+  }
+
+  use {
+    'williamboman/mason-lspconfig.nvim',
+    requires = { 'neovim/nvim-lspconfig' },
+    config = function()
+      require('mason-lspconfig').setup({
+        ensure_installed = {'sumneko_lua', 'rust_analyzer', 'clangd', 'pyright', 'cmake-language-server'}
+      })
+    end,
+  }
+
+  use {
     'neovim/nvim-lspconfig',
     config = [[require('config.lsp')]],
   }
 
   use {
-    'tami5/lspsaga.nvim',
+    'glepnir/lspsaga.nvim',
+    config = function()
+        local saga = require("lspsaga")
+
+        saga.init_lsp_saga({
+            -- your configuration
+        })
+    end,
   }
 
   use {
@@ -330,6 +344,24 @@ return packer.startup(function(use)
 
   use {
     'nfvs/vim-perforce',
+  }
+
+  use {
+  'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+  config = function()
+    require("lsp_lines").setup()
+  end,
+  }
+
+  use {
+  'kyazdani42/nvim-tree.lua',
+  requires = {
+    'kyazdani42/nvim-web-devicons',
+  },
+  config = function()
+    require("nvim-tree").setup()
+  end,
+  tag = 'nightly'
   }
 
   -- Automatically set up your configuration after cloning packer.nvim
