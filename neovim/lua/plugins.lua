@@ -130,6 +130,15 @@ return packer.startup(function(use)
     end
   }
 
+  use {
+    "klen/nvim-config-local",
+    config = function()
+      require('config-local').setup {
+        config_files = { '.nvimrc.lua' },
+      }
+    end
+  }
+
   -- Misc
   use {
     'junegunn/vim-easy-align',

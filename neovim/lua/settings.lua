@@ -6,7 +6,7 @@ vim.o.termguicolors = true
 
 -- Neovide
 if vim.g.neovide == true then
-  vim.o.guifont = 'Hack NF FC Ligatured:h09'
+  vim.o.guifont = 'Hack NF FC Ligatured:h10'
 end
 
 --Set python path
