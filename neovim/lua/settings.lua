@@ -98,3 +98,8 @@ Utils.create_augroup(
   }
 )
 
+vim.filetype.add({
+  filename = {
+    ['.clangd'] = 'yaml'
+  }
+})
