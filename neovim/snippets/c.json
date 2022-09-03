@@ -1,8 +1,48 @@
 {
+  "u8": {
+    "prefix": "u8",
+    "body": ["uint8_t"],
+    "description": "Code snippet for type"
+  },
+  "u16": {
+    "prefix": "u16",
+    "body": ["uint16_t"],
+    "description": "Code snippet for type"
+  },
+  "u32": {
+    "prefix": "u32",
+    "body": ["uint32_t"],
+    "description": "Code snippet for type"
+  },
+  "u64": {
+    "prefix": "u64",
+    "body": ["uint64_t"],
+    "description": "Code snippet for type"
+  },
+  "i8": {
+    "prefix": "i8",
+    "body": ["int8_t"],
+    "description": "Code snippet for type"
+  },
+  "i16": {
+    "prefix": "i16",
+    "body": ["int16_t"],
+    "description": "Code snippet for type"
+  },
+  "i32": {
+    "prefix": "i32",
+    "body": ["int32_t"],
+    "description": "Code snippet for type"
+  },
+  "i64": {
+    "prefix": "i64",
+    "body": ["int64_t"],
+    "description": "Code snippet for type"
+  },
   "blk": {
     "prefix": "blk",
     "body": ["{", "}"],
-    "description": "Code snippet for if statement"
+    "description": "Code snippet for code block"
   },
   "for": {
     "prefix": "for",
