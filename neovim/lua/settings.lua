@@ -1,4 +1,3 @@
-Utils = require('utils')
 Global = require('global')
 
 -- Enable TC
@@ -77,29 +76,78 @@ vim.opt.autoread = true
 vim.opt.wildmode = {'longest', 'list', 'full'}
 vim.opt.wildmenu = true
 
---Use hybrid numbers in normal mode and
---absolute line numbers in insert mode.
-Utils.create_augroup(
-  'HYBRID_NUM_AUCMDS',
-  {
-    { {'BufEnter','FocusGained','InsertLeave', 'WinEnter'}, {'*'}, 'if &nu && mode() != "i" | set rnu   | endif' },
-    { {'BufLeave', 'FocusLost', 'InsertEnter', 'WinLeave'}, {'*'}, 'if &nu | set nornu | endif' },
-    { {'TermOpen'}, {'*'}, 'startinsert' },
-    { {'TermOpen'}, {'*'}, ':set nonumber norelativenumber' },
-    { {'TermOpen'}, {'*'}, 'nnoremap <buffer> <C-c> i<C-c>' }
-  }
-)
-
--- Create directory on save if it doesn't exist.
-Utils.create_augroup(
-  'CREATE_DIR_AUCMDS',
-  {
-    { {'BufWritePre'}, {'*'}, 'lua require("utils").create_file_directory_structure()' }
-  }
-)
-
 vim.filetype.add({
   filename = {
     ['.clangd'] = 'yaml'
   }
 })
+
+--Use hybrid numbers in normal mode and
+--absolute line numbers in insert mode.
+create_augroup(
+  'HYBRID_NUM_AUCMDS',
+  {
+    {
+      events = {'BufEnter','FocusGained','InsertLeave', 'WinEnter'},
+      pattern = '*',
+      command = 'if &nu && mode() != "i" | set rnu   | endif',
+    },
+    {
+      events = {'BufLeave', 'FocusLost', 'InsertEnter', 'WinLeave'},
+      pattern = '*',
+      command = 'if &nu | set nornu | endif'
+    },
+    {
+      events = {'TermOpen'},
+      pattern = '*',
+      command = 'startinsert'
+    },
+    {
+      events = {'TermOpen'},
+      pattern = '*',
+      command = ':set nonumber norelativenumber'
+    },
+    { events = {'TermOpen'},
+      pattern = '*',
+      command = 'nnoremap <buffer> <C-c> i<C-c>'
+    }
+  }
+)
+
+-- Create directory on save if it doesn't exist.
+create_augroup(
+  'CREATE_DIR_AUCMDS',
+  {
+    events = {'BufWritePre'},
+    pattern = '*',
+    command = 'lua require("utils").create_file_directory_structure()'
+  }
+)
+
+-- Autocmds
+-- highlight yank for a brief second for visual feedback
+vim.api.nvim_create_autocmd('TextYankPost', {
+  pattern = '*',
+  callback = function()
+    vim.highlight.on_yank { on_visual = false }
+  end,
+})
+
+-- Disable builtin plugins i don't need
+vim.g.loaded_gzip = 1
+vim.g.loaded_zip = 1
+vim.g.loaded_zipPlugin = 1
+vim.g.loaded_tar = 1
+vim.g.loaded_tarPlugin = 1
+vim.g.loaded_getscript = 1
+vim.g.loaded_getscriptPlugin = 1
+vim.g.loaded_vimball = 1
+vim.g.loaded_vimballPlugin = 1
+vim.g.loaded_2html_plugin = 1
+vim.g.loaded_logiPat = 1
+vim.g.loaded_rrhelper = 1
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrwSettings = 1
+vim.g.loaded_matchit = 1
+vim.g.loaded_matchparen = 1

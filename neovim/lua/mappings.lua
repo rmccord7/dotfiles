@@ -1,146 +1,218 @@
-local map = require('utils').map
+local global = require('global')
 
 -- Remap space as leader key
-map('', '<Space>', '<Nop>')
+map('', '<Space>', '<Nop>', 'Leader')
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Packer
-map('n', '<leader>ps', [[<cmd>PackerSync<CR>]], {silent = true})
+nmap('<leader>ps', [[:PackerSync<CR>]], 'Packer Sync')
 
 -- Ex-mode is weird and not useful so it seems better to repeat the last macro
-map('n', 'Q', '@@')
+nmap('Q', '@@', 'Repeat last macro')
 
 -- Map jk/kj to <esc>. Note that this causes small visual pauses when actually
 -- typing j or k
-map('i', 'jk', '<ESC>')
---map('i', 'kj', '<ESC>')
+imap('jk', '<ESC>', 'Exit insert mode')
+imap('kj', '<ESC>', 'Exit insert mode')
 
 -- Keep cursor centered on search, motions, and join.
-map('n', 'n', 'nzzzv')
-map('n', 'N', 'Nzzzv')
-map('n', 'J', 'mzJ\'z')
-map('n', '[c', '[czz')
-map('n', ']c', ']czz')
-map('n', '[m', '[mzz')
-map('n', ']m', ']mzz')
+nmap('n', 'nzzzv')
+nmap('N', 'Nzzzv')
+nmap('J', 'mzJ\'z')
+nmap('[c', '[czz')
+nmap(']c', ']czz')
 
 -- Don't undo everything.
-map('i', '.', '.<c-g>u')
-map('i', ',', ',<c-g>u')
-map('i', '!', '!<c-g>u')
-map('i', '?', '?<c-g>u')
+imap('.', '.<c-g>u')
+imap(',', ',<c-g>u')
+imap('!', '!<c-g>u')
+imap('?', '?<c-g>u')
 
 -- Return from relative number jumping.
-map('n', 'j', [[(v:count > 5 ? "m'" . v:count : "") . 'j']], {expr = true})
-map('n', 'k', [[(v:count > 5 ? "m'" . v:count : "") . 'k']], {expr = true})
+nmap('j', [[(v:count > 5 ? "m'" . v:count : "") . 'j']], 'Move line down', {remap = true, expr = true})
+nmap('k', [[(v:count > 5 ? "m'" . v:count : "") . 'k']], 'Move line up', {remap = true, expr = true})
 
 --Moving text
-map('v', 'J', [[:m '>+1<CR>gv=gv]])
-map('v', 'K', [[:m '<-2<CR>gv=gv]])
-map('i', '<C-j>', [[<esc>:m .+1<CR>==]])
-map('i', '<C-k>', [[<esc>:m .-2<CR>==]])
-map('n', '<leader>k', [[:m .-2<CR>==]])
-map('n', '<leader>j', [[:m .+1<CR>==]])
+vmap('J', [[:m '>+1<CR>gv=gv]], 'Move text down')
+vmap('K', [[:m '<-2<CR>gv=gv]], 'Move text up')
+imap('<C-j>', [[<esc>:m .+1<CR>==]], 'Move text up')
+imap('<C-k>', [[<esc>:m .-2<CR>==]], 'Move text down')
+nmap('<leader>k', [[:m .-2<CR>==]], 'Move line up')
+nmap('<leader>j', [[:m .+1<CR>==]], 'Move line down')
+
+-- make c/C change command send text to black hole register, i didn't want
+-- it anyways if I changed it probably
+nmap('c', '"_c')
+nmap('C', '"_C')
 
 -- Change word. Set next word for quick search/replace..
-map('n', 'cn', [[*''cgn]])
-map('n', 'cN', [[*''cgN]])
+nmap('cn', [[*''cgn]], 'Change next word')
+nmap('cN', [[*''cgN]], 'Change next word')
 
 -- Reselect last put text
-map('n', 'gV', '\'[v\']')
+nmap('gV', '\'[v\']', 'Select last put text')
 
 -- Insert new line without leaving normal mode.
-map('n', '<leader>o', [[:<C-u>call append(line("."), repeat([""], v:count1))<CR>]])
-map('n', '<leader>O', [[:<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>]])
+nmap('<leader>o', [[:<C-u>call append(line("."), repeat([""], v:count1))<CR>]], 'Insert new line below')
+nmap('<leader>O', [[:<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>]], 'Insert new line above')
 
--- Map to remove search highlights
---map('', '<leader>h', '<C-h> :nohl<CR>', {silent = true})
+-- run a :command
+nmap('go', ':', 'Command-line mode', {silent = false})
+vmap('go', ':', 'Command-line mode', {silent = false})
 
--- Remove all trailing whitespace by pressing F5
---map('n', "<F5>", [[<cmd>let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>]], {silent = true})
+-- Substitute Linewise
+nmap('<leader>sl', ':s/', 'Linewise search', {silent = false})
+vmap('<leader>sl', ':s/', 'Linewise search', {silent = false})
 
--- ss1pwn
-map('n', '<F9>', [[<cmd>lua require('ss1pwn.comment').next_bad_comment()<CR>]], {silent = true})
-map('v', '<F10>', [[<cmd>lua require('ss1pwn.comment').format_comment()<CR>]], {silent = true})
-map('v', '<F11>', [[<cmd>lua require('ss1pwn.comment').format_all_comments()<CR>]], {silent = true})
+-- Substitute Globally
+nmap('<leader>sg', ':%s/', 'Global buffer search', {silent = false})
+vmap('<leader>sg', ':%s/', 'Global buffer search', {silent = false})
 
--- Telescope
-map('n', '<leader>fb', [[<cmd>Telescope file_browser<CR>]], {silent = true})
+-- swap to alternate file
+nmap('ga', '<c-^>', 'Swap to alt file', {silent = false})
+vmap('ga', '<c-^>', 'Swap to alt file', {silent = false})
 
-map('n', '<leader>gc', [[<cmd>lua require('telescope.builtin').git_commits()<CR>]], {silent = true})
-map('n', '<leader>gb', [[<cmd>lua require('telescope.builtin').git_branches()<CR>]], {silent = true})
-map('n', '<leader>gs', [[<cmd>lua require('telescope.builtin').git_status()<CR>]], {silent = true})
-map('n', '<leader>gp', [[<cmd>lua require('telescope.builtin').git_bcommits()<CR>]], {silent = true})
+-- repeat last macro
+nmap('<c-m>', '@@', 'Repeat last macro', {silent = false})
+vmap('<c-m>', '@@', 'Repeat last macro', {silent = false})
 
-map('n', '<leader>lf', [[<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<CR>]], {silent = true})
-map('n', '<leader>lc', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], {silent = true})
-map('n', '<leader>lr', [[<cmd>lua require('telescope.builtin').lsp_references()<CR>]], {silent = true})
-map('n', '<leader>ld', [[<cmd>lua require('telescope.builtin').lsp_document_diagnostics()<CR>]], {silent = true})
-map('n', '<leader>lw', [[<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<CR>]], {silent = true})
+-- repeat last :command
+nmap('gx', '@:', 'Repeat last command', {silent = false})
+vmap('gx', '@:', 'Repeat last command', {silent = false})
+
+-- remap q: to be easier to use, less work for your poor left pinky
+nmap('<c-q>', 'q:', 'Open cmdline window', {silent = false})
+vmap('<c-q>', 'q:', 'Open cmdline window', {silent = false})
+
+-- quickfix list navigation yay
+nmap('<leader>qo', '<cmd>copen<cr>', 'Open qflist')
+nmap('<leader>qn', '<cmd>cnext<cr>', 'Next item in qf list')
+nmap('<leader>qp', '<cmd>cprev<cr>', 'Prev item in qf list')
+nmap('<leader>qd', function()
+  vim.ui.input({ prompt = 'Quickfix do: ', completion = 'command' }, function(do_cmd)
+    if do_cmd then
+      vim.cmd('cfdo ' .. do_cmd)
+    end
+  end)
+end, 'Exec cmd for all items in qf list')
+
+-- take the only existing window and split it to the right
+nmap('<leader>wr', [[<cmd>vnew | wincmd r | wincmd l<cr>]], 'Split 1 window to right')
+
+-- swap windows and move cursor to other window
+nmap('<leader>wl', [[<cmd>wincmd r | wincmd l<cr>]], 'Swap windows and move cursor')
 
 -- Nvim Tree
-map('n', '<leader>t', [[<cmd>NvimTreeToggle<CR>]], {silent = true})
+nmap('<leader>t', [[:NvimTreeToggle<CR>]], 'Nvim tree')
 
 -- LSP Sage Symbols outline
-map('n', '<leader>so', [[<cmd>LSoutlineToggle<CR>]], {silent = true})
+nmap('<leader>so', [[:LSoutlineToggle<CR>]], 'Symbols outline')
 
 -- Neoclip
-map('n', '<leader>"', [[<cmd>Telescope neoclip<CR>]], {silent = true})
+nmap('<leader>"', [[:Telescope neoclip<CR>]], 'Neoclip')
 
 -- Treesitter text objects
-map('n', ']m', [[<cmd>TSTextobjectGotoNextStart @function.outer<CR>zz]], {silent = true})
-map('n', ']M', [[<cmd>TSTextobjectGotoNextEnd @function.outer<CR>zz]], {silent = true})
-map('n', '[m', [[<cmd>TSTextobjectGotoPreviousStart @function.outer<CR>zz]], {silent = true})
-map('n', '[M', [[<cmd>TSTextobjectGotoPreviousEnd @function.outer<CR>zz]], {silent = true})
-
--- Map to align C variable declarations by both identifier and = when visually
--- selected
-map('x', '<leader>ad', 'gadgvga=')
+nmap(']m', [[:TSTextobjectGotoNextStart @function.outer<CR>zz]], 'Go to next function start')
+nmap(']M', [[:TSTextobjectGotoNextEnd @function.outer<CR>zz]], 'Go to next function end')
+nmap('[m', [[:TSTextobjectGotoPreviousStart @function.outer<CR>zz]], 'Go to previous function start')
+nmap('[M', [[:TSTextobjectGotoPreviousEnd @function.outer<CR>zz]], 'Go to previous function end')
 
 -- VSnip
-map('i' , '<C-l>' , "vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'" , {expr = true })
-map('s' , '<C-l>' , "vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'" , {expr = true })
+imap('<C-l>' , "vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'" , 'VSnip', {expr = true })
+smap('<C-l>' , "vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'" , 'Vsnip', {expr = true })
 
 -- Miniyank
-map('', 'p', '<Plug>(miniyank-autoput)', {noremap = false})
-map('', 'P', '<Plug>(miniyank-autoPut)', {noremap = false})
+map('', 'p', '<Plug>(miniyank-autoput)', 'Override put for miniyank')
+map('', 'P', '<Plug>(miniyank-autoPut)', 'Override put for miniyank')
 
-map('', '<leader>p', '<Plug>(miniyank-cycle)', {noremap = false})
-map('', '<leader>P', '<Plug>(miniyank-cycleback)', {noremap = false})
+map('', '<leader>p', '<Plug>(miniyank-cycle)', 'Miniyank cycle next')
+map('', '<leader>P', '<Plug>(miniyank-cycleback)', 'Miniyank cycle previous')
 
 --LSP trouble
-map("n", "<leader>xx", "<cmd>Trouble<CR>", {silent = true})
-map("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<CR>", {silent = true})
-map("n", "<leader>xd", "<cmd>Trouble document_diagnostics<CR>", {silent = true})
-map("n", "<leader>xq", "<cmd>Trouble quickfix<CR>", {silent = true})
-map("n", "<leader>xl", "<cmd>Trouble loclist<CR>", {silent = true})
-map("n", "gR", "<cmd>Trouble lsp_references<CR>", {silent = true})
+nmap("<leader>xx", ":Trouble<CR>", 'Trouble toggle')
+nmap("<leader>xw", ":Trouble workspace_diagnostics<CR>", 'Trouble workspace diagnostics')
+nmap("<leader>xd", ":Trouble document_diagnostics<CR>", 'Trouble document diagnostics')
+nmap("<leader>xq", ":Trouble quickfix<CR>", 'Trouble quickfix')
+nmap("<leader>xl", ":Trouble loclist<CR>", 'Trouble loclist')
+nmap("gR", ":Trouble lsp_references<CR>", 'Trouble LSP ref')
 
 -- Harpoon
-map('n', '<leader>je', [[<cmd>lua require'harpoon.mark'.add_file()<CR>]], {silent = true})
-map('n', '<leader>jr', [[<cmd>lua require'harpoon.ui'.toggle_quick_menu()<CR>]], {silent = true})
+nmap('<leader>je', [[:lua require'harpoon.mark'.add_file()<CR>]], 'Harpoon mark')
+nmap('<leader>jr', [[:lua require'harpoon.ui'.toggle_quick_menu()<CR>]], 'Harpoon list')
 
-map('n', '<leader>ja', [[<cmd>lua require'harpoon.ui'.nav_file(1)<CR>]], {silent = true})
-map('n', '<leader>js', [[<cmd>lua require'harpoon.ui'.nav_file(2)<CR>]], {silent = true})
-map('n', '<leader>jd', [[<cmd>lua require'harpoon.ui'.nav_file(3)<CR>]], {silent = true})
-map('n', '<leader>jf', [[<cmd>lua require'harpoon.ui'.nav_file(4)<CR>]], {silent = true})
+nmap('<leader>ja', [[:lua require'harpoon.ui'.nav_file(1)<CR>]], 'Harpoon 1')
+nmap('<leader>js', [[:lua require'harpoon.ui'.nav_file(2)<CR>]], 'Harpoon 2')
+nmap('<leader>jd', [[:lua require'harpoon.ui'.nav_file(3)<CR>]], 'Harpoon 3')
+nmap('<leader>jf', [[:lua require'harpoon.ui'.nav_file(4)<CR>]], 'Harpoon 4')
 
-map('n', '<leader>ju', [[<cmd>lua require'harpoon.term'.gotoTerminal(2)<CR>]], {silent = true})
-map('n', '<leader>jl', [[<cmd>lua require'harpoon.term'.gotoTerminal(1)<CR>]], {silent = true})
+nmap('<leader>ju', [[:lua require'harpoon.term'.gotoTerminal(2)<CR>]], 'Go to terminal 1')
+nmap('<leader>jl', [[:lua require'harpoon.term'.gotoTerminal(1)<CR>]], 'Go to terminal 2')
 
--- Sandwich
-vim.api.nvim_exec(
-[[
-let g:sandwich_no_default_key_mappings = 1
-silent! nmap <unique><silent> <leader>sd <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
-silent! nmap <unique><silent> <leader>sr <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
-silent! nmap <unique><silent> <leader>sdb <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
-silent! nmap <unique><silent> <leader>srb <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+-- Source Here: Reload current buffer if it is a vim or lua file
+nmap('<leader>sh', function()
+  local ft = vim.api.nvim_buf_get_option(0, 'filetype')
+  if ft == 'vim' then
+    vim.cmd 'source %'
+    vim.notify('vim file reloaded!', 'info')
+  elseif ft == 'lua' then
+    vim.cmd 'luafile %'
+    vim.notify('lua file reloaded!', 'info')
+  else
+    vim.notify('Not a lua or vim file', 'info')
+  end
+end, 'Source Here (reload current file)')
 
-let g:operator_sandwich_no_default_key_mappings = 1
-silent! map <unique> <leader>sa <Plug>(operator-sandwich-add)
-silent! xmap <unique> <leader>sd <Plug>(operator-sandwich-delete)
-silent! xmap <unique> <leader>sr <Plug>(operator-sandwich-replace)
-]],
-false)
+-- Search dev docs
+nmap('<leader>dd', function()
+  local query = vim.fn.input 'Search DevDocs: '
+  local encodedURL = nil
+
+  if global.os_open_cmd ~= '' then
+    encodedURL = global.os_open_cmd .. string.format(' "https://devdocs.io/#q=%s"', query:gsub('%s', '%%20'))
+
+    os.execute(encodedURL)
+  else
+    vim.notify('Open command not supported by OS', 'error')
+  end
+end, 'Search DevDocs')
+
+-- Change a split between horizontal and vertical
+nmap('<leader>ws', function()
+  local a = vim.api
+  local windows = a.nvim_tabpage_list_wins(0)
+
+  if #windows ~= 2 then
+    vim.notify('Only works for 2 splits', 'error')
+    return
+  end
+
+  local ui = a.nvim_list_uis()[1]
+  local win1_height = a.nvim_win_get_height(windows[1])
+  local win2_height = a.nvim_win_get_height(windows[2])
+
+  local cmd_mapping
+  if ui.height < win1_height + win2_height then
+    cmd_mapping = a.nvim_replace_termcodes('<c-w>K', true, false, true)
+  else
+    cmd_mapping = a.nvim_replace_termcodes('<c-w>L', true, false, true)
+  end
+
+  if cmd_mapping then
+    a.nvim_feedkeys(cmd_mapping, 'n', false)
+  end
+end, 'Swap split between horizontal and vertical')
+
+-- Turn terminal to normal mode with escape if it's not a lazygit terminal
+create_augroup(
+  'REMAP_TERM_ESCAPE_UNLESS_LAZYGIT',
+  {
+    events = 'TermOpen',
+    pattern = '*',
+    callback = function()
+      if vim.fn.expand('%:t', false, {}) ~= 'lazygit' then
+        tmap('<esc>', [[<c-\><c-n>]], 'Escape term')
+      end
+    end
+  }
+)

@@ -6,7 +6,6 @@ end
 
 local ts = {}
 
-local map = require 'utils'.map
 local actions = require 'telescope.actions'
 local action_state = require 'telescope.actions.state'
 local pickers = require 'telescope.pickers'
@@ -44,6 +43,7 @@ local default_picker_opts = {
   },
 
   live_grep = {
+    path_display = {'smart'},
     file_ignore_patterns = ignored_files,
   },
 
@@ -53,6 +53,7 @@ local default_picker_opts = {
   },
 
   buffers = {
+    path_display = {'smart'},
     show_all_buffers = true,
     attach_mappings = function(_, local_map)
       local_map('n', 'd', actions.delete_buffer)
@@ -72,10 +73,15 @@ local default_picker_opts = {
   },
 
   find_files = {
+    path_display = {'smart'},
     find_command = { 'rg', '--files', '-L' },
     follow = true,
     hidden = false,
-    no_ignore = true,
+  },
+
+  oldfiles = {
+    path_display = {'smart'},
+    only_cwd = true,
   },
 }
 
@@ -147,23 +153,30 @@ telescope.setup{
   },
 }
 
+--Load native lua fzy since it is faster than the defaults.
+require('telescope').load_extension('fzy_native')
+require('telescope').load_extension('neoclip')
+require('telescope').load_extension('harpoon')
+require('telescope').load_extension('projects')
+require('telescope').load_extension('file_browser')
+require('telescope').load_extension('env')
+require('telescope').load_extension('vim_p4_files')
+
 -- function for generating keymap for each picker
-local builtin = function(mapping, picker, is_custom)
-  local module = is_custom and 'config.telescope' or 'telescope.builtin'
-  local rhs = string.format([[<cmd>lua require'%s'.%s()<CR>]], module, picker)
-  map('n', mapping, rhs, {silent = true})
+local builtin = function(lhs, picker, label)
+  nmap(lhs, function()
+    require('telescope.builtin')[picker]()
+  end, label)
 end
 
-local custom = function(mapping, picker_name, builtin_name, opts)
+local custom = function(lhs, picker, label, opts)
   opts = opts or {}
-  ts[picker_name] = function()
-    require('telescope.builtin')[builtin_name](opts)
-  end
-  local rhs = string.format([[<cmd>lua require'config.telescope'.%s()<CR>]], picker_name)
-  map('n', mapping, rhs, {silent = true})
+  nmap(lhs, function()
+    require('telescope.builtin')[picker](opts)
+  end, label)
 end
 
--- my telescope builtins mappings
+-- Telescope mappings
 builtin('<leader>ff', 'find_files')
 builtin('<leader>of', 'oldfiles')
 builtin('<leader>fw', 'grep_string')
@@ -180,48 +193,62 @@ builtin('<leader>tp', 'resume') -- telescope previous
 builtin('<leader>ps', 'lsp_dynamic_workspace_symbols') -- project symbols
 builtin('<leader>ca', 'lsp_code_actions')
 
+builtin('<leader>gc', 'git_commits')
+builtin('<leader>gb', 'git_branches')
+builtin('<leader>gs', 'git_status')
+builtin('<leader>gp', 'git_bcommits')
+builtin('<leader>lf', 'lsp_workspace_symbols')
+builtin('<leader>lc', 'lsp_document_symbols')
+builtin('<leader>lr', 'lsp_references')
+builtin('<leader>ld', 'lsp_document_diagnostics')
+builtin('<leader>lw', 'lsp_workspace_diagnostics')
+
+nmap("<leader>fb", ':Telescope file_browser<CR>')
+nmap("<leader>pj", ':Telescope projects<CR>')
+
 -- find_files, but don't use ignored patterns
-custom('<leader>fa', 'find_files_all', 'find_files', {
+custom('<leader>fa', 'find_files', 'find_files_all', {
   file_ignore_patterns = {},
   no_ignore = true,
   hidden = true,
 })
 
 -- find in dotfiles
-custom('<leader>fd', 'find_dotfiles', 'find_files', {
+custom('<leader>fd', 'find_files', 'find_dotfiles', {
   cwd = '~/dotfiles',
   prompt_title = 'files in dotfiles',
   file_ignore_patterns = {
     'dotbot/*', -- Ignore dotbot in dotfiles
   },
+  hidden = true,
 })
 
 -- find in neovim config
-custom('<leader>fn', 'find_neovim', 'find_files', {
+custom('<leader>fn', 'find_files', 'find_neovim', {
   cwd = '~/dotfiles/neovim',
   prompt_title = 'files in neovim config',
 })
 
 -- find in neovim config
-custom('<leader>fp', 'find_pack', 'find_files', {
-  cwd = '~/.local/share/nvim/site/pack/packer',
+custom('<leader>fp', 'find_files', 'find_packer', {
+  cwd = vim.fn.stdpath('data') .. '/site/pack/packer',
   prompt_title = 'files installed by packer',
 })
 
 -- grep inside of dotfiles
-custom('<leader>gid', 'grep_in_dotfiles', 'live_grep', {
+custom('<leader>gid', 'live_grep', 'grep_in_dotfiles', {
   cwd = '~/dotfiles',
   prompt_title = 'grep in dotfiles',
 })
 
 -- grep inside of neovim config
-custom('<leader>gin', 'grep_in_neovim', 'live_grep', {
+custom('<leader>gin', 'live_grep', 'grep_in_neovim', {
   cwd = '~/.config/nvim',
   prompt_title = 'grep in neovim config',
 })
 
 -- grep inside of vim help docs
-custom('<leader>vh', 'grep_vim_help', 'live_grep', {
+custom('<leader>vh', 'live_grep', 'grep_vim_help', {
   cwd = os.getenv 'VIMRUNTIME' .. '/doc',
   prompt_title = 'Grep in vim help docs',
 })
@@ -229,8 +256,8 @@ custom('<leader>vh', 'grep_vim_help', 'live_grep', {
 -- jump to a buffer
 custom(
   '<leader>jb',
-  'jump_to_buffer',
   'buffers',
+  'jump_to_buffer',
   vim.tbl_deep_extend('force', themes.get_dropdown(), {
     preview = false,
     prompt_title = 'Jump to buffer',
@@ -270,13 +297,6 @@ ts.packer_commands = function(opts)
     previewer = nil,
   }):find()
 end
-map('n', '<leader>pc', [[<cmd>lua require'config.telescope'.packer_commands()<CR>]], {silent = true})
-
---Load native lua fzy since it is faster than the defaults.
-require('telescope').load_extension('fzy_native')
-require('telescope').load_extension('neoclip')
-require('telescope').load_extension('harpoon')
-require('telescope').load_extension('projects')
-require('telescope').load_extension('file_browser')
+nmap('<leader>pc', [[<cmd>lua require'config.telescope'.packer_commands()<CR>]], 'Packer commands')
 
 return ts

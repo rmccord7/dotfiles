@@ -3,3 +3,7 @@
 neovim/plugin/
 neovim/pack/
 tags
+.git/
+!.git/config
+clangd/index/
+!clangd/config.yaml

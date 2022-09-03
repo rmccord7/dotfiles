@@ -1,14 +1,14 @@
 local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    PACKER_BOOTSTRAP = vim.fn.system {
-        "git",
-        "clone",
-        "--depth",
-        "1",
-        "https://github.com/wbthomason/packer.nvim",
-        install_path,
-    }
+  PACKER_BOOTSTRAP = vim.fn.system {
+    "git",
+    "clone",
+    "--depth",
+    "1",
+    "https://github.com/wbthomason/packer.nvim",
+    install_path,
+  }
 end
 
 vim.cmd [[packadd packer.nvim]]
@@ -32,6 +32,7 @@ packer.init {
   },
   auto_clean = true,
   compile_on_sync = true,
+  max_jobs = 8,
 }
 
 -- Run packer compile whenever this file is written.
@@ -77,9 +78,12 @@ return packer.startup(function(use)
     'ray-x/lsp_signature.nvim',
   }
 
-  use {
-    'machakann/vim-sandwich',
-  }
+  use({
+    "kylechui/nvim-surround",
+    config = function()
+      require("nvim-surround").setup({})
+    end
+  })
 
   use {
     'ludovicchabant/vim-gutentags',
@@ -165,6 +169,13 @@ return packer.startup(function(use)
   end
   }
 
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+      require('Comment').setup()
+    end
+  }
+
   -- Fuzzy finder
   use {
     'nvim-telescope/telescope.nvim',
@@ -172,7 +183,9 @@ return packer.startup(function(use)
       {'nvim-lua/popup.nvim'},
       {'nvim-lua/plenary.nvim'},
       {'nvim-telescope/telescope-fzy-native.nvim'},
-      {'nvim-telescope/telescope-file-browser.nvim'}
+      {'nvim-telescope/telescope-file-browser.nvim'},
+      {'LinArcX/telescope-env.nvim'},
+      {'Badhi/vim-p4-files'},
     },
     config = [[require('config.telescope')]],
   }
@@ -247,9 +260,24 @@ return packer.startup(function(use)
 
   use {
     'folke/which-key.nvim',
+    opt = true,
     config = function()
       require("which-key").setup {
+        plugins = {
+          presets = {
+            operators = false,
+            textobjects = false,
+            motions = false,
+          }
+        }
       }
+    end
+  }
+
+  use {
+    'sindrets/diffview.nvim',
+    config = function()
+      require('diffview').setup()
     end
   }
 
@@ -257,7 +285,9 @@ return packer.startup(function(use)
   use {
     'williamboman/mason.nvim',
     config = function()
-      require('mason').setup()
+      require('mason').setup({
+        log_level = vim.log.levels.DEBUG,
+      })
     end,
   }
 
@@ -290,6 +320,10 @@ return packer.startup(function(use)
   use {
     "folke/lsp-trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
+  }
+
+  use {
+    'folke/lua-dev.nvim',
   }
 
   -- Treesitter
@@ -344,13 +378,6 @@ return packer.startup(function(use)
 
   use {
     'nfvs/vim-perforce',
-  }
-
-  use {
-  'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
-  config = function()
-    require("lsp_lines").setup()
-  end,
   }
 
   use {
