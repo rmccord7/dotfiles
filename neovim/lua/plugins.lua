@@ -283,6 +283,12 @@ return packer.startup(function(use)
 
   --LSP
   use {
+    'neovim/nvim-lspconfig',
+    after = {'mason.nvim', 'mason-lspconfig.nvim'},
+    config = [[require('config.lsp')]],
+  }
+
+  use {
     'williamboman/mason.nvim',
     config = function()
       require('mason').setup({
@@ -293,17 +299,12 @@ return packer.startup(function(use)
 
   use {
     'williamboman/mason-lspconfig.nvim',
-    requires = { 'neovim/nvim-lspconfig' },
+    after = {'mason.nvim'},
     config = function()
       require('mason-lspconfig').setup({
         ensure_installed = {'sumneko_lua', 'rust_analyzer', 'clangd', 'pyright', 'cmake-language-server'}
       })
     end,
-  }
-
-  use {
-    'neovim/nvim-lspconfig',
-    config = [[require('config.lsp')]],
   }
 
   use {

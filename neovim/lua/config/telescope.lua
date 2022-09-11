@@ -178,8 +178,8 @@ end
 
 -- Telescope mappings
 builtin('<leader>ff', 'find_files')
-builtin('<leader>of', 'oldfiles')
-builtin('<leader>fw', 'grep_string')
+builtin('<leader>ow', 'oldfiles') -- old workspace files
+builtin('<leader>fw', 'grep_string') -- find word
 builtin('<leader>gw', 'live_grep') -- grep word
 builtin('<leader>gib', 'current_buffer_fuzzy_find') -- grep in buffer
 builtin('<leader>gl', 'git_commits') -- git log
@@ -205,6 +205,11 @@ builtin('<leader>lw', 'lsp_workspace_diagnostics')
 
 nmap("<leader>fb", ':Telescope file_browser<CR>')
 nmap("<leader>pj", ':Telescope projects<CR>')
+
+-- find_old_files, but all workspaces
+custom('<leader>of', 'oldfiles', 'find_old_files', {
+  only_cwd = false,
+})
 
 -- find_files, but don't use ignored patterns
 custom('<leader>fa', 'find_files', 'find_files_all', {

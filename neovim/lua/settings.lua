@@ -77,9 +77,13 @@ vim.opt.wildmode = {'longest', 'list', 'full'}
 vim.opt.wildmenu = true
 
 vim.filetype.add({
+  extension = {
+    scons = 'python',
+    api = 'python',
+  },
   filename = {
-    ['.clangd'] = 'yaml'
-  }
+    ['.clangd'] = 'yaml',
+  },
 })
 
 --Use hybrid numbers in normal mode and

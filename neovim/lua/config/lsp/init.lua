@@ -2,7 +2,7 @@ local servers = {
   'bashls',
   'clangd',
   'cmake',
-  'null-ls',
+  --'null-ls',
   --'pylsp',
   'pyright',
   'rust-analyzer',
