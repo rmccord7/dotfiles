@@ -9,14 +9,18 @@ if vim.g.neovide == true then
 end
 
 --Set python path
-if Global.is_windows == true then
-  vim.g.python3_host_prog = 'C:\\Users\\rmccord\\scoop\\apps\\python\\current\\python'
+if Global.is_windows then
+  vim.g.python3_host_prog = os_path('C:/Users/rmccord/scoop/apps/python/current/python')
 else
   vim.g.python3_host_prog = '/usr/bin/python3'
 end
 
--- Status
+
+-- Global status line
 vim.o.laststatus = 3
+
+-- Command height
+vim.o.cmdheight = 0
 
 -- Formatting options
 vim.o.expandtab   = true -- Expands tabs to spaces
@@ -78,6 +82,7 @@ vim.opt.wildmenu = true
 
 vim.filetype.add({
   extension = {
+    h = 'c',
     scons = 'python',
     api = 'python',
   },

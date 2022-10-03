@@ -23,6 +23,7 @@ local ignored_files = {
   '%.jpg',
   '%.ico',
   '%.o',
+  '^%.api',
   '%.a',
   '%.cmake',
   '%.lib',
