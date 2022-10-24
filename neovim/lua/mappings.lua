@@ -30,8 +30,8 @@ imap('!', '!<c-g>u')
 imap('?', '?<c-g>u')
 
 -- Return from relative number jumping.
-nmap('j', [[(v:count > 5 ? "m'" . v:count : "") . 'j']], 'Move line down', {remap = true, expr = true})
-nmap('k', [[(v:count > 5 ? "m'" . v:count : "") . 'k']], 'Move line up', {remap = true, expr = true})
+--nmap('j', [[(v:count > 5 ? "m'" . v:count : "") . 'j']], 'Move line down', {remap = true, expr = true})
+--nmap('k', [[(v:count > 5 ? "m'" . v:count : "") . 'k']], 'Move line up', {remap = true, expr = true})
 
 --Moving text
 vmap('J', [[:m '>+1<CR>gv=gv]], 'Move text down')
@@ -70,8 +70,8 @@ nmap('<leader>sg', ':%s/', 'Global buffer search', {silent = false})
 vmap('<leader>sg', ':%s/', 'Global buffer search', {silent = false})
 
 -- swap to alternate file
-nmap('ga', '<c-^>', 'Swap to alt file', {silent = false})
-vmap('ga', '<c-^>', 'Swap to alt file', {silent = false})
+--nmap('ga', '<c-^>', 'Swap to alt file', {silent = false})
+--vmap('ga', '<c-^>', 'Swap to alt file', {silent = false})
 
 -- repeat last macro
 nmap('<c-m>', '@@', 'Repeat last macro', {silent = false})

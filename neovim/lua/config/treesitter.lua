@@ -9,6 +9,9 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = { "c", "cpp", "python", "lua", "yaml", "json", "bash", "rust" },
   highlight = {
     enable = true,
+    disable = function(lang, bufnr)
+      return lang == 'c' and vim.api.nvim_buf_line_count(bufnr) > 50000
+    end,
   },
   incremental_selection = {
     enable = false,

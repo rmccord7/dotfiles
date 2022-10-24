@@ -7,7 +7,7 @@ local _M = {}
 
 _M.setup = function(on_attach, capabilities)
 
-  local luadev = require('lua-dev').setup({
+  require('lspconfig').sumneko_lua.setup{
 
     runtime_path = true,
     lspconfig = {
@@ -30,9 +30,7 @@ _M.setup = function(on_attach, capabilities)
       },
       single_file_support = true
     }
-  })
-
-  require("lspconfig").sumneko_lua.setup(luadev)
+  }
 end
 
 return _M

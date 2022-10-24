@@ -15,7 +15,6 @@ else
   vim.g.python3_host_prog = '/usr/bin/python3'
 end
 
-
 -- Global status line
 vim.o.laststatus = 3
 

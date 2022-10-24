@@ -10,6 +10,15 @@ local colors = require('material.colors')
 vim.g.material_style = 'deep ocean'
 
 material.setup({
+  plugins = {
+    --'indent-blankline',
+    --'lsp-saga',
+    --'nvim-cmp',
+    --'nvim-tree',
+    --'telescope',
+    --'trouble',
+    --'which-key',
+  },
   custom_colors = {
     fg           = '#717CB4',
     comments     = '#5A6077',
@@ -33,4 +42,4 @@ material.setup({
   }
 })
 
-vim.cmd[[colorscheme material]]
+vim.cmd 'colorscheme material'

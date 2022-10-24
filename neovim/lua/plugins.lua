@@ -123,7 +123,8 @@ return packer.startup(function(use)
   use {
     'marko-cerovac/material.nvim',
     config = [[require('config.material')]],
-    before = "feline.nvim"
+    before = "feline.nvim",
+    commit = 'de33236'
   }
 
   use {
@@ -302,7 +303,7 @@ return packer.startup(function(use)
     after = {'mason.nvim'},
     config = function()
       require('mason-lspconfig').setup({
-        ensure_installed = {'sumneko_lua', 'rust_analyzer', 'clangd', 'pyright', 'cmake-language-server'}
+        ensure_installed = {'sumneko_lua', 'rust_analyzer', 'clangd', 'pyright', 'cmake'}
       })
     end,
   }
@@ -324,7 +325,7 @@ return packer.startup(function(use)
   }
 
   use {
-    'folke/lua-dev.nvim',
+    'folke/neodev.nvim',
   }
 
   -- Treesitter
@@ -361,20 +362,12 @@ return packer.startup(function(use)
   }
 
   use {
-    'luukvbaal/stabilize.nvim',
-    config = function()
-      require("stabilize").setup({
-        nested = 'QuickFixCmdPost,DiagnosticChanged *',
-      })
-    end,
-  }
-
-  use {
     'tpope/vim-fugitive',
   }
 
   use {
     'mhinz/vim-signify',
+    opt = true,
   }
 
   use {
