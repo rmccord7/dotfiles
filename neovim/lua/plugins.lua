@@ -124,14 +124,17 @@ return packer.startup(function(use)
     'marko-cerovac/material.nvim',
     config = [[require('config.material')]],
     before = "feline.nvim",
-    commit = 'de33236'
   }
 
   use {
-    opt = true,
-    'norcalli/nvim-colorizer.lua',
+    'NvChad/nvim-colorizer.lua',
     config = function()
-      require('colorizer').setup {}
+      require('colorizer').setup {
+        user_default_options = {
+          mode = 'virtualtext',
+          names = false,
+        }
+      }
     end
   }
 

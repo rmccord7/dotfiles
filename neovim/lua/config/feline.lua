@@ -17,21 +17,21 @@ local components = {
 }
 
 local vi_mode_colors = {
-  NORMAL = colors.blue,
-  INSERT = colors.green,
-  VISUAL = colors.purple,
-  LINES = colors.violet,
-  OP = colors.green,
-  BLOCK = colors.blue,
-  REPLACE = colors.red,
-  ['V-REPLACE'] = colors.violet,
-  ENTER = colors.cyan,
-  MORE = colors.cyan,
-  SELECT = colors.orange,
-  COMMAND = colors.yellow,
-  SHELL = colors.green,
-  TERM = colors.green,
-  NONE = colors.yellow
+  NORMAL = colors.main.blue,
+  INSERT = colors.main.green,
+  VISUAL = colors.main.purple,
+  LINES = colors.main.violet,
+  OP = colors.main.green,
+  BLOCK = colors.main.blue,
+  REPLACE = colors.main.red,
+  ['V-REPLACE'] = colors.main.violet,
+  ENTER = colors.main.cyan,
+  MORE = colors.main.cyan,
+  SELECT = colors.main.orange,
+  COMMAND = colors.main.yellow,
+  SHELL = colors.main.green,
+  TERM = colors.main.green,
+  NONE = colors.main.yellow
 }
 
 local vi_mode_text = {
@@ -74,7 +74,7 @@ components.active[1][1] = {
   hl = function()
       local val = {
           name = vi_mode_utils.get_mode_highlight_name(),
-          fg = colors.bg,
+          fg = colors.editor.bg,
           bg = vi_mode_utils.get_mode_color(),
           style = 'bold'
       }
@@ -87,13 +87,13 @@ components.active[1][1] = {
 components.active[1][2] = {
   provider = 'file_info',
   hl = {
-      fg = colors.bg,
-      bg = colors.darkgreen,
+      fg = colors.editor.bg,
+      bg = colors.main.darkgreen,
       style = 'bold'
   },
   left_sep = {
       ' ', 'slant_left_2',
-      {str = ' ', hl = {bg = colors.darkgreen, fg = 'NONE'}}
+      {str = ' ', hl = {bg = colors.main.darkgreen, fg = 'NONE'}}
   },
   right_sep = {'right_rounded', ' '},
   icon = ''
@@ -103,7 +103,7 @@ components.active[1][2] = {
 components.active[1][3] = {
   provider = 'git_branch',
   hl = {
-    fg = colors.blue,
+    fg = colors.main.blue,
     bg = 'bg',
     style = 'bold'
   },
@@ -113,7 +113,7 @@ components.active[1][3] = {
 components.active[1][4] = {
   provider = 'git_diff_added',
   hl = {
-    fg = colors.darkgreen,
+    fg = colors.main.darkgreen,
     bg = 'bg',
     style = 'bold'
   }
@@ -143,7 +143,7 @@ components.active[1][6] = {
 components.active[2][1] = {
   provider = 'lsp_client_names',
   hl = {
-    fg = colors.blue,
+    fg = colors.main.blue,
     bg = 'bg',
     style = 'bold'
   },
@@ -242,7 +242,7 @@ components.active[3][3] = {
   provider = 'file_size',
   enabled = function() return vim.fn.getfsize(vim.fn.expand('%:t')) > 0 end,
   hl = {
-    fg = colors.darkgreen,
+    fg = colors.main.darkgreen,
     bg = 'bg',
     style = 'bold'
   },
@@ -253,7 +253,7 @@ components.active[3][3] = {
 components.active[3][4] = {
   provider = file_osinfo,
   hl = {
-    fg = colors.blue,
+    fg = colors.main.blue,
     bg = 'bg',
     style = 'bold'
   },
@@ -264,7 +264,7 @@ components.active[3][4] = {
 components.active[3][5] = {
   provider = 'file_encoding',
   hl = {
-    fg = colors.blue,
+    fg = colors.main.blue,
     bg = 'bg',
     style = 'bold'
   },
@@ -275,7 +275,7 @@ components.active[3][5] = {
 components.active[3][6] = {
   provider = 'position',
   hl = {
-    fg = colors.darkgreen,
+    fg = colors.main.darkgreen,
     bg = 'bg',
     style = 'bold'
   },
@@ -286,7 +286,7 @@ components.active[3][6] = {
 components.active[3][7] = {
   provider = 'line_percentage',
   hl = {
-    fg = colors.darkgreen,
+    fg = colors.main.darkgreen,
     bg = 'bg',
     style = 'bold'
   },
@@ -297,14 +297,14 @@ components.active[3][7] = {
 components.active[3][8] = {
   provider = 'scroll_bar',
   hl = {
-    fg = colors.darkgreen,
+    fg = colors.main.darkgreen,
     bg = 'bg',
   },
 }
 
 feline.setup({
-  default_bg = colors.bg,
-  default_fg = colors.fg,
+  default_bg = colors.editor.bg,
+  default_fg = colors.editor.fg,
   vi_mode_colors = vi_mode_colors,
   components = components,
 })
@@ -338,7 +338,7 @@ components.inactive[2][1] = {
     },
   },
   hl = {
-    fg = colors.orange,
+    fg = colors.main.orange,
     bg = 'NONE',
     style = 'bold',
   },
