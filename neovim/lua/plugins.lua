@@ -42,7 +42,7 @@ return packer.startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-  -- IDE stuff
+  -- Editor
   use {
     'famiu/feline.nvim',
     config = [[require('config.feline')]],
@@ -51,23 +51,6 @@ return packer.startup(function(use)
 
   use {
     'lukas-reineke/indent-blankline.nvim',
-  }
-
-  use {
-    "ahmedkhalf/project.nvim",
-    config = function()
-      require('project_nvim').setup {
-        patterns = {'.git', '.p4config', '.p4.conf', 'compile_commands.json'},
-      }
-    end
-  }
-
-  use {
-    "jose-elias-alvarez/null-ls.nvim",
-  }
-
-  use {
-    "editorconfig/editorconfig-vim",
   }
 
   use {
@@ -119,7 +102,7 @@ return packer.startup(function(use)
     end
   }
 
-  -- colors
+  -- Colors
   use {
     'marko-cerovac/material.nvim',
     config = [[require('config.material')]],
@@ -134,15 +117,6 @@ return packer.startup(function(use)
           mode = 'virtualtext',
           names = false,
         }
-      }
-    end
-  }
-
-  use {
-    "klen/nvim-config-local",
-    config = function()
-      require('config-local').setup {
-        config_files = { '.nvimrc.lua' },
       }
     end
   }
@@ -180,7 +154,7 @@ return packer.startup(function(use)
     end
   }
 
-  -- Fuzzy finder
+  -- Editor
   use {
     'nvim-telescope/telescope.nvim',
     requires = {
@@ -194,6 +168,7 @@ return packer.startup(function(use)
     config = [[require('config.telescope')]],
   }
 
+  -- Completion
   use {
     'hrsh7th/nvim-cmp',
     config = [[require('config.cmp')]],
@@ -279,19 +254,66 @@ return packer.startup(function(use)
   }
 
   use {
-    'sindrets/diffview.nvim',
+    'glepnir/lspsaga.nvim',
     config = function()
-      require('diffview').setup()
+        local saga = require("lspsaga")
+
+        saga.init_lsp_saga()
+    end,
+  }
+
+  use {
+    "folke/lsp-trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+  }
+
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = {
+      'kyazdani42/nvim-web-devicons',
+    },
+    config = function()
+      require("nvim-tree").setup()
+    end,
+    tag = 'nightly'
+  }
+
+  -- Project
+  use {
+    "ahmedkhalf/project.nvim",
+    config = function()
+      require('project_nvim').setup {
+        patterns = {
+          '.git',
+          '.nvimrc.lua',
+          '.nvimrc',
+          '.p4config',
+          '.p4.conf',
+          'compile_commands.json'},
+      }
     end
   }
 
-  --LSP
   use {
-    'neovim/nvim-lspconfig',
-    after = {'mason.nvim', 'mason-lspconfig.nvim'},
-    config = [[require('config.lsp')]],
+    "editorconfig/editorconfig-vim",
   }
 
+  -- Treesitter
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    requires = {
+      'nvim-treesitter/nvim-treesitter-refactor',
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      'nvim-treesitter/playground',
+      'romgrk/nvim-treesitter-context',
+      'p00f/nvim-ts-rainbow',
+
+    },
+    config = [[require('config.treesitter')]],
+    run = ':TSUpdate',
+  }
+
+  -- LSP
   use {
     'williamboman/mason.nvim',
     config = function()
@@ -306,68 +328,39 @@ return packer.startup(function(use)
     after = {'mason.nvim'},
     config = function()
       require('mason-lspconfig').setup({
-        ensure_installed = {'sumneko_lua', 'rust_analyzer', 'clangd', 'pyright', 'cmake'}
+        ensure_installed = {
+          'sumneko_lua',
+          'rust_analyzer',
+          'clangd',
+          'pyright',
+          'cmake'}
       })
     end,
   }
 
   use {
-    'glepnir/lspsaga.nvim',
-    config = function()
-        local saga = require("lspsaga")
-
-        saga.init_lsp_saga({
-            -- your configuration
-        })
-    end,
+    'neovim/nvim-lspconfig',
+    after = {'mason.nvim', 'mason-lspconfig.nvim'},
+    config = [[require('config.lsp')]],
   }
 
   use {
-    "folke/lsp-trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
+    "jose-elias-alvarez/null-ls.nvim",
   }
 
-  use {
-    'folke/neodev.nvim',
-  }
-
-  -- Treesitter
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    config = [[require('config.treesitter')]],
-    run = ':TSUpdate'
-  }
-
-  use {
-    'nvim-treesitter/nvim-treesitter-refactor',
-    requires = { 'nvim-treesitter/nvim-treesitter' }
-  }
-
-  use {
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    requires = { 'nvim-treesitter/nvim-treesitter' }
-  }
-
-  use {
-    opt = true,
-    'nvim-treesitter/playground',
-    requires = { 'nvim-treesitter/nvim-treesitter' }
-  }
-
-  use {
-    'romgrk/nvim-treesitter-context',
-    requires = { 'nvim-treesitter/nvim-treesitter' },
-  }
-
-  use {
-    'p00f/nvim-ts-rainbow',
-    requires = { 'nvim-treesitter/nvim-treesitter' }
-  }
-
+  -- Git
   use {
     'tpope/vim-fugitive',
   }
 
+  use {
+    'sindrets/diffview.nvim',
+    config = function()
+      require('diffview').setup()
+    end
+  }
+
+  -- Version Control
   use {
     'mhinz/vim-signify',
     opt = true,
@@ -377,15 +370,41 @@ return packer.startup(function(use)
     'nfvs/vim-perforce',
   }
 
+  -- Neovim delveopment
   use {
-  'kyazdani42/nvim-tree.lua',
-  requires = {
-    'kyazdani42/nvim-web-devicons',
-  },
-  config = function()
-    require("nvim-tree").setup()
-  end,
-  tag = 'nightly'
+    'folke/neodev.nvim',
+  }
+
+  -- Experimental
+  use({
+    "folke/noice.nvim",
+    disable = true,
+    config = function()
+      require('noice').setup()
+    end,
+    requires = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+      }
+  })
+
+  use {
+    'MunifTanjim/exrc.nvim',
+    requires = {
+      'MunifTanjim/nui.nvim',
+    },
+    config = function()
+      require('exrc').setup({
+        files = {
+          '.nvimrc.lua',
+          '.nvimrc'
+        }
+      })
+    end
   }
 
   -- Automatically set up your configuration after cloning packer.nvim

@@ -58,22 +58,14 @@ else
     vim.opt.grepprg = 'grep -nH'
 end
 
--- Folding (with Treesitter)
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-vim.opt.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').]] ..
-                   [[' ... '.trim(getline(v:foldend)).]] ..
-                   [[' ('.(v:foldend-v:foldstart).' lines folded...)']]
-vim.opt.fillchars = "fold: "
-vim.opt.foldlevel = 99
-vim.opt.foldnestmax = 3
-vim.opt.foldminlines = 4
-
 -- Persistent undo
 vim.opt.undofile = true
 
 -- Auto read file changes
 vim.opt.autoread = true
+
+-- Disable exrc
+vim.o.exrc = false
 
 -- Wildmenu
 vim.opt.wildmode = {'longest', 'list', 'full'}
