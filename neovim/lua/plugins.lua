@@ -255,7 +255,7 @@ return packer.startup(function(use)
     config = function()
       require('notify').setup({
         stages = "fade",
-        background_colour = require('material.colors').bg
+        background_colour = require('material.colors').editor.bg
       })
 
       vim.notify = require 'notify'
