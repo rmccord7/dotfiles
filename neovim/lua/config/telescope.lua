@@ -157,7 +157,6 @@ telescope.setup{
 --Load native lua fzy since it is faster than the defaults.
 require('telescope').load_extension('fzy_native')
 require('telescope').load_extension('neoclip')
-require('telescope').load_extension('harpoon')
 require('telescope').load_extension('projects')
 require('telescope').load_extension('file_browser')
 require('telescope').load_extension('env')
@@ -200,16 +199,21 @@ builtin('<leader>gp', 'git_bcommits')
 builtin('<leader>lf', 'lsp_workspace_symbols')
 builtin('<leader>lc', 'lsp_document_symbols')
 builtin('<leader>lr', 'lsp_references')
-builtin('<leader>ld', 'lsp_document_diagnostics')
 builtin('<leader>lw', 'lsp_workspace_diagnostics')
+builtin('<leader>ld', 'diagnostics')
 
 nmap("<leader>fb", ':Telescope file_browser<CR>')
 nmap("<leader>pj", ':Telescope projects<CR>')
 
--- find_old_files, but all workspaces
+-- -- Find_old_files, but all workspaces
+-- custom('<leader>ld', 'diagnostics', 'lsp_diagnostics', {
+-- })
+
+-- Find_old_files, but all workspaces
 custom('<leader>of', 'oldfiles', 'find_old_files', {
   only_cwd = false,
 })
+builtin('<leader>ld', 'diagnostics')
 
 -- find_files, but don't use ignored patterns
 custom('<leader>fa', 'find_files', 'find_files_all', {

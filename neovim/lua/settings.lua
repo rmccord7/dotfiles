@@ -32,13 +32,16 @@ vim.wo.wrap       = false
 --Do not save when switching buffers
 vim.o.hidden = true
 
---Case insensitive searching UNLESS /C or capital in search
+-- Search and replace options
 vim.o.ignorecase = true
 vim.o.smartcase  = true
 vim.o.inccommand = "split"
 
 --Make line numbers default
 vim.wo.number = true
+
+-- Reduced time for swap write and cursor hold event
+vim.o.updatetime = 2000
 
 --Completion options
 vim.o.completeopt = "menu,menuone,noselect"
@@ -50,6 +53,9 @@ vim.o.hlsearch = false
 vim.wo.list = true
 vim.o.listchars = "tab:››,extends:›,precedes:‹,nbsp:·,trail:·"
 
+-- Keyword program
+vim.o.keywordprg = ':vert bo help'
+
 -- Default grep command
 -- Prefer ripgrep over grep
 if vim.fn.executable('rg') == 1 then
@@ -58,18 +64,21 @@ else
     vim.opt.grepprg = 'grep -nH'
 end
 
--- Persistent undo
-vim.opt.undofile = true
-
--- Auto read file changes
-vim.opt.autoread = true
-
 -- Disable exrc
 vim.o.exrc = false
+
+-- Disable swap file
+vim.o.swapfile = false
+
+-- Split window options
+vim.o.splitright = true
+vim.o.splitbelow = true
+vim.o.splitkeep = 'cursor'
 
 -- Wildmenu
 vim.opt.wildmode = {'longest', 'list', 'full'}
 vim.opt.wildmenu = true
+vim.opt.wildignore = '*/node_modules/*,*/.git/*,DS_Store,*/venv/*,*/__pycache__/*,*.pyc'
 
 vim.filetype.add({
   extension = {

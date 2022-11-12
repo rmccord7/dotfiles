@@ -21,10 +21,19 @@ _M.setup = function(on_attach, capabilities)
             path = runtime_path,
           },
           diagnostics = {
-            globals = {'vim'},
+            globals = {
+              'vim',
+              'package',
+            },
+            disable  = {
+              'lowercase-global',
+            }
           },
           workspace = {
             library = vim.api.nvim_get_runtime_file("", true),
+          },
+          telemetry = {
+            enable = false,
           },
         },
       },

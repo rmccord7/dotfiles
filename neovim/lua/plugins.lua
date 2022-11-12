@@ -195,36 +195,6 @@ return packer.startup(function(use)
     config = [[require('snippets')]],
   }
 
-  --Harpoon
-  use {
-    'ThePrimeagen/harpoon',
-    requires = {
-      {'nvim-lua/plenary.nvim'},
-      {'nvim-telescope/telescope.nvim'},
-    },
-    config = function()
-      require('harpoon').setup({})
-    end
-  }
-
-  use {
-    opt = true,
-    'VonHeikemen/fine-cmdline.nvim',
-    config = function()
-      require('fine-cmdline').setup({
-        popup = {
-          position = {
-            row = '50%',
-            col = '50%',
-          },
-        },
-      })
-    end,
-    requires = {
-      {'MunifTanjim/nui.nvim'}
-    }
-  }
-
   use {
     'rcarriga/nvim-notify',
     config = function()
@@ -238,8 +208,8 @@ return packer.startup(function(use)
   }
 
   use {
+    disable = true,
     'folke/which-key.nvim',
-    opt = true,
     config = function()
       require("which-key").setup {
         plugins = {
