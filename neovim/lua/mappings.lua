@@ -30,8 +30,8 @@ imap('!', '!<c-g>u')
 imap('?', '?<c-g>u')
 
 -- Return from relative number jumping.
---nmap('j', [[(v:count > 5 ? "m'" . v:count : "") . 'j']], 'Move line down', {remap = true, expr = true})
---nmap('k', [[(v:count > 5 ? "m'" . v:count : "") . 'k']], 'Move line up', {remap = true, expr = true})
+nmap('j', [[(v:count > 5 ? "m'" . v:count : "") . 'j']], 'Move line down', {expr = true})
+nmap('k', [[(v:count > 5 ? "m'" . v:count : "") . 'k']], 'Move line up', {expr = true})
 
 --Moving text
 vmap('J', [[:m '>+1<CR>gv=gv]], 'Move text down')
@@ -137,35 +137,23 @@ nmap("<leader>xq", ":Trouble quickfix<CR>", 'Trouble quickfix')
 nmap("<leader>xl", ":Trouble loclist<CR>", 'Trouble loclist')
 nmap("gR", ":Trouble lsp_references<CR>", 'Trouble LSP ref')
 
--- Harpoon
-nmap('<leader>je', [[:lua require'harpoon.mark'.add_file()<CR>]], 'Harpoon mark')
-nmap('<leader>jr', [[:lua require'harpoon.ui'.toggle_quick_menu()<CR>]], 'Harpoon list')
-
-nmap('<leader>ja', [[:lua require'harpoon.ui'.nav_file(1)<CR>]], 'Harpoon 1')
-nmap('<leader>js', [[:lua require'harpoon.ui'.nav_file(2)<CR>]], 'Harpoon 2')
-nmap('<leader>jd', [[:lua require'harpoon.ui'.nav_file(3)<CR>]], 'Harpoon 3')
-nmap('<leader>jf', [[:lua require'harpoon.ui'.nav_file(4)<CR>]], 'Harpoon 4')
-
-nmap('<leader>ju', [[:lua require'harpoon.term'.gotoTerminal(2)<CR>]], 'Go to terminal 1')
-nmap('<leader>jl', [[:lua require'harpoon.term'.gotoTerminal(1)<CR>]], 'Go to terminal 2')
-
 -- Source Here: Reload current buffer if it is a vim or lua file
 nmap('<leader>sh', function()
   local ft = vim.api.nvim_buf_get_option(0, 'filetype')
   if ft == 'vim' then
     vim.cmd 'source %'
-    vim.notify('vim file reloaded!', 'info')
+    vim.notify('vim file reloaded!', vim.log.levels.INFO)
   elseif ft == 'lua' then
     vim.cmd 'luafile %'
-    vim.notify('lua file reloaded!', 'info')
+    vim.notify('lua file reloaded!', vim.log.levels.INFO)
   else
-    vim.notify('Not a lua or vim file', 'info')
+    vim.notify('Not a lua or vim file', vim.log.levels.INFO)
   end
 end, 'Source Here (reload current file)')
 
 -- Search dev docs
 nmap('<leader>dd', function()
-  local query = vim.fn.input 'Search DevDocs: '
+  local query = vim.fn.input({default = 'Search DevDocs: '})
   local encodedURL = nil
 
   if global.os_open_cmd ~= '' then
@@ -173,7 +161,7 @@ nmap('<leader>dd', function()
 
     os.execute(encodedURL)
   else
-    vim.notify('Open command not supported by OS', 'error')
+    vim.notify('Open command not supported by OS', vim.log.levels.ERROR)
   end
 end, 'Search DevDocs')
 
@@ -183,7 +171,7 @@ nmap('<leader>ws', function()
   local windows = a.nvim_tabpage_list_wins(0)
 
   if #windows ~= 2 then
-    vim.notify('Only works for 2 splits', 'error')
+    vim.notify('Only works for 2 splits', vim.log.levels.ERROR)
     return
   end
 
@@ -210,7 +198,7 @@ create_augroup(
     events = 'TermOpen',
     pattern = '*',
     callback = function()
-      if vim.fn.expand('%:t', false, {}) ~= 'lazygit' then
+      if vim.fn.expand('%:t', false) ~= 'lazygit' then
         tmap('<esc>', [[<c-\><c-n>]], 'Escape term')
       end
     end

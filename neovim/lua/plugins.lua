@@ -58,6 +58,7 @@ return packer.startup(function(use)
   }
 
   use {
+    disable = true,
     'ray-x/lsp_signature.nvim',
   }
 
@@ -179,8 +180,11 @@ return packer.startup(function(use)
       },
       {'onsails/lspkind-nvim'},
       {'hrsh7th/cmp-buffer'},
+      {'amarakon/nvim-cmp-buffer-lines'},
       {'hrsh7th/cmp-nvim-lua', ft = 'lua'},
       {'hrsh7th/cmp-nvim-lsp'},
+      {'hrsh7th/cmp-nvim-lsp-document-symbol'},
+      {'hrsh7th/cmp-nvim-lsp-signature-help'},
       {'quangnguyen30192/cmp-nvim-tags'},
       {'hrsh7th/cmp-path'},
       {'saadparwaiz1/cmp_luasnip'},

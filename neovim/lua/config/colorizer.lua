@@ -5,4 +5,4 @@ if not ok then
 
 end
 
-colorizer.setup()
+colorizer.setup({})

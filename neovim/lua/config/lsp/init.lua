@@ -60,28 +60,17 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- Setup all settings when we attach to a buffer for an LSP
-local function on_attach(client, bufnr)
+local function on_attach(_, bufnr)
 
-  nmap('gD', ':lua vim.lsp.buf.declaration()<CR>zz', nil, {buffer = bufnr})
-  nmap('gd', ':lua vim.lsp.buf.definition()<CR>zz', nil, {buffer = bufnr})
   nmap('<c-s>', ':Lspsaga hover_doc<CR>', nil, {buffer = bufnr})
-  nmap('gi', ':lua vim.lsp.buf.implementation()<CR>zz', nil, {buffer = bufnr})
-  nmap('<leader>D', ':lua vim.lsp.buf.type_definition()<CR>', nil, {buffer = bufnr})
   nmap('gr', ':Lspsaga rename<CR>', nil, {buffer = bufnr})
   nmap('<leader>ca', ':Lspsaga code_action<CR>', nil, {buffer = bufnr})
   vmap('<leader>ca', ':Lspsaga code_action<CR>', nil, {buffer = bufnr})
-  nmap('<leader>q', ':lua vim.lsp.diagnostic.set_loclist()<CR>', nil, {buffer = bufnr})
+  nmap('<leader>cd', ':Lspsaga show_line_diagnostics<CR>', nil, {buffer = bufnr})
+  nmap('<leader>cD', ':Lspsaga cursor_line_diagnostics<CR>', nil, {buffer = bufnr})
   nmap(']e', ':Lspsaga diagnostic_jump_next<CR>zz', nil, {buffer = bufnr})
   nmap('[e', ':Lspsaga diagnostic_jump_prev<CR>zz', nil, {buffer = bufnr})
   nmap('gh', ':Lspsaga lsp_finder<CR>', nil, {buffer = bufnr})
-
-  -- Need to register LSP signature on attach,
-  require "lsp_signature".on_attach({
-    bind = true,
-    handler_opts = {
-      border = "single"
-    }
-  })
 
   -- Show diagnostics on attach
   vim.b.show_diagnostics = true

@@ -35,6 +35,11 @@ local symbol_map = {
   TypeParameter = ""
 }
 
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
 -- Kind comparator function
 local function kind_cmp(entry1, entry2)
     local kind1 = entry1:get_kind()
@@ -72,7 +77,7 @@ cmp.setup {
     ['<C-p>'] = cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Insert}),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-Space>'] = cmp.mapping.complete({}),
     ['<C-e>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Insert,
@@ -83,6 +88,8 @@ cmp.setup {
         cmp.select_next_item()
       elseif ls.expand_or_jumpable() then
         ls.expand_or_jump()
+      elseif has_words_before() then
+        cmp.complete()
       else
         fallback()
       end
@@ -101,7 +108,12 @@ cmp.setup {
   -- You should specify your *installed* sources.
   sources = {
     { name = 'luasnip' },
-    { name = 'nvim_lsp' },
+    {
+      name = 'nvim_lsp',
+      max_item_count = 75,
+    },
+    { name = 'nvim_lsp_document_symbol' },
+    { name = 'nvim_lsp_signature_help' },
     { name = 'nvim_lua' },
     { name = 'path' },
   },
@@ -114,6 +126,8 @@ cmp.setup {
         menu = ({
           buffer = "[Buffer]",
           nvim_lsp = "[LSP]",
+          nvim_lsp_document_symbol = "[LSP-DS]",
+          nvim_lsp_signature_help = "[LSP-SH]",
           luasnip = "[Snip]",
           nvim_lua = "[Lua]",
         })

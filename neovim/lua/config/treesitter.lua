@@ -40,7 +40,7 @@ require'nvim-treesitter.configs'.setup {
       },
     },
     navigation = {
-      enable = true,
+      enable = false,
       keymaps = {
         goto_definition_lsp_fallback = "gd",
         list_definitions = "gnD",

@@ -100,16 +100,8 @@ telescope.setup{
     },
     mappings = {
       n = {
-        ['<C-x>'] = false,
-        ['<C-s>'] = actions.select_horizontal,
-        ['<C-q>'] = actions.send_to_qflist,
-        ['<M-q>'] = actions.send_selected_to_qflist,
       },
       i = {
-        ['<C-x>'] = false,
-        ['<C-s>'] = actions.select_horizontal,
-        ['<C-q>'] = actions.send_to_qflist,
-        ['<M-q>'] = actions.send_selected_to_qflist,
       },
     },
     color_devicons = true,
@@ -199,8 +191,9 @@ builtin('<leader>gp', 'git_bcommits')
 builtin('<leader>lf', 'lsp_workspace_symbols')
 builtin('<leader>lc', 'lsp_document_symbols')
 builtin('<leader>lr', 'lsp_references')
-builtin('<leader>lw', 'lsp_workspace_diagnostics')
 builtin('<leader>ld', 'diagnostics')
+builtin('gd', 'lsp_definitions')
+builtin('gD', 'lsp_implementations')
 
 nmap("<leader>fb", ':Telescope file_browser<CR>')
 nmap("<leader>pj", ':Telescope projects<CR>')
