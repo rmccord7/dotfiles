@@ -10,13 +10,13 @@ require'nvim-treesitter.configs'.setup {
   sync_install = true,
   highlight = {
     enable = true,
-    disable = function(lang, buf)
-      local max_filesize = 75 * 1024 -- 75 KB
-      local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-      if ok and stats and stats.size > max_filesize then
-          return true
-      end
-    end,
+    -- disable = function(lang, buf)
+    --   local max_filesize = 75 * 1024 -- 75 KB
+    --   local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+    --   if ok and stats and stats.size > max_filesize then
+    --       return true
+    --   end
+    -- end,
   },
   incremental_selection = {
     enable = false,

@@ -57,7 +57,8 @@ _G.map = function(modes, lhs, rhs, label, opts)
 
         wk.register({
           [last_keystroke] = { rhs, label },
-        }, {
+        },
+        {
           mode = mode,
           prefix = lhs:sub(1, -2), -- extract all but the last keystroke of the mapping
           silent = true,

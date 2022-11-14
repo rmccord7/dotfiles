@@ -1,7 +1,7 @@
 local global = require('global')
 
 -- Remap space as leader key
-map('', '<Space>', '<Nop>', 'Leader')
+--map('', '<Space>', '<Nop>', 'Leader')
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 

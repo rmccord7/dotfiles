@@ -57,11 +57,6 @@ return packer.startup(function(use)
     'bfredl/nvim-miniyank',
   }
 
-  use {
-    disable = true,
-    'ray-x/lsp_signature.nvim',
-  }
-
   use({
     "kylechui/nvim-surround",
     config = function()
@@ -92,7 +87,7 @@ return packer.startup(function(use)
   use {
     'windwp/nvim-autopairs',
     config = function()
-      require ('config.autopairs')
+      require('nvim-autopairs').setup()
     end
   }
 
@@ -217,12 +212,24 @@ return packer.startup(function(use)
     config = function()
       require("which-key").setup {
         plugins = {
+          marks = false,
+          registers = false,
           presets = {
             operators = false,
-            textobjects = false,
+            text_objects = false,
             motions = false,
+            windows = false,
+            nav = false,
+            z = false,
+            g = false,
           }
-        }
+        },
+        triggers_blacklist = {
+          n = {
+            'y',
+            'd',
+          },
+        },
       }
     end
   }
@@ -357,11 +364,7 @@ return packer.startup(function(use)
       require('noice').setup()
     end,
     requires = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
       "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
       }
   })
