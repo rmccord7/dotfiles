@@ -22,6 +22,10 @@ nmap('N', 'Nzzzv')
 nmap('J', 'mzJ\'z')
 nmap('[c', '[czz')
 nmap(']c', ']czz')
+nmap('<C-u>', '<C-u>zz')
+nmap('<C-d>', '<C-d>zz')
+nmap('<C-f>', '<C-f>zz')
+nmap('<C-b>', '<C-b>zz')
 
 -- Don't undo everything.
 imap('.', '.<c-g>u')
