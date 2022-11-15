@@ -184,11 +184,25 @@ return packer.startup(function(use)
     'rcarriga/nvim-notify',
     config = function()
       require('notify').setup({
+        level = vim.log.levels.TRACE,
+        timeout = 3000,
         stages = "fade",
         background_colour = require('material.colors').editor.bg
       })
 
-      vim.notify = require 'notify'
+      vim.notify = function(msg, log_level, opts)
+        log_level = log_level or vim.log.levels.DEBUG
+
+        -- Auto-convert tables to string interpretation so we can print it
+        if type(msg) == 'table' then
+          msg = vim.inspect(msg)
+        elseif not msg then
+          msg = 'CUSTOM NOTIFY FAILED'
+          log_level = vim.log.level.DEBUG
+          opts = {}
+        end
+        require('notify').nvim_notify(msg, log_level, opts)
+      end
     end,
   }
 
@@ -285,6 +299,10 @@ return packer.startup(function(use)
     'williamboman/mason.nvim',
     config = function()
       require('mason').setup({
+        providers = {
+          "mason.providers.client",
+          "mason.providers.registry-api",
+        },
         log_level = vim.log.levels.DEBUG,
       })
     end,
