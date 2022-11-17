@@ -1,3 +1,5 @@
+Utils = require('Utils')
+
 local servers = {
   'bashls',
   'clangd',
@@ -19,7 +21,7 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
 
 -- Advertise to LSP servers that nvim-cmp supports LSP
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- Setup all settings when we attach to a buffer for an LSP
 local function on_attach(client, bufnr)
@@ -32,7 +34,7 @@ local function on_attach(client, bufnr)
   nmap('gs', ':lua require("lspsaga.signaturehelp").signature_help()<CR>', nil, {buffer = bufnr})
   nmap('<leader>D', ':lua vim.lsp.buf.type_definition()<CR>', nil, {buffer = bufnr})
   nmap('gr', ':lua require("lspsaga.rename").rename()<CR>', nil, {buffer = bufnr})
-  nmap('<leader>ca', ':lua require("lspsaga.codeaction").code_action()<CR>', nil, {buffer = bufnr})
+  nmap(':Lspsaga code_action<CR>', '<leader>ca', nil, {buffer = bufnr})
   vmap('<leader>ca', ':lua require("lspsaga.codeaction").range_code_action()<CR>', nil, {buffer = bufnr})
   nmap('<leader>q', ':lua vim.lsp.diagnostic.set_loclist()<CR>', nil, {buffer = bufnr})
   nmap(']e', ':Lspsaga diagnostic_jump_next<CR>zz', nil, {buffer = bufnr})
@@ -65,6 +67,8 @@ end
 local ok, _ = pcall(require, "lspconfig")
 
 if ok then
+    require("neodev").setup{}
+
     for _, server in ipairs(servers) do
         require("config.lsp.servers." .. server).setup(on_attach, capabilities)
     end

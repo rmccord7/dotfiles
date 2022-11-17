@@ -1,7 +1,7 @@
 vim.bo.tabstop = 3
 vim.bo.softtabstop = 3
 vim.bo.shiftwidth = 3
-vim.bo.formatoptions= 'cqj'
+--vim.bo.formatoptions= 'cqj'
 
 -- ss1pwn
 nmap('<F9>', [[:lua require('ss1pwn.comment').next_bad_comment()<CR>]], 'Next bad ss1 comment')

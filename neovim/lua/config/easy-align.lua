@@ -1,6 +1,6 @@
 -- Map vim-easy-align to ga
-vim.api.nvim_set_keymap('x', '<leader>ea', '<Plug>(EasyAlign)', {})
-vim.api.nvim_set_keymap('n', '<leader>ea', '<Plug>(EasyAlign)', {})
+vim.api.nvim_set_keymap('x', 'ga', '<Plug>(EasyAlign)', {})
+vim.api.nvim_set_keymap('n', 'ga', '<Plug>(EasyAlign)', {})
 
 -- Alignment for c-style variable declarations
 local t = {}

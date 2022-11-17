@@ -192,7 +192,6 @@ builtin('<leader>ts', 'builtin')
 builtin('<leader>rp', 'reloader')
 builtin('<leader>tp', 'resume') -- telescope previous
 builtin('<leader>ps', 'lsp_dynamic_workspace_symbols') -- project symbols
-builtin('<leader>ca', 'lsp_code_actions')
 
 builtin('<leader>gc', 'git_commits')
 builtin('<leader>gb', 'git_branches')
