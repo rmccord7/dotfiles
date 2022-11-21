@@ -7,3 +7,4 @@ tags
 !.git/config
 clangd/index/
 !clangd/config.yaml
+.luarc.json
