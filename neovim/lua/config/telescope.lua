@@ -17,6 +17,7 @@ local themes = require 'telescope.themes'
 local ignored_files = {
   '.git/.*',
   'tags',
+  '%.ttf',
   '%.svg',
   '%.png',
   '%.jpeg',
@@ -211,6 +212,7 @@ custom('<leader>fd', 'find_files', 'find_dotfiles', {
   cwd = '~/dotfiles',
   prompt_title = 'files in dotfiles',
   file_ignore_patterns = {
+    '%.ttf',
     'dotbot/*', -- Ignore dotbot in dotfiles
   },
   hidden = true,
