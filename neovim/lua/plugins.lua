@@ -80,7 +80,7 @@ return packer.startup(function(use)
   use {
     'toppair/reach.nvim',
     config = function()
-      require('reach').setup {}
+      require('reach').setup({})
     end
   }
 
@@ -182,8 +182,9 @@ return packer.startup(function(use)
 
   use {
     'rcarriga/nvim-notify',
+    before = 'reach.nvim',
     config = function()
-      require('notify').setup({
+      nvim_notify = require('notify').setup({
         level = vim.log.levels.TRACE,
         timeout = 3000,
         stages = "fade",
@@ -201,8 +202,14 @@ return packer.startup(function(use)
           log_level = vim.log.level.DEBUG
           opts = {}
         end
-        require('notify').nvim_notify(msg, log_level, opts)
+        require('notify')(msg, log_level, opts)
       end
+
+      -- Notify
+      nmap('<leader>nc', function()
+        nvim_notify.dismiss { pending = true }
+      end, 'Notification Clear')
+
     end,
   }
 
@@ -329,10 +336,6 @@ return packer.startup(function(use)
     config = [[require('config.lsp')]],
   }
 
-  use {
-    "jose-elias-alvarez/null-ls.nvim",
-  }
-
   -- Git
   use {
     'tpope/vim-fugitive',
@@ -381,17 +384,10 @@ return packer.startup(function(use)
     config = function()
       require('exrc').setup({
         files = {
-          '.nvimrc.lua',
           '.nvimrc'
         }
       })
     end
   }
-
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if PACKER_BOOTSTRAP then
-    require('packer').sync()
-  end
 end)
 

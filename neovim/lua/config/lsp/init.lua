@@ -1,5 +1,3 @@
-Utils = require('Utils')
-
 vim.lsp.set_log_level(vim.log.levels.ERROR)
 
 local servers = {

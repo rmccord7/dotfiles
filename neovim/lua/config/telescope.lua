@@ -193,7 +193,7 @@ builtin('gD', 'lsp_implementations', 'Need label')
 
 nmap("<leader>fb", ':Telescope file_browser<CR>', 'File Browser')
 nmap("<leader>pj", ':Telescope projects<CR>', 'List Projects')
-nmap("<leader>tn", ':Telescope notify<CR>', 'List Notifications')
+nmap("<leader>nh", ':Telescope notify<CR>', 'List Notifications')
 
 -- Find_old_files, but all workspaces
 custom('<leader>of', 'oldfiles', 'find_old_files', {
