@@ -266,6 +266,10 @@ return packer.startup(function(use)
     tag = 'nightly'
   }
 
+  use {
+    'ckipp01/stylua-nvim',
+  }
+
   -- Project
   use {
     "ahmedkhalf/project.nvim",

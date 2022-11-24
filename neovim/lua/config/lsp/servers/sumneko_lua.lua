@@ -39,6 +39,13 @@ _M.setup = function(on_attach, capabilities)
         },
       },
     },
+    commands = {
+      Format = {
+        function()
+          require('stylua-nvim').format_file()
+        end,
+      },
+    },
     single_file_support = true
   }
 end

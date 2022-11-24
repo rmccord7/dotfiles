@@ -69,6 +69,7 @@ local function on_attach(_, bufnr)
   nmap(']e', ':Lspsaga diagnostic_jump_next<CR>zz', nil, {buffer = bufnr})
   nmap('[e', ':Lspsaga diagnostic_jump_prev<CR>zz', nil, {buffer = bufnr})
   nmap('gh', ':Lspsaga lsp_finder<CR>', nil, {buffer = bufnr})
+  nmap('<leader>f', ':Format<CR>', nil, {buffer = bufnr})
 
   -- Show diagnostics on attach
   vim.b.show_diagnostics = true
