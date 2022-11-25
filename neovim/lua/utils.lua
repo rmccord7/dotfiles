@@ -10,12 +10,11 @@ end
 
 -- Automatically create missing directories before save
 function M.create_file_directory_structure()
-  local path = vim.fn.expand('%:p:h')
+    local path = vim.fn.expand('%:p:h')
 
-  if vim.fn.isdirectory(path) == 0 then
-    vim.fn.mkdir(path, 'p')
-  end
+    if vim.fn.isdirectory(path) == 0 then
+        vim.fn.mkdir(path, 'p')
+    end
 end
 
 return M
-
