@@ -14,7 +14,7 @@ _M.setup = function(on_attach, capabilities)
     require('lspconfig').sumneko_lua.setup({
         on_attach = on_attach,
         capabilities = capabilities,
-        root_dir = require('lspconfig').util.root_pattern('.git'),
+        root_dir = require('lspconfig').util.root_pattern({'.git', 'stylua.toml', '.stylua.toml'}),
         settings = {
             Lua = {
                 runtime = {
