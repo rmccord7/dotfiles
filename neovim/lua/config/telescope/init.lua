@@ -13,30 +13,7 @@ local sorters = require('telescope.sorters')
 local finders = require('telescope.finders')
 local themes = require('telescope.themes')
 
--- Files to ignore with `file_ignore_patterns`
-local ignored_files = {
-    '.git/.*',
-    'tags',
-    '%.ttf',
-    '%.svg',
-    '%.png',
-    '%.jpeg',
-    '%.jpg',
-    '%.ico',
-    '%.o',
-    '^%.api',
-    '%.a',
-    '%.cmake',
-    '%.lib',
-    '%.so',
-    '.cache/*',
-    'SDK_BIN/*',
-    'SRC/*',
-    'SRC_ESL/*',
-    'SRC_SODAQ/*',
-    'out/',
-    'out_single/',
-}
+local util = require('config.telescope.util')
 
 -- Default picker options.
 local default_picker_opts = {
@@ -46,7 +23,7 @@ local default_picker_opts = {
 
     live_grep = {
         path_display = { 'smart' },
-        file_ignore_patterns = ignored_files,
+        file_ignore_patterns = util.ignored_files,
     },
 
     git_commits = {
@@ -107,7 +84,7 @@ telescope.setup({
         scroll_strategy = 'cycle',
         sorting_strategy = 'ascending',
         layout_strategy = 'flex',
-        file_ignore_patterns = ignored_files,
+        file_ignore_patterns = util.ignored_files,
         layout_config = {
             prompt_position = 'top',
             horizontal = {
@@ -163,49 +140,49 @@ local custom = function(lhs, picker, label, opts)
 end
 
 -- Telescope mappings
-builtin('<leader>ff', 'find_files', 'Need label')
-builtin('<leader>ow', 'oldfiles', 'Need label') -- old workspace files
-builtin('<leader>fw', 'grep_string', 'Need label') -- find word
-builtin('<leader>gw', 'live_grep', 'Need label') -- grep word
-builtin('<leader>/', 'current_buffer_fuzzy_find', 'Need label') -- grep in buffer
-builtin('<leader>gl', 'git_commits', 'Need label') -- git log
-builtin('<leader>gb', 'git_branches', 'Need label')
-builtin('<leader>gh', 'help_tags', 'Need label')
-builtin('<leader>gm', 'man_pages', 'Need label')
-builtin('<leader>bl', 'buffers', 'Need label') --Redundant with custom ?
-builtin('<leader>ts', 'builtin', 'Need label')
-builtin('<leader>rp', 'reloader', 'Need label')
-builtin('<leader>tp', 'resume', 'Need label') -- telescope previous
-builtin('<leader>ps', 'lsp_dynamic_workspace_symbols', 'Need label') -- project symbols
+--util.builtin('<leader>ff', 'find_files', 'Need label')
+util.builtin('<leader>ow', 'oldfiles', 'Need label') -- old workspace files
+util.builtin('<leader>fw', 'grep_string', 'Need label') -- find word
+util.builtin('<leader>gw', 'live_grep', 'Need label') -- grep word
+util.builtin('<leader>/', 'current_buffer_fuzzy_find', 'Need label') -- grep in buffer
+util.builtin('<leader>gl', 'git_commits', 'Need label') -- git log
+util.builtin('<leader>gb', 'git_branches', 'Need label')
+util.builtin('<leader>gh', 'help_tags', 'Need label')
+util.builtin('<leader>gm', 'man_pages', 'Need label')
+util.builtin('<leader>bl', 'buffers', 'Need label') --Redundant with custom ?
+util.builtin('<leader>ts', 'builtin', 'Need label')
+util.builtin('<leader>rp', 'reloader', 'Need label')
+util.builtin('<leader>tp', 'resume', 'Need label') -- telescope previous
+util.builtin('<leader>ps', 'lsp_dynamic_workspace_symbols', 'Need label') -- project symbols
 
-builtin('<leader>gc', 'git_commits', 'Need label')
-builtin('<leader>gb', 'git_branches', 'Need label')
-builtin('<leader>gs', 'git_status', 'Need label')
-builtin('<leader>gp', 'git_bcommits', 'Need label')
+util.builtin('<leader>gc', 'git_commits', 'Need label')
+util.builtin('<leader>gb', 'git_branches', 'Need label')
+util.builtin('<leader>gs', 'git_status', 'Need label')
+util.builtin('<leader>gp', 'git_bcommits', 'Need label')
 
-builtin('<leader>lc', 'lsp_document_symbols', 'Need label')
-builtin('<leader>lr', 'lsp_references', 'Need label')
-builtin('gd', 'lsp_definitions', 'Need label')
-builtin('gD', 'lsp_implementations', 'Need label')
+util.builtin('<leader>lc', 'lsp_document_symbols', 'Need label')
+util.builtin('<leader>lr', 'lsp_references', 'Need label')
+util.builtin('gd', 'lsp_definitions', 'Need label')
+util.builtin('gD', 'lsp_implementations', 'Need label')
 
 nmap('<leader>fb', ':Telescope file_browser<CR>', 'File Browser')
 nmap('<leader>pj', ':Telescope projects<CR>', 'List Projects')
 nmap('<leader>nh', ':Telescope notify<CR>', 'List Notifications')
 
 -- Find_old_files, but all workspaces
-custom('<leader>of', 'oldfiles', 'find_old_files', {
+util.custom('<leader>of', 'oldfiles', 'find_old_files', {
     only_cwd = false,
 })
 
 -- Find_files, but don't use ignored patterns
-custom('<leader>fa', 'find_files', 'find_files_all', {
+util.custom('<leader>fa', 'find_files', 'find_files_all', {
     file_ignore_patterns = {},
     no_ignore = true,
     hidden = true,
 })
 
 -- Find in dotfiles
-custom('<leader>fd', 'find_files', 'find_dotfiles', {
+util.custom('<leader>fd', 'find_files', 'find_dotfiles', {
     cwd = '~/dotfiles',
     prompt_title = 'files in dotfiles',
     file_ignore_patterns = {
@@ -216,25 +193,25 @@ custom('<leader>fd', 'find_files', 'find_dotfiles', {
 })
 
 -- Find in neovim config
-custom('<leader>fn', 'find_files', 'find_neovim', {
+util.custom('<leader>fn', 'find_files', 'find_neovim', {
     cwd = '~/dotfiles/neovim',
     prompt_title = 'files in neovim config',
 })
 
 -- Find in packer files
-custom('<leader>fp', 'find_files', 'find_packer', {
+util.custom('<leader>fp', 'find_files', 'find_packer', {
     cwd = vim.fn.stdpath('data') .. '/site/pack/packer',
     prompt_title = 'files installed by packer',
 })
 
 -- grep inside of vim help docs
-custom('<leader>vh', 'live_grep', 'grep_vim_help', {
+util.custom('<leader>vh', 'live_grep', 'grep_vim_help', {
     cwd = os.getenv('VIMRUNTIME') .. '/doc',
     prompt_title = 'Grep in vim help docs',
 })
 
 -- jump to a buffer
-custom(
+util.custom(
     '<leader>jb',
     'buffers',
     'jump_to_buffer',
@@ -245,24 +222,24 @@ custom(
 )
 
 -- LSP current buffer diagnostics
-custom('<leader>ld', 'diagnostics', 'lsp_diagnostics_buffer', {
+util.custom('<leader>ld', 'diagnostics', 'lsp_diagnostics_buffer', {
     bufnr = 0,
 })
 
 -- LSP current error diagnostics
-custom('<leader>le', 'diagnostics', 'lsp_diagnostics_buffer_error', {
+util.custom('<leader>le', 'diagnostics', 'lsp_diagnostics_buffer_error', {
     bufnr = 0,
     severity = vim.diagnostic.severity.ERROR,
 })
 
 -- LSP current warning diagnostics
-custom('<leader>lw', 'diagnostics', 'lsp_diagnostics_buffer_warn', {
+util.custom('<leader>lw', 'diagnostics', 'lsp_diagnostics_buffer_warn', {
     bufnr = 0,
     severity = vim.diagnostic.severity.WARN,
 })
 
 -- LSP project diagnostics
-custom('<leader>lp', 'diagnostics', 'lsp_diagnostics_project', {})
+util.custom('<leader>lp', 'diagnostics', 'lsp_diagnostics_project', {})
 
 -- custom telescope picker to execute a packer.nvim command
 -- https://github.com/nvim-telescope/telescope.nvim/blob/master/developers.md#guide-to-your-first-picker

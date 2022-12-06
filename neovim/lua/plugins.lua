@@ -1,3 +1,5 @@
+global = require('global')
+
 local ok, packer = pcall(require, 'packer')
 
 if not ok then
@@ -266,6 +268,11 @@ return packer.startup(function(use)
     -- Formatting lua files.
     use({
         'ckipp01/stylua-nvim',
+        config = function()
+            require('stylua-nvim').setup({
+                config_file = global.home_path .. '/dotfiles/neovim/stylua.toml'
+            })
+        end,
     })
 
     -- Project
@@ -387,7 +394,7 @@ return packer.startup(function(use)
         config = function()
             require('exrc').setup({
                 files = {
-                    '.nvimrc',
+                    '.nvimrc.lua',
                 },
             })
         end,

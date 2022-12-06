@@ -41,6 +41,7 @@ _M.setup = function(on_attach, capabilities)
         commands = {
             Format = {
                 function()
+                    --require('stylua-nvim').format_file(global.home_path .. '/dotfiles/neovim/stylua.toml')
                     require('stylua-nvim').format_file()
                 end,
             },
