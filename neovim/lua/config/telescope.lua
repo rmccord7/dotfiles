@@ -176,15 +176,17 @@ builtin('<leader>bl', 'buffers', 'Need label') --Redundant with custom ?
 builtin('<leader>ts', 'builtin', 'Need label')
 builtin('<leader>rp', 'reloader', 'Need label')
 builtin('<leader>tp', 'resume', 'Need label') -- telescope previous
-builtin('<leader>ps', 'lsp_dynamic_workspace_symbols', 'Need label') -- project symbols
 
 builtin('<leader>gc', 'git_commits', 'Need label')
 builtin('<leader>gb', 'git_branches', 'Need label')
 builtin('<leader>gs', 'git_status', 'Need label')
 builtin('<leader>gp', 'git_bcommits', 'Need label')
 
-builtin('<leader>lc', 'lsp_document_symbols', 'Need label')
 builtin('<leader>lr', 'lsp_references', 'Need label')
+builtin('<leader>lc', 'lsp_document_symbols', 'Need label')
+builtin('<leader>ps', 'lsp_dynamic_workspace_symbols', 'Need label') -- project symbols
+builtin('<leader>li', 'lsp_incoming_calls', 'Need label') -- project symbols
+builtin('<leader>lo', 'lsp_outgoing_calls', 'Need label') -- project symbols
 builtin('gd', 'lsp_definitions', 'Need label')
 builtin('gD', 'lsp_implementations', 'Need label')
 
