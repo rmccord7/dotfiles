@@ -373,6 +373,15 @@ return packer.startup(function(use)
         'folke/neodev.nvim',
     })
 
+    -- References
+    use({
+        'nanotee/nvim-lua-guide',
+    })
+
+    use({
+        'milisims/nvim-luaref',
+    })
+
     -- Experimental
     use({
         'folke/noice.nvim',

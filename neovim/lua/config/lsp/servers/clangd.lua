@@ -5,6 +5,7 @@ local _M = {}
 _M.setup = function(on_attach, capabilities)
     require('lspconfig').clangd.setup({
 
+        --cmd = { 'clangd.exe', '--pretty', '--log=verbose'},
         on_attach = on_attach,
         flags = {
 

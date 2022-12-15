@@ -2,10 +2,10 @@ M = {}
 
 M.ignored_files = {
     -- Directories
-    '.git/.*',
+    '%.git/.*',
 
     -- Clangd
-    '.cache/*',
+    '%.cache/*',
 
     -- FileTypes
     '%.ttf',
@@ -19,14 +19,14 @@ M.ignored_files = {
     'tags',
 
     -- Output files
-    '%.o',
-    '%.a',
-    '%.lib',
-    '%.so',
-    '%.bin',
-    '%.elf',
-    '%.dblite',
-    '%.pyc',
+    '$%.o',
+    '$%.a',
+    '$%.lib',
+    '$%.so',
+    '$%.bin',
+    '$%.elf',
+    '$%.dblite',
+    '$%.pyc',
 }
 
 function M.builtin(lhs, picker, label)
