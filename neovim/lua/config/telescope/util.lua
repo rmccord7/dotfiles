@@ -8,12 +8,12 @@ M.ignored_files = {
     '%.cache/*',
 
     -- FileTypes
-    '%.ttf',
-    '%.svg',
-    '%.png',
-    '%.jpeg',
-    '%.jpg',
-    '%.ico',
+    '$%.ttf',
+    '$%.svg',
+    '$%.png',
+    '$%.jpeg',
+    '$%.jpg',
+    '$%.ico',
 
     -- Files
     'tags',

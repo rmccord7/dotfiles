@@ -268,11 +268,6 @@ return packer.startup(function(use)
     -- Formatting lua files.
     use({
         'ckipp01/stylua-nvim',
-        config = function()
-            require('stylua-nvim').setup({
-                config_file = global.home_path .. '/dotfiles/neovim/stylua.toml'
-            })
-        end,
     })
 
     -- Project
