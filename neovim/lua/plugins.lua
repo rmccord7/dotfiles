@@ -146,6 +146,7 @@ return packer.startup(function(use)
             { 'nvim-telescope/telescope-file-browser.nvim' },
             { 'LinArcX/telescope-env.nvim' },
             { 'Badhi/vim-p4-files' },
+            { 'nvim-telescope/telescope-packer.nvim' },
         },
         config = [[require('config.telescope')]],
     })
@@ -242,10 +243,9 @@ return packer.startup(function(use)
 
     use({
         'glepnir/lspsaga.nvim',
+        branch = 'main',
         config = function()
-            local saga = require('lspsaga')
-
-            saga.init_lsp_saga()
+            require('lspsaga').setup({})
         end,
     })
 

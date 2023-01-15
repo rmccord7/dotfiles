@@ -124,53 +124,34 @@ require('telescope').load_extension('file_browser')
 require('telescope').load_extension('env')
 require('telescope').load_extension('vim_p4_files')
 require('telescope').load_extension('notify')
-
--- function for generating keymap for each picker
-local builtin = function(lhs, picker, label)
-    nmap(lhs, function()
-        require('telescope.builtin')[picker]()
-    end, label)
-end
-
-local custom = function(lhs, picker, label, opts)
-    opts = opts or {}
-    nmap(lhs, function()
-        require('telescope.builtin')[picker](opts)
-    end, label)
-end
+require('telescope').load_extension('packer')
 
 -- Telescope mappings
---util.builtin('<leader>ff', 'find_files', 'Need label')
-util.builtin('<leader>ow', 'oldfiles', 'Need label') -- old workspace files
-util.builtin('<leader>fw', 'grep_string', 'Need label') -- find word
-util.builtin('<leader>gw', 'live_grep', 'Need label') -- grep word
-util.builtin('<leader>/', 'current_buffer_fuzzy_find', 'Need label') -- grep in buffer
-util.builtin('<leader>gl', 'git_commits', 'Need label') -- git log
-util.builtin('<leader>gb', 'git_branches', 'Need label')
-util.builtin('<leader>gh', 'help_tags', 'Need label')
-util.builtin('<leader>gm', 'man_pages', 'Need label')
-util.builtin('<leader>bl', 'buffers', 'Need label') --Redundant with custom ?
-util.builtin('<leader>ts', 'builtin', 'Need label')
-util.builtin('<leader>rp', 'reloader', 'Need label')
-util.builtin('<leader>tp', 'resume', 'Need label') -- telescope previous
-util.builtin('<leader>ps', 'lsp_dynamic_workspace_symbols', 'Need label') -- project symbols
+util.builtin('<leader>ff', 'find_files', 'Find Files')
+util.builtin('<leader>ow', 'oldfiles', 'List Old Files')
+util.builtin('<leader>fw', 'grep_string', 'Grep String Under Cursor')
+util.builtin('<leader>gw', 'live_grep', 'Grep String')
+util.builtin('<leader>/', 'current_buffer_fuzzy_find', 'Fuzzy Find Current Buffer')
+util.builtin('<leader>hp', 'help_tags', 'Plugin Help')
+util.builtin('<leader>hm', 'man_pages', 'Find Manual')
+util.builtin('<leader>jb', 'builtin', 'List Telescope Builtins')
+util.builtin('<leader>tp', 'resume', 'Telecope Resume')
+util.builtin('<leader>m', 'keymaps', 'List Keymaps')
+util.builtin('<leader>ch', 'command_history', 'List Command History')
 
-util.builtin('<leader>gc', 'git_commits', 'Need label')
-util.builtin('<leader>gb', 'git_branches', 'Need label')
-util.builtin('<leader>gs', 'git_status', 'Need label')
-util.builtin('<leader>gp', 'git_bcommits', 'Need label')
-
-builtin('<leader>lr', 'lsp_references', 'Need label')
-builtin('<leader>lc', 'lsp_document_symbols', 'Need label')
-builtin('<leader>ps', 'lsp_dynamic_workspace_symbols', 'Need label') -- project symbols
-builtin('<leader>li', 'lsp_incoming_calls', 'Need label') -- project symbols
-builtin('<leader>lo', 'lsp_outgoing_calls', 'Need label') -- project symbols
-builtin('gd', 'lsp_definitions', 'Need label')
-builtin('gD', 'lsp_implementations', 'Need label')
+util.builtin('<leader>lr', 'lsp_references', 'List LSP References')
+util.builtin('<leader>lc', 'lsp_document_symbols', 'List LSP Document Symbols')
+util.builtin('<leader>ps', 'lsp_dynamic_workspace_symbols', 'List LSP Dynamic Workspace Symbols')
+util.builtin('<leader>li', 'lsp_incoming_calls', 'List LSP Incoming Calls')
+util.builtin('<leader>lo', 'lsp_outgoing_calls', 'List LSP Outgoing Calls')
+util.builtin('gd', 'lsp_definitions', 'List LSP Definitions')
+util.builtin('gD', 'lsp_implementations', 'List LSP Implementations')
 
 nmap('<leader>fb', ':Telescope file_browser<CR>', 'File Browser')
 nmap('<leader>pj', ':Telescope projects<CR>', 'List Projects')
 nmap('<leader>nh', ':Telescope notify<CR>', 'List Notifications')
+nmap('<leader>pa', ':Telescope packer<CR>', 'Packer Plugins')
+nmap('<leader>te', ':Telescope env<CR>', 'List Environment Variables')
 
 -- Find_old_files, but all workspaces
 util.custom('<leader>of', 'oldfiles', 'find_old_files', {
@@ -189,7 +170,7 @@ util.custom('<leader>fd', 'find_files', 'find_dotfiles', {
     cwd = '~/dotfiles',
     prompt_title = 'files in dotfiles',
     file_ignore_patterns = {
-        '%.ttf',
+        '%.ttf', -- Fonts
         'dotbot/*', -- Ignore dotbot in dotfiles
     },
     hidden = true,
@@ -201,84 +182,30 @@ util.custom('<leader>fn', 'find_files', 'find_neovim', {
     prompt_title = 'files in neovim config',
 })
 
--- Find in packer files
-util.custom('<leader>fp', 'find_files', 'find_packer', {
-    cwd = vim.fn.stdpath('data') .. '/site/pack/packer',
-    prompt_title = 'files installed by packer',
-})
-
--- grep inside of vim help docs
+-- Grep inside of vim help docs
 util.custom('<leader>vh', 'live_grep', 'grep_vim_help', {
     cwd = os.getenv('VIMRUNTIME') .. '/doc',
     prompt_title = 'Grep in vim help docs',
 })
 
--- jump to a buffer
-util.custom(
-    '<leader>jb',
-    'buffers',
-    'jump_to_buffer',
-    vim.tbl_deep_extend('force', themes.get_dropdown(), {
-        preview = false,
-        prompt_title = 'Jump to buffer',
-    })
-)
-
 -- LSP current buffer diagnostics
-util.custom('<leader>ld', 'diagnostics', 'lsp_diagnostics_buffer', {
+util.custom('<leader>ld', 'diagnostics', 'Buffer Diagnostics', {
     bufnr = 0,
 })
 
 -- LSP current error diagnostics
-util.custom('<leader>le', 'diagnostics', 'lsp_diagnostics_buffer_error', {
+util.custom('<leader>le', 'diagnostics', 'Buffer Errors', {
     bufnr = 0,
     severity = vim.diagnostic.severity.ERROR,
 })
 
 -- LSP current warning diagnostics
-util.custom('<leader>lw', 'diagnostics', 'lsp_diagnostics_buffer_warn', {
+util.custom('<leader>lw', 'diagnostics', 'Buffer Warnings', {
     bufnr = 0,
     severity = vim.diagnostic.severity.WARN,
 })
 
 -- LSP project diagnostics
-util.custom('<leader>lp', 'diagnostics', 'lsp_diagnostics_project', {})
-
--- custom telescope picker to execute a packer.nvim command
--- https://github.com/nvim-telescope/telescope.nvim/blob/master/developers.md#guide-to-your-first-picker
-ts.packer_commands = function(opts)
-    local packer_commands = {
-        'Clean',
-        'Compile',
-        'Install',
-        'Load',
-        'Profile',
-        'Status',
-        'Sync',
-        'Update',
-    }
-    local dropdown = themes.get_dropdown()
-    opts = opts and vim.tbl_deep_extend('keep', opts, dropdown) or dropdown
-
-    pickers
-        .new(opts, {
-            prompt_title = 'Run a packer.nvim command',
-            finder = finders.new_table(packer_commands),
-            sorter = sorters.get_generic_fuzzy_sorter(),
-            attach_mappings = function(prompt_bufnr)
-                actions.select_default:replace(function()
-                    local cmd = action_state.get_selected_entry()
-                    actions.close(prompt_bufnr)
-                    if cmd then
-                        vim.cmd('Packer' .. cmd[1])
-                    end
-                end)
-                return true
-            end,
-            previewer = nil,
-        })
-        :find()
-end
-nmap('<leader>pc', [[<cmd>lua require'config.telescope'.packer_commands()<CR>]], 'Packer commands')
+util.custom('<leader>lp', 'diagnostics', 'Project Diagnostics', {})
 
 return ts
