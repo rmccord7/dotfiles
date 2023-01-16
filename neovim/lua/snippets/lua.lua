@@ -1,30 +1,33 @@
 --- Provides snippets for Lua.
 
-local ls = require("luasnip")
+local ls = require('luasnip')
 local snippet = ls.snippet
-local fmt = require("luasnip.extras.fmt").fmt
-local l = require("luasnip.extras").lambda
+local fmt = require('luasnip.extras.fmt').fmt
+local l = require('luasnip.extras').lambda
 local i = ls.insert_node
 local d = ls.dynamic_node
 local t = ls.text_node
 local s = ls.snippet_node
 
 -- Needed for fancy snippets
-local ts_utils_ok, ts_utils = pcall(require, "nvim-treesitter.ts_utils")
+local ts_utils_ok, ts_utils = pcall(require, 'nvim-treesitter.ts_utils')
 if not ts_utils_ok then
     return {}
 end
 
-local query = require("vim.treesitter.query")
-local function_q = vim.treesitter.parse_query("lua",[[
+local query = require('vim.treesitter.query')
+local function_q = vim.treesitter.parse_query(
+    'lua',
+    [[
     [
         (function_declaration parameters: (parameters) @parms)
         (function_definition parameters: (parameters) @parms)
     ] @fun
-]])
+]]
+)
 -- This only matches returns that actually return something, so early return can still be used for
 -- control flow!
-local return_q = vim.treesitter.parse_query("lua", "(return_statement (expression_list)) @ret")
+local return_q = vim.treesitter.parse_query('lua', '(return_statement (expression_list)) @ret')
 
 --- Obtains list of parameter names for the next lua function and whether it returns something.
 -- @param linenr Line number at which we start searching.
@@ -36,7 +39,9 @@ local function next_fun_parms(linenr)
     -- TODO: Doesn't work if we land inside of a comment block because that's a different
     -- "language".
     local root = ts_utils.get_root_for_position(linenr - 1, 0)
-    if not root then return end
+    if not root then
+        return
+    end
 
     for _, captures, _ in function_q:iter_matches(root, bufnr) do
         local sline = captures[1]:range()
@@ -45,7 +50,7 @@ local function next_fun_parms(linenr)
             local parms = {}
             for parm, node_type in captures[1]:iter_children() do
                 -- Parameters are given via "name" nodes, other nodes might be comments etc.
-                if node_type == "name" then
+                if node_type == 'name' then
                     table.insert(parms, query.get_node_text(parm, bufnr))
                 end
             end
@@ -57,45 +62,47 @@ local function next_fun_parms(linenr)
 end
 
 return {
-    ls.parser.parse_snippet("for", "for ${1:i} = ${2:1}, ${3:n} do\n\t$0\nend"),
-    ls.parser.parse_snippet("fun", "local function ${1:name}($2)\n\t$0\nend"),
-    ls.parser.parse_snippet("while", "while ${1:cond} do\n\t$0\nend"),
-    ls.parser.parse_snippet("mfun", "function M.${1:name}($2)\n\t$0\nend"),
-    ls.parser.parse_snippet("pairs", "for ${1:key}, ${2:value} in pairs($3) do\n\t$0\nend"),
-    ls.parser.parse_snippet("ipairs", "for ${1:i}, ${2:value} in ipairs($3) do\n\t$0\nend"),
-    ls.parser.parse_snippet("if", "if ${1:cond} then\n\t$0\nend"),
-    ls.parser.parse_snippet("ifn", "if not ${1:cond} then\n\t$0\nend"),
-    snippet("req",
-        fmt("local {} = require(\"{}\")", {
-            l(l._1:match("[^.]*$"):gsub("[^%a]+", "_"), 1),
-            i(1, "module")
+    ls.parser.parse_snippet('for', 'for ${1:i} = ${2:1}, ${3:n} do\n\t$0\nend', {}),
+    ls.parser.parse_snippet('fun', 'local function ${1:name}($2)\n\t$0\nend', {}),
+    ls.parser.parse_snippet('while', 'while ${1:cond} do\n\t$0\nend', {}),
+    ls.parser.parse_snippet('mfun', 'function M.${1:name}($2)\n\t$0\nend', {}),
+    ls.parser.parse_snippet('pairs', 'for ${1:key}, ${2:value} in pairs($3) do\n\t$0\nend', {}),
+    ls.parser.parse_snippet('ipairs', 'for ${1:i}, ${2:value} in ipairs($3) do\n\t$0\nend', {}),
+    ls.parser.parse_snippet('if', 'if ${1:cond} then\n\t$0\nend', {}),
+    ls.parser.parse_snippet('ifn', 'if not ${1:cond} then\n\t$0\nend', {}),
+    snippet(
+        'req',
+        fmt('local {} = require("{}")', {
+            l(l._1:match('[^.]*$'):gsub('[^%a]+', '_'), 1),
+            i(1, 'module'),
         })
     ),
-    snippet("preq",
-        fmt("local {1}_ok, {1} = pcall(require, \"{}\")\nif not {1}_ok then return end", {
-            l(l._1:match("[^.]*$"):gsub("[^%a]+", "_"), 1),
-            i(1, "module")
+    snippet(
+        'preq',
+        fmt('local {1}_ok, {1} = pcall(require, "{}")\nif not {1}_ok then return end', {
+            l(l._1:match('[^.]*$'):gsub('[^%a]+', '_'), 1),
+            i(1, 'module'),
         })
     ),
-    snippet("doc", {
-        t"--- ",
-        i(1, "Function description."),
+    snippet('doc', {
+        t('--- '),
+        i(1, 'Function description.'),
         d(2, function(_, snip)
             local parms, ret = next_fun_parms(tonumber(snip.env.TM_LINE_NUMBER))
-            assert(parms, "Did not find a function!")
+            assert(parms, 'Did not find a function!')
 
             local parm_nodes = {}
             for j, parm in ipairs(parms) do
-                table.insert(parm_nodes, t{"", "-- @param " .. parm .. " "})
-                table.insert(parm_nodes, i(j, "Parameter description."))
+                table.insert(parm_nodes, t({ '', '-- @param ' .. parm .. ' ' }))
+                table.insert(parm_nodes, i(j, 'Parameter description.'))
             end
 
             if ret then
-                table.insert(parm_nodes, t{"", "-- @return "})
-                table.insert(parm_nodes, i(#parms + 1, "Return description."))
+                table.insert(parm_nodes, t({ '', '-- @return ' }))
+                table.insert(parm_nodes, i(#parms + 1, 'Return description.'))
             end
 
             return s(1, parm_nodes)
         end),
-    })
+    }),
 }

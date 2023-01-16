@@ -13,3 +13,6 @@ CompileFlags:
     -Wno-unused-macros,
     -Wno-extra-semi-stmt,
     ]
+
+# Diagnostics:
+#   Suppress: ['drv_unknown_argument']
