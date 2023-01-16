@@ -5,9 +5,6 @@ local global = require('global')
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Packer
-nmap('<leader>ps', [[:PackerSync<CR>]], 'Packer Sync')
-
 -- Ex-mode is weird and not useful so it seems better to repeat the last macro
 nmap('Q', '@@', 'Repeat last macro')
 
