@@ -4,6 +4,7 @@ return {
     -- Editor
     {
         'famiu/feline.nvim',
+        event = 'VeryLazy',
         config = function()
             require('config.feline')
         end,
@@ -126,14 +127,16 @@ return {
             'nvim-telescope/telescope-file-browser.nvim',
             'LinArcX/telescope-env.nvim',
             'Badhi/vim-p4-files',
-            'nvim-telescope/telescope-packer.nvim',
         },
-        config = [[require('config.telescope')]],
+        config = function()
+            require('config.telescope')
+        end,
     },
 
     -- Completion
     {
         'hrsh7th/nvim-cmp',
+        event = 'InsertEnter',
         config = function()
             require('config.cmp')
         end,
@@ -143,7 +146,6 @@ return {
             'hrsh7th/cmp-buffer',
             'amarakon/nvim-cmp-buffer-lines',
             'hrsh7th/cmp-nvim-lua',
-            ft = 'lua',
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-nvim-lsp-document-symbol',
             'hrsh7th/cmp-nvim-lsp-signature-help',
@@ -156,6 +158,13 @@ return {
     },
 
     {
+        'hrsh7th/vim-vsnip',
+        config = function()
+            require('config.vsnip')
+        end,
+    },
+
+    {
         'L3MON4D3/LuaSnip',
         config = function()
             require('snippets')
@@ -165,6 +174,7 @@ return {
     {
         'rcarriga/nvim-notify',
         --before = 'reach.nvim',
+        event = 'VeryLazy',
         config = function()
             nvim_notify = require('notify').setup({
                 level = vim.log.levels.TRACE,
@@ -243,7 +253,7 @@ return {
         config = function()
             require('nvim-tree').setup()
         end,
-        tag = 'nightly',
+        version = 'nightly',
     },
 
     -- Formatting lua files.
@@ -285,7 +295,7 @@ return {
         config = function()
             require('config.treesitter')
         end,
-        run = ':TSUpdate',
+        build = ':TSUpdate',
     },
 
     -- LSP
@@ -341,7 +351,7 @@ return {
     -- Version Control
     {
         'mhinz/vim-signify',
-        enable = false,
+        enabled = false,
     },
 
     {
@@ -373,19 +383,5 @@ return {
             'MunifTanjim/nui.nvim',
             'rcarriga/nvim-notify',
         },
-    },
-
-    {
-        'MunifTanjim/exrc.nvim',
-        dependencies = {
-            'MunifTanjim/nui.nvim',
-        },
-        config = function()
-            require('exrc').setup({
-                files = {
-                    '.nvimrc.lua',
-                },
-            })
-        end,
     },
 }

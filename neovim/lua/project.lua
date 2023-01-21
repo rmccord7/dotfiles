@@ -21,7 +21,7 @@ function M.setup(settings)
         })
     end
 
-    vim.notify('Project Setup')
+    vim.notify('Project Config Loaded')
 end
 
 return M

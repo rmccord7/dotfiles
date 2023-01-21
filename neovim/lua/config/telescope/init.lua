@@ -6,6 +6,8 @@ end
 
 local ts = {}
 
+local global = require('global')
+
 local actions = require('telescope.actions')
 local action_state = require('telescope.actions.state')
 local pickers = require('telescope.pickers')
@@ -124,7 +126,6 @@ require('telescope').load_extension('file_browser')
 require('telescope').load_extension('env')
 require('telescope').load_extension('vim_p4_files')
 require('telescope').load_extension('notify')
-require('telescope').load_extension('packer')
 
 -- Telescope mappings
 util.builtin('<leader>ff', 'find_files', 'Find Files')
@@ -150,7 +151,6 @@ util.builtin('gD', 'lsp_implementations', 'List LSP Implementations')
 nmap('<leader>fb', ':Telescope file_browser<CR>', 'File Browser')
 nmap('<leader>pj', ':Telescope projects<CR>', 'List Projects')
 nmap('<leader>nh', ':Telescope notify<CR>', 'List Notifications')
-nmap('<leader>pa', ':Telescope packer<CR>', 'Packer Plugins')
 nmap('<leader>te', ':Telescope env<CR>', 'List Environment Variables')
 
 -- Find_old_files, but all workspaces
@@ -180,6 +180,12 @@ util.custom('<leader>fd', 'find_files', 'find_dotfiles', {
 util.custom('<leader>fn', 'find_files', 'find_neovim', {
     cwd = '~/dotfiles/neovim',
     prompt_title = 'files in neovim config',
+})
+
+-- Find in neovim plugins
+util.custom('<leader>fp', 'find_files', 'find_plugins', {
+    cwd =  vim.fn.stdpath('data') .. '/lazy',
+    prompt_title = 'files in neovim plugins',
 })
 
 -- Grep inside of vim help docs

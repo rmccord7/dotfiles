@@ -5,6 +5,7 @@ table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
 local library_files = vim.api.nvim_get_runtime_file('', true)
+
 -- add local nvim config to enable goto definitions, etc
 table.insert(library_files, global.home_path .. '/dotfiles/neovim/lua')
 
@@ -32,6 +33,7 @@ _M.setup = function(on_attach, capabilities)
                 },
                 workspace = {
                     library = library_files,
+                    checkThirdParty = false,
                 },
                 telemetry = {
                     enable = false,
