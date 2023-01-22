@@ -8,7 +8,12 @@
     $USERPROFILE\.config\starship: $USERPROFILE\dotfiles\starship\starship.toml
     $LOCALAPPDATA\clangd: $USERPROFILE\dotfiles\clangd
     $LOCALAPPDATA\nvim: $USERPROFILE\dotfiles\neovim
-    $APPDATA\alacritty: $USERPROFILE\dotfiles\alacritty
+    $APPDATA\alacritty:
+      path: $USERPROFILE\dotfiles\alacritty
+      force: true
+    $LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json:
+      path: $USERPROFILE\dotfiles\win_terminal\settings.json
+      force: true
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

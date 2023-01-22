@@ -64,8 +64,8 @@ else
     vim.opt.grepprg = 'grep -nH'
 end
 
--- Disable exrc
-vim.o.exrc = false
+-- Enable exrc
+vim.o.exrc = true
 
 -- Disable swap file
 vim.o.swapfile = false
