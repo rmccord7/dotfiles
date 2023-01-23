@@ -27,6 +27,7 @@ vim.g.nvim_tree_icons = {
 
 tree.setup({
     sync_root_with_cwd = true,
+    respect_buf_cwd = true,
     filters = {
         custom = {
             '.git',

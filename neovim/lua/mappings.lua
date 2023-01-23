@@ -105,7 +105,8 @@ nmap('<leader>wr', [[<cmd>vnew | wincmd r | wincmd l<cr>]], 'Split 1 window to r
 nmap('<leader>wl', [[<cmd>wincmd r | wincmd l<cr>]], 'Swap windows and move cursor')
 
 -- Nvim Tree
-nmap('<leader>t', [[:NvimTreeToggle<CR>]], 'Nvim tree')
+nmap('<leader>tt', [[:NvimTreeToggle<CR>]], 'Nvim tree toggle')
+nmap('<leader>tf', [[:NvimTreeFindFile<CR>]], 'Nvim tree find file')
 
 -- LSP Sage Symbols outline
 nmap('<leader>so', [[:LSoutlineToggle<CR>]], 'Symbols outline')
