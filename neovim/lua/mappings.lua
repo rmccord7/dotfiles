@@ -143,6 +143,9 @@ nmap('gR', ':Trouble lsp_references<CR>', 'Trouble LSP ref')
 nmap('<leader>b', ':ReachOpen buffers<CR>', 'Reach Open Buffers')
 nmap("<leader>'", ':ReachOpen marks<CR>', 'Reach Open Marks')
 
+-- Fun
+nmap('<leader>fml', '<cmd>CellularAutomaton make_it_rain<CR>', 'Make it rain')
+
 -- Reload current buffer if it is a vim or lua file (Source Here)
 nmap('<leader>sh', function()
     local ft = vim.api.nvim_buf_get_option(0, 'filetype')

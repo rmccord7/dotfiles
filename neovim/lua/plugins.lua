@@ -384,4 +384,9 @@ return {
             'rcarriga/nvim-notify',
         },
     },
+
+    -- Fun
+    {
+        'Eandrju/cellular-automaton.nvim',
+    },
 }
