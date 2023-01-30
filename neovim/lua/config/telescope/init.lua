@@ -126,6 +126,7 @@ require('telescope').load_extension('file_browser')
 require('telescope').load_extension('env')
 require('telescope').load_extension('vim_p4_files')
 require('telescope').load_extension('notify')
+require('telescope').load_extension('lazy')
 
 -- Telescope mappings
 util.builtin('<leader>ff', 'find_files', 'Find Files')
@@ -152,6 +153,7 @@ nmap('<leader>fb', ':Telescope file_browser<CR>', 'File Browser')
 nmap('<leader>pj', ':Telescope projects<CR>', 'List Projects')
 nmap('<leader>nh', ':Telescope notify<CR>', 'List Notifications')
 nmap('<leader>te', ':Telescope env<CR>', 'List Environment Variables')
+nmap('<leader>tl', ':Telescope lazy<CR>', 'Plugin Browser')
 
 -- Find_old_files, but all workspaces
 util.custom('<leader>of', 'oldfiles', 'find_old_files', {

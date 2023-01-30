@@ -46,6 +46,7 @@ return {
 
     {
         'rmccord7/ss1pwn',
+        ft = {'c'},
     },
 
     {
@@ -74,6 +75,7 @@ return {
 
     {
         'NvChad/nvim-colorizer.lua',
+        module = false,
         config = function()
             require('colorizer').setup({
                 user_default_options = {
@@ -154,6 +156,7 @@ return {
             'saadparwaiz1/cmp_luasnip',
             'ray-x/cmp-treesitter',
             'lukas-reineke/cmp-under-comparator',
+            'tsakirist/telescope-lazy.nvim',
         },
     },
 
