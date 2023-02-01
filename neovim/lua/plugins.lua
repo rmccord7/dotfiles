@@ -95,12 +95,10 @@ return {
     },
 
     {
-        'ggandor/lightspeed.nvim',
+        'ggandor/leap.nvim',
         config = function()
-            require('lightspeed').setup({})
-            vim.cmd('doautocmd User LightspeedEnter nohlsearch')
-            vim.cmd('doautocmd User LightspeedEnter TSBufDisable rainbow')
-            vim.cmd('doautocmd User LightspeedLeave TSBufEnable rainbow')
+            require('leap').add_default_mappings()
+            --vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' })
         end,
     },
 
