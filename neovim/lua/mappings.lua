@@ -120,10 +120,6 @@ nmap(']M', [[:TSTextobjectGotoNextEnd @function.outer<CR>zz]], 'Go to next funct
 nmap('[m', [[:TSTextobjectGotoPreviousStart @function.outer<CR>zz]], 'Go to previous function start')
 nmap('[M', [[:TSTextobjectGotoPreviousEnd @function.outer<CR>zz]], 'Go to previous function end')
 
--- VSnip
-imap('<C-l>', "vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'", 'VSnip', { expr = true })
-smap('<C-l>', "vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'", 'Vsnip', { expr = true })
-
 -- Miniyank
 map('', 'p', '<Plug>(miniyank-autoput)', 'Override put for miniyank')
 map('', 'P', '<Plug>(miniyank-autoPut)', 'Override put for miniyank')

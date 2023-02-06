@@ -10,11 +10,11 @@ local Highlight_Lang_CFG = {
 
     -- Use default if file language not configured
     __index = function()
-        return
-{
-            size = IGNORE_HIGHLIGHT_CHECK,
-            line_count = IGNORE_HIGHLIGHT_CHECK,
-        }
+    return
+    {
+        size = IGNORE_HIGHLIGHT_CHECK,
+        line_count = IGNORE_HIGHLIGHT_CHECK,
+    }
     end,
 }
 
@@ -36,11 +36,25 @@ Highlight_Lang_CFG.c = {
 
     -- Use default if file extension not specified
     __index = function()
-        return
-{
-            size = DEFAULT_C_MAX_BUF_SIZE_KB,
-            line_count = DEFAULT_C_MAX_BUF_LINE_COUNT,
-        }
+    return {
+        size = DEFAULT_C_MAX_BUF_SIZE_KB,
+        line_count = DEFAULT_C_MAX_BUF_LINE_COUNT,
+    }
+    end,
+}
+
+-- JSON language file extension config
+local DEFAULT_JSON_MAX_BUF_SIZE_KB    = DEFAULT_MAX_BUF_SIZE_KB
+local DEFAULT_JSON_MAX_BUF_LINE_COUNT = DEFAULT_MAX_BUF_LINE_COUNT
+
+Highlight_Lang_CFG.json = {
+
+    -- Use default if file extension not specified
+    __index = function()
+    return {
+        size = DEFAULT_JSON_MAX_BUF_SIZE_KB,
+        line_count = DEFAULT_JSON_MAX_BUF_LINE_COUNT,
+    }
     end,
 }
 
