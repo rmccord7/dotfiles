@@ -81,7 +81,7 @@ vim.opt.wildmenu = true
 vim.opt.wildignore = '*/node_modules/*,*/.git/*,DS_Store,*/venv/*,*/__pycache__/*,*.pyc'
 
 -- Timeout for keymaps
-vim.o.timeoutlen = 300
+--vim.o.timeoutlen = 300
 
 vim.filetype.add({
     extension = {

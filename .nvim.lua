@@ -1,7 +1,7 @@
-settings = {}
+config = {}
 
-settings.file_ignore_patterns = {
+config.file_ignore_patterns = {
     '%*%.lua',
 }
 
-require('project').setup(settings)
+require('project').setup(config)
