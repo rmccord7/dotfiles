@@ -15,7 +15,7 @@ _M.setup = function(on_attach, capabilities)
     require('lspconfig').lua_ls.setup({
         on_attach = on_attach,
         capabilities = capabilities,
-        root_dir = require('lspconfig').util.root_pattern({'compile_commands.json', '.nvimrc.lua', '.git', 'stylua.toml', '.stylua.toml'}),
+        root_dir = require('lspconfig').util.root_pattern({'stylua.toml', '.stylua.toml', '.nvim.lua', 'compile_commands.json', '.git'}),
         settings = {
             Lua = {
                 runtime = {
