@@ -12,7 +12,7 @@ table.insert(library_files, global.home_path .. '/dotfiles/neovim/lua')
 local _M = {}
 
 _M.setup = function(on_attach, capabilities)
-    require('lspconfig').sumneko_lua.setup({
+    require('lspconfig').lua_ls.setup({
         on_attach = on_attach,
         capabilities = capabilities,
         root_dir = require('lspconfig').util.root_pattern({'compile_commands.json', '.nvimrc.lua', '.git', 'stylua.toml', '.stylua.toml'}),
