@@ -6,16 +6,7 @@ local config = function()
         return
     end
 
-    local ts = {}
-
-    local global = require('global')
-
     local actions = require('telescope.actions')
-    local action_state = require('telescope.actions.state')
-    local pickers = require('telescope.pickers')
-    local sorters = require('telescope.sorters')
-    local finders = require('telescope.finders')
-    local themes = require('telescope.themes')
 
     local util = require('plugins.editor.navigation.telescope.util')
 
@@ -164,7 +155,6 @@ local config = function()
 
     -- Find_files, but don't use ignored patterns
     util.custom('<leader>fa', 'find_files', 'find_files_all', {
-        file_ignore_patterns = {},
         no_ignore = true,
         hidden = true,
     })
@@ -173,11 +163,6 @@ local config = function()
     util.custom('<leader>fd', 'find_files', 'find_dotfiles', {
         cwd = '~/dotfiles',
         prompt_title = 'files in dotfiles',
-        file_ignore_patterns = {
-            '%.ttf', -- Fonts
-            'dotbot/*', -- Ignore dotbot in dotfiles
-        },
-        hidden = true,
     })
 
     -- Find in neovim config

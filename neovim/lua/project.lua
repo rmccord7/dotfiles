@@ -3,22 +3,14 @@ local lspconfig_ok, lspconfig = pcall(require, 'lspconfig')
 
 local util = require('plugins.editor.navigation.telescope.util')
 
-local defaults = {
-    file_ignore_patterns = {},
-}
+local defaults = {}
 
 local M = {}
 
-function M.setup(config)
-    M.config = vim.tbl_deep_extend('force', {}, defaults, config or {})
+function M.setup(options)
+    M.options = vim.tbl_deep_extend('force', {}, defaults, options or {})
 
-    if telescope_ok then
-        util.custom('<leader>ff', 'find_files', 'Find Project Files', {
-            file_ignore_patterns = M.config.file_ignore_patterns,
-        })
-    end
-
-    --TODO: Test for clangd
+    -- Replace clangd LSP command
     if lspconfig_ok then
 
         lspconfig.util.on_setup = lspconfig.util.add_hook_before(lspconfig.util.on_setup, function(config)
