@@ -9,6 +9,7 @@ local M = {
     {
         'hrsh7th/vim-vsnip',
         config = config,
+        event = 'InsertEnter',
     },
 
 }

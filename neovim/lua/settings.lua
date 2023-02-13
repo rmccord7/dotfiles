@@ -67,8 +67,8 @@ end
 -- Enable exrc
 vim.o.exrc = true
 
--- Disable swap file
-vim.o.swapfile = false
+-- Persistent undo
+vim.opt.undofile = true
 
 -- Split window options
 vim.o.splitright = true
@@ -80,9 +80,7 @@ vim.opt.wildmode = { 'longest', 'list', 'full' }
 vim.opt.wildmenu = true
 vim.opt.wildignore = '*/node_modules/*,*/.git/*,DS_Store,*/venv/*,*/__pycache__/*,*.pyc'
 
--- Timeout for keymaps
---vim.o.timeoutlen = 300
-
+-- Set file types
 vim.filetype.add({
     extension = {
         h = 'c',

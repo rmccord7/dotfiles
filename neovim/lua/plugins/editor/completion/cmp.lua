@@ -36,11 +36,6 @@ local config = function()
         TypeParameter = '',
     }
 
-    local has_words_before = function()
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
-    end
-
     -- Kind comparator function
     local function kind_cmp(entry1, entry2)
         local kind1 = entry1:get_kind()
@@ -72,10 +67,9 @@ local config = function()
             end,
         },
 
-        -- You must set mapping if you want.
         mapping = {
-            ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-            ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+            ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+            ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
             ['<C-d>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-Space>'] = cmp.mapping.complete({}),
@@ -84,29 +78,8 @@ local config = function()
                 behavior = cmp.ConfirmBehavior.Insert,
                 select = true,
             }),
-            ['<Tab>'] = function(fallback)
-                if cmp.visible() then
-                    cmp.select_next_item()
-                elseif ls.expand_or_jumpable() then
-                    ls.expand_or_jump()
-                elseif has_words_before() then
-                    cmp.complete()
-                else
-                    fallback()
-                end
-            end,
-            ['<S-Tab>'] = function(fallback)
-                if cmp.visible() then
-                    cmp.select_prev_item()
-                elseif ls.jumpable(-1) then
-                    ls.jump(-1)
-                else
-                    fallback()
-                end
-            end,
         },
 
-        -- You should specify your *installed* sources.
         sources = {
             { name = 'luasnip' },
             {

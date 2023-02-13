@@ -21,20 +21,5 @@ ls.config.set_config({
 })
 
 -- Set up actual snippets, TODO: lazy loading
-require('luasnip.loaders.from_vscode').lazy_load({ paths = { '~/dotfiles/neovim/snippets' } })
+require('luasnip.loaders.from_vscode').lazy_load({ paths = { '~/dotfiles/neovim/lua/plugins/editor/completion/vsnip/snippets' } })
 require('luasnip.loaders.from_lua').load()
-
---- Reloads snippets for a given language, useful for editing snippets without restarting.
--- @param lang Language / filetype name.
--- @return Module containing the snippets.
-local function reload_snips(lang)
-    package.loaded['snippets.' .. lang] = nil
-    return require('snippets.' .. lang)
-end
-
-ls.snippets = {
-    all = reload_snips('all'),
-    c = reload_snips('c'),
-    lua = reload_snips('lua'),
-    python = reload_snips('python'),
-}
