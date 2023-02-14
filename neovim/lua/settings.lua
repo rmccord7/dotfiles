@@ -44,7 +44,7 @@ vim.wo.number = true
 vim.o.updatetime = 2000
 
 --Completion options
-vim.o.completeopt = 'menu,menuone,noselect'
+vim.o.completeopt = 'menu,menuone'
 
 --No highlight when searching
 vim.o.hlsearch = false

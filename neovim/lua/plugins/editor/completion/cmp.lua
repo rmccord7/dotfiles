@@ -75,7 +75,6 @@ local config = function()
             ['<C-Space>'] = cmp.mapping.complete({}),
             ['<C-e>'] = cmp.mapping.close(),
             ['<CR>'] = cmp.mapping.confirm({
-                behavior = cmp.ConfirmBehavior.Insert,
                 select = true,
             }),
         },
@@ -128,7 +127,6 @@ local M = {
         event = 'InsertEnter',
         config = config,
         dependencies = {
-            'hrsh7th/vim-vsnip',
             'onsails/lspkind-nvim',
             'hrsh7th/cmp-buffer',
             'amarakon/nvim-cmp-buffer-lines',
@@ -136,12 +134,9 @@ local M = {
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-nvim-lsp-document-symbol',
             'hrsh7th/cmp-nvim-lsp-signature-help',
-            'quangnguyen30192/cmp-nvim-tags',
             'hrsh7th/cmp-path',
             'saadparwaiz1/cmp_luasnip',
-            'ray-x/cmp-treesitter',
             'lukas-reineke/cmp-under-comparator',
-            'tsakirist/telescope-lazy.nvim',
         },
     },
 }

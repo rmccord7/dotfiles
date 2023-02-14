@@ -5,6 +5,16 @@ neovim/pack/
 tags
 .git/
 !.git/config
+
+# Dotbot
+dotbot*/
+
+# Clang
 clangd/index/
 !clangd/config.yaml
+
+# Lua LSP
 .luarc.json
+
+# Font files
+*.ttf

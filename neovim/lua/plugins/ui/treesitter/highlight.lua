@@ -10,11 +10,11 @@ local Highlight_Lang_CFG = {
 
     -- Use default if file language not configured
     __index = function()
-    return
-    {
-        size = IGNORE_HIGHLIGHT_CHECK,
-        line_count = IGNORE_HIGHLIGHT_CHECK,
-    }
+        return
+        {
+            size = IGNORE_HIGHLIGHT_CHECK,
+            line_count = IGNORE_HIGHLIGHT_CHECK,
+        }
     end,
 }
 
@@ -33,14 +33,6 @@ Highlight_Lang_CFG.c = {
         size = 75 * KB_SIZE,
         line_count = 12000,
     },
-
-    -- Use default if file extension not specified
-    __index = function()
-    return {
-        size = DEFAULT_C_MAX_BUF_SIZE_KB,
-        line_count = DEFAULT_C_MAX_BUF_LINE_COUNT,
-    }
-    end,
 }
 
 -- JSON language file extension config
@@ -49,16 +41,14 @@ local DEFAULT_JSON_MAX_BUF_LINE_COUNT = DEFAULT_MAX_BUF_LINE_COUNT
 
 Highlight_Lang_CFG.json = {
 
-    -- Use default if file extension not specified
-    __index = function()
-    return {
+    json = {
         size = DEFAULT_JSON_MAX_BUF_SIZE_KB,
         line_count = DEFAULT_JSON_MAX_BUF_LINE_COUNT,
-    }
-    end,
+    },
 }
 
 function GetBufFileExtension(bufnr)
+
     -- Telescope buffer preview will have a name of nil unless buffer
     -- has been opened previously
 
@@ -85,23 +75,29 @@ function M.DisableHighlight(lang, bufnr)
     -- If we don't have a config for the specified language, then
     -- highlighting will be enabled.
     if lang_cfg then
+
         -- Possible nil is returned by telescope previewer for
         -- buf name.
         local file_extension = GetBufFileExtension(bufnr)
 
         if file_extension then
+
             -- If we have a configuration for this
             -- languages file extension.
             local ext_cfg = lang_cfg[file_extension]
 
-            -- Check if we should disable highlighting
-            if (ext_cfg.size ~= IGNORE_HIGHLIGHT_CHECK) and (buf_size > ext_cfg.size) then
-                return true
+            if ext_cfg then
+
+                -- Check if we should disable highlighting
+                if (ext_cfg.size ~= IGNORE_HIGHLIGHT_CHECK) and (buf_size > ext_cfg.size) then
+                    return true
+                end
+
+                if (ext_cfg.line_count ~= IGNORE_HIGHLIGHT_CHECK) and (buf_line_count > ext_cfg.line_count) then
+                    return true
+                end
             end
 
-            if (ext_cfg.line_count ~= IGNORE_HIGHLIGHT_CHECK) and (buf_line_count > ext_cfg.line_count) then
-                return true
-            end
         end
     end
 

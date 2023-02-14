@@ -1,5 +1,5 @@
 local config = function()
-    require('plugins.editor.completion.luasnip.snippets')
+    require('plugins.editor.completion.luasnip.lua')
 end
 
 local M = {

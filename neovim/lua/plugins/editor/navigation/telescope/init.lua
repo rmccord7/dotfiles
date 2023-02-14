@@ -216,6 +216,7 @@ local M = {
             'nvim-telescope/telescope-file-browser.nvim',
             'LinArcX/telescope-env.nvim',
             'Badhi/vim-p4-files',
+            'tsakirist/telescope-lazy.nvim',
         },
     },
 }

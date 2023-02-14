@@ -21,5 +21,5 @@ ls.config.set_config({
 })
 
 -- Set up actual snippets, TODO: lazy loading
-require('luasnip.loaders.from_vscode').lazy_load({ paths = { '~/dotfiles/neovim/lua/plugins/editor/completion/vsnip/snippets' } })
+require('luasnip.loaders.from_vscode').lazy_load({ paths = { '~/dotfiles/neovim/lua/plugins/editor/completion/luasnip/vscode' } })
 require('luasnip.loaders.from_lua').load()

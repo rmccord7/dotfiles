@@ -1,7 +1,0 @@
-{
-  "todo": {
-    "prefix": "todo",
-    "body": ["//TODO: $1"],
-    "description": "Code snippet for TODO comment"
-  }
-}
