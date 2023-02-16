@@ -14,7 +14,7 @@
       {
         "language": "c",
         "path": "c.json"
-      }
+      },
       {
         "language": "lua",
         "path": "lua.json"
