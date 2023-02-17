@@ -30,6 +30,11 @@ local config = function()
             -- Command mode
             MsgArea = { fg = '#E2795B', bold = true },
 
+            -- Treesitter
+            ['@macro'] = { fg = colors.main.orange },
+
+            --TODO: Remove lightspeed
+
             -- Lightspeed
             LightspeedLabel = { fg = colors.main.darkgreen, bold = true, underline = true },
             --LightspeedLabelOverlapped        = { fg = colors.main.darkred, bold = true, underline = true },

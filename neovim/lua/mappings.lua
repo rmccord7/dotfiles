@@ -104,9 +104,15 @@ nmap('<leader>wr', [[<cmd>vnew | wincmd r | wincmd l<cr>]], 'Split 1 window to r
 -- swap windows and move cursor to other window
 nmap('<leader>wl', [[<cmd>wincmd r | wincmd l<cr>]], 'Swap windows and move cursor')
 
+-- Lazy home
+nmap('<leader>lh', [[:Lazy home<CR>]], 'Lazy home')
+
 -- Nvim Tree
 nmap('<leader>tt', [[:NvimTreeToggle<CR>]], 'Nvim tree toggle')
 nmap('<leader>tf', [[:NvimTreeFindFile<CR>]], 'Nvim tree find file')
+
+-- ToDo
+nmap('<leader>td', [[:TodoTelescope<CR>]], 'Todo Telescope')
 
 -- LSP Sage Symbols outline
 nmap('<leader>so', [[:LSoutlineToggle<CR>]], 'Symbols outline')
