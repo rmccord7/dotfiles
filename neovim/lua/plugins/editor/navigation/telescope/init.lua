@@ -71,31 +71,22 @@ local config = function()
                 '--smart-case',
             },
             mappings = {
-                n = {},
-                i = {},
+                n = {
+                    ['jk'] = actions.close,
+                    ['kj'] = actions.close,
+                },
+                i = {
+                    ['<C-j>'] = actions.move_selection_next,
+                    ['<C-k>'] = actions.move_selection_previous,
+                    ['<C-e>'] = actions.close,
+                },
             },
-            color_devicons = true,
             prompt_prefix = '🔍 ',
-            scroll_strategy = 'cycle',
             sorting_strategy = 'ascending',
             layout_strategy = 'flex',
             file_ignore_patterns = util.ignored_files,
             layout_config = {
                 prompt_position = 'top',
-                horizontal = {
-                    mirror = true,
-                    preview_cutoff = 100,
-                    preview_width = 0.5,
-                },
-                vertical = {
-                    mirror = true,
-                    preview_cutoff = 0.4,
-                },
-                flex = {
-                    flip_columns = 110,
-                },
-                height = 0.94,
-                width = 0.86,
             },
         },
         extensions = {

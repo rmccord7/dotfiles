@@ -52,36 +52,34 @@ local M = {
     },
 
     {
-        enabled = false,
         'folke/which-key.nvim',
         config = function()
             require('which-key').setup({
-                plugins = {
-                    marks = false,
-                    registers = false,
-                    presets = {
-                        operators = false,
-                        text_objects = false,
-                        motions = false,
-                        windows = false,
-                        nav = false,
-                        z = false,
-                        g = false,
-                    },
-                },
-                triggers_blacklist = {
-                    n = {
-                        'y',
-                        'd',
-                    },
-                },
+                -- plugins = {
+                --     marks = false,
+                --     registers = false,
+                --     presets = {
+                --         operators = false,
+                --         text_objects = false,
+                --         motions = false,
+                --         windows = false,
+                --         nav = false,
+                --         z = false,
+                --         g = false,
+                --     },
+                -- },
+                -- triggers_blacklist = {
+                --     n = {
+                --         'y',
+                --         'd',
+                --     },
+                -- },
             })
         end,
     },
 
     {
         'folke/noice.nvim',
-        enabled = false,
         config = function()
             require('noice').setup()
         end,
