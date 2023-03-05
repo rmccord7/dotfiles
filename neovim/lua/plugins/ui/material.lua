@@ -15,6 +15,7 @@ local config = function()
         plugins = {
             'indent-blankline',
             'lspsaga',
+            'gitsigns',
             'nvim-cmp',
             'nvim-tree',
             'telescope',

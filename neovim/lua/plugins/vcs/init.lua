@@ -5,8 +5,18 @@ local M = {
     },
 
     {
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require('gitsigns').setup()
+        end,
+    },
+
+    {
         'mhinz/vim-signify',
         enabled = false,
+    },
+    {
+        'nfvs/vim-perforce',
     },
 
     {
