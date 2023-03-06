@@ -25,7 +25,10 @@ local FileIcon = {
         return self.icon and (self.icon .. ' ')
     end,
     hl = function(self)
-        return { fg = self.icon_color }
+        return {
+            fg = self.icon_color,
+            bg = utils.get_highlight('StatusLine').bg,
+        }
     end,
 }
 
@@ -39,7 +42,10 @@ local FileName = {
 
         return filename
     end,
-    hl = { fg = utils.get_highlight('Directory').fg },
+    hl = {
+        fg = utils.get_highlight('Directory').fg,
+        bg = utils.get_highlight('StatusLine').bg,
+    },
 }
 
 local FileFlags = {
@@ -48,14 +54,20 @@ local FileFlags = {
             return vim.bo.modified
         end,
         provider = '[+]',
-        hl = { fg = colors.main.green },
+        hl = {
+            fg = colors.main.green,
+            bg = utils.get_highlight('StatusLine').bg,
+        },
     },
     {
         condition = function()
             return not vim.bo.modifiable or vim.bo.readonly
         end,
         provider = ' ',
-        hl = { fg = colors.main.orange },
+        hl = {
+            fg = colors.main.orange,
+            bg = utils.get_highlight('StatusLine').bg,
+        },
     },
 }
 
@@ -63,7 +75,12 @@ local FileNameModifer = {
     hl = function()
         if vim.bo.modified then
             -- use `force` because we need to override the child's hl foreground
-            return { fg = colors.main.green, bold = true, force = true }
+            return {
+                fg = colors.main.green,
+                bg = utils.get_highlight('StatusLine').bg,
+                bold = true,
+                force = true,
+            }
         end
     end,
 }
@@ -71,7 +88,7 @@ local FileNameModifer = {
 M.FileSize = {
     provider = function()
         -- stackoverflow, compute human readable file size
-        local suffix = { 'V', 'K', 'M', 'G', 'T', 'P', 'E' }
+        local suffix = { 'B', 'K', 'M', 'G', 'T', 'P', 'E' }
         local fsize = vim.fn.getfsize(vim.api.nvim_buf_get_name(0))
         fsize = (fsize < 0 and 0) or fsize
         if fsize < 1024 then
@@ -80,7 +97,10 @@ M.FileSize = {
         local i = math.floor((math.log(fsize) / math.log(1024)))
         return string.format('%.2f%s', fsize / math.pow(1024, i), suffix[i + 1])
     end,
-    hl = { fg = colors.main.orange },
+    hl = {
+        fg = colors.main.orange,
+        bg = utils.get_highlight('StatusLine').bg,
+    },
 }
 
 -- let's add the children to our FileNameBlock component
@@ -96,7 +116,11 @@ M.FileType = {
     provider = function()
         return string.upper(vim.bo.filetype)
     end,
-    hl = { fg = utils.get_highlight('Type').fg, bold = true },
+    hl = {
+        fg = utils.get_highlight('Type').fg,
+        bg = utils.get_highlight('StatusLine').bg,
+        bold = true,
+    },
 }
 
 M.FileEncoding = {
@@ -104,7 +128,10 @@ M.FileEncoding = {
         local enc = (vim.bo.fenc ~= '' and vim.bo.fenc) or vim.o.enc -- :h 'enc'
         return enc:upper()
     end,
-    hl = { fg = colors.main.purple },
+    hl = {
+        fg = colors.main.purple,
+        bg = utils.get_highlight('StatusLine').bg,
+    },
 }
 
 M.FileFormat = {
@@ -120,7 +147,10 @@ M.FileFormat = {
         end
         return icon .. os
     end,
-    hl = { fg = colors.main.purple },
+    hl = {
+        fg = colors.main.purple,
+        bg = utils.get_highlight('StatusLine').bg,
+    },
 }
 
 M.FileLastModified = {

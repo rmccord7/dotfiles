@@ -9,11 +9,15 @@ M.Git = {
     condition = conditions.is_git_repo,
 
     init = function(self)
+        ---@diagnostic disable-next-line: undefined-field
         self.status_dict = vim.b.gitsigns_status_dict
         self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
     end,
 
-    hl = { fg = colors.main.orange },
+    hl = {
+        fg = colors.main.orange,
+        bg = utils.get_highlight('StatusLine').bg,
+    },
 
 
     {   -- git branch name

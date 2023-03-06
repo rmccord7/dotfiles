@@ -193,8 +193,6 @@ create_augroup('window_group', {
         pattern = 'qf',
         desc = 'Skip quickfix windows when :bprevious and :bnext',
         command = 'set nobuflisted',
-        group = windowGroup,
-
     },
     {
         events = { 'QuitPre' },

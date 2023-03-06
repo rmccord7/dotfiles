@@ -43,7 +43,10 @@ local Ruler = {
     -- %c = column number
     -- %P = percentage through file of displayed window
     provider = '%7(%l/%3L%):%2c %P',
-    hl = { fg = colors.main.green },
+    hl = {
+        fg = colors.main.green,
+        bg = utils.get_highlight('StatusLine').bg,
+    },
 }
 
 -- local ScrollBar = {
@@ -75,16 +78,22 @@ local Lazy = {
         end,
         name = 'update_plugins',
     },
-    hl = { fg = colors.main.green },
+    hl = {
+        fg = colors.main.green,
+        bg = utils.get_highlight('StatusLine').bg,
+    },
 }
 
 local sep = '  '
 local cwd = {
     init = function(self)
-        self.cwd = vim.fn.getcwd(0)
+        self.cwd = string.gsub(vim.fn.getcwd(0), '\\', '/')
     end,
-    hl = { fg = utils.get_highlight('Directory').fg, italic = true },
-
+    hl = {
+        fg = utils.get_highlight('Directory').fg,
+        bg = utils.get_highlight('StatusLine').bg,
+        italic = true,
+    },
     flexible = 1,
     {
         -- evaluates to the full-length path

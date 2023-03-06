@@ -1,5 +1,6 @@
 M = {}
 
+local utils = require('heirline.utils')
 local conditions = require('heirline.conditions')
 
 local colors = require('material.colors')
@@ -19,7 +20,11 @@ M.LSPActive = {
         end
         return ' [' .. table.concat(names, ' ') .. ']'
     end,
-    hl = { fg = colors.main.green, bold = true },
+    hl = {
+        fg = colors.main.green,
+        bg = utils.get_highlight('StatusLine').bg,
+        bold = true,
+    },
 }
 
 M.Diagnostics = {

@@ -1,8 +1,10 @@
 M = {}
 
+local utils = require('heirline.utils')
+
 local colors = require('material.colors')
 
-M.ViMode = {
+M.Mode = {
     -- get vim current mode, this information will be required by the provider
     -- and the highlight functions, so we compute it only once per component
     -- evaluation and store it as a component attribute
@@ -89,7 +91,11 @@ M.ViMode = {
     -- Same goes for the highlight. Now the foreground will change according to the current mode.
     hl = function(self)
         local mode = self.mode:sub(1, 1) -- get only the first mode character
-        return { fg = self.mode_colors[mode], bold = true }
+        return {
+            fg = self.mode_colors[mode],
+            bg = utils.get_highlight('StatusLine').bg,
+            bold = true,
+        }
     end,
     -- Re-evaluate the component only on ModeChanged event!
     -- This is not required in any way, but it's there, and it's a small
