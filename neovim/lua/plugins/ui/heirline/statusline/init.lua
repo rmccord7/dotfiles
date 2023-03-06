@@ -5,7 +5,7 @@ local conditions = require('heirline.conditions')
 
 local colors = require('material.colors')
 
-local vimode = require('plugins.ui.heirline.statusline.vimode')
+local mode = require('plugins.ui.heirline.statusline.mode')
 local file = require('plugins.ui.heirline.statusline.file')
 local git = require('plugins.ui.heirline.statusline.git')
 local lsp = require('plugins.ui.heirline.statusline.lsp')
@@ -119,7 +119,7 @@ M = {
         })
     end,
 
-    vimode.ViMode,
+    mode.Mode,
     Space,
     cwd,
     Space,

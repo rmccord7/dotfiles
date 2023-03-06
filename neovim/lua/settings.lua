@@ -15,11 +15,25 @@ else
     vim.g.python3_host_prog = '/usr/bin/python3'
 end
 
+-- Clipboard
+vim.o.clipboard = 'unnamedplus'
+
 -- Global status line
 vim.o.laststatus = 3
 
 -- Command height
 vim.o.cmdheight = 0
+
+-- Avoid enter prompts for file changes
+vim.opt.shortmess:append({
+    --default filnxtToOF
+    c = true, -- Disable "Pattern not found" messages
+    m = true, -- use "[+]" instead of "[Modified]"
+    r = true, -- use "[RO]" instead of "[readonly]"
+    I = true, -- don't give the intro message when starting Vim |:intro|.
+    S = true, -- hide search info echoing (i have a statusline for that)
+    W = true, -- don't give "written" or "[w]" when writing a file
+})
 
 -- Formatting options
 vim.o.expandtab = true -- Expands tabs to spaces
@@ -28,6 +42,29 @@ vim.o.tabstop = 2
 vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
 vim.wo.wrap = false
+
+vim.opt.formatoptions = {
+    --default jcroql
+    j = true, -- remove comment leader on join comments
+    c = true, -- auto wrap comments using text width, inserting the current comment leader automatically.
+    r = true, -- Continue comments by default
+    o = true, -- continue comment using o or O
+    q = true, -- allow gq to format comments
+    l = true, -- break lines that are already long?
+
+    n = true, -- Recognize numbered lists
+    a = false, -- auto-gq paragraphs
+}
+vim.opt.formatoptions:append('1') -- Break before 1-letter words
+vim.opt.formatoptions:append('2') -- Use indent from 2nd line of a paragraph
+vim.opt.fillchars = { diff = '⣿' }
+
+-- Diffing
+vim.opt.diffopt = {
+    vertical = true, -- Use in vertical diff mode
+    filler = true, -- blank lines to keep sides aligned
+    iwhite = true, -- Ignore whitespace changes
+}
 
 --Do not save when switching buffers
 vim.o.hidden = true
@@ -74,7 +111,7 @@ vim.opt.undofile = true
 -- Split window options
 vim.o.splitright = true
 vim.o.splitbelow = true
-vim.o.splitkeep = 'cursor'
+vim.o.splitkeep = 'screen'
 
 -- Wildmenu
 vim.opt.wildmode = { 'longest', 'list', 'full' }
@@ -133,6 +170,42 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     callback = function()
         vim.highlight.on_yank({ on_visual = false })
     end,
+})
+
+create_augroup('window_group', {
+    {
+        events = { 'VimResized' },
+        desc = 'Automatically resize windows in all tabpages when resizing Vim',
+        command = 'tabdo wincmd =',
+    },
+    {
+        events = { 'BufEnter' },
+        desc = 'When :q, close if quickfix is the only window',
+        callback = function()
+            if vim.bo.filetype == 'qf' and vim.fn.winnr('$') < 2 then
+                vim.cmd.quit()
+            end
+        end,
+
+    },
+    {
+        events = { 'FileType' },
+        pattern = 'qf',
+        desc = 'Skip quickfix windows when :bprevious and :bnext',
+        command = 'set nobuflisted',
+        group = windowGroup,
+
+    },
+    {
+        events = { 'QuitPre' },
+        desc = 'Auto close corresponding loclist when quitting a window',
+        callback = function()
+            if vim.bo.filetype ~= 'qf' then
+                vim.cmd('silent! lclose')
+            end
+        end,
+        nested = true,
+    }
 })
 
 -- Disable builtin plugins i don't need

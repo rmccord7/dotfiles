@@ -71,15 +71,14 @@ local FileNameModifer = {
 M.FileSize = {
     provider = function()
         -- stackoverflow, compute human readable file size
-        local suffix = { 'b', 'k', 'M', 'G', 'T', 'P', 'E' }
+        local suffix = { 'V', 'K', 'M', 'G', 'T', 'P', 'E' }
         local fsize = vim.fn.getfsize(vim.api.nvim_buf_get_name(0))
         fsize = (fsize < 0 and 0) or fsize
         if fsize < 1024 then
             return fsize .. suffix[1]
         end
-        dump(fsize)
         local i = math.floor((math.log(fsize) / math.log(1024)))
-        return string.format('%.2g%s', fsize / math.pow(1024, i), suffix[i + 1])
+        return string.format('%.2f%s', fsize / math.pow(1024, i), suffix[i + 1])
     end,
     hl = { fg = colors.main.orange },
 }
