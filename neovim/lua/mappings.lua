@@ -110,12 +110,17 @@ nmap('<leader>lh', [[:Lazy home<CR>]], 'Lazy home')
 -- Nvim Tree
 nmap('<leader>tt', [[:NvimTreeToggle<CR>]], 'Nvim tree toggle')
 nmap('<leader>tf', [[:NvimTreeFindFile<CR>]], 'Nvim tree find file')
+-- Diffview
+
+nmap('<leader>gd', [[:DiffviewOpen]], 'Diffview Open', {nowait = true})
+nmap('<leader>gh', [[:DiffviewFileHistory]], 'Diffview File History', {nowait = true})
+nmap('<leader>gx', [[:DiffviewClose<CR>]], 'Diffview Close')
 
 -- ToDo
 nmap('<leader>td', [[:TodoTelescope<CR>]], 'Todo Telescope')
 
 -- LSP Sage Symbols outline
-nmap('<leader>so', [[:LSoutlineToggle<CR>]], 'Symbols outline')
+nmap('<leader>so', [[:Lspsaga outline<CR>]], 'Symbols outline')
 
 -- Neoclip
 nmap('<leader>"', [[:Telescope neoclip<CR>]], 'Neoclip')

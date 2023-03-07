@@ -87,6 +87,15 @@ local config = function()
             file_ignore_patterns = util.ignored_files,
             layout_config = {
                 prompt_position = 'top',
+                horizontal = {
+                    mirror = true,
+                },
+                vertical = {
+                    mirror = true,
+                },
+                flex = {
+                    flip_columns = 110,
+                },
             },
         },
         extensions = {

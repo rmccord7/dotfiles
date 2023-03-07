@@ -1,5 +1,7 @@
 M = {}
 
+local global = require('global')
+
 local utils = require('heirline.utils')
 local conditions = require('heirline.conditions')
 
@@ -87,7 +89,9 @@ local Lazy = {
 local sep = '  '
 local cwd = {
     init = function(self)
-        self.cwd = string.gsub(vim.fn.getcwd(0), '\\', '/')
+        self.cwd = vim.fn.getcwd(0)
+        self.cwd = string.gsub(self.cwd, global.home_path, '~')
+        self.cwd = string.gsub(self.cwd, '\\', '/')
     end,
     hl = {
         fg = utils.get_highlight('Directory').fg,
