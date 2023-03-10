@@ -1,3 +1,5 @@
+local global = require('global')
+
 local M = {
 
     {
@@ -22,6 +24,9 @@ local M = {
 
     {
         'rmccord7/ss1pwn',
+        dir = global.home_path .. '/ss1pwn',
+        dev = true,
+        fallback = true,
         ft = {'c'},
     },
 
