@@ -7,6 +7,7 @@ local config = function()
     end
 
     local actions = require('telescope.actions')
+    local trouble = require('trouble.providers.telescope')
 
     local util = require('plugins.editor.navigation.telescope.util')
 
@@ -74,11 +75,13 @@ local config = function()
                 n = {
                     ['jk'] = actions.close,
                     ['kj'] = actions.close,
+                    ['<C-t>'] = trouble.smart_open_with_trouble,
                 },
                 i = {
                     ['<C-j>'] = actions.move_selection_next,
                     ['<C-k>'] = actions.move_selection_previous,
                     ['<C-e>'] = actions.close,
+                    ['<C-t>'] = trouble.smart_open_with_trouble,
                 },
             },
             prompt_prefix = '🔍 ',
