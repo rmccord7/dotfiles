@@ -13,9 +13,14 @@ local M = {
 
     {
         'glepnir/lspsaga.nvim',
+        event = "BufRead",
         branch = 'main',
         config = function()
-            require('lspsaga').setup({})
+            require('lspsaga').setup({
+                outline = {
+                    win_position = "left",
+                },
+            })
         end,
     },
 
