@@ -32,13 +32,17 @@ local M = {
             require('notify').setup({
                 level = vim.log.levels.TRACE,
                 timeout = 1500,
+                max_height = function()
+                    return math.floor(vim.o.lines * 0.75)
+                end,
+                max_width = function()
+                    return math.floor(vim.o.columns * 0.75)
+                end,
                 stages = 'fade',
                 background_colour = require('material.colors').editor.bg,
                 render = 'compact',
-                top_down = false,
             })
 
-            ---@diagnostic disable-next-line: duplicate-set-field
             vim.notify = function(msg, log_level, opts)
                 log_level = log_level or vim.log.levels.DEBUG
 
@@ -53,7 +57,7 @@ local M = {
                         return
                     end
                 else
-                    require('notify')([[Could'nt convert value to a string]], vim.log.levels.ERROR, opts)
+                    require('notify')([[Couldn't convert value to a string]], vim.log.levels.ERROR, opts)
                     return
                 end
 
