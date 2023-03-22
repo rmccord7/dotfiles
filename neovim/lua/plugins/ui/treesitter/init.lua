@@ -1,5 +1,4 @@
 local config = function()
-    local _treesitter, _ = pcall(require, 'nvim-treesitter')
 
     if not _treesitter then
         return
@@ -7,7 +6,19 @@ local config = function()
 
     require('nvim-treesitter.install').compilers = { 'clang' }
     require('nvim-treesitter.configs').setup({
-        ensure_installed = { 'c', 'cpp', 'python', 'lua', 'yaml', 'json', 'bash', 'rust' },
+        ensure_installed = {
+            'bash',
+            'c',
+            'cpp',
+            'python',
+            'lua',
+            'yaml',
+            'json',
+            'markdown',
+            'markdown_inline',
+            'regex',
+            'rust',
+        },
         sync_install = true,
         highlight = {
             enable = true,
