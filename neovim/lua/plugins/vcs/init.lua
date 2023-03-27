@@ -13,8 +13,8 @@ local M = {
 
     {
         'mhinz/vim-signify',
-        enabled = false,
     },
+
     {
         'nfvs/vim-perforce',
     },

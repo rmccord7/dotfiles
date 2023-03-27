@@ -19,10 +19,6 @@ local M = {
     },
 
     {
-        'editorconfig/editorconfig-vim',
-    },
-
-    {
         'rmccord7/ss1pwn',
         dir = global.home_path .. '/ss1pwn',
         dev = true,

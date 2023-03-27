@@ -1,9 +1,5 @@
 local config = function()
 
-    if not _treesitter then
-        return
-    end
-
     require('nvim-treesitter.install').compilers = { 'clang' }
     require('nvim-treesitter.configs').setup({
         ensure_installed = {
@@ -76,6 +72,10 @@ local config = function()
                     ['ad'] = '@comment.outer',
                     ['am'] = '@call.outer',
                     ['im'] = '@call.inner',
+                },
+                selection_modes = {
+                    ['@function.outer'] = 'V',
+                    ['@function.inner'] = 'V',
                 },
             },
             swap = {
