@@ -86,6 +86,23 @@ local Lazy = {
     },
 }
 
+local Treesitter = {
+    provider = 'TS',
+    condition = function(self)
+        local buf = vim.api.nvim_get_current_buf()
+        local highlighter = require "vim.treesitter.highlighter"
+        if highlighter.active[buf] then
+            return true
+        else
+            return false
+        end
+    end,
+    hl = {
+        fg = colors.main.green,
+        bg = utils.get_highlight('StatusLine').bg,
+    },
+}
+
 local sep = '  '
 local cwd = {
     init = function(self)
@@ -154,6 +171,8 @@ M = {
     file.FileFormat,
     Align,
 
+    Treesitter,
+    Space,
     Lazy,
     Space,
     lsp.LSPActive,
