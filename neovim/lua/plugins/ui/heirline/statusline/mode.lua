@@ -100,8 +100,13 @@ M.Mode = {
     -- Re-evaluate the component only on ModeChanged event!
     -- This is not required in any way, but it's there, and it's a small
     -- performance improvement.
+    -- Also allorws the statusline to be re-evaluated when entering operator-pending mode
     update = {
         'ModeChanged',
+        pattern = "*:*",
+        callback = vim.schedule_wrap(function()
+            vim.cmd("redrawstatus")
+        end),
     },
 }
 

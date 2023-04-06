@@ -120,14 +120,14 @@ local cwd = {
         -- evaluates to the full-length path
         provider = function(self)
             local trail = self.cwd:sub(-1) == '/' and '' or '/'
-            return '  ' .. table.concat(vim.fn.split(self.cwd .. trail, '/'), sep) .. sep
+            return '  ' .. table.concat(vim.fn.split(self.cwd .. trail, '/'), sep)
         end,
     },
     {
         -- evaluates to the shortened path
         provider = function(self)
             local cwd = vim.fn.pathshorten(self.cwd)
-            return '  ' .. table.concat(vim.fn.split(cwd, '/'), sep) .. sep
+            return '  ' .. table.concat(vim.fn.split(cwd, '/'), sep)
         end,
     },
     {
