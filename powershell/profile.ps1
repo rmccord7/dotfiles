@@ -18,6 +18,10 @@ function manl { wsl -- man $Args }
 
 Remove-Alias -Name ls -Force
 function ls() {
+    exa -la @Args
+}
+
+function lsg() {
     exa -la --git @Args
 }
 

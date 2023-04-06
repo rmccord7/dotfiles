@@ -6,6 +6,9 @@
 
 - link:
     $USERPROFILE\.config\starship: $USERPROFILE\dotfiles\starship\starship.toml
+    $ONEDRIVE\Documents\PowerShell\profile.ps1:
+      path: $USERPROFILE\dotfiles\powershell\profile.ps1
+      force: true
     $LOCALAPPDATA\clangd: $USERPROFILE\dotfiles\clangd
     $LOCALAPPDATA\nvim: $USERPROFILE\dotfiles\neovim
     $APPDATA\alacritty:
