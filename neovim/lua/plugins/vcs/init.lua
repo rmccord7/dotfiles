@@ -13,6 +13,7 @@ local M = {
 
     {
         'mhinz/vim-signify',
+        enabled = false,
     },
 
     {
