@@ -139,8 +139,10 @@ if [ -f "$HOME"/.zshrc.local.aliases ]; then
   alias zsha="$EDITOR ~/.zshrc.local.aliases"
 fi
 
-alias ls='ls -lF --color=auto'
-alias ll='ls -alF --color=auto'
+#alias ls='ls -lF --color=auto'
+#alias ll='ls -alF --color=auto'
+alias ls='exa -la --git'
+alias lg='lazygit'
 
 alias luamake=/Users/rmccord/lua-language-server/3rd/luamake/luamake
 
