@@ -91,19 +91,30 @@ local config = function()
             { name = 'path' },
         },
 
-        formatting = {
-            format = lspkind.cmp_format({
-                symbol_map = symbol_map,
-                mode = 'symbol_text',
-                menu = {
-                    buffer = '[Buffer]',
-                    nvim_lsp = '[LSP]',
-                    nvim_lsp_document_symbol = '[LSP-DS]',
-                    nvim_lsp_signature_help = '[LSP-SH]',
-                    luasnip = '[Snip]',
-                    nvim_lua = '[Lua]',
-                },
+        window = {
+            completion = cmp.config.window.bordered({
+                col_offset = -3,
+                side_padding = 0,
+                winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
             }),
+            documentation = cmp.config.window.bordered({
+                winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+            }),
+        },
+
+        formatting = {
+            fields = { "kind", "abbr", "menu" },
+            format = function(entry, vim_item)
+                local kind = lspkind.cmp_format({
+                    mode = "symbol_text",
+                    maxwidth = 50,
+                })(entry, vim_item)
+                local strings = vim.split(kind.kind, "%s", { trimempty = true })
+                kind.kind = " " .. strings[1] .. " "
+                kind.menu = "    (" .. strings[2] .. ")"
+
+                return kind
+            end,
         },
 
         sorting = {

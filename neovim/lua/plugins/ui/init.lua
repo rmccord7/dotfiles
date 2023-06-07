@@ -1,9 +1,7 @@
 local M = {
 
     require('plugins.ui.treesitter'),
-    --require('plugins.ui.feline'),
     require('plugins.ui.heirline'),
-    require('plugins.ui.material'),
     require('plugins.ui.tree'),
     require('plugins.ui.trouble'),
 

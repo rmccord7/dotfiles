@@ -1,7 +1,8 @@
 local M = {
 
-    require('plugins.editor.navigation'),
+    require('plugins.editor.color'),
     require('plugins.editor.completion'),
+    require('plugins.editor.navigation'),
 
     require('plugins.editor.easy-align'),
 
