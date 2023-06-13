@@ -18,6 +18,7 @@ end
 -- Clipboard
 vim.o.clipboard = 'unnamedplus'
 
+
 -- Global status line
 vim.o.laststatus = 3
 

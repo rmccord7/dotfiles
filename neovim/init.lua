@@ -19,9 +19,6 @@ vim.opt.rtp:prepend(lazypath)
 config = {
     checker = {
         enabled = true,
-        concurrency = nil,
-        notify = true,
-        frequency = 3600,
     },
 }
 

@@ -24,9 +24,8 @@ local config = function()
         color_overrides = {
             all = {},
             mocha = {
-
+                base = '#0F111A',
             },
-
         },
         custom_highlights = function(C)
             return {
@@ -64,7 +63,7 @@ local config = function()
             nvimtree = true,
             telescope = true,
             notify = true,
-            lightspeed = true,
+            leap = true,
             lsp_saga = true,
             mason = true,
             noice = true,
@@ -78,6 +77,7 @@ end
 local M = {
     {
         'catppuccin/nvim',
+        name = 'catppuccin',
         lazy = false,
         config = config,
         priority = 1000,

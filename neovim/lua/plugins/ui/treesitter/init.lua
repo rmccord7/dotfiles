@@ -93,7 +93,6 @@ local config = function()
         },
         rainbow = {
             enable = true,
-            extended_mode = true,
         },
         playground = {
             enable = false,
@@ -203,7 +202,7 @@ local M = {
             'nvim-treesitter/nvim-treesitter-textobjects',
             'nvim-treesitter/playground',
             'romgrk/nvim-treesitter-context',
-            'p00f/nvim-ts-rainbow',
+            'HiPhish/nvim-ts-rainbow2',
         },
         config = config,
         build = ':TSUpdate',
