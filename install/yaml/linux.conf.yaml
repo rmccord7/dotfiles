@@ -1,24 +1,40 @@
 - defaults:
     link:
+      create: true
       relink: true
 
 - clean: ['~']
 
 - link:
     # Fonts
-    ~/.local/share/fonts/hack: fonts/hack
+    ~/.local/share/fonts:
+      path: fonts/*
 
     # Zsh
-    ~/.zshrc: zsh/.zshrc
+    ~/:
+      path: zsh/.*
+      glob: true
 
-    # Alcacritty
-    ~/.config/alacritty/alacritty.yml: alacritty/alacritty.yml
+    # Zsh Scripts
+    ~/.local/bin:
+      path: zsh/scripts/*
+      glob: true
 
     # Tmux
-    ~/.tmux.conf: tmux/tmux.conf
+    ~/.tmux.conf:
+      path: tmux/tmux.conf
+
+    # Alcacritty
+    ~/.config/alacritty/alacritty.yml:
+      path: alacritty/alacritty.yml
 
     # Neovim
-    ~/.config/nvim: neovim
+    ~/.config/nvim:
+      path: neovim
+
+    # Starship
+    ~/.config/starship.toml:
+      path: starship/starship.toml
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

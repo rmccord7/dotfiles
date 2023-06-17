@@ -26,7 +26,6 @@ local M = {
                     'rust_analyzer',
                     'clangd',
                     'pyright',
-                    'cmake',
                 },
             })
         end,

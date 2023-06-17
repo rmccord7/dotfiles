@@ -1,6 +1,6 @@
 local config = function()
 
-    require('nvim-treesitter.install').compilers = { 'clang' }
+    require('nvim-treesitter.install').compilers = { 'clang', 'cc' }
     require('nvim-treesitter.configs').setup({
         ensure_installed = {
             'bash',

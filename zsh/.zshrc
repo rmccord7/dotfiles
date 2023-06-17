@@ -1,8 +1,9 @@
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME"/.oh-my-zsh"
+
+# Use FD for fuzzy
+export FZF_DEFAULT_CMD='fd --type file --color=always --follow --hidden --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_CMD"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -82,7 +83,6 @@ plugins=(
   autojump # Quick jump to previous visited directories
   pj # Project jump list
   git # Git
-  k # Git status
   tmux
   extract # Extracts all types of archives
   fzf
@@ -153,6 +153,7 @@ fi
 
 # Perforce
 if command -v p4 > /dev/null; then
+  export P4PORT=qctp411:1666
   export P4CONFIG=.p4config
   export P4IGNORE=.p4ignore
   export P4DIFF="$EDITOR -d"

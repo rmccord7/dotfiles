@@ -15,12 +15,12 @@ disabled = true
 [custom.p4client]
 description = "Displays current perforce client"
 command = """
-cat $(find_up.sh . -iname ".p4config") | grep P4CLIENT | cut -d "=" -f 2
+cat $(find_up.zsh ./ -iname ".p4config") | grep P4CLIENT | cut -d "=" -f 2
 """
 style = 'red'
-shell = ["bash","--noprofile"]
+shell = ["zsh"]
 when = """
-if [ $(find_up.sh . -iname ".p4config") ]; then
+if [ $(find_up.zsh ./ -iname ".p4config") ]; then
   exit 0
 fi
 exit 1
@@ -30,12 +30,12 @@ format = "client [$output](green) "
 [custom.p4port]
 description = "Displays current perforce p4port"
 command = """
-cat $(find_up.sh . -iname ".p4enviro") | grep P4PORT | cut -d "=" -f 2
+cat $(find_up.zsh ./ -iname ".p4config") | grep P4PORT | cut -d "=" -f 2
 """
 style = 'red'
-shell = ["bash","--noprofile"]
+shell = ["zsh"]
 when = """
-if [ $(find_up.sh . -iname ".p4config") ]; then
+if [ $(find_up.zsh ./ -iname ".p4config") ]; then
   exit 0
 fi
 exit 1
