@@ -9,6 +9,7 @@
     # Fonts
     ~/.local/share/fonts:
       path: fonts/*
+      glob: true
 
     # Zsh
     ~/:

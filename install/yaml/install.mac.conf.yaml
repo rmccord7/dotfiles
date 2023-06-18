@@ -1,4 +1,4 @@
-- default:
+- defaults:
     link:
       create: true
       relink: true
@@ -8,7 +8,8 @@
 - link:
     # Fonts
     ~/.local/share/fonts:
-      path: fonts/*
+      path: fonts/**
+      glob: true
 
     # Zsh
     ~/:
