@@ -144,11 +144,14 @@ fi
 alias ls='exa -la --git'
 alias lg='lazygit'
 
-alias luamake=/Users/rmccord/lua-language-server/3rd/luamake/luamake
-
 # Load local aliases.
 if [ -f "$HOME"/.zshrc.local.aliases ]; then
   source $HOME/.zshrc.local.aliases
+fi
+
+# Direnv
+if command -v direnv > /dev/null; then
+  eval "$(direnv hook zsh)"
 fi
 
 # Perforce
@@ -165,12 +168,6 @@ if command -v starship > /dev/null; then
   eval "$(starship init zsh)"
 fi
 
-# Autojump homebrew
-#[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
-
-#test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-source ~/.dotfiles/lib/zsh-autoenv/autoenv.zsh
 source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export NVM_DIR="$HOME/.nvm"

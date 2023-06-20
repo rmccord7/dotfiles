@@ -32,7 +32,14 @@ local config = function()
             MsgArea = { fg = '#E2795B', bold = true },
 
             -- Treesitter
+            ['@type.qualifier'] = { fg = colors.main.orange },
+
+            ['@keyword'] = { fg = colors.main.orange },
+
             ['@macro'] = { fg = colors.main.orange },
+            ['@preproc'] = { fg = colors.main.orange },
+
+            ['@constant.macro'] = { fg = colors.main.orange },
 
             --TODO: Remove lightspeed
 
