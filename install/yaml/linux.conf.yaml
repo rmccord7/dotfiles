@@ -20,6 +20,11 @@
     ~/.local/bin:
       path: zsh/scripts/*
       glob: true
+      exclude: [ zsh/scripts/perforce ]
+
+    ~/.local/bin:
+      path: zsh/scripts/perforce/*
+      glob: true
 
     # Tmux
     ~/.tmux.conf:

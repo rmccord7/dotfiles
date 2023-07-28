@@ -18,7 +18,6 @@ end
 -- Clipboard
 vim.o.clipboard = 'unnamedplus'
 
-
 -- Global status line
 vim.o.laststatus = 3
 
@@ -128,6 +127,9 @@ vim.filetype.add({
     },
     filename = {
         ['.clangd'] = 'yaml',
+    },
+    pattern = {
+        ['.*/sway/config%.d/.*'] = {'swayconfig', priority = 10},
     },
 })
 

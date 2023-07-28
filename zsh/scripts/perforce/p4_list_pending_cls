@@ -1,0 +1,25 @@
+#!/usr/bin/zsh
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+source log.zsh
+source p4_util.zsh
+
+# Verify P4 env.
+p4_verify_env
+
+#######################################
+# List's all CLs with pending changes.
+#
+# Parameters:
+#   CL - Change list
+#######################################
+p4_list_pending_cls() {
+
+  p4 changes -u "${P4USER}" -c "${P4CLIENT}" -s pending | cut -d " " -f 1-2,8-
+}
+
+p4_list_pending_cls
+

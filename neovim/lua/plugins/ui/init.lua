@@ -30,7 +30,7 @@ local M = {
 
     {
         'rcarriga/nvim-notify',
-        --before = 'reach.nvim',
+        enabled = false,
         event = 'VeryLazy',
         config = function()
             require('notify').setup({

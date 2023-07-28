@@ -6,10 +6,10 @@ local config = function()
         return
     end
 
-    local colors = require('material.colors')
-
     -- Set theme
     vim.g.material_style = 'deep ocean'
+
+    local colors = require('material.colors')
 
     material.setup({
         plugins = {

@@ -1,0 +1,50 @@
+#!/usr/bin/zsh
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+source log.zsh
+source p4_util.zsh
+
+if [[ $# -lt 2 ]]; then
+  echo "Usage $0: [SRC_CL] [DST_CL]"
+  exit 1
+fi
+
+local src_cl="$1"
+local dst_cl="$2"
+
+# Verify P4 env.
+p4_verify_env
+
+#######################################
+# Moves all files in the specified CL to another CL.
+#
+# Parameters:
+#   SRC_CL - Source change list.
+#   DST_CL - Destination change list.
+#######################################
+p4_move_cl() {
+
+  if [[ $# -lt 2 ]]; then
+    echo "Usage $0: [SRC_CL] [DST_CL]"
+    exit 1
+  fi
+
+  local src_cl="$1"
+  local dst_cl="$2"
+
+  p4_verify_cl "${src_cl}"
+  p4_verify_cl "${dst_cl}"
+
+  if [[ ${src_cl} == ${dst_cl} ]]; then
+    log_error "Source CL ${src_cl} is the same as the destination CL ${dst_cl}"
+  fi
+
+  # Move files from source CL to destination CL.
+  p4 opened -c "${src_cl}" | cut -d "#" -f 1 | p4 -x - reopen -c "${dst_cl}"
+}
+
+p4_move_cl "${src_cl}" "${dst_cl}"
+

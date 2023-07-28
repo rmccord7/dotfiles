@@ -1,0 +1,54 @@
+#!/usr/bin/zsh
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+source log.zsh
+source p4_util.zsh
+
+# Handle input from stdin.
+if [[ -p /dev/stdin ]]; then
+
+  local cl_list=($(cat))
+
+else
+
+  # Handle input passed on command line.
+  if [[ $# -eq 0 ]]; then
+    echo "Usage $0: [CL]"
+    exit 1
+  fi
+
+  local cl_list=("$@")
+
+fi
+
+# Verify P4 env.
+p4_verify_env
+
+#######################################
+# Reverts all files in the specified CLs.
+#
+# Parameters:
+#   CLs - Change lists to revert.
+#######################################
+p4_revert_cl() {
+
+  if [[ $# -eq 0 ]]; then
+    echo "Usage "$0": [CL]"
+    exit 1
+  fi
+
+  # Revert each CL.
+  for cl in "$@"; do
+
+    p4_verify_cl "${cl}"
+
+    p4 opened -c "${cl}" | cut -d "#" -f 1 | p4 -x - revert -c "${cl}"
+
+  done
+}
+
+p4_revert_cl ${cl_list}
+

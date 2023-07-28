@@ -1,6 +1,15 @@
+# A continuation prompt that displays two filled in arrows
+continuation_prompt = '▶▶ '
+
 # Replace the "❯" symbol in the prompt with "➜"
 [character]                            # The name of the module we are configuring is "character"
 success_symbol = "[➜](bold green)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
+
+[cmake]
+disabled = true
+
+[hostname]
+disabled = true
 
 [lua]
 disabled = true
@@ -9,37 +18,22 @@ disabled = true
 python_binary = "python3"
 detect_extensions = []
 
-[cmake]
+
+[username]
 disabled = true
 
 [custom.p4client]
-description = "Displays current perforce client"
+description = "Displays perforce client"
 command = """
-cat $(find_up.zsh ./ -iname ".p4config") | grep P4CLIENT | cut -d "=" -f 2
+echo "$P4CLIENT"
 """
 style = 'red'
 shell = ["zsh"]
 when = """
-if [ $(find_up.zsh ./ -iname ".p4config") ]; then
+if [[ -n "$P4CLIENT" ]]; then
   exit 0
 fi
 exit 1
 """
-format = "client [$output](green) "
+format = "p4 client: [$output](green) "
 
-[custom.p4port]
-description = "Displays current perforce p4port"
-command = """
-cat $(find_up.zsh ./ -iname ".p4config") | grep P4PORT | cut -d "=" -f 2
-"""
-style = 'red'
-shell = ["zsh"]
-when = """
-if [ $(find_up.zsh ./ -iname ".p4config") ]; then
-  exit 0
-fi
-exit 1
-"""
-format = "at [$output](green) "
-
-  #export $(cat $(p4config) | xargs) > /dev/null

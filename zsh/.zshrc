@@ -42,7 +42,7 @@ zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+#ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
@@ -66,6 +66,17 @@ HIST_STAMPS="dd/mm/yyyy"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# preview directory's content with exa when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
+
 # Configure tmux plugin
 ZSH_TMUX_AUTOSTART=true
 ZSH_TMUX_AUTOCONNECT=true
@@ -77,7 +88,6 @@ ZSH_TMUX_AUTOQUIT=false
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  zsh-autosuggestions # Zsh command uggestions
   colored-man-pages # Adds color to man pages
   dirhistory # Quick jump to previous visited directories
   autojump # Quick jump to previous visited directories
@@ -87,6 +97,7 @@ plugins=(
   extract # Extracts all types of archives
   fzf
   fzf-tab
+  zsh-autosuggestions # Zsh command uggestions
   zsh-syntax-highlighting # Must be last
 )
 
@@ -159,8 +170,8 @@ if command -v p4 > /dev/null; then
   export P4PORT=qctp411:1666
   export P4CONFIG=.p4config
   export P4IGNORE=.p4ignore
-  export P4DIFF="$EDITOR -d"
-  export P4MERGE="bash ~/bin/nvim_merge.sh"
+  export P4DIFF=p4_diff
+  export P4MERGE=p4_merge
 fi
 
 # Starship

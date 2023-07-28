@@ -12,10 +12,6 @@ local M = {
             })
         end,
     },
-
-    {
-        'Eandrju/cellular-automaton.nvim',
-    },
 }
 
 return M

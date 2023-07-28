@@ -1,0 +1,51 @@
+#!/usr/bin/zsh
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+source log.zsh
+source p4_util.zsh
+
+# Handle input from stdin.
+if [[ -p /dev/stdin ]]; then
+
+  local cl=($(cat))
+
+else
+
+  # Handle input passed on command line.
+  if [[ $# -eq 0 ]]; then
+    echo "Usage $0: [CL]"
+    exit 1
+  fi
+
+  local cl=("$@")
+
+fi
+
+# Verify P4 env.
+p4_verify_env
+
+#######################################
+# Performs diff on all files in the specified CL.
+#
+# Parameters:
+#   CLs - Change lists to revert.
+#######################################
+p4_diff_cl() {
+
+  if [[ $# -eq 0 ]]; then
+    echo "Usage "$0": [CL]"
+    exit 1
+  fi
+
+  local cl="$1"
+
+  p4_verify_cl "${cl}"
+
+  p4 opened -c "${cl}" | cut -d "#" -f 1 | p4 -x - diff
+}
+
+p4_diff_cl ${cl}
+

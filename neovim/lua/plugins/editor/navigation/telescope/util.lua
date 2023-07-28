@@ -1,3 +1,6 @@
+local global = require('global')
+local utils = require('telescope.utils')
+
 M = {}
 
 M.ignored_files = {
@@ -30,16 +33,34 @@ M.ignored_files = {
 }
 
 function M.builtin(lhs, picker, label)
+    local opts = {
+        prompt_title = label,
+    }
     nmap(lhs, function()
-        require('telescope.builtin')[picker]()
+        require('telescope.builtin')[picker](opts)
     end, label)
 end
 
 function M.custom(lhs, picker, label, opts)
-    opts = opts or {}
+    local default = {
+        prompt_title = label,
+    }
+    opts = vim.tbl_extend('keep', opts, default)
     nmap(lhs, function()
         require('telescope.builtin')[picker](opts)
     end, label)
+end
+
+function M.path_from_cwd(opts, path)
+
+    local cwd = vim.fn.getcwd(0)
+    local truncated_path
+
+    truncated_path = path:gsub(cwd, '')
+
+    truncated_path = os_path(truncated_path)
+
+    return truncated_path
 end
 
 return M

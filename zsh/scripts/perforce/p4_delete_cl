@@ -1,0 +1,60 @@
+#!/usr/bin/zsh
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+source log.zsh
+source p4_util.zsh
+
+# Handle input from stdin.
+if [[ -p /dev/stdin ]]; then
+
+  local cl_list=($(cat))
+
+else
+
+  # Handle input passed on command line.
+  if [[ $# -eq 0 ]]; then
+    echo "Usage $0: [CL]"
+    exit 1
+  fi
+
+  local cl_list=("$@")
+
+fi
+
+# Verify P4 env.
+p4_verify_env
+
+#######################################
+# Deletes all specified CLs.
+#
+# Parameters:
+#   CLs - Change lists to delete.
+#######################################
+p4_delete_cl() {
+
+  if [[ $# -eq 0 ]]; then
+    echo "Usage "$0": [CL]"
+    exit 1
+  fi
+
+  for cl in "$@"; do
+
+    p4_verify_cl "${cl}"
+
+    # Delete shelved files.
+    p4 shelve -d -c "${cl}"
+
+    # Revert pending changes.
+    p4 opened -c "${cl}" | cut -d "#" -f 1 | p4 -x - revert -c "${cl}"
+
+    # Delete the CL.
+    p4 change -d "${cl}"
+
+  done
+}
+
+p4_delete_cl ${cl_list}
+

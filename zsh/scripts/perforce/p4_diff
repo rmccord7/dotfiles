@@ -1,0 +1,23 @@
+#!/usr/bin/zsh
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+source log.zsh
+
+# yours is $1
+# Theirs is $2
+
+local theirs="$1"
+local yours="$2"
+
+log_debug "Yours: "${yours}""
+log_debug "Theirs: "${theirs}""
+
+if [[ -n $SSH_CONNECTION ]]; then
+  ${EDITOR} -d "${yours}" "${theirs}"
+else
+  sh -vx /usr/bin/bcompare "${yours}" "${theirs}"
+fi
+

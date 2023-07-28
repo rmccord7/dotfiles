@@ -1,0 +1,19 @@
+#!/usr/bin/zsh
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+source log.zsh
+
+# Base is $1
+# Theirs is $2
+# Yours is #3
+# Merged is #4
+
+if [[ -n $SSH_CONNECTION ]]; then
+  ${EDITOR} -d -c "wincmd J" -c "windo set wrap" $4 $3 $1 $2
+else
+  bcompare $3 $2 $1 $4
+fi
+

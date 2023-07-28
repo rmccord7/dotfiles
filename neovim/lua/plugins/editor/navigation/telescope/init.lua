@@ -11,14 +11,9 @@ local config = function()
 
     local util = require('plugins.editor.navigation.telescope.util')
 
-    -- Default picker options.
     local default_picker_opts = {
-        grep_string = {
-            prompt_title = 'word under cursor',
-        },
-
         live_grep = {
-            path_display = { 'smart' },
+            path_display = { 'truncate' },
             file_ignore_patterns = util.ignored_files,
         },
 
@@ -49,13 +44,10 @@ local config = function()
         find_files = {
             path_display = { 'smart' },
             find_command = { 'rg', '--files', '-L' },
-            follow = true,
-            hidden = false,
         },
 
         oldfiles = {
             path_display = { 'smart' },
-            only_cwd = true,
         },
     }
 
@@ -121,21 +113,71 @@ local config = function()
     require('telescope').load_extension('file_browser')
     require('telescope').load_extension('env')
     require('telescope').load_extension('vim_p4_files')
-    require('telescope').load_extension('notify')
+    -- require('telescope').load_extension('notify')
     require('telescope').load_extension('lazy')
 
     -- Telescope mappings
-    util.builtin('<leader>ff', 'find_files', 'Find Files')
-    util.builtin('<leader>ow', 'oldfiles', 'List Old Files')
-    util.builtin('<leader>fw', 'grep_string', 'Grep String Under Cursor')
+    util.builtin('<leader>sw', 'grep_string', 'Find Word Under Cursor')
     util.builtin('<leader>gw', 'live_grep', 'Grep String')
     util.builtin('<leader>/', 'current_buffer_fuzzy_find', 'Fuzzy Find Current Buffer')
-    util.builtin('<leader>hp', 'help_tags', 'Plugin Help')
+    util.builtin('<leader>hv', 'help_tags', 'Plugin Help')
     util.builtin('<leader>hm', 'man_pages', 'Find Manual')
     util.builtin('<leader>jb', 'builtin', 'List Telescope Builtins')
-    util.builtin('<leader>tp', 'resume', 'Telecope Resume')
+    util.builtin('<leader>tr', 'resume', 'Telecope Resume')
     util.builtin('<leader>m', 'keymaps', 'List Keymaps')
     util.builtin('<leader>ch', 'command_history', 'List Command History')
+
+    util.builtin('<leader>ff', 'find_files', 'Search Files')
+
+    util.custom('<leader>ffa', 'find_files', 'Search Files (All)', {
+        path_display = util.path_from_cwd,
+        no_ignore = true,
+        hidden = true,
+    })
+
+    util.custom('<leader>fw', 'find_files', 'Search Workspace Files', {
+        path_display = util.path_from_cwd,
+    })
+
+    util.custom('<leader>fwa', 'find_files', 'Search Workspace Files (All)', {
+        path_display = util.path_from_cwd,
+        no_ignore = true,
+        hidden = true,
+    })
+
+    util.builtin('<leader>rf', 'oldfiles', 'Recent Files')
+
+    util.custom('<leader>rfa', 'oldfiles', 'Recent Files (All)', {
+        no_ignore = true,
+        hidden = true,
+    })
+
+    util.custom('<leader>rw', 'oldfiles', 'Recent Workspace Files', {
+        path_display = util.path_from_cwd,
+        only_cwd = true,
+    })
+
+    util.custom('<leader>rwa', 'oldfiles', 'Recent Workspace Files (All)', {
+        path_display = util.path_from_cwd,
+        only_cwd = true,
+        no_ignore = true,
+        hidden = true,
+    })
+
+    util.custom('<leader>fd', 'find_files', 'Search Dotfiles', {
+        cwd = '~/dotfiles',
+        path_display = util.path_from_cwd,
+    })
+
+    -- Find in neovim plugins
+    -- util.custom('<leader>fp', 'find_files', 'Search Plugins', {
+    --     cwd =  vim.fn.stdpath('data') .. '/lazy',
+    -- })
+
+    -- Grep inside of vim help docs
+    util.custom('<leader>gv', 'live_grep', 'Grep Vim Help', {
+        cwd = os.getenv('VIMRUNTIME') .. '/doc',
+    })
 
     util.builtin('<leader>lr', 'lsp_references', 'List LSP References')
     util.builtin('<leader>lc', 'lsp_document_symbols', 'List LSP Document Symbols')
@@ -144,47 +186,6 @@ local config = function()
     util.builtin('<leader>lo', 'lsp_outgoing_calls', 'List LSP Outgoing Calls')
     util.builtin('gd', 'lsp_definitions', 'List LSP Definitions')
     util.builtin('gD', 'lsp_implementations', 'List LSP Implementations')
-
-    nmap('<leader>fb', ':Telescope file_browser<CR>', 'File Browser')
-    nmap('<leader>pj', ':Telescope projects<CR>', 'List Projects')
-    nmap('<leader>nh', ':Telescope notify<CR>', 'List Notifications')
-    nmap('<leader>te', ':Telescope env<CR>', 'List Environment Variables')
-    nmap('<leader>tl', ':Telescope lazy<CR>', 'Plugin Browser')
-
-    -- Find_old_files, but all workspaces
-    util.custom('<leader>of', 'oldfiles', 'find_old_files', {
-        only_cwd = false,
-    })
-
-    -- Find_files, but don't use ignored patterns
-    util.custom('<leader>fa', 'find_files', 'find_files_all', {
-        no_ignore = true,
-        hidden = true,
-    })
-
-    -- Find in dotfiles
-    util.custom('<leader>fd', 'find_files', 'find_dotfiles', {
-        cwd = '~/dotfiles',
-        prompt_title = 'files in dotfiles',
-    })
-
-    -- Find in neovim config
-    util.custom('<leader>fn', 'find_files', 'find_neovim', {
-        cwd = '~/dotfiles/neovim',
-        prompt_title = 'files in neovim config',
-    })
-
-    -- Find in neovim plugins
-    util.custom('<leader>fp', 'find_files', 'find_plugins', {
-        cwd =  vim.fn.stdpath('data') .. '/lazy',
-        prompt_title = 'files in neovim plugins',
-    })
-
-    -- Grep inside of vim help docs
-    util.custom('<leader>vh', 'live_grep', 'grep_vim_help', {
-        cwd = os.getenv('VIMRUNTIME') .. '/doc',
-        prompt_title = 'Grep in vim help docs',
-    })
 
     -- LSP current buffer diagnostics
     util.custom('<leader>ld', 'diagnostics', 'Buffer Diagnostics', {
@@ -205,6 +206,12 @@ local config = function()
 
     -- LSP project diagnostics
     util.custom('<leader>lp', 'diagnostics', 'Project Diagnostics', {})
+
+    nmap('<leader>fb', ':Telescope file_browser<CR>', 'File Browser')
+    nmap('<leader>pj', ':Telescope projects<CR>', 'List Projects')
+    -- nmap('<leader>nh', ':Telescope notify<CR>', 'List Notifications')
+    nmap('<leader>te', ':Telescope env<CR>', 'List Environment Variables')
+    nmap('<leader>tp', ':Telescope lazy<CR>', 'Plugin Browser')
 end
 
 local M = {
