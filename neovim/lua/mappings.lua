@@ -16,6 +16,8 @@ imap('kj', '<ESC>', 'Exit insert mode')
 -- Keep cursor centered on search, motions, and join.
 nmap('n', 'nzzzv')
 nmap('N', 'Nzzzv')
+nmap('g;', 'g;zz')
+nmap('gi', 'zzgi')
 nmap('J', "mzJ'z")
 nmap('[c', '[czz')
 nmap(']c', ']czz')
@@ -53,6 +55,9 @@ nmap('cN', [[*''cgN]], 'Change next word')
 
 -- Reselect last put text
 nmap('gV', "'[v']", 'Select last put text')
+
+-- Replace currently selected text with default register without yanking it
+vmap('p', '"_dP', nil, { silent = false })
 
 -- Insert new line without leaving normal mode.
 nmap('<leader>o', [[:<C-u>call append(line("."), repeat([""], v:count1))<CR>]], 'Insert new line below')
@@ -110,8 +115,8 @@ nmap('<leader>lh', [[:Lazy home<CR>]], 'Lazy home')
 -- Nvim Tree
 nmap('<leader>tt', [[:NvimTreeToggle<CR>]], 'Nvim tree toggle')
 nmap('<leader>tf', [[:NvimTreeFindFile<CR>]], 'Nvim tree find file')
--- Diffview
 
+-- Diffview
 nmap('<leader>gd', [[:DiffviewOpen]], 'Diffview Open', {nowait = true})
 nmap('<leader>gh', [[:DiffviewFileHistory]], 'Diffview File History', {nowait = true})
 nmap('<leader>gx', [[:DiffviewClose<CR>]], 'Diffview Close')
@@ -151,6 +156,15 @@ nmap('<leader>xp', [[:lua require('trouble').previous({skip_groups = false, jump
 -- Reach
 nmap('<leader>b', ':ReachOpen buffers<CR>', 'Reach Open Buffers')
 nmap("<leader>'", ':ReachOpen marks<CR>', 'Reach Open Marks')
+
+-- Toggle relative line numbers
+nmap('<leader>tn', function()
+    if vim.api.nvim_win_get_option(0, 'relativenumber') then
+        vim.cmd 'windo set norelativenumber'
+    else
+        vim.cmd 'windo set relativenumber'
+    end
+end, 'Toogle relative line numbers')
 
 -- Reload current buffer if it is a vim or lua file (Source Here)
 nmap('<leader>sh', function()

@@ -129,7 +129,7 @@ local config = function()
 
     util.builtin('<leader>ff', 'find_files', 'Search Files')
 
-    util.custom('<leader>ffa', 'find_files', 'Search Files (All)', {
+    util.custom('<leader>aff', 'find_files', 'Search Files (All)', {
         path_display = util.path_from_cwd,
         no_ignore = true,
         hidden = true,
@@ -139,7 +139,7 @@ local config = function()
         path_display = util.path_from_cwd,
     })
 
-    util.custom('<leader>fwa', 'find_files', 'Search Workspace Files (All)', {
+    util.custom('<leader>afw', 'find_files', 'Search Workspace Files (All)', {
         path_display = util.path_from_cwd,
         no_ignore = true,
         hidden = true,
@@ -147,7 +147,7 @@ local config = function()
 
     util.builtin('<leader>rf', 'oldfiles', 'Recent Files')
 
-    util.custom('<leader>rfa', 'oldfiles', 'Recent Files (All)', {
+    util.custom('<leader>arf', 'oldfiles', 'Recent Files (All)', {
         no_ignore = true,
         hidden = true,
     })
@@ -157,7 +157,7 @@ local config = function()
         only_cwd = true,
     })
 
-    util.custom('<leader>rwa', 'oldfiles', 'Recent Workspace Files (All)', {
+    util.custom('<leader>arw', 'oldfiles', 'Recent Workspace Files (All)', {
         path_display = util.path_from_cwd,
         only_cwd = true,
         no_ignore = true,
@@ -166,6 +166,11 @@ local config = function()
 
     util.custom('<leader>fd', 'find_files', 'Search Dotfiles', {
         cwd = '~/dotfiles',
+        path_display = util.path_from_cwd,
+    })
+
+    util.custom('<leader>fh', 'find_files', 'Search Home', {
+        cwd = '~',
         path_display = util.path_from_cwd,
     })
 
