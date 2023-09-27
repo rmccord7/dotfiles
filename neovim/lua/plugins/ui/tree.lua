@@ -28,6 +28,9 @@ local config = function()
     }
 
     tree.setup({
+        view = {
+            width = {},
+        },
         update_focused_file = {
             enable = true,
             update_root = true,

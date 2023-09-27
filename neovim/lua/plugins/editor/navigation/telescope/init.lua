@@ -113,8 +113,9 @@ local config = function()
     require('telescope').load_extension('file_browser')
     require('telescope').load_extension('env')
     require('telescope').load_extension('vim_p4_files')
-    -- require('telescope').load_extension('notify')
+    require('telescope').load_extension('notify')
     require('telescope').load_extension('lazy')
+    require('telescope').load_extension('p4')
 
     -- Telescope mappings
     util.builtin('<leader>sw', 'grep_string', 'Find Word Under Cursor')
@@ -214,7 +215,7 @@ local config = function()
 
     nmap('<leader>fb', ':Telescope file_browser<CR>', 'File Browser')
     nmap('<leader>pj', ':Telescope projects<CR>', 'List Projects')
-    -- nmap('<leader>nh', ':Telescope notify<CR>', 'List Notifications')
+    nmap('<leader>nh', ':Telescope notify<CR>', 'List Notifications')
     nmap('<leader>te', ':Telescope env<CR>', 'List Environment Variables')
     nmap('<leader>tp', ':Telescope lazy<CR>', 'Plugin Browser')
 end
@@ -232,6 +233,7 @@ local M = {
             'LinArcX/telescope-env.nvim',
             'Badhi/vim-p4-files',
             'tsakirist/telescope-lazy.nvim',
+            'rmccord7/p4.nvim',
         },
     },
 }

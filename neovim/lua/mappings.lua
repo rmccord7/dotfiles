@@ -5,6 +5,12 @@ local global = require('global')
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+nmap('<leader>pc', [[<cmd>Telescope p4 clients<cr>]], 'List perforce clients')
+nmap('<leader>pl', [[<cmd>Telescope p4 change_lists<cr>]], 'List perforce change lists')
+
+nmap('<leader>qa', '<cmd>qa<cr>', 'Quit all')
+nmap('<leader>qf', '<cmd>qa!<cr>', 'Force Quit all')
+
 -- Ex-mode is weird and not useful so it seems better to repeat the last macro
 nmap('Q', '@@', 'Repeat last macro')
 
@@ -25,6 +31,9 @@ nmap('<C-u>', '<C-u>zz')
 nmap('<C-d>', '<C-d>zz')
 nmap('<C-f>', '<C-f>zz')
 nmap('<C-b>', '<C-b>zz')
+
+nmap('<leader>ht', [[:lua require('lsp-inlayhints').toggle()<CR>]])
+nmap('<leader>hc', [[:lua require('lsp-inlayhints').reset()<CR>]])
 
 -- Don't undo everything.
 imap('.', '.<c-g>u')
@@ -75,10 +84,6 @@ vmap('<leader>sl', ':s/', 'Linewise search', { silent = false })
 nmap('<leader>sg', ':%s/', 'Global buffer search', { silent = false })
 vmap('<leader>sg', ':%s/', 'Global buffer search', { silent = false })
 
--- swap to alternate file
---nmap('ga', '<c-^>', 'Swap to alt file', {silent = false})
---vmap('ga', '<c-^>', 'Swap to alt file', {silent = false})
-
 -- repeat last macro
 nmap('<c-m>', '@@', 'Repeat last macro', { silent = false })
 vmap('<c-m>', '@@', 'Repeat last macro', { silent = false })
@@ -92,9 +97,10 @@ nmap('<c-q>', 'q:', 'Open cmdline window', { silent = false })
 vmap('<c-q>', 'q:', 'Open cmdline window', { silent = false })
 
 -- quickfix list navigation yay
-nmap('<leader>qo', '<cmd>copen<cr>', 'Open qflist')
-nmap('<leader>qn', '<cmd>cnext<cr>', 'Next item in qf list')
-nmap('<leader>qp', '<cmd>cprev<cr>', 'Prev item in qf list')
+nmap('<leader>co', '<cmd>copen<cr>', 'Open qflist')
+nmap('<leader>ce', '<cmd>cclose<cr>', 'Close/exit qflist')
+nmap('<leader>cn', '<cmd>cnext<cr>', 'Next item in qflist')
+nmap('<leader>cp', '<cmd>cprev<cr>', 'Prev item in qflist')
 nmap('<leader>qd', function()
     vim.ui.input({ prompt = 'Quickfix do: ', completion = 'command' }, function(do_cmd)
         if do_cmd then
@@ -117,8 +123,8 @@ nmap('<leader>tt', [[:NvimTreeToggle<CR>]], 'Nvim tree toggle')
 nmap('<leader>tf', [[:NvimTreeFindFile<CR>]], 'Nvim tree find file')
 
 -- Diffview
-nmap('<leader>gd', [[:DiffviewOpen]], 'Diffview Open', {nowait = true})
-nmap('<leader>gh', [[:DiffviewFileHistory]], 'Diffview File History', {nowait = true})
+nmap('<leader>gd', [[:DiffviewOpen]], 'Diffview Open', { nowait = true })
+nmap('<leader>gh', [[:DiffviewFileHistory]], 'Diffview File History', { nowait = true })
 nmap('<leader>gx', [[:DiffviewClose<CR>]], 'Diffview Close')
 
 -- ToDo
@@ -160,9 +166,9 @@ nmap("<leader>'", ':ReachOpen marks<CR>', 'Reach Open Marks')
 -- Toggle relative line numbers
 nmap('<leader>tn', function()
     if vim.api.nvim_win_get_option(0, 'relativenumber') then
-        vim.cmd 'windo set norelativenumber'
+        vim.cmd('windo set norelativenumber')
     else
-        vim.cmd 'windo set relativenumber'
+        vim.cmd('windo set relativenumber')
     end
 end, 'Toogle relative line numbers')
 

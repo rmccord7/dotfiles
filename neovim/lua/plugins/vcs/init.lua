@@ -1,7 +1,10 @@
+local global = require('global')
+
 local M = {
 
     {
         'nfvs/vim-perforce',
+        enabled = false,
     },
 
     {
@@ -31,6 +34,14 @@ local M = {
         'tpope/vim-fugitive',
     },
 
+    {
+       'rmccord7/p4.nvim',
+        config = function()
+            require('p4').setup()
+        end,
+        dir = global.home_path .. '/p4.nvim',
+        dev = true,
+    },
 }
 
 return M
