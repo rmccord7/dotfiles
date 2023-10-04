@@ -41,20 +41,6 @@ local config = function()
 
             ['@constant.macro'] = { fg = colors.main.orange },
 
-            --TODO: Remove lightspeed
-
-            -- Lightspeed
-            LightspeedLabel = { fg = colors.main.darkgreen, bold = true, underline = true },
-            --LightspeedLabelOverlapped        = { fg = colors.main.darkred, bold = true, underline = true },
-            LightspeedLabelDistant = { fg = colors.main.darkpurple, bold = true, underline = true },
-            --LightspeedLabelDistantOverlapped = { fg = colors.main.darkpurple, bold = true, underline = true },
-            LightspeedShortcut = { fg = colors.main.blue, bold = true, underline = true },
-            --LightspeedShortcutOverlapped     = { fg = colors.main.blue, bold = true, underline = true },
-            LightspeedMaskedChar = { fg = colors.main.darkpurple, bold = true },
-            LightspeedGreyWash = { fg = colors.syntax.comments },
-            LightspeedUnlabeledMatch = { fg = '#E2795B', bold = true },
-            LightspeedUniqueChar = { fg = '#E2795B', bold = true },
-
             CmpItemKindSnippet = { fg = colors.editor.fg, bg = colors.main.orange },
             CmpItemKindKeyword = { fg = colors.editor.fg, bg = colors.main.red },
             CmpItemKindText = { fg = colors.editor.fg, bg = colors.main.teal },
@@ -81,6 +67,10 @@ local config = function()
             CmpItemKindOperator = { fg = colors.editor.fg, bg = colors.main.blue },
             CmpItemKindTypeParameter = { fg = colors.editor.fg, bg = colors.main.blue },
             CmpItemKindCopilot = { fg = colors.editor.fg, bg = colors.main.teal },
+
+            -- IblScope = {fg = colors.editor.border },
+            -- IblWhitespace = {fg = colors.editor.disabled },
+            -- IblIndex = {fg = colors.editor.disabled },
         },
     })
 
