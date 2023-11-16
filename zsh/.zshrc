@@ -162,6 +162,9 @@ fi
 alias ls='exa -la --git'
 alias lg='lazygit'
 
+alias plc='p4_list_pending_cls'
+alias pd='p4_delete_cl'
+
 # Load local aliases.
 if [ -f "$HOME"/.zshrc.local.aliases ]; then
   source $HOME/.zshrc.local.aliases
