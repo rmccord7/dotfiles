@@ -5,19 +5,19 @@ local _M = {}
 _M.setup = function(on_attach, capabilities)
     require('lspconfig').clangd.setup({
 
-        cmd = {
-        'clangd',
-        -- '--pretty',
-        -- '--log=verbose',
-        "--background-index",
-        "-j=8",
-        "--malloc-trim",
-        "--pch-storage=memory",
-        "--header-insertion=never",
-        "--all-scopes-completion",
-        -- "--clang-tidy",
-        -- "--clang-tidy-checks=modernize-*,misc-*"
-        },
+        -- cmd = {
+        -- 'clangd',
+        -- -- '--pretty',
+        -- -- '--log=verbose',
+        -- "--background-index",
+        -- "-j=8",
+        -- "--malloc-trim",
+        -- "--pch-storage=memory",
+        -- "--header-insertion=never",
+        -- "--all-scopes-completion",
+        -- -- "--clang-tidy",
+        -- -- "--clang-tidy-checks=modernize-*,misc-*"
+        -- },
         on_attach = on_attach,
         flags = {
 

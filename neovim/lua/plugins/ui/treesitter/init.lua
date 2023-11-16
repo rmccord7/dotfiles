@@ -91,9 +91,6 @@ local config = function()
                 enable = true,
             },
         },
-        rainbow = {
-            enable = true,
-        },
         playground = {
             enable = false,
             disable = {},
@@ -202,7 +199,7 @@ local M = {
             'nvim-treesitter/nvim-treesitter-textobjects',
             'nvim-treesitter/playground',
             'romgrk/nvim-treesitter-context',
-            'HiPhish/nvim-ts-rainbow2',
+            'HiPhish/rainbow-delimiters.nvim',
         },
         config = config,
         build = ':TSUpdate',
