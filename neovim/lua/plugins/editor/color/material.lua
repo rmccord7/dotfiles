@@ -24,6 +24,7 @@ local config = function()
         },
         custom_colors = function(colors)
             colors.editor.fg = '#717CB4'
+            colors.syntax.variable = '#717CB4'
             colors.syntax.comments = '#5A6077'
             colors.editor.line_numbers = '#5A6077'
         end,

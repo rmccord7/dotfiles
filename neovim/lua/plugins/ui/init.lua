@@ -24,6 +24,7 @@ local M = {
 
     {
         'glepnir/lspsaga.nvim',
+        opt = true,
         event = "BufRead",
         branch = 'main',
         config = function()

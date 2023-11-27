@@ -1,6 +1,6 @@
 local config = function()
 
-    vim.lsp.set_log_level(vim.log.levels.OFF)
+    vim.lsp.set_log_level(vim.log.levels.DEBUG)
 
     local servers = {
         'bashls',

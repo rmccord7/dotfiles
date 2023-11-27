@@ -162,8 +162,17 @@ fi
 alias ls='exa -la --git'
 alias lg='lazygit'
 
+# Perforce aliases
+alias po='p4 opened'
+alias pld='p4 opened -c default'
 alias plc='p4_list_pending_cls'
-alias pd='p4_delete_cl'
+alias pdc='p4_delete_cl'
+
+function pu {
+  if [[ "$1" != "" ]] then
+    p4 unshelve -s $1 -c $1
+  fi
+}
 
 # Load local aliases.
 if [ -f "$HOME"/.zshrc.local.aliases ]; then
