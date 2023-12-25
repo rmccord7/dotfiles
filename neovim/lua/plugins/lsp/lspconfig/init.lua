@@ -1,6 +1,6 @@
 local config = function()
 
-    vim.lsp.set_log_level(vim.log.levels.DEBUG)
+    vim.lsp.set_log_level(vim.log.levels.OFF)
 
     local servers = {
         'bashls',
@@ -60,7 +60,7 @@ local config = function()
     capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
     -- Setup all settings when we attach to a buffer for an LSP
-    local function on_attach(_, bufnr)
+    local function on_attach(client, bufnr)
         nmap('<c-s>', ':Lspsaga hover_doc<CR>', nil, { buffer = bufnr })
         nmap('gr', ':Lspsaga rename<CR>', nil, { buffer = bufnr })
         nmap('<leader>ca', ':Lspsaga code_action<CR>', nil, { buffer = bufnr })
@@ -71,6 +71,9 @@ local config = function()
         nmap('[e', ':Lspsaga diagnostic_jump_prev<CR>zz', nil, { buffer = bufnr })
         nmap('gh', ':Lspsaga lsp_finder<CR>', nil, { buffer = bufnr })
         nmap('<leader>f', ':Format<CR>', nil, { buffer = bufnr })
+
+        -- client.server_capabilities.semanticTokensProvider = nil
+        -- client.server_capabilities.completionProvider = false
 
         -- Show diagnostics on attach
         vim.b.show_diagnostics = true
