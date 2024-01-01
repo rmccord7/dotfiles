@@ -5,13 +5,20 @@ table.insert(runtime_path, "lua/?/init.lua")
 local library_files = {
     vim.api.nvim_get_runtime_file('', true),
     vim.fn.expand('~/dotfiles/neovim/lua'),
-    vim.fn.expand('~/.local/share/nvim/lazy'),
+    -- vim.fn.expand('~/.local/share/nvim/lazy/telescope.nvim/lua'),
+    -- vim.fn.expand('~/projects/p4.nvim/lua'),
 }
 
 local _M = {}
 
 _M.setup = function(on_attach, capabilities)
     require('lspconfig').lua_ls.setup({
+        cmd = {
+            'lua-language-server',
+            -- '--logpath=' .. './log',
+            -- '--metapath=' .. './meta',
+        },
+        filetypes = { 'lua' },
         on_attach = on_attach,
         capabilities = capabilities,
         root_dir = require('lspconfig').util.root_pattern({'stylua.toml', '.stylua.toml', '.luacheckrc', '.nvim.lua', 'compile_commands.json', '.git'}),
@@ -31,11 +38,8 @@ _M.setup = function(on_attach, capabilities)
                     },
                 },
                 workspace = {
-                    library = library_files,
                     checkThirdParty = false,
-                },
-                telemetry = {
-                    enable = false,
+                    library = library_files,
                 },
             },
         },

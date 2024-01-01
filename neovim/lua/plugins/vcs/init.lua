@@ -39,8 +39,8 @@ local M = {
         config = function()
             require('p4').setup()
         end,
-        dir = global.home_path .. '/p4.nvim',
-        dev = true,
+        dir = global.home_path .. '/.local/share/nvim/dev/p4.nvim',
+        -- dev = true,
     },
 }
 
