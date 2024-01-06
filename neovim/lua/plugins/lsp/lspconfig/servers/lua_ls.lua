@@ -5,7 +5,7 @@ table.insert(runtime_path, "lua/?/init.lua")
 local library_files = {
     vim.api.nvim_get_runtime_file('', true),
     vim.fn.expand('~/dotfiles/neovim/lua'),
-    -- vim.fn.expand('~/.local/share/nvim/lazy/telescope.nvim/lua'),
+    vim.fn.expand('~/.local/share/nvim/lazy/telescope.nvim/lua'),
     -- vim.fn.expand('~/projects/p4.nvim/lua'),
 }
 
