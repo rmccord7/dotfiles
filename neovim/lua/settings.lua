@@ -209,7 +209,7 @@ create_augroup('window_group', {
     }
 })
 
--- Disable builtin plugins i don't need
+-- Disable builtin plugins I don't use
 vim.g.loaded_gzip = 1
 vim.g.loaded_zip = 1
 vim.g.loaded_zipPlugin = 1

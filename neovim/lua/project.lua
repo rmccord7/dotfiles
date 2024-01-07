@@ -1,7 +1,7 @@
 local telescope_ok, _ = pcall(require, 'telescope')
 local lspconfig_ok, lspconfig = pcall(require, 'lspconfig')
 
-local util = require('plugins.editor.navigation.telescope.util')
+local util = require('plugins.telescope.util')
 
 local defaults = {}
 

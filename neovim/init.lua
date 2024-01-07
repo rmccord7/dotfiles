@@ -16,7 +16,7 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-config = {
+local config = {
     checker = {
         enabled = true,
     },

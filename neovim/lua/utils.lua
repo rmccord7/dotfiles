@@ -1,6 +1,6 @@
 local M = {}
 
--- Merge to lua tables
+-- Merge two lua tables
 function M.merge(t1, t2)
     for k, v in pairs(t2) do
         t1[k] = v
