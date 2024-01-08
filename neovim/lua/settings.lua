@@ -10,11 +10,7 @@ if vim.g.neovide == true then
 end
 
 --Set python path
-if plat.is_windows then
-    vim.g.python3_host_prog = path.os_path('C:/Users/rmccord/scoop/apps/python/current/python')
-else
-    vim.g.python3_host_prog = '/usr/bin/python3'
-end
+vim.g.python3_host_prog = path.python
 
 -- Clipboard
 vim.o.clipboard = 'unnamedplus'

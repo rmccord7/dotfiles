@@ -1,10 +1,11 @@
 local plat = require('util.plat')
 
+--- Path locals.
 local M = {
-    home = os.getenv('HOME'),
-    nvim_config = vim.fn.stdpath('log'),
-    nvim_data = vim.fn.stdpath('data'),
-    nvim_log = vim.fn.stdpath('log'),
+    home = os.getenv('HOME'), -- Home path
+    nvim_config = vim.fn.stdpath('log'), -- Neovim config path
+    nvim_data = vim.fn.stdpath('data'), -- Neovim data path
+    nvim_log = vim.fn.stdpath('log'), -- Neovim log path
 }
 
 --- Takes a sanitized path and converts it to the os
@@ -28,6 +29,14 @@ function M.sanitize(path)
     return path
 end
 
+--Add python path
+if plat.is_windows then
+    M.python = M.os_path(M.home .. '/scoop/apps/python/current/python')
+else
+    M.python = '/usr/bin/python3'
+end
+
+--- Add lazy plugin path.
 M.lazy = M.os_path(M.nvim_data .. '/lazy')
 
 return M

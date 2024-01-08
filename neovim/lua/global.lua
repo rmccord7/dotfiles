@@ -1,7 +1,8 @@
--- Map commands
+-- Map commands.
 _G.map = function(modes, lhs, rhs, label, opts)
     local uses_leader = lhs:match('<leader>.*')
 
+    -- Add leader key bindings to which-key.
     if uses_leader then
         local ok, wk = pcall(require, 'which-key')
         if ok then
@@ -34,13 +35,15 @@ _G.map = function(modes, lhs, rhs, label, opts)
             return
         end
     end
-    -- if we didn't have a <leader> mapping or which key is unavailable, default
+
+    -- If we didn't have a <leader> mapping or which key is unavailable, default
     -- to built-in lua function vim.keymap.set()
 
-    -- extend the default options with user's overrides
+    -- Extend the default options with user's overrides
     local default_opts = { noremap = true, silent = true }
     opts = opts and vim.tbl_extend('keep', opts, default_opts) or default_opts
 
+    -- Set the keymapping.
     vim.keymap.set(modes, lhs, rhs, opts)
 end
 
