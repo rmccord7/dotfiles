@@ -1,6 +1,3 @@
-local global = require('global')
-local utils = require('telescope.utils')
-
 M = {}
 
 M.ignored_files = {
@@ -57,8 +54,7 @@ function M.path_from_cwd(opts, path)
     local truncated_path
 
     truncated_path = path:gsub(cwd, '')
-
-    truncated_path = os_path(truncated_path)
+    truncated_path = require('util.path').os_path(truncated_path)
 
     return truncated_path
 end

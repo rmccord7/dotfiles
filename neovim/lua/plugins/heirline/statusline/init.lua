@@ -1,6 +1,6 @@
 M = {}
 
-local global = require('global')
+local path = require('util.path')
 
 local utils = require('heirline.utils')
 local conditions = require('heirline.conditions')
@@ -107,7 +107,7 @@ local sep = '  '
 local cwd = {
     init = function(self)
         self.cwd = vim.fn.getcwd(0)
-        self.cwd = string.gsub(self.cwd, global.home_path, '~')
+        self.cwd = string.gsub(self.cwd, path.home, '~')
         self.cwd = string.gsub(self.cwd, '\\', '/')
     end,
     hl = {

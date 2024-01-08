@@ -1,4 +1,5 @@
-Global = require('global')
+local plat = require('util.plat')
+local path = require('util.path')
 
 -- Enable TC
 vim.o.termguicolors = true
@@ -9,8 +10,8 @@ if vim.g.neovide == true then
 end
 
 --Set python path
-if Global.is_windows then
-    vim.g.python3_host_prog = os_path('C:/Users/rmccord/scoop/apps/python/current/python')
+if plat.is_windows then
+    vim.g.python3_host_prog = path.os_path('C:/Users/rmccord/scoop/apps/python/current/python')
 else
     vim.g.python3_host_prog = '/usr/bin/python3'
 end
@@ -18,7 +19,7 @@ end
 -- Clipboard
 vim.o.clipboard = 'unnamedplus'
 
--- Global status line
+-- global status line
 vim.o.laststatus = 3
 
 -- Command height
