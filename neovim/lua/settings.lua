@@ -115,21 +115,6 @@ vim.opt.wildmode = { 'longest', 'list', 'full' }
 vim.opt.wildmenu = true
 vim.opt.wildignore = '*/node_modules/*,*/.git/*,DS_Store,*/venv/*,*/__pycache__/*,*.pyc'
 
--- Set file types
-vim.filetype.add({
-    extension = {
-        h = 'c',
-        scons = 'python',
-        api = 'python',
-    },
-    filename = {
-        ['.clangd'] = 'yaml',
-    },
-    pattern = {
-        ['.*/sway/config%.d/.*'] = {'swayconfig', priority = 10},
-    },
-})
-
 --Use hybrid numbers in normal mode and
 --absolute line numbers in insert mode.
 create_augroup('HYBRID_NUM_AUCMDS', {
