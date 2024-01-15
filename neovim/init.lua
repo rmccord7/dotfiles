@@ -2,6 +2,7 @@ require('global')
 require('settings')
 require('mappings')
 require('ftdetect')
+require('autocommands')
 
 local path = require('util.path')
 
