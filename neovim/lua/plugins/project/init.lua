@@ -1,12 +1,10 @@
 local config = function()
     require('project_nvim').setup({
         patterns = {
-            '.git',
-            '.nvimrc.lua',
-            '.nvimrc',
-            '.p4config',
-            '.p4.conf',
+            '.nvim.lua',
             'compile_commands.json',
+            '.p4config',
+            '.git',
         },
     })
 end
