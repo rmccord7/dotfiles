@@ -1,3 +1,4 @@
+local plat = require('util.plat')
 local path = require('util.path')
 
 -- Global options
@@ -109,6 +110,7 @@ vim.wo.wrap = false -- Do not display text over multiple lines
 
 -- External options
 
-if vim.fn.executable('rg') == 1 then
+-- Use Rip grep instead of grep if supported
+if plat.bin.rg then
     vim.opt.grepprg = 'rg --vimgrep --smart-case' -- Use rg instead of grep
 end
