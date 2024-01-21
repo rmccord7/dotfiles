@@ -1,4 +1,4 @@
-vim.filetype.add({
+local M = {
     extension = {
         h = 'c',
         scons = 'python',
@@ -10,5 +10,10 @@ vim.filetype.add({
     pattern = {
         ['.*/sway/config%.d/.*'] = {'swayconfig', priority = 10},
     },
-})
+}
+
+-- Add new file type mappings
+vim.filetype.add(M)
+
+return M
 

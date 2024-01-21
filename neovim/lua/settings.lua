@@ -1,9 +1,8 @@
-local plat = require('util.plat')
-local path = require('util.path')
+local config = require('config')
 
 -- Global options
 
-vim.g.python3_host_prog = path.python -- Set python path
+vim.g.python3_host_prog = config.path.python -- Set python path
 
 --Disable internal plugins we aren't to use
 vim.g.loaded_gzip = 1
@@ -80,7 +79,7 @@ vim.opt.splitright = true -- Split window right by default
 vim.opt.splitbelow = true -- Split window bottom by default
 vim.opt.splitkeep = 'screen' -- Keep text the same when opening, closing, or resizing splits
 vim.opt.termguicolors = true -- Enable true color
-vim.opt.undodir = path.nvim_data .. "/undos" -- Set the undo directory
+vim.opt.undodir = config.path.nvim_data .. "/undos" -- Set the undo directory
 vim.opt.undofile = true -- Enable undo between neovim sessions
 vim.opt.updatetime = 2000 -- Time (ms) for swap write and cursor hold event
 vim.opt.wildmode = { 'list', 'longest',  } -- Command line completion mode
@@ -111,6 +110,6 @@ vim.wo.wrap = false -- Do not display text over multiple lines
 -- External options
 
 -- Use Rip grep instead of grep if supported
-if plat.bin.rg then
+if config.apps.rg then
     vim.opt.grepprg = 'rg --vimgrep --smart-case' -- Use rg instead of grep
 end
