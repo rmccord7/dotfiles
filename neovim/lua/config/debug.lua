@@ -3,7 +3,7 @@ require('global')
 local path = require('util.path')
 
 local M = {
-    enable = true, -- Enable neovim config debug messages
+    enable = false, -- Enable neovim config debug messages
 
     log = { -- Logging options
 
