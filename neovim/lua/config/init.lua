@@ -3,6 +3,7 @@ local M = {
     path = require('config.path'),
     apps = require('config.apps'),
     ft = require('config.ft'),
+    lazy = require('config.lazy'),
 }
 
 -- If debug is enabled, then dump the config

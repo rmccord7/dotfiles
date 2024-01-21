@@ -74,3 +74,13 @@ create_augroup('window_group', {
     }
 })
 
+-- Turn terminal to normal mode with escape if it's not a lazygit terminal
+create_augroup('REMAP_TERM_ESCAPE_UNLESS_LAZYGIT', {
+    events = 'TermOpen',
+    pattern = '*',
+    callback = function()
+        if vim.fn.expand('%:t', false) ~= 'lazygit' then
+            tmap('<esc>', [[<c-\><c-n>]], 'Escape term')
+        end
+    end,
+})

@@ -1,5 +1,7 @@
 local config = function()
     require('Comment').setup()
+
+    nmap('<leader>"', [[:Telescope neoclip<CR>]], 'Neoclip')
 end
 
 local M = {

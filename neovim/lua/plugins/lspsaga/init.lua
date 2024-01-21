@@ -4,6 +4,8 @@ local config = function()
             win_position = "left",
         },
     })
+
+    nmap('<leader>so', [[:Lspsaga outline<CR>]], 'Symbols outline')
 end
 
 local M = {

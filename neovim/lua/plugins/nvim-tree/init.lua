@@ -45,6 +45,9 @@ local config = function()
             },
         },
     })
+
+    nmap('<leader>tt', [[:NvimTreeToggle<CR>]], 'Nvim tree toggle')
+    nmap('<leader>tf', [[:NvimTreeFindFile<CR>]], 'Nvim tree find file')
 end
 
 local M = {

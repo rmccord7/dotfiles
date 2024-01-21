@@ -1,5 +1,7 @@
 local config = function()
     require('todo-comments').setup({})
+
+    nmap('<leader>td', [[:TodoTelescope<CR>]], 'Todo Telescope')
 end
 
 local M = {

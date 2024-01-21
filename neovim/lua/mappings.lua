@@ -115,54 +115,6 @@ nmap('<leader>wr', [[<cmd>vnew | wincmd r | wincmd l<cr>]], 'Split 1 window to r
 -- swap windows and move cursor to other window
 nmap('<leader>wl', [[<cmd>wincmd r | wincmd l<cr>]], 'Swap windows and move cursor')
 
--- Lazy home
-nmap('<leader>lh', [[:Lazy home<CR>]], 'Lazy home')
-
--- Nvim Tree
-nmap('<leader>tt', [[:NvimTreeToggle<CR>]], 'Nvim tree toggle')
-nmap('<leader>tf', [[:NvimTreeFindFile<CR>]], 'Nvim tree find file')
-
--- Diffview
-nmap('<leader>gd', [[:DiffviewOpen]], 'Diffview Open', { nowait = true })
-nmap('<leader>gh', [[:DiffviewFileHistory]], 'Diffview File History', { nowait = true })
-nmap('<leader>gx', [[:DiffviewClose<CR>]], 'Diffview Close')
-
--- ToDo
-nmap('<leader>td', [[:TodoTelescope<CR>]], 'Todo Telescope')
-
--- LSP Sage Symbols outline
-nmap('<leader>so', [[:Lspsaga outline<CR>]], 'Symbols outline')
-
--- Neoclip
-nmap('<leader>"', [[:Telescope neoclip<CR>]], 'Neoclip')
-
--- Treesitter text objects
-nmap(']m', [[:TSTextobjectGotoNextStart @function.outer<CR>zz]], 'Go to next function start')
-nmap(']M', [[:TSTextobjectGotoNextEnd @function.outer<CR>zz]], 'Go to next function end')
-nmap('[m', [[:TSTextobjectGotoPreviousStart @function.outer<CR>zz]], 'Go to previous function start')
-nmap('[M', [[:TSTextobjectGotoPreviousEnd @function.outer<CR>zz]], 'Go to previous function end')
-
--- Miniyank
-map('', 'p', '<Plug>(miniyank-autoput)', 'Override put for miniyank')
-map('', 'P', '<Plug>(miniyank-autoPut)', 'Override put for miniyank')
-
-map('', '<leader>p', '<Plug>(miniyank-cycle)', 'Miniyank cycle next')
-map('', '<leader>P', '<Plug>(miniyank-cycleback)', 'Miniyank cycle previous')
-
---LSP trouble
-nmap('<leader>xx', ':Trouble<CR>', 'Trouble toggle')
-nmap('<leader>xw', ':Trouble workspace_diagnostics<CR>', 'Trouble workspace diagnostics')
-nmap('<leader>xd', ':Trouble document_diagnostics<CR>', 'Trouble document diagnostics')
-nmap('<leader>xq', ':Trouble quickfix<CR>', 'Trouble quickfix')
-nmap('<leader>xl', ':Trouble loclist<CR>', 'Trouble loclist')
-nmap('<leader>xr', ':Trouble lsp_references<CR>', 'Trouble LSP Ref')
-nmap('<leader>xn', [[:lua require('trouble').next({skip_groups = false, jump = true})<CR>]], 'Trouble Next')
-nmap('<leader>xp', [[:lua require('trouble').previous({skip_groups = false, jump = true})<CR>]], 'Trouble Previous')
-
--- Reach
-nmap('<leader>b', ':ReachOpen buffers<CR>', 'Reach Open Buffers')
-nmap("<leader>'", ':ReachOpen marks<CR>', 'Reach Open Marks')
-
 -- Toggle relative line numbers
 nmap('<leader>tn', function()
     if vim.api.nvim_win_get_option(0, 'relativenumber') then
@@ -226,13 +178,3 @@ nmap('<leader>ws', function()
     end
 end, 'Swap split between horizontal and vertical')
 
--- Turn terminal to normal mode with escape if it's not a lazygit terminal
-create_augroup('REMAP_TERM_ESCAPE_UNLESS_LAZYGIT', {
-    events = 'TermOpen',
-    pattern = '*',
-    callback = function()
-        if vim.fn.expand('%:t', false) ~= 'lazygit' then
-            tmap('<esc>', [[<c-\><c-n>]], 'Escape term')
-        end
-    end,
-})

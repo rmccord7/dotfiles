@@ -188,6 +188,11 @@ local config = function()
         -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
         separator = nil,
     })
+
+    nmap(']m', [[:TSTextobjectGotoNextStart @function.outer<CR>zz]], 'Go to next function start')
+    nmap(']M', [[:TSTextobjectGotoNextEnd @function.outer<CR>zz]], 'Go to next function end')
+    nmap('[m', [[:TSTextobjectGotoPreviousStart @function.outer<CR>zz]], 'Go to previous function start')
+    nmap('[M', [[:TSTextobjectGotoPreviousEnd @function.outer<CR>zz]], 'Go to previous function end')
 end
 
 local M = {
