@@ -2,6 +2,7 @@
 local root_files = {
     'compile_commands.json',
     'compile_flags.txt',
+    '.clangd',
     '.nvim.lua',
     '.p4config',
     '.git',
