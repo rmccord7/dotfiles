@@ -7,6 +7,10 @@ local config = function()
         --log_level = vim.log.levels.DEBUG,
     })
 
+    require('neodev').setup({
+        lspconfig = false,
+    })
+
     -- Load LSP
     require('lsp')
 end
