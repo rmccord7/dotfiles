@@ -6,7 +6,7 @@ return {
     require('plugins.heirline'),
     require('plugins.indent-blankline'),
     require('plugins.lsp-inlayhints'),
-    -- require('plugins.lspconfig'),
+    --require('plugins.lspconfig'),
     require('plugins.lspsaga'),
     require('plugins.luasnip'),
     require('plugins.mason'),

@@ -1,18 +1,25 @@
--- LSP root file/directory markers.
-local root_files = {
-    'compile_commands.json',
-    'compile_flags.txt',
-    '.clangd',
-    '.nvim.lua',
-    '.p4config',
-    '.git',
+local M = {
+    -- File types
+    file_types = {
+        'c',
+    },
+
+    -- LSP root file/directory markers.
+    root_files = {
+        'compile_commands.json',
+        'compile_flags.txt',
+        '.clangd',
+        '.nvim.lua',
+        '.p4config',
+        '.git',
+    },
 }
 
 -- LSP root file paths in order root files were found.
-local root_paths = vim.fs.find(root_files, { upward = true })
+local root_paths = vim.fs.find(M.root_files, { upward = true })
 
--- LSP setup config
-local config = {
+-- LSP config
+M.lsp = {
     name = 'clangd', -- Unique LSP server name.
     cmd = { -- Command to start the language server.
         'clangd',
@@ -31,11 +38,4 @@ local config = {
     capabilities = require('cmp_nvim_lsp').default_capabilities(), -- LSP client capabilities.
 }
 
--- Start the LSP server after the buffer file type has been set.
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = {'c'},
-    desc = 'Start Lua LSP',
-    callback = function()
-        vim.lsp.start(config)
-    end,
-})
+return M

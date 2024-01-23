@@ -1,10 +1,4 @@
-local servers = {
-    'lua', -- Lua-language-server
-}
-
-for _, server in ipairs(servers) do
-    require('lsp.servers.' .. server)
-end
+require('lsp.config')
 
 -- LSP Autocmds
 -- highlight yank for a brief second for visual feedback
@@ -27,3 +21,4 @@ vim.api.nvim_create_autocmd('LSPAttach', {
         nmap('<leader>f', ':Format<CR>', nil, { buffer = bufnr })
     end,
 })
+

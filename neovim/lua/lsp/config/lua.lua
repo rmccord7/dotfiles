@@ -10,43 +10,27 @@ local library_files = {
     vim.fn.expand('~/.local/share/nvim/lazy/telescope.nvim/lua'), -- Go to telescope definitions
 }
 
--- LSP root file/directory markers.
-local root_files = {
-    '.nvim.lua',
-    '.git',
-    '.stylua.toml',
-    'stylua.toml',
-    '.luacheckrc'
+local M = {
+    -- File types
+    file_types = {
+        'lua',
+    },
+
+    -- LSP root file/directory markers.
+    root_files = {
+        '.nvim.lua',
+        '.git',
+        '.stylua.toml',
+        'stylua.toml',
+        '.luacheckrc'
+    }
 }
 
 -- LSP root file paths in order root files were found.
-local root_paths = vim.fs.find(root_files, { upward = true })
+local root_paths = vim.fs.find(M.root_files, { upward = true })
 
 -- LSP config
-local settings = {
-    Lua = {
-        runtime = { -- Lua runtime
-            version = 'LuaJIT', -- Use neovim LUAJIT runtime
-            path = runtime_path, -- Point to neovim runtime
-        },
-        diagnostics = {
-            globals = { -- Ignore missing globals
-                'vim', -- Ignore Neovim missing vim global
-                -- 'package', -- Ignore Neovim missing package
-            },
-            disable = { -- Disable diagnostics
-                'lowercase-global', -- Disable global variable not capitilized
-            },
-        },
-        workspace = { -- External workspace
-            checkThirdParty = false, -- Look for external lua modules
-            library = library_files, -- Point to external lua modules
-        },
-    },
-}
-
--- LSP setup config
-local config = {
+M.lsp = {
     name = 'lua-language-server', -- Unique LSP server name.
     cmd = { -- Command to start the language server.
         'lua-language-server',
@@ -56,7 +40,27 @@ local config = {
     before_init = require('neodev.lsp').before_init, -- Neodev needs to be run before the lua-language-server starts.
     root_dir = vim.fs.dirname(root_paths[1]), -- Project root directory.
     capabilities = require('cmp_nvim_lsp').default_capabilities(), -- LSP client capabilities.
-    settings = settings, -- LSP settings
+    settings = {
+        Lua = {
+            runtime = { -- Lua runtime
+                version = 'LuaJIT', -- Use neovim LUAJIT runtime
+                path = runtime_path, -- Point to neovim runtime
+            },
+            diagnostics = {
+                globals = { -- Ignore missing globals
+                    'vim', -- Ignore Neovim missing vim global
+                    -- 'package', -- Ignore Neovim missing package
+                },
+                disable = { -- Disable diagnostics
+                    'lowercase-global', -- Disable global variable not capitilized
+                },
+            },
+            workspace = { -- External workspace
+                checkThirdParty = false, -- Look for external lua modules
+                library = library_files, -- Point to external lua modules
+            },
+        }
+    },
     commands = { -- LSP commands
         Format = { -- LSP format command
             -- Format the lua buffer using the stylua-nvim plugin.
@@ -67,11 +71,4 @@ local config = {
     },
 }
 
--- Start the LSP server after the buffer file type has been set.
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = {'lua'},
-    desc = 'Start Lua LSP',
-    callback = function()
-        vim.lsp.start(config)
-    end,
-})
+return M
