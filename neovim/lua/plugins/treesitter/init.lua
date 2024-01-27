@@ -38,26 +38,6 @@ local config = function()
         indent = {
             enable = false,
         },
-        refactor = {
-            highlight_definitions = { enable = true },
-            highlight_current_scope = { enable = false },
-            smart_rename = {
-                enable = true,
-                keymaps = {
-                    smart_rename = 'grr',
-                },
-            },
-            navigation = {
-                enable = false,
-                keymaps = {
-                    goto_definition_lsp_fallback = 'gd',
-                    list_definitions = 'gnD',
-                    list_definitions_toc = 'gO',
-                    goto_next_usage = ']d',
-                    goto_previous_usage = '[d',
-                },
-            },
-        },
         textobjects = {
             select = {
                 enable = true,
@@ -96,24 +76,6 @@ local config = function()
             move = {
                 enable = true,
             },
-        },
-        playground = {
-            enable = false,
-            disable = {},
-            updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-            keybindings = {
-                toggle_query_editor = 'o',
-                toggle_hl_groups = 'i',
-                toggle_injected_languages = 't',
-                toggle_anonymous_nodes = 'a',
-                toggle_language_display = 'I',
-                focus_language = 'f',
-                unfocus_language = 'F',
-                update = 'R',
-                goto_node = '<cr>',
-                show_help = '?',
-            },
-            persist_queries = false, -- Whether the query persists across vim sessions
         },
     })
 
@@ -212,9 +174,7 @@ local M = {
     {
         'nvim-treesitter/nvim-treesitter',
         dependencies = {
-            'nvim-treesitter/nvim-treesitter-refactor',
             'nvim-treesitter/nvim-treesitter-textobjects',
-            'nvim-treesitter/playground',
             'romgrk/nvim-treesitter-context',
             'HiPhish/rainbow-delimiters.nvim',
         },
