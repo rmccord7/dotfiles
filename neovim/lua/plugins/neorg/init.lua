@@ -1,5 +1,11 @@
 local config = function()
-    require("neorg").setup {
+    local ok, plugin = pcall(require, 'neorg')
+
+    if not ok then
+        return
+    end
+
+    plugin.setup {
         load = {
             ["core.defaults"] = {}, -- Loads default behaviour
             ["core.concealer"] = {}, -- Adds pretty icons to your documents

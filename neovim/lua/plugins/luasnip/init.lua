@@ -1,4 +1,10 @@
 local config = function()
+    local ok, _ = pcall(require, 'LuaSnip')
+
+    if not ok then
+        return
+    end
+
     require('plugins.luasnip.lua')
 end
 

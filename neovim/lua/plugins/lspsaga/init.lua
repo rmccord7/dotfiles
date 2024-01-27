@@ -1,5 +1,11 @@
 local config = function()
-    require('lspsaga').setup({
+    local ok, plugin = pcall(require, 'lspsaga')
+
+    if not ok then
+        return
+    end
+
+    plugin.setup({
         outline = {
             win_position = "left",
         },

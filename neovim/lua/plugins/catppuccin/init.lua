@@ -1,11 +1,11 @@
 local config = function()
-    local ok, catppuccin = pcall(require, 'catppuccin')
+    local ok, plugin = pcall(require, 'catppuccin')
 
     if not ok then
         return
     end
 
-    catppuccin.setup({
+    plugin.setup({
         flavour = 'mocha',
         styles = {
             comments = {},

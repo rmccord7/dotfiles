@@ -1,7 +1,12 @@
 local config = function()
+    local ok, plugin = pcall(require, 'ibl')
+
+    if not ok then
+        return
+    end
     -- local colors = require('material').colors
 
-    require('ibl').setup({
+    plugin.setup({
 
         -- config = {
             --     scope = {

@@ -1,6 +1,6 @@
 local M = {
     {
-        'ckipp01/stylua-nvim',
+        'rmccord7/ss1pwn',
     },
 }
 

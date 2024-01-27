@@ -1,6 +1,6 @@
 local config = function()
 
-    local ok, tree = pcall(require, 'nvim-tree')
+    local ok, plugin = pcall(require, 'nvim-tree')
 
     if not ok then
         return
@@ -27,7 +27,7 @@ local config = function()
         },
     }
 
-    tree.setup({
+    plugin.setup({
         view = {
             width = {},
         },

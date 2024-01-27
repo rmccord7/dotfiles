@@ -1,13 +1,14 @@
 local config = function()
+    --TODO: pcall?
     require('nvim-web-devicons').setup({})
 
-    local ok, heirline = pcall(require, 'heirline')
+    local ok, plugin = pcall(require, 'heirline')
 
     if not ok then
         return
     end
 
-    heirline.setup({
+    plugin.setup({
         statusline = require('plugins.heirline.statusline'),
     })
 end

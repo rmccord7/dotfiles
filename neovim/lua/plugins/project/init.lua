@@ -1,5 +1,11 @@
 local config = function()
-    require('project_nvim').setup({
+    local ok, plugin = pcall(require, 'project_nvim')
+
+    if not ok then
+        return
+    end
+
+    plugin.setup({
         patterns = {
             '.nvim.lua',
             'compile_commands.json',

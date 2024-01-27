@@ -1,5 +1,11 @@
 local config = function()
-    require('mason').setup({
+    local ok, plugin = pcall(require, 'mason')
+
+    if not ok then
+        return
+    end
+
+    plugin.setup({
         providers = {
             'mason.providers.client',
             'mason.providers.registry-api',
@@ -7,11 +13,17 @@ local config = function()
         --log_level = vim.log.levels.DEBUG,
     })
 
-    require('neodev').setup({
+    ok, plugin = pcall(require, 'neodev')
+
+    if not ok then
+        return
+    end
+
+    plugin.setup({
         lspconfig = false,
     })
 
-    -- Load LSP
+    -- Load our internal LSP config
     require('lsp')
 end
 

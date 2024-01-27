@@ -1,5 +1,11 @@
 local config = function()
-    require("noice").setup({
+    local ok, plugin = pcall(require, 'noice')
+
+    if not ok then
+        return
+    end
+
+    plugin.setup({
         lsp = {
             -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
             override = {

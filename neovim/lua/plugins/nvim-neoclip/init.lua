@@ -1,12 +1,18 @@
 local config = function()
-    require('Comment').setup()
+    local ok, plugin = pcall(require, 'neoclip')
+
+    if not ok then
+        return
+    end
+
+    plugin.setup()
 
     nmap('<leader>"', [[:Telescope neoclip<CR>]], 'Neoclip')
 end
 
 local M = {
     {
-        'numToStr/Comment.nvim',
+        'AckslD/nvim-neoclip.lua',
         config = config,
     },
 }

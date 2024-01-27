@@ -1,5 +1,11 @@
 local config = function()
-    require('neoclip').setup()
+    local ok, plugin = pcall(require, 'neoclip')
+
+    if not ok then
+        return
+    end
+
+    plugin.setup()
 
     map('', 'p', '<Plug>(miniyank-autoput)', 'Override put for miniyank')
     map('', 'P', '<Plug>(miniyank-autoPut)', 'Override put for miniyank')

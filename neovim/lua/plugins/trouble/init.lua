@@ -1,12 +1,12 @@
 local config = function()
 
-    local ok, trouble = pcall(require, 'nvim-trouble')
+    local ok, plugin = pcall(require, 'nvim-trouble')
 
     if not ok then
         return
     end
 
-    trouble.setup({})
+    plugin.setup({})
 
     nmap('<leader>xx', ':Trouble<CR>', 'Trouble toggle')
     nmap('<leader>xw', ':Trouble workspace_diagnostics<CR>', 'Trouble workspace diagnostics')

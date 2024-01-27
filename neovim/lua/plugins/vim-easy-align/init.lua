@@ -1,11 +1,17 @@
 local config = function()
 
+    local ok, _ = pcall(require, 'vim-easy-align')
+
+    if not ok then
+        return
+    end
+
     -- Map vim-easy-align to ga
     xmap('ga', '<Plug>(EasyAlign)', 'Easy align', {})
     nmap('ga', '<Plug>(EasyAlign)', 'Easy align', {})
 
     -- Alignment for c-style variable declarations
-    -- NOTE: Cannot add/update/store keys from a dictionary without a workaroumd
+    -- Cannot add/update/store keys from a dictionary without a WAR
     local t = {}
 
     --C style variables

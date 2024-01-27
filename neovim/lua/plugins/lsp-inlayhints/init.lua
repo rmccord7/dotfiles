@@ -1,5 +1,11 @@
 local config = function()
-    require('lsp-inlayhints').setup({
+    local ok, plugin = pcall(require, 'lsp-inlayhints')
+
+    if not ok then
+        return
+    end
+
+    plugin.setup({
         enabled_at_startup = false,
     })
 end

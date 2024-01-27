@@ -1,5 +1,11 @@
 local config = function()
-    require('which-key').setup()
+    local ok, plugin = pcall(require, 'which-key')
+
+    if not ok then
+        return
+    end
+
+    plugin.setup()
 end
 
 local M = {

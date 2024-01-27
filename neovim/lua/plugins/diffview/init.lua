@@ -1,5 +1,11 @@
 local config = function()
-    require('diffview').setup()
+    local ok, plugin = pcall(require, 'diffview')
+
+    if not ok then
+        return
+    end
+
+    plugin.setup()
 
     nmap('<leader>gd', [[:DiffviewOpen]], 'Diffview Open', { nowait = true })
     nmap('<leader>gh', [[:DiffviewFileHistory]], 'Diffview File History', { nowait = true })

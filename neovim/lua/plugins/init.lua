@@ -24,7 +24,6 @@ return {
     require('plugins.project'),
     require('plugins.reach'),
     require('plugins.ss1pwn'),
-    require('plugins.stylua-nvim'),
     require('plugins.telescope'),
     require('plugins.todo-comments'),
     require('plugins.treesitter'),

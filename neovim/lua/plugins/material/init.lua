@@ -1,6 +1,6 @@
 local config = function()
 
-    local ok, material = pcall(require, 'material')
+    local ok, plugin = pcall(require, 'material')
 
     if not ok then
         return
@@ -11,7 +11,7 @@ local config = function()
 
     local colors = require('material.colors')
 
-    material.setup({
+    plugin.setup({
         plugins = {
             'indent-blankline',
             'lspsaga',
@@ -22,11 +22,11 @@ local config = function()
             'trouble',
             'which-key',
         },
-        custom_colors = function(colors)
-            colors.editor.fg = '#717CB4'
-            colors.syntax.variable = '#717CB4'
-            colors.syntax.comments = '#5A6077'
-            colors.editor.line_numbers = '#5A6077'
+        custom_colors = function(c)
+            c.editor.fg = '#717CB4'
+            c.syntax.variable = '#717CB4'
+            c.syntax.comments = '#5A6077'
+            c.editor.line_numbers = '#5A6077'
         end,
         custom_highlights = {
             -- Command mode
@@ -75,6 +75,7 @@ local config = function()
         },
     })
 
+    -- Set our color scheme
     vim.cmd('colorscheme material')
 end
 

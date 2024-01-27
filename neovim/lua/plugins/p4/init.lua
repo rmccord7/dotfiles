@@ -2,7 +2,13 @@ local nvim_config = require('config')
 local path = require('util.path')
 
 local config = function()
-    require('p4').setup()
+    local ok, plugin = pcall(require, 'p4')
+
+    if not ok then
+        return
+    end
+
+    plugin.setup()
 end
 
 local M = {
