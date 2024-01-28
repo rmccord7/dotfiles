@@ -1,40 +1,12 @@
 local config = function()
-    local cmp_ok, cmp = pcall(require, 'cmp')
-    local luasnip_ok, ls = pcall(require, 'luasnip')
-    local lspkind_ok, lspkind = pcall(require, 'lspkind')
 
-    if not (cmp_ok and luasnip_ok and lspkind_ok) then
+    local ok, plugin = pcall(require, 'cmp')
+
+    if not ok then
         return
     end
 
     local types = require('cmp.types')
-
-    -- Use our own symbols for lsp
-    local symbol_map = {
-        Text = '',
-        Method = 'Ƒ',
-        Function = 'ƒ',
-        Constructor = '',
-        Variable = '',
-        Class = '',
-        Interface = 'ﰮ',
-        Module = '',
-        Property = '',
-        Unit = '',
-        Value = '',
-        Enum = '了',
-        Keyword = '',
-        Snippet = '﬌',
-        Color = '',
-        File = '',
-        Folder = '',
-        EnumMember = '',
-        Constant = '',
-        Struct = '',
-        Event = '',
-        Operator = '',
-        TypeParameter = '',
-    }
 
     -- Kind comparator function
     local function kind_cmp(entry1, entry2)
@@ -60,49 +32,58 @@ local config = function()
         end
     end
 
-    cmp.setup({
-        snippet = {
-            expand = function(args)
-                ls.lsp_expand(args.body)
-            end,
-        },
-
+    local config = {
         mapping = {
-            ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-            ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-            ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-            ['<C-f>'] = cmp.mapping.scroll_docs(4),
-            ['<C-Space>'] = cmp.mapping.complete({}),
-            ['<C-e>'] = cmp.mapping.close(),
-            ['<CR>'] = cmp.mapping.confirm({
+            ['<C-j>'] = plugin.mapping.select_next_item({ behavior = plugin.SelectBehavior.Insert }),
+            ['<C-k>'] = plugin.mapping.select_prev_item({ behavior = plugin.SelectBehavior.Insert }),
+            ['<C-d>'] = plugin.mapping.scroll_docs(-4),
+            ['<C-f>'] = plugin.mapping.scroll_docs(4),
+            ['<C-Space>'] = plugin.mapping.complete({}),
+            ['<C-e>'] = plugin.mapping.close(),
+            ['<CR>'] = plugin.mapping.confirm({
                 select = true,
             }),
         },
 
         sources = {
             { name = 'luasnip' },
-            {
-                name = 'nvim_lsp',
-                max_item_count = 75,
-            },
-            { name = 'nvim_lsp_document_symbol' },
-            { name = 'nvim_lsp_signature_help' },
+            { name = 'nvim_lsp', },
             { name = 'nvim_lua' },
             { name = 'path' },
         },
 
         window = {
-            completion = cmp.config.window.bordered({
+            completion = plugin.config.window.bordered({
                 col_offset = -3,
                 side_padding = 0,
                 winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
             }),
-            documentation = cmp.config.window.bordered({
+            documentation = plugin.config.window.bordered({
                 winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
             }),
         },
 
-        formatting = {
+        sorting = {
+            comparators = {
+                plugin.config.compare.offset,
+                plugin.config.compare.exact,
+                plugin.config.compare.score,
+                require('cmp-under-comparator').under,
+                kind_cmp,
+                plugin.config.compare.sort_text,
+                plugin.config.compare.length,
+                plugin.config.compare.order,
+            },
+        },
+
+    }
+
+    -- Config completion to use symbols from lsp kind
+    local lspkind
+    ok, lspkind = pcall(require, 'lspkind')
+
+    if ok then
+        local formatting = {
             fields = { "kind", "abbr", "menu" },
             format = function(entry, vim_item)
                 local kind = lspkind.cmp_format({
@@ -114,38 +95,60 @@ local config = function()
                 kind.menu = "    (" .. strings[2] .. ")"
 
                 return kind
-            end,
-        },
+            end
+        }
 
-        sorting = {
-            comparators = {
-                cmp.config.compare.offset,
-                cmp.config.compare.exact,
-                cmp.config.compare.score,
-                require('cmp-under-comparator').under,
-                kind_cmp,
-                cmp.config.compare.sort_text,
-                cmp.config.compare.length,
-                cmp.config.compare.order,
-            },
-        },
-    })
+        config.formatting = formatting
+    end
+
+
+    -- Config completion for lua snippets
+    local luasnip
+    ok, luasnip = pcall(require, 'luasnip')
+
+    if ok then
+        local snippet = {
+            expand = function(args)
+                luasnip.lsp_expand(args.body)
+            end,
+        }
+
+        local mapping = {
+            ['<Tab>'] = plugin.mapping(function()
+                if plugin.visible() then
+                   if luasnip.expand_or_jump() then
+                       luasnip.expand_or_jump()
+                   end
+                end
+            end, { "i", "s" }),
+
+            ['<S-Tab>'] = plugin.mapping(function()
+                if plugin.visible() then
+                    if luasnip.jumpable(-1) then
+                        luasnip.jump(-1)
+                    end
+                end
+            end, { "i", "s" }),
+        }
+
+        config.snippet = snippet
+        config.mapping = vim.tbl_extend('force', config.mapping, mapping)
+    end
+
+    plugin.setup(config)
 end
 
 local M = {
     {
         'hrsh7th/nvim-cmp',
-        event = 'InsertEnter',
         config = config,
+        event = {'InsertEnter', 'CmdlineEnter'},
         dependencies = {
-            'onsails/lspkind-nvim',
             'hrsh7th/cmp-buffer',
-            'amarakon/nvim-cmp-buffer-lines',
             'hrsh7th/cmp-nvim-lua',
             'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-nvim-lsp-document-symbol',
-            'hrsh7th/cmp-nvim-lsp-signature-help',
             'hrsh7th/cmp-path',
+            'onsails/lspkind-nvim',
             'saadparwaiz1/cmp_luasnip',
             'lukas-reineke/cmp-under-comparator',
         },
