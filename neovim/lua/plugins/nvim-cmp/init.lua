@@ -135,7 +135,33 @@ local config = function()
         config.mapping = vim.tbl_extend('force', config.mapping, mapping)
     end
 
+    -- Setup Cmp
     plugin.setup(config)
+
+    -- Setup Cmp command line
+    plugin.setup.cmdline(":", {
+        mapping = plugin.mapping.preset.cmdline({
+            ["<Tab>"] = plugin.mapping(function(fallback)
+                if plugin.visible() then
+                    local entry = plugin.get_selected_entry()
+                    if not entry then
+                        plugin.select_next_item({ behavior = plugin.SelectBehavior.Select })
+                    else
+                        plugin.confirm()
+                    end
+                else
+                    fallback()
+                end
+            end, { "i", "s", "c" }),
+        }),
+        sources = plugin.config.sources({
+            { name = "cmdline" },
+            { name = "path" },
+        }),
+        window = {
+            completion = plugin.config.window.bordered(),
+        },
+    })
 end
 
 local M = {
@@ -148,6 +174,7 @@ local M = {
             'hrsh7th/cmp-nvim-lua',
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-path',
+            "hrsh7th/cmp-cmdline",
             'onsails/lspkind-nvim',
             'saadparwaiz1/cmp_luasnip',
             'lukas-reineke/cmp-under-comparator',
