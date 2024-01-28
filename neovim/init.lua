@@ -3,7 +3,7 @@ require('global')
 local config = require('config')
 
 require('settings')
-require('ac')
+require('auto')
 require('mappings')
 
 -- Start lazy
