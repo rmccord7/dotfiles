@@ -1,10 +1,5 @@
 local config = function()
 
-    local ok, _ = pcall(require, 'vim-easy-align')
-
-    if not ok then
-        return
-    end
 
     -- Map vim-easy-align to ga
     xmap('ga', '<Plug>(EasyAlign)', 'Easy align', {})
