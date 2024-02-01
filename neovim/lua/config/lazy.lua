@@ -1,6 +1,7 @@
 require('global')
 
 path = require('config.path')
+path_util = require('util.path')
 
 local M = {
     enabled = true, -- Lazy plugin manager enabled
@@ -9,6 +10,7 @@ local M = {
             enabled = true, -- Enable check for updates at startup
         },
     },
+    dev = path_util.os_path(path.nvim_data .. '/dev')
 }
 
 --- Starts lazy plugin manager.

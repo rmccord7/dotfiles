@@ -112,7 +112,6 @@ local config = function()
     require('telescope').load_extension('projects')
     require('telescope').load_extension('file_browser')
     require('telescope').load_extension('env')
-    require('telescope').load_extension('vim_p4_files')
     require('telescope').load_extension('notify')
     require('telescope').load_extension('lazy')
     require('telescope').load_extension('p4')
@@ -201,7 +200,6 @@ local M = {
             'nvim-telescope/telescope-fzy-native.nvim',
             'nvim-telescope/telescope-file-browser.nvim',
             'LinArcX/telescope-env.nvim',
-            'Badhi/vim-p4-files',
             'tsakirist/telescope-lazy.nvim',
             'rmccord7/p4.nvim',
         },

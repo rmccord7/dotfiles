@@ -37,10 +37,10 @@ M.lsp = {
     name = 'lua-language-server', -- Unique LSP server name.
     cmd = { -- Command to start the language server.
         'lua-language-server',
-        '--logpath=' .. './lua_log',
+        '--logpath=' .. path.os_path(nvim_config.path.lsp_log .. '/lua'),
         -- '--metapath=' .. './meta',
     },
-    -- before_init = require('neodev.lsp').before_init, -- Neodev needs to be run before the lua-language-server starts.
+    before_init = require('neodev.lsp').before_init, -- Neodev needs to be run before the lua-language-server starts.
     root_dir = vim.fs.dirname(root_paths[1]), -- Project root directory.
     capabilities = require('cmp_nvim_lsp').default_capabilities(), -- LSP client capabilities.
     settings = {
