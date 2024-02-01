@@ -1,6 +1,6 @@
 require('global')
 
-path = require('config.path')
+local path = require('config.path')
 
 local M = {
     enabled = true, -- Lazy plugin manager enabled
