@@ -2,7 +2,7 @@ local config = require('config')
 
 -- Global options
 
-vim.g.python3_host_prog = config.path.python -- Set python path
+vim.g.python3_host_prog = config.path.python_path -- Set python path
 
 --Disable internal plugins we aren't to use
 vim.g.loaded_gzip = 1

@@ -9,7 +9,7 @@ local M = {}
 function M.os_path(path)
     if plat.is_windows then
         path = path:sub(1, 1):upper() .. path:sub(2)
-        path = path:gsub(path, '/', '\\')
+        path = string.gsub(path, '/', '\\')
     end
     return path
 end

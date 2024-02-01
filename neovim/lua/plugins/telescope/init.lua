@@ -128,57 +128,27 @@ local config = function()
     util.builtin('<leader>m', 'keymaps', 'List Keymaps')
     util.builtin('<leader>ch', 'command_history', 'List Command History')
 
-    util.builtin('<leader>ff', 'find_files', 'Search Files')
+    util.builtin('<leader>ff', 'find_files', 'Workspace Files')
 
-    util.custom('<leader>aff', 'find_files', 'Search Files (All)', {
-        path_display = util.path_from_cwd,
+    util.custom('<leader>fa', 'find_files', 'Workspace Files (All)', {
         no_ignore = true,
         hidden = true,
     })
 
-    util.custom('<leader>fw', 'find_files', 'Search Workspace Files', {
-        path_display = util.path_from_cwd,
-    })
+    util.builtin('<leader>of', 'oldfiles', 'Recent Files')
 
-    util.custom('<leader>afw', 'find_files', 'Search Workspace Files (All)', {
-        path_display = util.path_from_cwd,
-        no_ignore = true,
-        hidden = true,
-    })
-
-    util.builtin('<leader>rf', 'oldfiles', 'Recent Files')
-
-    util.custom('<leader>arf', 'oldfiles', 'Recent Files (All)', {
-        no_ignore = true,
-        hidden = true,
-    })
-
-    util.custom('<leader>rw', 'oldfiles', 'Recent Workspace Files', {
-        path_display = util.path_from_cwd,
-        only_cwd = true,
-    })
-
-    util.custom('<leader>arw', 'oldfiles', 'Recent Workspace Files (All)', {
-        path_display = util.path_from_cwd,
-        only_cwd = true,
+    util.custom('<leader>oa', 'oldfiles', 'Recent Files (All)', {
         no_ignore = true,
         hidden = true,
     })
 
     util.custom('<leader>fd', 'find_files', 'Search Dotfiles', {
         cwd = '~/dotfiles',
-        path_display = util.path_from_cwd,
     })
 
     util.custom('<leader>fh', 'find_files', 'Search Home', {
         cwd = '~',
-        path_display = util.path_from_cwd,
     })
-
-    -- Find in neovim plugins
-    -- util.custom('<leader>fp', 'find_files', 'Search Plugins', {
-    --     cwd =  vim.fn.stdpath('data') .. '/lazy',
-    -- })
 
     -- Grep inside of vim help docs
     util.custom('<leader>gv', 'live_grep', 'Grep Vim Help', {
