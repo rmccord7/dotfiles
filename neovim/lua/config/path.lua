@@ -4,7 +4,7 @@ local path = require('util.path')
 local M = {
     home = os.getenv('HOME'), -- Home path
 
-    nvim_config = vim.fn.stdpath('log'), -- Neovim config path
+    nvim_config = vim.fn.stdpath('config'), -- Neovim config path
     nvim_data = vim.fn.stdpath('data'), -- Neovim data path
     nvim_log = vim.fn.stdpath('log'), -- Neovim log path
 
@@ -13,7 +13,7 @@ local M = {
 
     python = function()
         if plat.is_windows then
-            M.python_path = path.os_path(M.home .. '/scoop/apps/python/current/python')
+            M.python_path = path.os_path(M.home .. '/scoop/apps/python/current/python.exe')
         else
             M.python_path = '/usr/bin/python3'
         end

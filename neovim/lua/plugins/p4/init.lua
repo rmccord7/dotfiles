@@ -15,7 +15,7 @@ local M = {
     {
        'rmccord7/p4.nvim',
         config = config,
-        dir = path.os_path(nvim_config.path.home .. '/.local/share/nvim/dev/p4.nvim'),
+        dir = path.os_path(nvim_config.path.nvim_config .. '/dev/p4.nvim'),
         -- dev = true,
     },
 }
