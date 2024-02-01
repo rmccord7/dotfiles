@@ -42,21 +42,20 @@ function M.custom(lhs, picker, label, opts)
     local default = {
         prompt_title = label,
     }
-    opts = vim.tbl_extend('keep', opts, default)
+    opts = vim.tbl_extend('keep', opts or {}, default)
     nmap(lhs, function()
         require('telescope.builtin')[picker](opts)
     end, label)
 end
 
-function M.path_from_cwd(opts, path)
+function M.path_from_cwd()
 
-    local cwd = vim.fn.getcwd(0)
-    local truncated_path
+    local cwd = vim.fn.getcwd()
 
-    truncated_path = path:gsub(cwd, '')
-    truncated_path = require('util.path').os_path(truncated_path)
+    cwd = cwd:gsub(cwd, '')
+    cwd = require('util.path').os_path(cwd)
 
-    return truncated_path
+    return cwd or ''
 end
 
 return M
