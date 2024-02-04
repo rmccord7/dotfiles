@@ -15,11 +15,10 @@ vim.bo.softtabstop = 4 -- Number of spaces tabs count for
 vim.bo.tabstop = 4 -- Number of spaces in a tab
 
 -- Start LSP
-local config = require('lsp.config.lua_ls')
+local config = require('lsp.config.rust_analyzer')
 
 if config then
     if vim.fn.executable(config.lsp.name) then
         vim.lsp.start(config.lsp)
     end
 end
-
