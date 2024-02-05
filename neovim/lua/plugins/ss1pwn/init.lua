@@ -15,6 +15,7 @@ local M = {
         config = config,
         dir = path.os_path(nvim_config.path.nvim_data .. '/dev/ss1pwn'),
         -- dev = true,
+        ft = 'c',
     },
 }
 

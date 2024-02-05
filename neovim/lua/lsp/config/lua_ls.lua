@@ -1,5 +1,5 @@
 local nvim_config = require('config')
-local path = require('util.path')
+local util_path = require('util.path')
 
 -- Add lua directories to runtime path that is supplied to the LSP
 local runtime_path = vim.split(package.path, ';')
@@ -9,8 +9,8 @@ table.insert(runtime_path, "lua/?/init.lua")
 -- Additional Workspace files when working with lua
 local library_files = {
     vim.api.nvim_get_runtime_file('', true),
-    path.os_path(vim.fn.expand('~/dotfiles/neovim/lua')),
-    path.os_path(vim.fn.expand(nvim_config.path.plugins .. '/telescope.nvim/lua')), -- Go to telescope definitions
+    util_path.os_path(vim.fn.expand('~/dotfiles/neovim/lua')),
+    util_path.os_path(vim.fn.expand(nvim_config.path.plugins .. '/telescope.nvim/lua')), -- Go to telescope definitions
 }
 
 local M = {
@@ -37,7 +37,7 @@ M.lsp = {
     name = 'lua-language-server', -- Unique LSP server name.
     cmd = { -- Command to start the language server.
         'lua-language-server',
-        '--logpath=' .. path.os_path(nvim_config.path.lsp_log .. '/lua'),
+        '--logpath=' .. util_path.os_path(nvim_config.path.nvim_log .. '/lsp/lua'),
         -- '--metapath=' .. './meta',
     },
     before_init = require('neodev.lsp').before_init, -- Neodev needs to be run before the lua-language-server starts.
