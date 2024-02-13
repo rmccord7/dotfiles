@@ -1,0 +1,11 @@
+local M = {
+
+    {
+        'HiPhish/rainbow-delimiters.nvim',
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+        },
+    },
+}
+
+return M

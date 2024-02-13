@@ -1,107 +1,62 @@
-M = {}
+local config = require('plugins.treesitter.config')
 
-local IGNORE_HIGHLIGHT_CHECK = 0
-
-local KB_SIZE = 1024
-local DEFAULT_MAX_BUF_SIZE_KB = 75 * KB_SIZE
-local DEFAULT_MAX_BUF_LINE_COUNT = 75000
-
-local Highlight_Lang_CFG = {
-
-    -- Use default if file language not configured
-    __index = function()
-        return
-        {
-            size = IGNORE_HIGHLIGHT_CHECK,
-            line_count = IGNORE_HIGHLIGHT_CHECK,
-        }
-    end,
-}
-
--- C language file extension config
-local DEFAULT_C_MAX_BUF_SIZE_KB = DEFAULT_MAX_BUF_SIZE_KB
-local DEFAULT_C_MAX_BUF_LINE_COUNT = DEFAULT_MAX_BUF_LINE_COUNT
-
-Highlight_Lang_CFG.c = {
-
-    c = {
-        size = IGNORE_HIGHLIGHT_CHECK,
-        line_count = IGNORE_HIGHLIGHT_CHECK,
-    },
-
-    h = {
-        size = 75 * KB_SIZE,
-        line_count = 12000,
-    },
-}
-
--- JSON language file extension config
-local DEFAULT_JSON_MAX_BUF_SIZE_KB    = DEFAULT_MAX_BUF_SIZE_KB
-local DEFAULT_JSON_MAX_BUF_LINE_COUNT = DEFAULT_MAX_BUF_LINE_COUNT
-
-Highlight_Lang_CFG.json = {
-
-    json = {
-        size = DEFAULT_JSON_MAX_BUF_SIZE_KB,
-        line_count = DEFAULT_JSON_MAX_BUF_LINE_COUNT,
-    },
-}
-
-function GetBufFileExtension(bufnr)
+--- Helper function to get buffer file extension
+local function GetBufFileExtension(bufnr)
 
     -- Telescope buffer preview will have a name of nil unless buffer
     -- has been opened previously
 
-    local file_extension = vim.api.nvim_buf_get_name(bufnr):match('^.+(%..+)$')
+    local ext = vim.api.nvim_buf_get_name(bufnr):match('^.+(%..+)$')
 
-    if file_extension then
-        file_extension = string.sub(file_extension, 2)
+    if ext then
+        ext = string.sub(ext, 2)
     end
 
-    return file_extension
+    return ext
 end
 
-function M.DisableHighlight(lang, bufnr)
-    local buf_size = 0
+--- Disables TS highlighting for the current buffer if buffer size or
+--- buffer line count exceeds the configured maximums for the specified
+--- language.
+local function Disable(_, bufnr)
+
+    local buf = {
+        ext = '',
+        size = 0,
+        lc = 0,
+    }
+
+    -- Get buffer file extension
+    buf.ext = GetBufFileExtension(bufnr)
+
+    -- Get buffer size
     local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(bufnr))
     if ok and stats then
-        buf_size = stats.size
+        buf.size = stats.size
     end
 
-    local buf_line_count = vim.api.nvim_buf_line_count(bufnr)
+    -- Get buffer line count
+    buf.lc = vim.api.nvim_buf_line_count(bufnr)
 
-    local lang_cfg = Highlight_Lang_CFG[lang]
+    -- Disable highlighting based on TS config
+    local check = config.ft[buf.ext]
 
-    -- If we don't have a config for the specified language, then
-    -- highlighting will be enabled.
-    if lang_cfg then
+    -- Disable highlighting if buffer size is too big
+    if buf.size > check.size then
+        return true
+    end
 
-        -- Possible nil is returned by telescope previewer for
-        -- buf name.
-        local file_extension = GetBufFileExtension(bufnr)
-
-        if file_extension then
-
-            -- If we have a configuration for this
-            -- languages file extension.
-            local ext_cfg = lang_cfg[file_extension]
-
-            if ext_cfg then
-
-                -- Check if we should disable highlighting
-                if (ext_cfg.size ~= IGNORE_HIGHLIGHT_CHECK) and (buf_size > ext_cfg.size) then
-                    return true
-                end
-
-                if (ext_cfg.line_count ~= IGNORE_HIGHLIGHT_CHECK) and (buf_line_count > ext_cfg.line_count) then
-                    return true
-                end
-            end
-
-        end
+    -- Disable highlighting if buffer line count is too big
+    if buf.lc > check.lc then
+        return true
     end
 
     return false
 end
+
+M = {
+    enable = true, -- Enable TS highlighting
+    disable = Disable, -- Disables TS highlighting per buffer
+}
 
 return M
