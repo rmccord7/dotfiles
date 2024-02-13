@@ -1,5 +1,5 @@
 local config = function()
-    local ok, _ = pcall(require, 'LuaSnip')
+    local ok, _ = pcall(require, 'luasnip')
 
     if not ok then
         return
