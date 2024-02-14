@@ -1,6 +1,7 @@
 local M = {
     {
-        'bfredl/nvim-miniyank',
+        'windwp/nvim-autopairs',
+        event = "InsertEnter",
     },
 }
 
