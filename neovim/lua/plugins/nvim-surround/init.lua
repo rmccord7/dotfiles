@@ -1,5 +1,5 @@
 local config = function()
-    local ok, plugin = pcall(require, 'nvim-autopairs')
+    local ok, plugin = pcall(require, 'nvim-surround')
 
     if not ok then
         return
@@ -10,7 +10,8 @@ end
 
 local M = {
     {
-        'windwp/nvim-autopairs',
+        "kylechui/nvim-surround",
+        event = "VeryLazy",
         config = config,
     },
 }
