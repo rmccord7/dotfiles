@@ -7,9 +7,9 @@ local config = function()
 
     plugin.setup()
 
-    nmap('<leader>gd', [[:DiffviewOpen]], 'Diffview Open', { nowait = true })
-    nmap('<leader>gh', [[:DiffviewFileHistory]], 'Diffview File History', { nowait = true })
-    nmap('<leader>gx', [[:DiffviewClose<CR>]], 'Diffview Close')
+    nmap('<leader>do', [[:DiffviewOpen]], 'Diffview Open', { nowait = true })
+    nmap('<leader>dh', [[:DiffviewFileHistory]], 'Diffview File History', { nowait = true })
+    nmap('<leader>dc', [[:DiffviewClose<CR>]], 'Diffview Close')
 end
 
 local M = {
