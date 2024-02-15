@@ -30,4 +30,8 @@ return {
     require('plugins.vim-abolish'),
     require('plugins.vim-easy-align'),
     require('plugins.which-key'),
+
+    {
+        'elkowar/yuck.vim',
+    },
 }
