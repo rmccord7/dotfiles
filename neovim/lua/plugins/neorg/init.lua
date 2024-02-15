@@ -29,7 +29,7 @@ end
 local M = {
     {
         "nvim-neorg/neorg",
-        ft = 'norg',
+        -- ft = 'norg',
         config = config,
         dependencies = { "nvim-lua/plenary.nvim" },
         build = ":Neorg sync-parsers",

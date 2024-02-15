@@ -1,5 +1,4 @@
 return {
-    require('plugins.catppuccin'),
     require('plugins.comment'),
     require('plugins.diffview'),
     require('plugins.gitsigns'),
@@ -15,7 +14,6 @@ return {
     require('plugins.nvim-cmp'),
     require('plugins.nvim-colorizer'),
     require('plugins.nvim-luaref'),
-    require('plugins.nvim-miniyank'),
     require('plugins.nvim-neoclip'),
     require('plugins.nvim-surround'),
     require('plugins.nvim-tree'),

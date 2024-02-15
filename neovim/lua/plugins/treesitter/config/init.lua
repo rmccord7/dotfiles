@@ -1,29 +1,23 @@
 local KB_SIZE = 1024
 
-local M = {}
-
--- For unhandled file types
-local default_ft = {
+-- Defaults
+local default = {
     size = 75 * KB_SIZE,
     lc = 75000,
 }
 
--- For unhandled languages
-local default_lang = {
+local mt = {
     __index = function()
-        return(default_ft)
+        return(default)
     end
 }
 
-M.lang = {}
+--- TS config
+local M = {}
 
-setmetatable(M.lang, default_lang)
+-- TS language config
+M.ft = {}
 
-local ft = {
-    c = {
-        size = 75 * KB_SIZE,
-        lc = 75000
-    }
-}
+setmetatable(M.ft, mt)
 
 return M
