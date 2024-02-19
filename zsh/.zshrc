@@ -145,6 +145,7 @@ fi
 
 alias python=python3
 
+# Quick access to zsh config.
 alias zshrc="$EDITOR ~/.zshrc"
 
 if [ -f "$HOME"/.zshrc.local ]; then
@@ -156,6 +157,9 @@ alias zsha="$EDITOR ~/.zshrc.aliases"
 if [ -f "$HOME"/.zshrc.local.aliases ]; then
   alias zsha="$EDITOR ~/.zshrc.local.aliases"
 fi
+
+# Quick access to hypr config.
+alias hyprc="$EDITOR ~/.config/hypr/hyprland.conf"
 
 #alias ls='ls -lF --color=auto'
 #alias ll='ls -alF --color=auto'
@@ -192,6 +196,8 @@ if command -v p4 > /dev/null; then
   export P4DIFF=p4_diff
   export P4MERGE=p4_merge
 fi
+
+[[ -s /etc/profile.d/autojump.zsh ]] && source /etc/profile.d/autojump.zsh
 
 # Starship
 if command -v starship > /dev/null; then
