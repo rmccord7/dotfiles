@@ -32,4 +32,10 @@ return {
     {
         'elkowar/yuck.vim',
     },
+
+    {
+        "theRealCarneiro/hyprland-vim-syntax",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        ft = "hypr",
+    },
 }

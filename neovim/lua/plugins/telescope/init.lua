@@ -134,9 +134,9 @@ local config = function()
         hidden = true,
     })
 
-    util.builtin('<leader>of', 'oldfiles', 'Recent Files')
+    util.builtin('<leader>rw', 'oldfiles', 'Recent Files')
 
-    util.custom('<leader>oa', 'oldfiles', 'Recent Files (All)', {
+    util.custom('<leader>ra', 'oldfiles', 'Recent Files (All)', {
         no_ignore = true,
         hidden = true,
     })

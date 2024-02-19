@@ -69,8 +69,8 @@ nmap('gV', "'[v']", 'Select last put text')
 vmap('p', '"_dP', nil, { silent = false })
 
 -- Insert new line without leaving normal mode.
-nmap('<leader>o', [[:<C-u>call append(line("."), repeat([""], v:count1))<CR>]], 'Insert new line below')
-nmap('<leader>O', [[:<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>]], 'Insert new line above')
+nmap('<leader>o', [[:<C-u>call append(line("."), repeat([""], v:count1))<CR>]], 'Insert new line below', { nowait = true })
+nmap('<leader>O', [[:<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>]], 'Insert new line above', { nowait = true })
 
 -- run a :command
 nmap('go', ':', 'Command-line mode', { silent = false })
