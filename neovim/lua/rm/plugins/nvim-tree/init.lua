@@ -28,20 +28,43 @@ local config = function()
     }
 
     plugin.setup({
+        -- Main options
+        sync_root_with_cwd = true,
+        respect_buf_cwd = true,
+
+        -- View options
         view = {
+            centralize_selection = true,
             width = {},
+            float = {
+                enable = true,
+            },
         },
+
+        renderer = {
+            group_empty = true, -- Compact folders that contain a single folder
+            full_name = true, -- Display nodes whose name is wider than window (floating)
+            special_files = {
+                '.p4config',
+                'stylua.toml',
+                '.stylua.toml',
+                'cargo.toml',
+                'Makefile',
+                'README.md',
+                'readme.md',
+            },
+        },
+
+        -- File options
         update_focused_file = {
             enable = true,
             update_root = true,
         },
-        sync_root_with_cwd = true,
-        respect_buf_cwd = true,
+
+        -- Filtered files/dirs
         filters = {
             custom = {
                 '.git',
-                'out',
-                'dist',
             },
         },
     })
