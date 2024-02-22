@@ -1,13 +1,14 @@
-require('global')
+require('rm.global')
 
-local config = require('config')
+local config = require('rm.config')
 
-require('settings')
-require('auto')
-require('mappings')
+require('rm.settings')
+require('rm.auto')
+require('rm.mappings')
 
 -- Start lazy
 config.lazy.start()
 
 -- Load project config if it exists.
-require('project')
+require('rm.project')
+

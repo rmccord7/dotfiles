@@ -1,1 +1,1 @@
-require('project').setup()
+require('rm.project').setup()
