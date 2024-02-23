@@ -1,1 +1,0 @@
-require('rm.project').setup()
