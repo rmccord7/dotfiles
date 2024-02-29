@@ -25,5 +25,5 @@ ls.config.set_config({
 })
 
 -- Set up actual snippets
-require('luasnip.loaders.from_vscode').lazy_load({ paths = { config.path.plugins .. path_util.os_path('/luasnip/vscode') } })
+require('luasnip.loaders.from_vscode').lazy_load({ paths = { config.path.plugin_config .. path_util.os_path('/luasnip/vscode') } })
 require('luasnip.loaders.from_lua').load()

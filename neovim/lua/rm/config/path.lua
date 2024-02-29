@@ -8,6 +8,8 @@ local M = {
     nvim_data = vim.fn.stdpath('data'),                                           -- Neovim data path
     nvim_log = vim.fn.stdpath('log'),                                             -- Neovim log path
 
+    plugin_config = path_util.os_path(vim.fn.stdpath('config') .. '/lua/rm/plugins'), -- Plugin config path
+
     plugins = path_util.os_path(vim.fn.stdpath('data') .. '/lazy'),               -- Plugin path
     dev_plugins = path_util.os_path(vim.fn.stdpath('data') .. '/dev'),            -- Dev plugin path
 
