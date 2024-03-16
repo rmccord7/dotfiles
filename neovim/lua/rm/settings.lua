@@ -51,7 +51,7 @@ vim.opt.formatoptions = { -- Paragraph formatting options
 vim.opt.formatoptions:append('1') -- Break before 1-letter words
 vim.opt.formatoptions:append('2') -- Use indent from 2nd line of a paragraph
 vim.opt.grepprg = 'grep -nH' -- Use grep
-vim.opt.guifont = { 'Hack NF FC Ligatured:h10' } -- Set GUI font
+vim.opt.guifont = { 'Hack NF FC Ligatured:h09' } -- Set GUI font
 vim.opt.hidden = true --Do not save when switching buffers
 vim.opt.ignorecase = true -- Ignore case when searching
 vim.opt.laststatus = 3 -- Display status line across all windows
