@@ -31,8 +31,13 @@ local M = {
         "nvim-neorg/neorg",
         -- ft = 'norg',
         config = config,
-        dependencies = { "nvim-lua/plenary.nvim" },
-        build = ":Neorg sync-parsers",
+        rocks = { "lua-utils.nvim", "nvim-nio", "nui.nvim", "plenary.nvim" },
+    },
+
+    {
+        "vhyrro/luarocks.nvim",
+        priority = 1000,
+        config = true,
     },
 }
 

@@ -1,5 +1,6 @@
 return {
     require('rm.plugins.comment'),
+    require('rm.plugins.diagflow'),
     require('rm.plugins.diffview'),
     require('rm.plugins.gitsigns'),
     require('rm.plugins.heirline'),
