@@ -1,3 +1,8 @@
+ vim.diagnostic.config({
+     virtual_text = false,
+     virtual_lines = true,
+})
+
 -- Global diagnostic actions regardless of LSP
 nmap('<space>e', vim.diagnostic.open_float, 'List Diagnostics')
 nmap('[d', vim.diagnostic.goto_prev, 'GoTo Previous Diagnostic')

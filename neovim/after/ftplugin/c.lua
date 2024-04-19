@@ -19,10 +19,13 @@ vim.bo.tabstop = 4 -- Number of spaces in a tab
 xmap('<leader>ad', 'gadgvga=', 'Align c style variables')
 
 -- Start LSP
-local config = require('rm.lsp.config.clangd')
+if not vim.api.nvim_win_get_option(0, "diff") then
 
-if config then
-    if vim.fn.executable(config.lsp.name) then
-        vim.lsp.start(config.lsp)
+    local config = require('rm.lsp.config.clangd')
+
+    if config then
+        if vim.fn.executable(config.lsp.name) then
+            vim.lsp.start(config.lsp)
+        end
     end
 end
