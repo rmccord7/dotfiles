@@ -2,8 +2,32 @@
 export ZSH=$HOME"/.oh-my-zsh"
 
 # Use FD for fuzzy
-export FZF_DEFAULT_CMD='fd --type file --color=always --follow --hidden --exclude .git'
+export FZF_DEFAULT_CMD='fd --type file --color=always --strip-cwd-prefix --follow --hidden --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_CMD"
+
+export FZF_DEFAULT_OPTS="--ansi"
+
+# Preview file content using bat (https://github.com/sharkdp/bat)
+export FZF_CTRL_T_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'bat -n --color=always {}'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+
+# CTRL-/ to toggle small preview window to see the full command
+# CTRL-Y to copy the command into clipboard using pbcopy
+export FZF_CTRL_R_OPTS="
+  --preview 'echo {}' --preview-window up:3:hidden:wrap
+  --bind 'ctrl-/:toggle-preview'
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --color header:italic
+  --header 'Press CTRL-Y to copy command into clipboard'"
+
+# Print tree structure in the preview window
+export FZF_ALT_C_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'tree -C {}'"
+
+#export FZF_TMUX_OPTS='-p80%,60%'
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -69,20 +93,27 @@ HIST_STAMPS="dd/mm/yyyy"
 # Use tab for auto complete
 #bindkey '^I' autosuggest-accept
 
-# Disable sort when completing `git checkout`
+# disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
 
-# Set descriptions format to enable group support
-zstyle ':completion:*:descriptions' format '[%d]'
+# set descriptions format to enable group support
+# NOTE: don't use escape sequences here, fzf-tab will ignore them
+#zstyle ':completion:*:descriptions' format '[%d]'
 
-# Set list-colors to enable filename colorizing
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# set list-colors to enable filename colorizing
+#zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-# Preview directory's content with exa when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+zstyle ':completion:*' menu no
 
-# Switch group using `,` and `.`
-zstyle ':fzf-tab:*' switch-group ',' '.'
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+
+# switch group using `<` and `>`
+zstyle ':fzf-tab:*' switch-group '<' '>'
+
+# Tmux popup feature
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 # Configure tmux plugin
 ZSH_TMUX_AUTOSTART=true
@@ -102,9 +133,9 @@ plugins=(
   git # Git
   tmux
   extract # Extracts all types of archives
+  zsh-autosuggestions # Zsh command uggestions
   fzf
   fzf-tab
-  zsh-autosuggestions # Zsh command uggestions
   zsh-syntax-highlighting # Must be last
 )
 
@@ -163,7 +194,7 @@ alias hyprc="$EDITOR ~/.config/hypr/hyprland.conf"
 
 #alias ls='ls -lF --color=auto'
 #alias ll='ls -alF --color=auto'
-alias ls='exa -la --git'
+alias ls='eza -la --git'
 alias lg='lazygit'
 
 # Perforce aliases
