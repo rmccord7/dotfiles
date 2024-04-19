@@ -9,8 +9,15 @@ local M = {
         checker = { -- Update checker
             enabled = true, -- Enable check for updates at startup
         },
+        dev = {
+            path = path_util.os_path(path.nvim_data .. '/dev'),
+            fallback = true,
+        },
+        install = {
+            missing = false, -- Do not install missing plugins at startup
+            colorscheme = {'material'},
+        },
     },
-    dev = path_util.os_path(path.nvim_data .. '/dev')
 }
 
 --- Starts lazy plugin manager.
