@@ -111,5 +111,6 @@ vim.wo.wrap = false -- Do not display text over multiple lines
 
 -- Use Rip grep instead of grep if supported
 if config.apps.rg then
-    vim.opt.grepprg = 'rg --vimgrep --smart-case' -- Use rg instead of grep
+    vim.opt.grepprg = 'rg --vimgrep --smart-case --hidden' -- Use rg instead of grep
+    vim.opt.grepformat = '%f:%l:%c:%m'
 end
