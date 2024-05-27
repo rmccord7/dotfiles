@@ -14,6 +14,7 @@ end
 local M = {
     {
        'rmccord7/p4.nvim',
+       dependencies = {'nvim-telescope/telescope.nvim'},
         config = config,
         --dir = path.os_path(nvim_config.path.nvim_data .. '/dev/p4.nvim'),
         dev = true,
