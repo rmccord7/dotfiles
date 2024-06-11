@@ -13,16 +13,6 @@ local config = function()
         --log_level = vim.log.levels.DEBUG,
     })
 
-    ok, plugin = pcall(require, 'neodev')
-
-    if not ok then
-        return
-    end
-
-    plugin.setup({
-        lspconfig = false,
-    })
-
     -- Load our internal LSP config
     require('rm.lsp')
 end
@@ -31,9 +21,6 @@ local M = {
     {
         'williamboman/mason.nvim',
         config = config,
-        dependencies = {
-            'folke/neodev.nvim', -- Include for lua language server
-        },
     },
 }
 

@@ -1,5 +1,4 @@
 local config = function()
-
     local ok, telescope = pcall(require, 'telescope')
 
     if not ok then
@@ -7,9 +6,20 @@ local config = function()
     end
 
     local actions = require('telescope.actions')
-    local trouble = require('trouble.providers.telescope')
 
     local util = require('rm.plugins.telescope.util')
+
+    -- Open all or selected files for add.
+    local p4_add = require("p4.telescope").add
+
+    -- Open all or selected files for edit.
+    local p4_edit = require("p4.telescope").edit
+
+    -- Revert all or selected files that are opened for add/edit.
+    local p4_revert = require("p4.telescope").revert
+
+    -- Get file information.
+    local p4_fstat = require("p4.telescope").fstat
 
     local default_picker_opts = {
         live_grep = {
@@ -67,13 +77,20 @@ local config = function()
                 n = {
                     ['jk'] = actions.close,
                     ['kj'] = actions.close,
-                    ['<C-t>'] = trouble.smart_open_with_trouble,
+                    ["<c-a>"] = p4_add,
+                    ["<c-e>"] = p4_edit,
+                    ["<c-r>"] = p4_revert,
+                    ["<c-g>"] = p4_fstat,
+                    ['<C-t>'] = require("trouble.sources.telescope").open,
                 },
                 i = {
                     ['<C-j>'] = actions.move_selection_next,
                     ['<C-k>'] = actions.move_selection_previous,
-                    ['<C-e>'] = actions.close,
-                    ['<C-t>'] = trouble.smart_open_with_trouble,
+                    ["<c-a>"] = p4_add,
+                    ["<c-e>"] = p4_edit,
+                    ["<c-r>"] = p4_revert,
+                    ["<c-g>"] = p4_fstat,
+                    ['<C-t>'] = require("trouble.sources.telescope").open,
                 },
             },
             prompt_prefix = '🔍 ',
