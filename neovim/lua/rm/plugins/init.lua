@@ -20,7 +20,6 @@ return {
     require('rm.plugins.nvim-surround'),
     require('rm.plugins.nvim-tree'),
     require('rm.plugins.p4'),
-    require('rm.plugins.project'),
     require('rm.plugins.reach'),
     require('rm.plugins.ss1pwn'),
     require('rm.plugins.telescope'),
