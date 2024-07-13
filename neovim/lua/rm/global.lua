@@ -6,8 +6,6 @@ _G.map = function(modes, lhs, rhs, label, opts)
     if uses_leader then
         local ok, wk = pcall(require, 'which-key')
         if ok then
-            -- extract the last keystroke of the mapping
-            local last_keystroke = lhs:sub(-1)
 
             -- make an iterable table of all the modes for this keymap
             modes = type(modes) == 'string' and { modes } or modes
@@ -22,14 +20,15 @@ _G.map = function(modes, lhs, rhs, label, opts)
                     end
                 end
 
-                wk.register({
-                    [last_keystroke] = { rhs, label },
-                }, {
+                wk.add({
+                    lhs,
+                    rhs,
+                    desc = label,
                     mode = mode,
-                    prefix = lhs:sub(1, -2), -- extract all but the last keystroke of the mapping
                     silent = true,
                     noremap = true,
                     buffer = opts and opts.buffer or nil,
+                    -- prefix = lhs:sub(1, -2), -- extract all but the last keystroke of the mapping
                 })
             end
             return
