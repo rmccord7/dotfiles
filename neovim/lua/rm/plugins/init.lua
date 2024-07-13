@@ -18,7 +18,6 @@ return {
     require('rm.plugins.nvim-luaref'),
     require('rm.plugins.nvim-neoclip'),
     require('rm.plugins.nvim-surround'),
-    require('rm.plugins.nvim-tree'),
     require('rm.plugins.p4'),
     require('rm.plugins.reach'),
     require('rm.plugins.ss1pwn'),
@@ -29,6 +28,7 @@ return {
     require('rm.plugins.vim-abolish'),
     require('rm.plugins.vim-easy-align'),
     require('rm.plugins.which-key'),
+    require('rm.plugins.yazi'),
 
     {
         'elkowar/yuck.vim',
