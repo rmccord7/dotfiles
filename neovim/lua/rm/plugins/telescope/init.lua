@@ -150,13 +150,6 @@ local config = function()
         hidden = true,
     })
 
-    util.builtin('<leader>rw', 'oldfiles', 'Recent Files')
-
-    util.custom('<leader>ra', 'oldfiles', 'Recent Files (All)', {
-        no_ignore = true,
-        hidden = true,
-    })
-
     util.custom('<leader>fd', 'find_files', 'Search Dotfiles', {
         cwd = '~/dotfiles',
     })
