@@ -54,6 +54,7 @@ local config = function()
         find_files = {
             path_display = { 'smart' },
             find_command = { 'rg', '--files', '-L' },
+            hidden = true,
         },
 
         oldfiles = {
@@ -144,6 +145,11 @@ local config = function()
     util.builtin('<leader>ch', 'command_history', 'List Command History')
 
     util.builtin('<leader>ff', 'find_files', 'Workspace Files')
+
+    util.custom('<leader>b', 'buffers', 'Buffers', {
+        ignore_current_buffer = true,
+        sort_mru = true,
+    })
 
     util.custom('<leader>fa', 'find_files', 'Workspace Files (All)', {
         no_ignore = true,
