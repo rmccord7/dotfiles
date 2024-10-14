@@ -3,6 +3,7 @@ local M = {
         h = 'c',
         scons = 'python',
         api = 'python',
+        dh = 'dh',
     },
     filename = {
         ['.clangd'] = 'yaml',
