@@ -38,10 +38,9 @@ M.lsp = {
     cmd = { -- Command to start the language server.
         'lua-language-server',
         '--logpath=' .. util_path.os_path(nvim_config.path.nvim_log .. '/lsp/lua'),
-        -- '--metapath=' .. './meta',
+        '--loglevel=debug',
     },
     root_dir = vim.fs.dirname(root_paths[1]), -- Project root directory.
-    capabilities = require('cmp_nvim_lsp').default_capabilities(), -- LSP client capabilities.
     settings = {
         Lua = {
             runtime = { -- Lua runtime

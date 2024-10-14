@@ -24,15 +24,19 @@ M.lsp = {
     cmd = { -- Command to start the language server.
         'clangd',
         '--log=verbose',
-        -- '--pretty',
-        -- "--background-index",
-        -- "-j=8",
+        '--pretty',
+        "--background-index",
+        "-j=8",
+        "--inlay-hints",
         -- "--malloc-trim",
-        -- "--pch-storage=memory",
-        -- "--header-insertion=never",
-        -- "--all-scopes-completion",
+        "--pch-storage=memory",
+        "--header-insertion=never",
+        "--header-insertion-decorators",
+        "--all-scopes-completion",
         -- "--clang-tidy",
         -- "--clang-tidy-checks=modernize-*,misc-*"
+        "--function-arg-placeholders",
+        "--completion-style=detailed",
     },
     root_dir = vim.fs.dirname(root_paths[1]), -- Project root directory.
     capabilities = require('cmp_nvim_lsp').default_capabilities(), -- LSP client capabilities.
