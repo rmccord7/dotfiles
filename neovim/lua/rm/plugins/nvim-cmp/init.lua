@@ -166,7 +166,9 @@ end
 
 local M = {
     {
-        'hrsh7th/nvim-cmp',
+        -- 'hrsh7th/nvim-cmp',
+        'iguanacucumber/magazine.nvim',
+        url = "https://github.com/iguanacucumber/magazine.nvim",
         config = config,
         event = {'InsertEnter', 'CmdlineEnter'},
         dependencies = {
