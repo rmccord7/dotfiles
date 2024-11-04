@@ -1,15 +1,3 @@
--- Start LSP
-if not vim.api.nvim_win_get_option(0, "diff") then
-
-    local config = require('rm.lsp.config.clangd')
-
-    if config then
-        if vim.fn.executable(config.lsp.name) then
-            vim.lsp.start(config.lsp)
-        end
-    end
-end
-
 local bufnr = vim.api.nvim_get_current_buf()
 
 if vim.b[bufnr].rm_did_ftplugin then

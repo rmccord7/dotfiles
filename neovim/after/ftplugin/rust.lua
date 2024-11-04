@@ -13,12 +13,3 @@ vim.bo.shiftwidth = 4 -- Size of an indent
 vim.bo.smartindent = true -- Insert indents automatically
 vim.bo.softtabstop = 4 -- Number of spaces tabs count for
 vim.bo.tabstop = 4 -- Number of spaces in a tab
-
--- Start LSP
-local config = require('lsp.config.rust_analyzer')
-
-if config then
-    if vim.fn.executable(config.lsp.name) then
-        vim.lsp.start(config.lsp)
-    end
-end

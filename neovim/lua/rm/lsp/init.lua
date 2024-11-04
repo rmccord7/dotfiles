@@ -1,3 +1,8 @@
+local lsp_servers = {
+    "clangd",
+    "lua_ls",
+    "rust_analyzer",
+}
  vim.diagnostic.config({
      virtual_text = false,
      virtual_lines = true,
@@ -36,3 +41,6 @@ vim.api.nvim_create_autocmd('LSPAttach', {
     end,
 })
 
+for _, server in ipairs(lsp_servers) do
+    require("rm.lsp.config." .. server).setup()
+end

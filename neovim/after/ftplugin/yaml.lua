@@ -1,12 +1,3 @@
--- Start LSP
-local config = require('rm.lsp.config.yaml')
-
-if config then
-    if vim.fn.executable(config.lsp.name) then
-        vim.lsp.start(config.lsp)
-    end
-end
-
 local bufnr = vim.api.nvim_get_current_buf()
 
 if vim.b[bufnr].rm_did_ftplugin then

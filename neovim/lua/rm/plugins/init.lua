@@ -16,6 +16,7 @@ return {
     require('rm.plugins.nvim-cmp'),
     require('rm.plugins.nvim-colorizer'),
     require('rm.plugins.nvim-luaref'),
+    require('rm.plugins.nvim-lspconfig'),
     require('rm.plugins.nvim-neoclip'),
     require('rm.plugins.nvim-surround'),
     require('rm.plugins.p4'),

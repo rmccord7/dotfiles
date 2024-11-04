@@ -12,9 +12,6 @@ local config = function()
         },
         --log_level = vim.log.levels.DEBUG,
     })
-
-    -- Load our internal LSP config
-    require('rm.lsp')
 end
 
 local M = {
