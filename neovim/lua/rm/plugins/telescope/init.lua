@@ -9,17 +9,19 @@ local config = function()
 
     local util = require('rm.plugins.telescope.util')
 
+    local p4_actions = require("p4.api.telescope.actions")
+
     -- Open all or selected files for add.
-    local p4_add = require("p4.telescope").add
+    local p4_add = p4_actions.add
 
     -- Open all or selected files for edit.
-    local p4_edit = require("p4.telescope").edit
+    local p4_edit = p4_actions.edit
 
     -- Revert all or selected files that are opened for add/edit.
-    local p4_revert = require("p4.telescope").revert
+    local p4_revert = p4_actions.revert
 
     -- Get file information.
-    local p4_fstat = require("p4.telescope").fstat
+    local p4_fstat = p4_actions.fstat
 
     local default_picker_opts = {
         live_grep = {
@@ -169,33 +171,13 @@ local config = function()
         cwd = os.getenv('VIMRUNTIME') .. '/doc',
     })
 
-    util.builtin('<leader>lr', 'lsp_references', 'List LSP References')
-    util.builtin('<leader>lc', 'lsp_document_symbols', 'List LSP Document Symbols')
-    util.builtin('<leader>ps', 'lsp_dynamic_workspace_symbols', 'List LSP Dynamic Workspace Symbols')
-    util.builtin('<leader>li', 'lsp_incoming_calls', 'List LSP Incoming Calls')
-    util.builtin('<leader>lo', 'lsp_outgoing_calls', 'List LSP Outgoing Calls')
-    util.builtin('gd', 'lsp_definitions', 'List LSP Definitions')
-    util.builtin('gD', 'lsp_implementations', 'List LSP Implementations')
-
     -- LSP current buffer diagnostics
     util.custom('<leader>ld', 'diagnostics', 'Buffer Diagnostics', {
         bufnr = 0,
     })
 
-    -- LSP current error diagnostics
-    util.custom('<leader>le', 'diagnostics', 'Buffer Errors', {
-        bufnr = 0,
-        severity = vim.diagnostic.severity.ERROR,
-    })
-
-    -- LSP current warning diagnostics
-    util.custom('<leader>lw', 'diagnostics', 'Buffer Warnings', {
-        bufnr = 0,
-        severity = vim.diagnostic.severity.WARN,
-    })
-
     -- LSP project diagnostics
-    util.custom('<leader>lp', 'diagnostics', 'Project Diagnostics', {})
+    util.custom('<leader>lad', 'diagnostics', 'Project Diagnostics', {})
 
     nmap('<leader>fb', ':Telescope file_browser<CR>', 'File Browser')
     nmap('<leader>nh', ':Telescope notify<CR>', 'List Notifications')

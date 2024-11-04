@@ -2,9 +2,12 @@ local lspconfig = require("lspconfig")
 
 local M = {}
 
-M.setup = {
+function M.setup(hooks)
 
     lspconfig.rust_analyzer.setup {
+
+        on_attach = hooks.my_on_attach,
+        capabilities = hooks.my_capabilities,
 
         cmd = {
             'yaml-language-server',
@@ -28,6 +31,6 @@ M.setup = {
             },
         },
     }
-}
+end
 
 return M

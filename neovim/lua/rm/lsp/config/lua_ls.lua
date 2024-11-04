@@ -17,9 +17,12 @@ local library_files = {
 
 local M = {}
 
-function M.setup()
+function M.setup(hooks)
 
     lspconfig.lua_ls.setup {
+
+        on_attach = hooks.my_on_attach,
+        capabilities = hooks.my_capabilities,
 
         cmd = { -- Command to start the language server.
             'lua-language-server',
