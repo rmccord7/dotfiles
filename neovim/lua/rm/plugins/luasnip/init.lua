@@ -5,7 +5,12 @@ local config = function()
         return
     end
 
-    require('rm.plugins.luasnip.lua')
+    local config = require('rm.config')
+    local path_util = require('rm.util.path')
+
+    -- Set up actual snippets
+    require('luasnip.loaders.from_vscode').lazy_load({ paths = { config.path.plugin_config .. path_util.os_path('/luasnip/vscode/') } })
+    require('luasnip.loaders.from_lua').load()
 end
 
 local M = {
@@ -14,6 +19,8 @@ local M = {
         'L3MON4D3/LuaSnip',
         config = config,
         event = {'InsertEnter', 'CmdlineEnter'},
+        version = "v2.3",
+        build = "make install_jsregexp"
     },
 }
 

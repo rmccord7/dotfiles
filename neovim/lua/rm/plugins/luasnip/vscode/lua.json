@@ -3,12 +3,12 @@
     "prefix": "todo",
     "body": ["--TODO: $1"],
     "description": "Code snippet for TODO comment"
-  }
+  },
   "fix": {
     "prefix": "fix",
     "body": ["--FIX: $1"],
     "description": "Code snippet for FIX comment"
-  }
+  },
   "note": {
     "prefix": "note",
     "body": ["--NOTE: $1"],
