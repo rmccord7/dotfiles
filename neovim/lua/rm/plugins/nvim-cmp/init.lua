@@ -140,27 +140,17 @@ local config = function()
 
     -- Setup Cmp command line
     plugin.setup.cmdline(":", {
-        mapping = plugin.mapping.preset.cmdline({
-            ["<Tab>"] = plugin.mapping(function(fallback)
-                if plugin.visible() then
-                    local entry = plugin.get_selected_entry()
-                    if not entry then
-                        plugin.select_next_item({ behavior = plugin.SelectBehavior.Select })
-                    else
-                        plugin.confirm()
-                    end
-                else
-                    fallback()
-                end
-            end, { "i", "s", "c" }),
-        }),
+        mapping = plugin.mapping.preset.cmdline(),
         sources = plugin.config.sources({
-            { name = "cmdline" },
+            { name = "buffer" },
             { name = "path" },
+            {
+                name = 'cmdline',
+                option = {
+                    ignore_cmds = { 'Man', '!' }
+                }
+            },
         }),
-        window = {
-            completion = plugin.config.window.bordered(),
-        },
     })
 end
 
