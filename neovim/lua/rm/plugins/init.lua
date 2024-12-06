@@ -20,7 +20,6 @@ return {
     require('rm.plugins.nvim-neoclip'),
     require('rm.plugins.nvim-surround'),
     require('rm.plugins.p4'),
-    require('rm.plugins.ss1pwn'),
     require('rm.plugins.telescope'),
     require('rm.plugins.todo-comments'),
     require('rm.plugins.treesitter'),
