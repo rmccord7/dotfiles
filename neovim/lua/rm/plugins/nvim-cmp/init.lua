@@ -47,7 +47,7 @@ local config = function()
 
         sources = {
             { name = 'luasnip' },
-            { name = 'nvim_lsp', },
+            { name = 'nvim_lsp' },
             { name = 'nvim_lua' },
             { name = 'path' },
         },
