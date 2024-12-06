@@ -11,6 +11,7 @@ local config = function()
             "~/.config/*",
             "~/perforce/ganges/rel/*",
             "~/perforce/ganges/dev/*",
+            require("rm.config.path").dev_plugins .. "/*",
         },
         -- Path to store history and sessions
         datapath = vim.fn.stdpath("data"), -- ~/.local/share/nvim/
