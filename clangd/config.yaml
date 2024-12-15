@@ -1,18 +1,10 @@
-CompileFlags:
-  Add: [
-    -Wall,
-    -Wno-unused-function,
-    -Wno-cast-align,
-    -Wno-void-pointer-to-int-cast,
-    -Wno-implicit-fallthrough,
-    -Wno-covered-switch-default,
-    -Wno-reserved-identifier,
-    -Wno-cast-qual,
-    -Wno-switch-enum,
-    -Wno-unused-parameter,
-    -Wno-unused-macros,
-    -Wno-extra-semi-stmt,
-    ]
-
-# Diagnostics:
-#   Suppress: ['drv_unknown_argument']
+# Index:
+#   Background: Build     # Disable slow background indexing of these files.
+#
+# InlayHints:
+#   BlockEnd: No
+#   Designators: Yes
+#   Enabled: Yes
+#   ParameterNames: Yes
+#   DeducedTypes: Yes
+#   TypeNameLimit: 24
