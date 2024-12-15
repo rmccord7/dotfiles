@@ -5,8 +5,10 @@ local config = function()
         return
     end
 
-    opts = {
+    local opts = {
         projects = { -- define project roots
+            "~/dotfiles/*",
+            "~/dotfiles/neovim/*",
             "~/projects/*",
             "~/.config/*",
             "~/perforce/ganges/rel/*",
@@ -35,7 +37,6 @@ local config = function()
                 'gitrebase',
                 'qf',
                 'toggleterm',
-                'NvimTree',
                 'help',
                 'lazy',
             },

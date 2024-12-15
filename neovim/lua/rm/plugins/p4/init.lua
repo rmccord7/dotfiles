@@ -1,22 +1,25 @@
-local nvim_config = require('rm.config')
-local path = require('rm.util.path')
+-- local nvim_config = require('rm.config')
+-- local path = require('rm.util.path')
 
 local config = function()
-    local ok, plugin = pcall(require, 'p4')
+    local ok, _ = pcall(require, 'p4')
 
     if not ok then
         return
     end
 
-    plugin.setup()
+    nmap('<leader>pc', [[:P4 Display_CLs<CR>]], 'Open picker for the current client\'s CLs', { nowait = true })
+    nmap('<leader>po', [[:P4 Display_Open_Files<CR>]], 'Open picker for the current client\'s open files', { nowait = true })
 end
 
 local M = {
     {
        'rmccord7/p4.nvim',
-       dependencies = {'nvim-telescope/telescope.nvim'},
+       dependencies = {
+           "nvim-neotest/nvim-nio",
+           'nvim-telescope/telescope.nvim',
+       },
         config = config,
-        --dir = path.os_path(nvim_config.path.nvim_data .. '/dev/p4.nvim'),
         dev = true,
     },
 }

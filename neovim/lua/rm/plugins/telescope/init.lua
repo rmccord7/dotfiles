@@ -9,19 +9,19 @@ local config = function()
 
     local util = require('rm.plugins.telescope.util')
 
-    local p4_actions = require("p4.api.telescope.actions")
-
-    -- Open all or selected files for add.
-    local p4_add = p4_actions.add
-
-    -- Open all or selected files for edit.
-    local p4_edit = p4_actions.edit
-
-    -- Revert all or selected files that are opened for add/edit.
-    local p4_revert = p4_actions.revert
-
-    -- Get file information.
-    local p4_fstat = p4_actions.fstat
+    -- local p4_actions = require("p4.api.telescope.actions")
+    --
+    -- -- Open all or selected files for add.
+    -- local p4_add = p4_actions.add
+    --
+    -- -- Open all or selected files for edit.
+    -- local p4_edit = p4_actions.edit
+    --
+    -- -- Revert all or selected files that are opened for add/edit.
+    -- local p4_revert = p4_actions.revert
+    --
+    -- -- Get file information.
+    -- local p4_fstat = p4_actions.fstat
 
     local default_picker_opts = {
         live_grep = {
@@ -80,19 +80,19 @@ local config = function()
                 n = {
                     ['jk'] = actions.close,
                     ['kj'] = actions.close,
-                    ["<c-a>"] = p4_add,
-                    ["<c-e>"] = p4_edit,
-                    ["<c-r>"] = p4_revert,
-                    ["<c-g>"] = p4_fstat,
+                    -- ["<c-a>"] = p4_add,
+                    -- ["<c-e>"] = p4_edit,
+                    -- ["<c-r>"] = p4_revert,
+                    -- ["<c-g>"] = p4_fstat,
                     ['<C-t>'] = require("trouble.sources.telescope").open,
                 },
                 i = {
                     ['<C-j>'] = actions.move_selection_next,
                     ['<C-k>'] = actions.move_selection_previous,
-                    ["<c-a>"] = p4_add,
-                    ["<c-e>"] = p4_edit,
-                    ["<c-r>"] = p4_revert,
-                    ["<c-g>"] = p4_fstat,
+                    -- ["<c-a>"] = p4_add,
+                    -- ["<c-e>"] = p4_edit,
+                    -- ["<c-r>"] = p4_revert,
+                    -- ["<c-g>"] = p4_fstat,
                     ['<C-t>'] = require("trouble.sources.telescope").open,
                 },
             },
