@@ -221,7 +221,6 @@ fi
 
 # Perforce
 if command -v p4 > /dev/null; then
-  export P4PORT=qctp411:1666
   export P4CONFIG=.p4config
   export P4IGNORE=.p4ignore
   export P4DIFF=p4_diff
