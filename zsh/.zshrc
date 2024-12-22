@@ -179,6 +179,8 @@ alias python=python3
 # Quick access to zsh config.
 alias zshrc="$EDITOR ~/.zshrc"
 
+alias hyprc="$EDITOR ~/.config/hypr/hyprland.conf"
+
 if [ -f "$HOME"/.zshrc.local ]; then
   alias zshlrc="$EDITOR ~/.zshrc.local"
 fi
