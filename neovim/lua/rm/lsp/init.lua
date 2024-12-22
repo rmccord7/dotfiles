@@ -128,14 +128,12 @@ end
 
 hooks.my_capabilities = vim.tbl_deep_extend(
   'force',
-  require('cmp_nvim_lsp').default_capabilities(
-    vim.lsp.protocol.make_client_capabilities()
-  ),
+  require('blink.cmp').get_lsp_capabilities(),
   {
     textDocument = {
       completion = {
         completionItem = {
-          snippetSupport = true,
+          snippetSupport = false,
         },
       },
     },

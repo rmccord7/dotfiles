@@ -19,7 +19,7 @@ local M = {
         'L3MON4D3/LuaSnip',
         config = config,
         event = {'InsertEnter', 'CmdlineEnter'},
-        version = "v2.3",
+        version = "v2.*",
         build = "make install_jsregexp"
     },
 }
