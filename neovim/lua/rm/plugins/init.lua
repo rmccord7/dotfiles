@@ -13,7 +13,6 @@ return {
     require('rm.plugins.material'),
     require('rm.plugins.noice'),
     require('rm.plugins.nvim-autopairs'),
-    require('rm.plugins.nvim-cmp'),
     require('rm.plugins.nvim-colorizer'),
     require('rm.plugins.nvim-luaref'),
     require('rm.plugins.nvim-lspconfig'),
