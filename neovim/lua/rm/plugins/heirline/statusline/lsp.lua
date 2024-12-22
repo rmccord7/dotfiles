@@ -1,4 +1,4 @@
-M = {}
+local M = {}
 
 local utils = require('heirline.utils')
 local conditions = require('heirline.conditions')
@@ -15,7 +15,7 @@ M.LSPActive = {
     -- Or complicate things a bit and get the servers names
     provider = function()
         local names = {}
-        for _, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+        for _, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
             table.insert(names, server.name)
         end
         return ' [' .. table.concat(names, ' ') .. ']'
