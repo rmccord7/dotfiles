@@ -28,7 +28,6 @@ local config = function()
             'regex',
             'rust',
             'ssh_config',
-            'systemverilog',
             't32',
             'tmux',
             'toml',
