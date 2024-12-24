@@ -1,5 +1,24 @@
 require("telescope")
 
+local default_capabilities = vim.tbl_deep_extend(
+  'force',
+  require('blink.cmp').get_lsp_capabilities(),
+  {
+    textDocument = {
+      completion = {
+        completionItem = {
+          snippetSupport = false,
+        },
+      },
+    },
+  }
+)
+
+vim.lsp.config('*', {
+  root_markers = { '.git', '.nvim.lua' },
+  capabilities = default_capabilities
+})
+
 local lsp_servers = {
     "clangd",
     "lua_ls",
@@ -8,35 +27,27 @@ local lsp_servers = {
 }
 
 -- Log level
+-- ~/.local/state/nvim/lsp.log
 vim.lsp.set_log_level(vim.log.levels.WARN)
 
--- close signature_help on following events
-vim.lsp.handlers['textDocument/signatureHelp'] =
-  vim.lsp.with(vim.lsp.handlers.signature_help, {
+-- Close signature_help on following events
+vim.lsp.buf.signature_help({
     border = 'shadow',
     close_events = { 'CursorMoved', 'BufHidden', 'InsertCharPre' },
-  })
+})
 
--- handle hover
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+vim.lsp.buf.hover({
   border = 'shadow',
 })
 
- vim.diagnostic.config({
-     virtual_text = false,
-     virtual_lines = true,
+vim.diagnostic.config({
+    virtual_text  = false,
+    virtual_lines = true,
 })
-
-
--- Global diagnostic actions regardless of LSP
-nmap('<leader>e', vim.diagnostic.open_float, 'List Diagnostics')
-nmap('[d', vim.diagnostic.goto_prev, 'GoTo Previous Diagnostic')
-nmap(']d', vim.diagnostic.goto_next, 'GoTo Next Diagnostic')
--- nmap('<space>q', vim.diagnostic.setloclist, 'Set Loc List With Diagnostics')
 
 local hooks = {}
 
-lsp_rename = function()
+local lsp_rename = function()
   local curr_name = vim.fn.expand '<cword>'
   vim.ui.input({
     prompt = 'LSP Rename: ',
@@ -51,49 +62,52 @@ lsp_rename = function()
       end
 
       -- request lsp rename
+      ---@diagnostic disable-next-line: inject-field
       lsp_params.newName = new_name
       vim.lsp.buf_request(
         0,
         'textDocument/rename',
         lsp_params,
-        function(_, res, ctx, _)
+        function(_, res, ctx)
           if not res then
             return
           end
 
           -- apply renames
           local client = vim.lsp.get_client_by_id(ctx.client_id)
-          vim.lsp.util.apply_workspace_edit(res, client.offset_encoding)
+          if client then
+              vim.lsp.util.apply_workspace_edit(res, client.offset_encoding)
 
-          -- print renames
-          local changed_files_count = 0
-          local changed_instances_count = 0
+              -- print renames
+              local changed_files_count = 0
+              local changed_instances_count = 0
 
-          if res.documentChanges then
-            for _, changed_file in pairs(res.documentChanges) do
-              changed_files_count = changed_files_count + 1
-              changed_instances_count = changed_instances_count
-                + #changed_file.edits
-            end
-          elseif res.changes then
-            for _, changed_file in pairs(res.changes) do
-              changed_instances_count = changed_instances_count + #changed_file
-              changed_files_count = changed_files_count + 1
-            end
+              if res.documentChanges then
+                for _, changed_file in pairs(res.documentChanges) do
+                  changed_files_count = changed_files_count + 1
+                  changed_instances_count = changed_instances_count
+                    + #changed_file.edits
+                end
+              elseif res.changes then
+                for _, changed_file in pairs(res.changes) do
+                  changed_instances_count = changed_instances_count + #changed_file
+                  changed_files_count = changed_files_count + 1
+                end
+              end
+
+              -- compose the right print message
+              vim.notify(
+                string.format(
+                  'Renamed %s instance%s in %s file%s. %s',
+                  changed_instances_count,
+                  changed_instances_count == 1 and '' or 's',
+                  changed_files_count,
+                  changed_files_count == 1 and '' or 's',
+                  changed_files_count > 1 and "To save them run ':cfdo w'" or ''
+                ),
+                vim.log.levels.INFO
+              )
           end
-
-          -- compose the right print message
-          vim.notify(
-            string.format(
-              'Renamed %s instance%s in %s file%s. %s',
-              changed_instances_count,
-              changed_instances_count == 1 and '' or 's',
-              changed_files_count,
-              changed_files_count == 1 and '' or 's',
-              changed_files_count > 1 and "To save them run ':cfdo w'" or ''
-            ),
-            vim.log.levels.INFO
-          )
         end
       )
     end
@@ -117,7 +131,7 @@ hooks.my_on_attach = function(_, bufnr)
     vmap('<leader>ca', vim.lsp.buf.code_action, 'LSP Code Action', { buffer = bufnr })
 
     nmap('<leader>lr', function() require('telescope.builtin').lsp_references() end, 'LSP List References', { buffer = bufnr })
-    nmap('<leader>f', function() vim.lsp.buf.format { async = true } end, 'LSP Format', { buffer = bufnr })
+    -- nmap('<leader>f', function() vim.lsp.buf.format { async = true } end, 'LSP Format', { buffer = bufnr })
 
     nmap('<leader>li', vim.lsp.buf.implementation, 'LSP GoTo Implementation', { buffer = bufnr })
 
