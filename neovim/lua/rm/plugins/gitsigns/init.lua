@@ -1,12 +1,12 @@
 local config = function()
-    require('gitsigns').setup()
+  require("gitsigns").setup()
 end
 
 local M = {
-    {
-        'lewis6991/gitsigns.nvim',
-        config = config,
-    },
+  {
+    "lewis6991/gitsigns.nvim",
+    config = config,
+  },
 }
 
 return M

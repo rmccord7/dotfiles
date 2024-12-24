@@ -1,7 +1,7 @@
 local M = {
-    {
-        'tpope/vim-abolish',
-    },
+  {
+    "tpope/vim-abolish",
+  },
 }
 
 return M

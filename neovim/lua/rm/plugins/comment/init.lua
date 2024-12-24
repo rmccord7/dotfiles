@@ -1,18 +1,18 @@
 local config = function()
-    local ok, plugin = pcall(require, 'Comment')
+  local ok, plugin = pcall(require, "Comment")
 
-    if not ok then
-        return
-    end
+  if not ok then
+    return
+  end
 
-    plugin.setup()
+  plugin.setup()
 end
 
 local M = {
-    {
-        'numToStr/Comment.nvim',
-        config = config,
-    },
+  {
+    "numToStr/Comment.nvim",
+    config = config,
+  },
 }
 
 return M

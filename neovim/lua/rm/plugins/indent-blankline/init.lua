@@ -1,27 +1,27 @@
 local config = function()
-    local ok, plugin = pcall(require, 'ibl')
+  local ok, plugin = pcall(require, "ibl")
 
-    if not ok then
-        return
-    end
-    -- local colors = require('material').colors
+  if not ok then
+    return
+  end
+  -- local colors = require('material').colors
 
-    plugin.setup({
+  plugin.setup({
 
-        -- config = {
-            --     scope = {
-                --         highlight = colors.editor.border
-                --     }
-                -- }
-            })
+    -- config = {
+    --     scope = {
+    --         highlight = colors.editor.border
+    --     }
+    -- }
+  })
 end
 
 local M = {
-    {
-        'lukas-reineke/indent-blankline.nvim',
-        main = "ibl",
-        config = config,
-    },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    config = config,
+  },
 }
 
 return M
