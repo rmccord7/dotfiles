@@ -1,7 +1,6 @@
 local config = function()
   -- Map vim-easy-align to ga
-  xmap("ga", "<Plug>(EasyAlign)", "Easy align", {})
-  nmap("ga", "<Plug>(EasyAlign)", "Easy align", {})
+  vim.keymap.set({"n", "x"}, "ga", "<Plug>(EasyAlign)", { desc = "Easy align" })
 
   -- Alignment for c-style variable declarations
   -- Cannot add/update/store keys from a dictionary without a WAR

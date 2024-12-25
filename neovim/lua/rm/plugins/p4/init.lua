@@ -8,13 +8,11 @@ local config = function()
     return
   end
 
-  nmap("<leader>pc", [[:P4 Display_CLs<CR>]], "Open picker for the current client's CLs", { nowait = true })
-  nmap(
+  vim.keymap.set({"n"}, "<leader>pc", [[:P4 Display_CLs<CR>]], { nowait = true, desc = "Open picker for the current client's CLs" })
+  vim.keymap.set({"n"},
     "<leader>po",
     [[:P4 Display_Open_Files<CR>]],
-    "Open picker for the current client's open files",
-    { nowait = true }
-  )
+    { nowait = true, desc = "Open picker for the current client's open files" })
 end
 
 local M = {

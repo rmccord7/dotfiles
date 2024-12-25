@@ -15,8 +15,8 @@ end
 
 local M = {
   {
-    "NvChad/nvim-colorizer.lua",
-    module = false,
+    "catgoose/nvim-colorizer.lua",
+    event = "BufReadPre",
     config = config,
   },
 }

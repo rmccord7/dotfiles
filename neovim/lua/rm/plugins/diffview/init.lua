@@ -7,9 +7,9 @@ local config = function()
 
   plugin.setup()
 
-  nmap("<leader>do", [[:DiffviewOpen]], "Diffview Open", { nowait = true })
-  nmap("<leader>dh", [[:DiffviewFileHistory]], "Diffview File History", { nowait = true })
-  nmap("<leader>dc", [[:DiffviewClose<CR>]], "Diffview Close")
+  vim.keymap.set({"n"}, "<leader>do", [[:DiffviewOpen]], { nowait = true, desc = "Diffview Open" })
+  vim.keymap.set({"n"}, "<leader>dh", [[:DiffviewFileHistory]], { nowait = true, desc = "Diffview File History" })
+  vim.keymap.set({"n"}, "<leader>dc", [[:DiffviewClose<CR>]], { desc = "Diffview Close" })
 end
 
 local M = {

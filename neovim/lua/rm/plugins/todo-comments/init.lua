@@ -7,7 +7,7 @@ local config = function()
 
   plugin.setup({})
 
-  nmap("<leader>td", [[:TodoTelescope<CR>]], "Todo Telescope")
+  vim.keymap.set({"n"}, "<leader>td", [[:TodoTelescope<CR>]], { desc = "Todo Telescope" })
 end
 
 local M = {

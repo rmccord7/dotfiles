@@ -7,14 +7,14 @@ local config = function()
 
   plugin.setup()
 
-  -- nmap('<leader>xx', ':Trouble<CR>', 'Trouble toggle')
-  -- nmap('<leader>xw', ':Trouble workspace_diagnostics<CR>', 'Trouble workspace diagnostics')
-  -- nmap('<leader>xd', ':Trouble document_diagnostics<CR>', 'Trouble document diagnostics')
-  -- nmap('<leader>xq', ':Trouble quickfix<CR>', 'Trouble quickfix')
-  -- nmap('<leader>xl', ':Trouble loclist<CR>', 'Trouble loclist')
-  -- nmap('<leader>xr', ':Trouble lsp_references<CR>', 'Trouble LSP Ref')
-  -- nmap('<leader>xn', [[:lua require('trouble').next({skip_groups = false, jump = true})<CR>]], 'Trouble Next')
-  -- nmap('<leader>xp', [[:lua require('trouble').previous({skip_groups = false, jump = true})<CR>]], 'Trouble Previous')
+  -- vim.keymap.set({"n"}, '<leader>xx', ':Trouble<CR>', { desc = 'Trouble toggle' })
+  -- vim.keymap.set({"n"}, '<leader>xw', ':Trouble workspace_diagnostics<CR>', { desc = 'Trouble workspace diagnostics' })
+  -- vim.keymap.set({"n"}, '<leader>xd', ':Trouble document_diagnostics<CR>', { desc = 'Trouble document diagnostics' })
+  -- vim.keymap.set({"n"}, '<leader>xq', ':Trouble quickfix<CR>', { desc = 'Trouble quickfix' })
+  -- vim.keymap.set({"n"}, '<leader>xl', ':Trouble loclist<CR>', { desc = 'Trouble loclist' })
+  -- vim.keymap.set({"n"}, '<leader>xr', ':Trouble lsp_references<CR>', { desc = 'Trouble LSP Ref' })
+  -- vim.keymap.set({"n"}, '<leader>xn', [[:lua require('trouble').next({skip_groups = false, jump = true})<CR>]], { desc = 'Trouble Next' })
+  -- vim.keymap.set({"n"}, '<leader>xp', [[:lua require('trouble').previous({skip_groups = false, jump = true})<CR>]], { desc = 'Trouble Previous' })
 end
 
 local M = {

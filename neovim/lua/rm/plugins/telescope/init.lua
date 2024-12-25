@@ -179,10 +179,10 @@ local config = function()
   -- LSP project diagnostics
   util.custom("<leader>lad", "diagnostics", "Project Diagnostics", {})
 
-  nmap("<leader>fb", ":Telescope file_browser<CR>", "File Browser")
-  nmap("<leader>nh", ":Telescope notify<CR>", "List Notifications")
-  nmap("<leader>te", ":Telescope env<CR>", "List Environment Variables")
-  nmap("<leader>tp", ":Telescope lazy<CR>", "Plugin Browser")
+  vim.keymap.set({"n"}, "<leader>fb", ":Telescope file_browser<CR>", { desc = "File Browser" })
+  vim.keymap.set({"n"}, "<leader>nh", ":Telescope notify<CR>", { desc = "List Notifications" })
+  vim.keymap.set({"n"}, "<leader>te", ":Telescope env<CR>", { desc = "List Environment Variables" })
+  vim.keymap.set({"n"}, "<leader>tp", ":Telescope lazy<CR>", { desc = "Plugin Browser" })
 end
 
 local M = {

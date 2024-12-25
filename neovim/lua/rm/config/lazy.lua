@@ -40,7 +40,7 @@ function M.start()
 
     require("lazy").setup("rm.plugins", M.config)
 
-    nmap("<leader>lh", [[:Lazy home<CR>]], "Lazy home")
+    vim.keymap.set({"n"}, "<leader>lh", [[:Lazy home<CR>]], { desc = "Lazy home" })
   end
 end
 

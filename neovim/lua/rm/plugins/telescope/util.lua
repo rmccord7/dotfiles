@@ -33,9 +33,9 @@ function M.builtin(lhs, picker, label)
   local opts = {
     prompt_title = label,
   }
-  nmap(lhs, function()
+  vim.keymap.set({"n"}, lhs, function()
     require("telescope.builtin")[picker](opts)
-  end, label)
+  end, { desc = label })
 end
 
 function M.custom(lhs, picker, label, opts)
@@ -43,9 +43,9 @@ function M.custom(lhs, picker, label, opts)
     prompt_title = label,
   }
   opts = vim.tbl_extend("keep", opts or {}, default)
-  nmap(lhs, function()
+  vim.keymap.set({"n"}, lhs, function()
     require("telescope.builtin")[picker](opts)
-  end, label)
+  end, { desc = label })
 end
 
 function M.path_from_cwd()

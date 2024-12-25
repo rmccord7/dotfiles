@@ -45,8 +45,8 @@ local config = function()
 
   plugin.setup(opts)
 
-  nmap("<leader>pd", ":Telescope neovim-project discover<CR>", "Discover Projects")
-  nmap("<leader>pj", ":Telescope neovim-project history<CR>", "List Projects")
+  vim.keymap.set({"n"}, "<leader>pd", ":Telescope neovim-project discover<CR>", { desc = "Discover Projects" })
+  vim.keymap.set({"n"}, "<leader>pj", ":Telescope neovim-project history<CR>", { desc = "List Projects" })
 end
 
 local M = {

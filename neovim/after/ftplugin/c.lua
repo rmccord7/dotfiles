@@ -16,5 +16,5 @@ vim.bo.tabstop = 4 -- Number of spaces in a tab
 
 -- Map to align C variable declarations by both identifier and = when visually
 -- selected
-xmap('<leader>ad', 'gadgvga=', 'Align c style variables')
+vim.keymap.set({"x"}, '<leader>ad', 'gadgvga=', { desc = 'Align c style variables' })
 

@@ -7,7 +7,7 @@ local config = function()
 
   plugin.setup()
 
-  nmap('<leader>"', [[:Telescope neoclip<CR>]], "Neoclip")
+  vim.keymap.set({"n"}, '<leader>"', [[:Telescope neoclip<CR>]], { desc = "Neoclip" })
 end
 
 local M = {

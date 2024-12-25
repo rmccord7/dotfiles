@@ -38,9 +38,9 @@ local M = {
   },
 }
 
-nmap("]m", [[:TSTextobjectGotoNextStart @function.outer<CR>zz]], "Go to next function start")
-nmap("]M", [[:TSTextobjectGotoNextEnd @function.outer<CR>zz]], "Go to next function end")
-nmap("[m", [[:TSTextobjectGotoPreviousStart @function.outer<CR>zz]], "Go to previous function start")
-nmap("[M", [[:TSTextobjectGotoPreviousEnd @function.outer<CR>zz]], "Go to previous function end")
+vim.keymap.set({"n"}, "]m", [[:TSTextobjectGotoNextStart @function.outer<CR>zz]], { desc = "Go to next function start" })
+vim.keymap.set({"n"}, "]M", [[:TSTextobjectGotoNextEnd @function.outer<CR>zz]], { desc = "Go to next function end" })
+vim.keymap.set({"n"}, "[m", [[:TSTextobjectGotoPreviousStart @function.outer<CR>zz]], { desc = "Go to previous function start" })
+vim.keymap.set({"n"}, "[M", [[:TSTextobjectGotoPreviousEnd @function.outer<CR>zz]], { desc = "Go to previous function end" })
 
 return M

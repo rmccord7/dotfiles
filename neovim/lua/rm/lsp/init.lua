@@ -65,9 +65,12 @@ local lsp_rename = function()
           return
         end
 
+        --- @cast ctx lsp.HandlerContext
+
         -- apply renames
         local client = vim.lsp.get_client_by_id(ctx.client_id)
         if client then
+          --- @cast client vim.lsp.Client
           vim.lsp.util.apply_workspace_edit(res, client.offset_encoding)
 
           -- print renames
@@ -108,35 +111,45 @@ end
 ---@param _ any a reference to the lsp client
 ---@param bufnr number the buffer number
 hooks.my_on_attach = function(_, bufnr)
-  nmap("gh", vim.lsp.buf.hover, "LSP Hover", { buffer = bufnr })
-  nmap("gi", vim.lsp.buf.implementation, "LSP GoTo implementation", { buffer = bufnr })
-  nmap("gt", vim.lsp.buf.type_definition, "LSP GoTo Type", { buffer = bufnr })
-  nmap("gd", function()
+  vim.keymap.set({ "n" }, "gh", vim.lsp.buf.hover, { buffer = bufnr, desc = "LSP Hover" })
+
+  vim.keymap.set({ "n" }, "gi", vim.lsp.buf.implementation, { buffer = bufnr, desc = "LSP GoTo implementation" })
+
+  vim.keymap.set({ "n" }, "gt", vim.lsp.buf.type_definition, { buffer = bufnr, desc = "LSP GoTo Type" })
+
+  vim.keymap.set({ "n" }, "gd", function()
     require("telescope.builtin").lsp_definitions()
-  end, "LSP GoTo Definition", { buffer = bufnr })
-  nmap("gD", vim.lsp.buf.definition, "LSP GoTo Definition", { buffer = bufnr })
-  nmap("<C-s>", vim.lsp.buf.signature_help, "LSP Signatute Help", { buffer = bufnr })
-  nmap("<leader>rn", lsp_rename, "LSP Rename", { buffer = bufnr })
+  end, { buffer = bufnr, desc = "LSP GoTo Definition" })
 
-  nmap("<leader>ca", vim.lsp.buf.code_action, "LSP Code Action", { buffer = bufnr })
-  vmap("<leader>ca", vim.lsp.buf.code_action, "LSP Code Action", { buffer = bufnr })
+  vim.keymap.set({ "n" }, "gD", vim.lsp.buf.definition, { buffer = bufnr, desc = "LSP GoTo Definition" })
 
-  nmap("<leader>lr", function()
+  vim.keymap.set({ "n" }, "<C-s>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP Signatute Help" })
+
+  vim.keymap.set({ "n" }, "<leader>rn", lsp_rename, { buffer = bufnr, desc = "LSP Rename" })
+
+  vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "LSP Code Action" })
+
+  vim.keymap.set({ "n" }, "<leader>lr", function()
     require("telescope.builtin").lsp_references()
-  end, "LSP List References", { buffer = bufnr })
-  -- nmap('<leader>f', function() vim.lsp.buf.format { async = true } end, 'LSP Format', { buffer = bufnr })
+  end, { buffer = bufnr, desc = "LSP List References" })
 
-  nmap("<leader>li", vim.lsp.buf.implementation, "LSP GoTo Implementation", { buffer = bufnr })
+  vim.keymap.set({ "n" }, '<leader>f', function()
+    vim.lsp.buf.format({ async = true })
+  end, { buffer = bufnr, desc = "LSP Format" })
 
-  nmap("<leader>ps", function()
+  vim.keymap.set({ "n" }, "<leader>li", vim.lsp.buf.implementation, { buffer = bufnr, desc = "LSP GoTo Implementation" })
+
+  vim.keymap.set({ "n" }, "<leader>ps", function()
     require("telescope.builtin").lsp_dynamic_workspace_symbols()
-  end, "LSP Dynamic Workspace Symbols", { buffer = bufnr })
-  nmap("<leader>lw", function()
+  end, { buffer = bufnr, desc = "LSP Dynamic Workspace Symbols" })
+
+  vim.keymap.set({ "n" }, "<leader>lw", function()
     require("telescope.builtin").lsp_workspace_symbols()
-  end, "LSP Workspace Symbols", { buffer = bufnr })
-  nmap("<leader>gs", function()
+  end, { buffer = bufnr, desc = "LSP Workspace Symbols" })
+
+  vim.keymap.set({ "n" }, "<leader>gs", function()
     require("telescope.builtin").lsp_document_symbols()
-  end, "LSP Document Symbols", { buffer = bufnr })
+  end, { buffer = bufnr, desc = "LSP Document Symbols" })
 end
 
 hooks.my_capabilities = vim.tbl_deep_extend("force", require("blink.cmp").get_lsp_capabilities(), {

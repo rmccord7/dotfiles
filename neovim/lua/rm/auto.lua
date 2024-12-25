@@ -79,7 +79,7 @@ create_augroup("REMAP_TERM_ESCAPE_UNLESS_LAZYGIT", {
   pattern = "*",
   callback = function()
     if vim.fn.expand("%:t", false) ~= "lazygit" then
-      tmap("<esc>", [[<c-\><c-n>]], "Escape term")
+      vim.keymap.set({"t"}, "<esc>", [[<c-\><c-n>]], { desc = "Escape term" })
     end
   end,
 })

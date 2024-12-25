@@ -5,138 +5,130 @@ local global = require("rm.global")
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-nmap("<leader>pc", [[<cmd>Telescope p4 clients<cr>]], "List perforce clients")
-nmap("<leader>pl", [[<cmd>Telescope p4 change_lists<cr>]], "List perforce change lists")
+vim.keymap.set({ "n" }, "<leader>pc", [[<cmd>Telescope p4 clients<cr>]], { desc = "List perforce clients" })
+vim.keymap.set({ "n" }, "<leader>pl", [[<cmd>Telescope p4 change_lists<cr>]], { desc = "List perforce change lists" })
 
-nmap("<leader>qa", "<cmd>qa<cr>", "Quit all")
-nmap("<leader>qf", "<cmd>qa!<cr>", "Force Quit all")
+vim.keymap.set({ "n" }, "<leader>qa", "<cmd>qa<cr>", { desc = "Quit all" })
+vim.keymap.set({ "n" }, "<leader>qf", "<cmd>qa!<cr>", { desc = "Force Quit all" })
 
 -- Ex-mode is weird and not useful so it seems better to repeat the last macro
-nmap("Q", "@@", "Repeat last macro")
+vim.keymap.set({ "n" }, "Q", "@@", { desc = "Repeat last macro" })
 
 -- Map jk/kj to <esc>. Note that this causes small visual pauses when actually
 -- typing j or k
-imap("jk", "<ESC>", "Exit insert mode")
-imap("kj", "<ESC>", "Exit insert mode")
+vim.keymap.set({ "i" }, "jk", "<ESC>", { desc = "Exit insert mode" })
+vim.keymap.set({ "i" }, "kj", "<ESC>", { desc = "Exit insert mode" })
 
 -- Keep cursor centered on search, motions, and join.
-nmap("n", "nzzzv")
-nmap("N", "Nzzzv")
-nmap("g;", "g;zz")
-nmap("gi", "zzgi")
-nmap("J", "mzJ'z")
-nmap("[c", "[czz")
-nmap("]c", "]czz")
-nmap("<C-u>", "<C-u>zz")
-nmap("<C-d>", "<C-d>zz")
-nmap("<C-f>", "<C-f>zz")
-nmap("<C-b>", "<C-b>zz")
+vim.keymap.set({ "n" }, "n", "nzzzv")
+vim.keymap.set({ "n" }, "N", "Nzzzv")
+vim.keymap.set({ "n" }, "g;", "g;zz")
+vim.keymap.set({ "n" }, "gi", "zzgi")
+vim.keymap.set({ "n" }, "J", "mzJ'z")
+vim.keymap.set({ "n" }, "[c", "[czz")
+vim.keymap.set({ "n" }, "]c", "]czz")
+vim.keymap.set({ "n" }, "<C-u>", "<C-u>zz")
+vim.keymap.set({ "n" }, "<C-d>", "<C-d>zz")
+vim.keymap.set({ "n" }, "<C-f>", "<C-f>zz")
+vim.keymap.set({ "n" }, "<C-b>", "<C-b>zz")
 
-nmap("<leader>ht", [[:lua require('lsp-inlayhints').toggle()<CR>]])
-nmap("<leader>hc", [[:lua require('lsp-inlayhints').reset()<CR>]])
+vim.keymap.set({ "n" }, "<leader>ht", [[:lua require('lsp-inlayhints').toggle()<CR>]])
+vim.keymap.set({ "n" }, "<leader>hc", [[:lua require('lsp-inlayhints').reset()<CR>]])
 
 -- Don't undo everything.
-imap(".", ".<c-g>u")
-imap(",", ",<c-g>u")
-imap("!", "!<c-g>u")
-imap("?", "?<c-g>u")
+vim.keymap.set({ "i" }, ".", ".<c-g>u")
+vim.keymap.set({ "i" }, ",", ",<c-g>u")
+vim.keymap.set({ "i" }, "!", "!<c-g>u")
+vim.keymap.set({ "i" }, "?", "?<c-g>u")
 
 -- Return from relative number jumping.
-nmap("j", [[(v:count > 5 ? "m'" . v:count : "") . 'j']], "Move line down", { expr = true })
-nmap("k", [[(v:count > 5 ? "m'" . v:count : "") . 'k']], "Move line up", { expr = true })
+vim.keymap.set({ "n" }, "j", [[(v:count > 5 ? "m'" . v:count : "") . 'j']], { expr = true, desc = "Move line down" })
+vim.keymap.set({ "n" }, "k", [[(v:count > 5 ? "m'" . v:count : "") . 'k']], { expr = true, desc = "Move line up" })
 
 --Moving text
-vmap("J", [[:m '>+1<CR>gv=gv]], "Move text down")
-vmap("K", [[:m '<-2<CR>gv=gv]], "Move text up")
-imap("<C-j>", [[<esc>:m .+1<CR>==]], "Move text up")
-imap("<C-k>", [[<esc>:m .-2<CR>==]], "Move text down")
-nmap("<leader>k", [[:m .-2<CR>==]], "Move line up")
-nmap("<leader>j", [[:m .+1<CR>==]], "Move line down")
+vim.keymap.set({ "v" }, "J", [[:m '>+1<CR>gv=gv]], { desc = "Move text down" })
+vim.keymap.set({ "v" }, "K", [[:m '<-2<CR>gv=gv]], { desc = "Move text up" })
+vim.keymap.set({ "i" }, "<C-j>", [[<esc>:m .+1<CR>==]], { desc = "Move text up" })
+vim.keymap.set({ "i" }, "<C-k>", [[<esc>:m .-2<CR>==]], { desc = "Move text down" })
+vim.keymap.set({ "n" }, "<leader>k", [[:m .-2<CR>==]], { desc = "Move line up" })
+vim.keymap.set({ "n" }, "<leader>j", [[:m .+1<CR>==]], { desc = "Move line down" })
 
 -- make c/C change command send text to black hole register, i didn't want
 -- it anyways if I changed it probably
-nmap("c", '"_c')
-nmap("C", '"_C')
+vim.keymap.set({ "n" }, "c", '"_c')
+vim.keymap.set({ "n" }, "C", '"_C')
 
 -- Change word. Set next word for quick search/replace..
-nmap("cn", [[*''cgn]], "Change next word")
-nmap("cN", [[*''cgN]], "Change next word")
+vim.keymap.set({ "n" }, "cn", [[*''cgn]], { desc = "Change next word" })
+vim.keymap.set({ "n" }, "cN", [[*''cgN]], { desc = "Change next word" })
 
 -- Reselect last put text
-nmap("gV", "'[v']", "Select last put text")
+vim.keymap.set({ "n" }, "gV", "'[v']", { desc = "Select last put text" })
 
 -- Replace currently selected text with default register without yanking it
-vmap("p", '"_dP', nil, { silent = false })
+vim.keymap.set({ "v" }, "p", '"_dP', { silent = false })
 
 -- Insert new line without leaving normal mode.
-nmap(
+vim.keymap.set({ "n" },
   "<leader>o",
   [[:<C-u>call append(line("."), repeat([""], v:count1))<CR>]],
-  "Insert new line below",
-  { nowait = true }
+  { nowait = true, desc = "Insert new line below" }
 )
-nmap(
+vim.keymap.set({ "n" },
   "<leader>O",
   [[:<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>]],
-  "Insert new line above",
-  { nowait = true }
+  { nowait = true, desc = "Insert new line above" }
 )
 
 -- run a :command
-nmap("go", ":", "Command-line mode", { silent = false })
-vmap("go", ":", "Command-line mode", { silent = false })
+vim.keymap.set({ "n", "v" }, "go", ":", { silent = false, desc = "Command-line mode" })
 
 -- Substitute Linewise
-nmap("<leader>sl", ":s/", "Linewise search", { silent = false })
-vmap("<leader>sl", ":s/", "Linewise search", { silent = false })
+vim.keymap.set({ "n", "v" }, "<leader>sl", ":s/", { silent = false, desc = "Linewise search" })
 
 -- Substitute Globally
-nmap("<leader>sg", ":%s/", "Global buffer search", { silent = false })
-vmap("<leader>sg", ":%s/", "Global buffer search", { silent = false })
+vim.keymap.set({ "n", "v" }, "<leader>sg", ":%s/", { silent = false, desc = "Global buffer search" })
 
 -- repeat last macro
-nmap("<c-m>", "@@", "Repeat last macro", { silent = false })
-vmap("<c-m>", "@@", "Repeat last macro", { silent = false })
+vim.keymap.set({ "n", "v" }, "<c-m>", "@@", { silent = false, desc = "Repeat last macro" })
 
 -- repeat last :command
-nmap("gx", "@:", "Repeat last command", { silent = false })
-vmap("gx", "@:", "Repeat last command", { silent = false })
+vim.keymap.set({ "n", "v" }, "gx", "@:", { silent = false, desc = "Repeat last command" })
 
 -- remap q: to be easier to use, less work for your poor left pinky
-nmap("<c-q>", "q:", "Open cmdline window", { silent = false })
-vmap("<c-q>", "q:", "Open cmdline window", { silent = false })
+vim.keymap.set({ "n", "v" }, "<c-q>", "q:", { silent = false, desc = "Open cmdline window" })
 
 -- quickfix list navigation yay
-nmap("<leader>co", "<cmd>copen<cr>", "Open qflist")
-nmap("<leader>ce", "<cmd>cclose<cr>", "Close/exit qflist")
-nmap("<leader>cn", "<cmd>cnext<cr>", "Next item in qflist")
-nmap("<leader>cp", "<cmd>cprev<cr>", "Prev item in qflist")
-nmap("<leader>qd", function()
+vim.keymap.set({ "n" }, "<leader>co", "<cmd>copen<cr>", { desc = "Open qflist" })
+vim.keymap.set({ "n" }, "<leader>ce", "<cmd>cclose<cr>", { desc = "Close/exit qflist" })
+vim.keymap.set({ "n" }, "<leader>cn", "<cmd>cnext<cr>", { desc = "Next item in qflist" })
+vim.keymap.set({ "n" }, "<leader>cp", "<cmd>cprev<cr>", { desc = "Prev item in qflist" })
+vim.keymap.set({ "n" }, "<leader>qd", function()
   vim.ui.input({ prompt = "Quickfix do: ", completion = "command" }, function(do_cmd)
     if do_cmd then
       vim.cmd("cfdo " .. do_cmd)
     end
   end)
-end, "Exec cmd for all items in qf list")
+end, { desc = "Exec cmd for all items in qf list" })
 
 -- take the only existing window and split it to the right
-nmap("<leader>wr", [[<cmd>vnew | wincmd r | wincmd l<cr>]], "Split 1 window to right")
+vim.keymap.set({ "n" }, "<leader>wr", [[<cmd>vnew | wincmd r | wincmd l<cr>]], { desc = "Split 1 window to right" })
 
 -- swap windows and move cursor to other window
-nmap("<leader>wl", [[<cmd>wincmd r | wincmd l<cr>]], "Swap windows and move cursor")
+vim.keymap.set({ "n" }, "<leader>wl", [[<cmd>wincmd r | wincmd l<cr>]], { desc = "Swap windows and move cursor" })
 
 -- Toggle relative line numbers
-nmap("<leader>tn", function()
-  if vim.api.nvim_win_get_option(0, "relativenumber") then
+vim.keymap.set({ "n" }, "<leader>tn", function()
+  if vim.api.nvim_get_option_value("relativenumber", { buf = 0 }) then
     vim.cmd("windo set norelativenumber")
   else
     vim.cmd("windo set relativenumber")
   end
-end, "Toogle relative line numbers")
+end, { desc = "Toogle relative line numbers" })
 
 -- Reload current buffer if it is a vim or lua file (Source Here)
-nmap("<leader>sh", function()
-  local ft = vim.api.nvim_buf_get_option(0, "filetype")
+vim.keymap.set({ "n" }, "<leader>sh", function()
+  local ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
   if ft == "vim" then
     vim.cmd("source %")
     vim.notify("vim file reloaded!", vim.log.levels.INFO)
@@ -146,10 +138,10 @@ nmap("<leader>sh", function()
   else
     vim.notify("Not a lua or vim file", vim.log.levels.INFO)
   end
-end, "Source Here (reload current file)")
+end, { desc = "Source Here (reload current file)" })
 
 -- Search dev docs
-nmap("<leader>dd", function()
+vim.keymap.set({ "n" }, "<leader>dd", function()
   local query = vim.fn.input({ default = "Search DevDocs: " })
   local encodedURL = nil
 
@@ -160,10 +152,10 @@ nmap("<leader>dd", function()
   else
     vim.notify("Open command not supported by OS", vim.log.levels.ERROR)
   end
-end, "Search DevDocs")
+end, { desc = "Search DevDocs" })
 
 -- Change a split between horizontal and vertical
-nmap("<leader>ws", function()
+vim.keymap.set({ "n" }, "<leader>ws", function()
   local a = vim.api
   local windows = a.nvim_tabpage_list_wins(0)
 
@@ -186,4 +178,4 @@ nmap("<leader>ws", function()
   if cmd_mapping then
     a.nvim_feedkeys(cmd_mapping, "n", false)
   end
-end, "Swap split between horizontal and vertical")
+end, { desc = "Swap split between horizontal and vertical" })
