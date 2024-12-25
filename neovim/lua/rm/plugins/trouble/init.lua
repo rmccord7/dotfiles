@@ -1,26 +1,40 @@
-local config = function()
-  local ok, plugin = pcall(require, "trouble")
-
-  if not ok then
-    return
-  end
-
-  plugin.setup()
-
-  -- vim.keymap.set({"n"}, '<leader>xx', ':Trouble<CR>', { desc = 'Trouble toggle' })
-  -- vim.keymap.set({"n"}, '<leader>xw', ':Trouble workspace_diagnostics<CR>', { desc = 'Trouble workspace diagnostics' })
-  -- vim.keymap.set({"n"}, '<leader>xd', ':Trouble document_diagnostics<CR>', { desc = 'Trouble document diagnostics' })
-  -- vim.keymap.set({"n"}, '<leader>xq', ':Trouble quickfix<CR>', { desc = 'Trouble quickfix' })
-  -- vim.keymap.set({"n"}, '<leader>xl', ':Trouble loclist<CR>', { desc = 'Trouble loclist' })
-  -- vim.keymap.set({"n"}, '<leader>xr', ':Trouble lsp_references<CR>', { desc = 'Trouble LSP Ref' })
-  -- vim.keymap.set({"n"}, '<leader>xn', [[:lua require('trouble').next({skip_groups = false, jump = true})<CR>]], { desc = 'Trouble Next' })
-  -- vim.keymap.set({"n"}, '<leader>xp', [[:lua require('trouble').previous({skip_groups = false, jump = true})<CR>]], { desc = 'Trouble Previous' })
-end
-
 local M = {
   {
     "folke/trouble.nvim",
-    config = config,
+    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    cmd = "Trouble",
+    keys = {
+      {
+        "<leader>xx",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Diagnostics (Trouble)",
+      },
+      {
+        "<leader>xX",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Buffer Diagnostics (Trouble)",
+      },
+      {
+        "<leader>cs",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
+        desc = "Symbols (Trouble)",
+      },
+      {
+        "<leader>cl",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        desc = "LSP Definitions / references / ... (Trouble)",
+      },
+      {
+        "<leader>xL",
+        "<cmd>Trouble loclist toggle<cr>",
+        desc = "Location List (Trouble)",
+      },
+      {
+        "<leader>xQ",
+        "<cmd>Trouble qflist toggle<cr>",
+        desc = "Quickfix List (Trouble)",
+      },
+    },
     dependencies = {
       "kyazdani42/nvim-web-devicons",
       "nvim-telescope/telescope.nvim",
