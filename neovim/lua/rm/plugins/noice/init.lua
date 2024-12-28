@@ -1,11 +1,11 @@
-local config = function()
-  local ok, plugin = pcall(require, "noice")
-
-  if not ok then
-    return
-  end
-
-  plugin.setup({
+return {
+  "folke/noice.nvim",
+  dependencies = {
+    "MunifTanjim/nui.nvim",
+    "rcarriga/nvim-notify",
+  },
+  event = "VeryLazy",
+  opts = {
     lsp = {
       -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
       override = {
@@ -22,19 +22,5 @@ local config = function()
       inc_rename = false, -- enables an input dialog for inc-rename.nvim
       lsp_doc_border = false, -- add a border to hover docs and signature help
     },
-  })
-end
-
-local M = {
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    config = config,
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    },
   },
 }
-
-return M

@@ -1,22 +1,12 @@
-local config = function()
-  local ok, plugin = pcall(require, "material")
-
-  if not ok then
-    return
-  end
-
-  -- Set theme
-  vim.g.material_style = "deep ocean"
-
-  local colors = require("material.colors")
-
-  plugin.setup({
+return {
+  "marko-cerovac/material.nvim",
+  lazy = false,
+  priority = 1000,
+  opts = {
     plugins = {
       "indent-blankline",
-      "lspsaga",
       "gitsigns",
       "nvim-cmp",
-      "nvim-tree",
       "telescope",
       "trouble",
       "which-key",
@@ -27,7 +17,11 @@ local config = function()
       c.syntax.comments = "#5A6077"
       c.editor.line_numbers = "#5A6077"
     end,
-    custom_highlights = {
+  },
+  config = function(_, opts)
+    local colors = require("material.colors")
+
+    opts.custom_highlights = {
       -- Command mode
       MsgArea = { fg = "#E2795B", bold = true },
 
@@ -71,20 +65,13 @@ local config = function()
       -- IblScope = {fg = colors.editor.border },
       -- IblWhitespace = {fg = colors.editor.disabled },
       -- IblIndex = {fg = colors.editor.disabled },
-    },
-  })
+    }
 
-  -- Set our color scheme
-  vim.cmd("colorscheme material")
-end
+    require("material").setup(opts)
 
-local M = {
-  {
-    "marko-cerovac/material.nvim",
-    lazy = false,
-    config = config,
-    priority = 1000,
-  },
+    vim.cmd("colorscheme material")
+  end,
+  init = function(_)
+    vim.g.material_style = "deep ocean"
+  end,
 }
-
-return M

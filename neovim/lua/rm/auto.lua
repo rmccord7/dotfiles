@@ -29,6 +29,13 @@ create_augroup("CREATE_DIR_AUCMDS", {
   events = { "BufWritePre" },
   pattern = "*",
   command = 'lua require("utils").create_file_directory_structure()',
+  callback = function()
+    local path = vim.fn.expand("%:p:h")
+
+    if vim.fn.isdirectory(path) == 0 then
+      vim.fn.mkdir(path, "p")
+    end
+  end
 })
 
 -- Autocmds
@@ -79,7 +86,7 @@ create_augroup("REMAP_TERM_ESCAPE_UNLESS_LAZYGIT", {
   pattern = "*",
   callback = function()
     if vim.fn.expand("%:t", false) ~= "lazygit" then
-      vim.keymap.set({"t"}, "<esc>", [[<c-\><c-n>]], { desc = "Escape term" })
+      vim.keymap.set({ "t" }, "<esc>", [[<c-\><c-n>]], { desc = "Escape term" })
     end
   end,
 })

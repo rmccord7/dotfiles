@@ -1,7 +1,3 @@
-local M = {
-  {
-    "milisims/nvim-luaref",
-  },
+return {
+  "milisims/nvim-luaref",
 }
-
-return M

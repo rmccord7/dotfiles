@@ -1,8 +1,8 @@
-M = {}
-
 local utils = require("heirline.utils")
 
 local colors = require("material.colors")
+
+local M = {}
 
 local FileNameBlock = {
   -- let's first set up some attributes needed by this component and it's children

@@ -1,21 +1,10 @@
-local config = function()
-  local ok, plugin = pcall(require, "todo-comments")
+return {
+  "folke/todo-comments.nvim",
+  dependencies = "nvim-lua/plenary.nvim",
+  opts = {},
+  config = function(_, opts)
+    require("todo-comments").setup(opts)
 
-  if not ok then
-    return
-  end
-
-  plugin.setup({})
-
-  vim.keymap.set({"n"}, "<leader>td", [[:TodoTelescope<CR>]], { desc = "Todo Telescope" })
-end
-
-local M = {
-  {
-    "folke/todo-comments.nvim",
-    dependencies = "nvim-lua/plenary.nvim",
-    config = config,
-  },
+    vim.keymap.set({ "n" }, "<leader>td", [[:TodoTelescope<CR>]], { desc = "Todo Telescope" })
+  end,
 }
-
-return M

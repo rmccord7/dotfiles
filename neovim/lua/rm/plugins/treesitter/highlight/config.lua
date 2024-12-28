@@ -52,9 +52,7 @@ local function Disable(_, bufnr)
   return false
 end
 
-M = {
-  enable = true, -- Enable TS highlighting
-  disable = Disable, -- Disables TS highlighting per buffer
+return {
+  enable = true,
+  disable = Disable,
 }
-
-return M

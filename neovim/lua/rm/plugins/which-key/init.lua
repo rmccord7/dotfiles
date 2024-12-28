@@ -1,22 +1,8 @@
-local config = function()
-  local ok, plugin = pcall(require, "which-key")
-
-  if not ok then
-    return
-  end
-
-  plugin.setup()
-end
-
-local M = {
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    config = config,
-    dependencies = {
-      "kyazdani42/nvim-web-devicons",
-    },
+return {
+  "folke/which-key.nvim",
+  dependencies = {
+    "kyazdani42/nvim-web-devicons",
   },
+  event = "VeryLazy",
+  opts = {},
 }
-
-return M

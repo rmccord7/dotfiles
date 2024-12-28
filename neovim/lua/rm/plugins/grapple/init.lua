@@ -1,25 +1,14 @@
-local config = function()
-  local ok, plugin = pcall(require, "grapple")
-
-  if not ok then
-    return
-  end
-
-  plugin.setup({
-    scope = "lsp",
-  })
-end
-
-local M = {
-  ---@type LazySpec
+return {
   {
     "cbochs/grapple.nvim",
-    config = config,
     dependencies = {
       { "nvim-tree/nvim-web-devicons", lazy = true },
     },
     event = { "BufReadPost", "BufNewFile" },
     cmd = "Grapple",
+    opts = {
+      scope = "lsp",
+    },
     keys = {
       { "<leader>a", "<cmd>Grapple toggle<cr>", desc = "Tag a file" },
       { "<c-e>", "<cmd>Grapple toggle_tags<cr>", desc = "Toggle tags menu" },
@@ -39,5 +28,3 @@ local M = {
     },
   },
 }
-
-return M

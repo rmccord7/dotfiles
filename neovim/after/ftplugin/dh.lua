@@ -1,4 +1,4 @@
--- Set buffer options
+-- Buffer options
 vim.bo.autoindent = true -- Insert indents automatically
 vim.bo.expandtab = true -- Expands tabs to spaces
 vim.bo.shiftwidth = 4 -- Size of an indent

@@ -1,20 +1,9 @@
-local config = function()
-  local ok, plugin = pcall(require, "neoclip")
+return {
+  "AckslD/nvim-neoclip.lua",
+  opts = {},
+  config = function(_, opts)
+    require("neoclip").setup(opts)
 
-  if not ok then
-    return
-  end
-
-  plugin.setup()
-
-  vim.keymap.set({"n"}, '<leader>"', [[:Telescope neoclip<CR>]], { desc = "Neoclip" })
-end
-
-local M = {
-  {
-    "AckslD/nvim-neoclip.lua",
-    config = config,
-  },
+    vim.keymap.set({ "n" }, '<leader>"', [[:Telescope neoclip<CR>]], { desc = "Neoclip" })
+  end,
 }
-
-return M

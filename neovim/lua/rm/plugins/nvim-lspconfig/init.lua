@@ -1,22 +1,10 @@
-local config = function()
-  local ok, _ = pcall(require, "lspconfig")
-
-  if not ok then
-    return
-  end
-
-  require("rm.lsp")
-end
-
-local M = {
-  {
-    "neovim/nvim-lspconfig",
-    config = config,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "saghen/blink.cmp",
-    },
+return {
+  "neovim/nvim-lspconfig",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "saghen/blink.cmp",
   },
+  config = function(_, _)
+    require("rm.lsp")
+  end,
 }
-
-return M

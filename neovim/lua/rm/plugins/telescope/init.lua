@@ -1,32 +1,32 @@
 local actions = require("telescope.actions")
 
 local always_ignored = {
-    -- Directories
-    "%.git/.*",
+  -- Directories
+  "%.git/.*",
 
-    -- Clangd
-    "%.cache/*",
+  -- Clangd
+  "%.cache/*",
 
-    -- FileTypes
-    "$%.ttf",
-    "$%.svg",
-    "$%.png",
-    "$%.jpeg",
-    "$%.jpg",
-    "$%.ico",
+  -- FileTypes
+  "$%.ttf",
+  "$%.svg",
+  "$%.png",
+  "$%.jpeg",
+  "$%.jpg",
+  "$%.ico",
 
-    -- Files
-    "tags",
+  -- Files
+  "tags",
 
-    -- Output files
-    "$%.o",
-    "$%.a",
-    "$%.lib",
-    "$%.so",
-    "$%.bin",
-    "$%.elf",
-    "$%.dblite",
-    "$%.pyc",
+  -- Output files
+  "$%.o",
+  "$%.a",
+  "$%.lib",
+  "$%.so",
+  "$%.bin",
+  "$%.elf",
+  "$%.dblite",
+  "$%.pyc",
 }
 
 return {
@@ -40,6 +40,7 @@ return {
     "tsakirist/telescope-lazy.nvim",
     "rmccord7/p4.nvim",
     "folke/trouble.nvim",
+    "nvim-telescope/telescope-frecency.nvim",
   },
   event = "VeryLazy",
   opts = {
@@ -82,8 +83,7 @@ return {
       oldfiles = {
         path_display = { "smart" },
       },
-    }
-    ,
+    },
     defaults = {
       vimgrep_arguments = {
         "rg",
@@ -142,11 +142,10 @@ return {
         hijack_netrw = false,
       },
     },
-
   },
   config = function(_, opts)
     local telescope = require("telescope")
-    local builtin = require 'telescope.builtin'
+    local builtin = require("telescope.builtin")
 
     telescope.setup(opts)
 
@@ -171,71 +170,74 @@ return {
     require("telescope").load_extension("notify")
     require("telescope").load_extension("lazy")
     require("telescope").load_extension("p4")
+    require("telescope").load_extension("frecency")
 
-    vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Workspace Files' })
+    vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Workspace Files" })
 
-    vim.keymap.set('n', '<leader>fa', function()
-      builtin.find_files {
+    vim.keymap.set("n", "<leader>fa", function()
+      builtin.find_files({
         -- file_ignore_patterns = bs.telescope.always_ignored,
         no_ignore = true,
         hidden = true,
-      }
-    end, { desc = 'Workspace Files (All)' })
+      })
+    end, { desc = "Workspace Files (All)" })
 
-    vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'Find Word Under Cursor' })
+    vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "Find Word Under Cursor" })
 
-    vim.keymap.set('n', '<leader>gw', builtin.live_grep, { desc = 'Grep String' })
+    vim.keymap.set("n", "<leader>gw", builtin.live_grep, { desc = "Grep String" })
 
-    vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = 'Fuzzy Find Current Buffer' })
+    vim.keymap.set("n", "<leader>/", builtin.current_buffer_fuzzy_find, { desc = "Fuzzy Find Current Buffer" })
 
-    vim.keymap.set('n', '<leader>hv', builtin.help_tags, { desc = 'Plugin Help' })
+    vim.keymap.set("n", "<leader>hv", builtin.help_tags, { desc = "Plugin Help" })
 
-    vim.keymap.set('n', '<leader>hm', builtin.man_pages, { desc = 'Find Manual' })
+    vim.keymap.set("n", "<leader>hm", builtin.man_pages, { desc = "Find Manual" })
 
-    vim.keymap.set('n', '<leader>jb', builtin.builtin, { desc = 'List Telescope Builtins' })
+    vim.keymap.set("n", "<leader>jb", builtin.builtin, { desc = "List Telescope Builtins" })
 
-    vim.keymap.set('n', '<leader>tr', builtin.resume, { desc = 'Telescope Resume' })
+    vim.keymap.set("n", "<leader>tr", builtin.resume, { desc = "Telescope Resume" })
 
-    vim.keymap.set('n', '<leader>m', builtin.keymaps, { desc = 'List Keymaps' })
+    vim.keymap.set("n", "<leader>m", builtin.keymaps, { desc = "List Keymaps" })
 
-    vim.keymap.set('n', '<leader>ch', builtin.command_history, { desc = 'List Command History' })
+    vim.keymap.set("n", "<leader>ch", builtin.command_history, { desc = "List Command History" })
 
-    vim.keymap.set('n', '<leader>b', function()
-      builtin.buffers {
+    vim.keymap.set("n", "<leader>b", function()
+      builtin.buffers({
         ignore_current_buffer = true,
         sort_mru = true,
-      }
-    end, { desc = 'Buffers' })
+      })
+    end, { desc = "Buffers" })
 
-    vim.keymap.set('n', '<leader>fd', function()
-      builtin.find_files {
+    vim.keymap.set("n", "<leader>fd", function()
+      builtin.find_files({
         cwd = "~/dotfiles",
-      }
-    end, { desc = 'Search Dotfiles' })
+      })
+    end, { desc = "Search Dotfiles" })
 
-    vim.keymap.set('n', '<leader>fh', function()
-      builtin.find_files {
+    vim.keymap.set("n", "<leader>fh", function()
+      builtin.find_files({
         cwd = "~",
-      }
-    end, { desc = 'Search Home' })
+      })
+    end, { desc = "Search Home" })
 
-    vim.keymap.set('n', '<leader>gv', function()
-      builtin.live_grep {
+    vim.keymap.set("n", "<leader>gv", function()
+      builtin.live_grep({
         cwd = os.getenv("VIMRUNTIME") .. "/doc",
-      }
-    end, { desc = 'Grim Vim Help' })
+      })
+    end, { desc = "Grim Vim Help" })
 
-    vim.keymap.set('n', '<leader>ld', function()
-      builtin.diagnostics {
+    vim.keymap.set("n", "<leader>ld", function()
+      builtin.diagnostics({
         bufnr = 0,
-      }
-    end, { desc = 'Buffer Diagnostics' })
+      })
+    end, { desc = "Buffer Diagnostics" })
 
-    vim.keymap.set('n', '<leader>lad', builtin.diagnostics, { desc = 'Project Diagnostics' })
+    vim.keymap.set("n", "<leader>lad", builtin.diagnostics, { desc = "Project Diagnostics" })
 
     vim.keymap.set({ "n" }, "<leader>fb", ":Telescope file_browser<CR>", { desc = "File Browser" })
     vim.keymap.set({ "n" }, "<leader>nh", ":Telescope notify<CR>", { desc = "List Notifications" })
     vim.keymap.set({ "n" }, "<leader>te", ":Telescope env<CR>", { desc = "List Environment Variables" })
     vim.keymap.set({ "n" }, "<leader>tp", ":Telescope lazy<CR>", { desc = "Plugin Browser" })
+
+    vim.keymap.set({ "n" }, "<leader>rw", ":Telescope fecency<CR>", { desc = "Telescope frecency" })
   end,
 }

@@ -69,12 +69,14 @@ vim.keymap.set({ "n" }, "gV", "'[v']", { desc = "Select last put text" })
 vim.keymap.set({ "v" }, "p", '"_dP', { silent = false })
 
 -- Insert new line without leaving normal mode.
-vim.keymap.set({ "n" },
+vim.keymap.set(
+  { "n" },
   "<leader>o",
   [[:<C-u>call append(line("."), repeat([""], v:count1))<CR>]],
   { nowait = true, desc = "Insert new line below" }
 )
-vim.keymap.set({ "n" },
+vim.keymap.set(
+  { "n" },
   "<leader>O",
   [[:<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>]],
   { nowait = true, desc = "Insert new line above" }

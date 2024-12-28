@@ -133,11 +133,16 @@ hooks.my_on_attach = function(_, bufnr)
     require("telescope.builtin").lsp_references()
   end, { buffer = bufnr, desc = "LSP List References" })
 
-  vim.keymap.set({ "n" }, '<leader>f', function()
+  vim.keymap.set({ "n" }, "<leader>f", function()
     vim.lsp.buf.format({ async = true })
   end, { buffer = bufnr, desc = "LSP Format" })
 
-  vim.keymap.set({ "n" }, "<leader>li", vim.lsp.buf.implementation, { buffer = bufnr, desc = "LSP GoTo Implementation" })
+  vim.keymap.set(
+    { "n" },
+    "<leader>li",
+    vim.lsp.buf.implementation,
+    { buffer = bufnr, desc = "LSP GoTo Implementation" }
+  )
 
   vim.keymap.set({ "n" }, "<leader>ps", function()
     require("telescope.builtin").lsp_dynamic_workspace_symbols()

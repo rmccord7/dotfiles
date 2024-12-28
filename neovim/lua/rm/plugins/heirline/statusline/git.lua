@@ -1,9 +1,9 @@
-M = {}
-
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
 
 local colors = require("material.colors")
+
+local M = {}
 
 M.Git = {
   condition = conditions.is_git_repo,

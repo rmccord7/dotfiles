@@ -6,7 +6,6 @@ return {
   require("rm.plugins.heirline"),
   require("rm.plugins.indent-blankline"),
   require("rm.plugins.lazydev"),
-  require("rm.plugins.lsp-inlayhints"),
   require("rm.plugins.luasnip"),
   require("rm.plugins.markdown-preview"),
   require("rm.plugins.mason"),
@@ -29,12 +28,10 @@ return {
   require("rm.plugins.yazi"),
 
   {
-    "elkowar/yuck.vim",
-  },
-
-  {
     "theRealCarneiro/hyprland-vim-syntax",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
     ft = "hypr",
   },
 }

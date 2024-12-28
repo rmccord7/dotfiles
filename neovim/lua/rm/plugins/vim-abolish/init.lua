@@ -1,7 +1,3 @@
-local M = {
-  {
-    "tpope/vim-abolish",
-  },
+return {
+  "tpope/vim-abolish",
 }
-
-return M

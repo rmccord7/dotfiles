@@ -1,8 +1,8 @@
-M = {}
-
 local utils = require("heirline.utils")
 
 local colors = require("material.colors")
+
+local M = {}
 
 M.Mode = {
   -- get vim current mode, this information will be required by the provider

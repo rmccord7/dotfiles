@@ -1,7 +1,8 @@
-M = {}
+local M = {}
 
 local config = require("rm.config")
 
+require("heirline")
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
 
@@ -88,7 +89,7 @@ local Lazy = {
 
 local Treesitter = {
   provider = "TS",
-  condition = function(self)
+  condition = function(_)
     local buf = vim.api.nvim_get_current_buf()
     local highlighter = require("vim.treesitter.highlighter")
     if highlighter.active[buf] then
@@ -126,8 +127,8 @@ local cwd = {
   {
     -- evaluates to the shortened path
     provider = function(self)
-      local cwd = vim.fn.pathshorten(self.cwd)
-      return "  " .. table.concat(vim.fn.split(cwd, "/"), sep)
+      local _cwd = vim.fn.pathshorten(self.cwd)
+      return "  " .. table.concat(vim.fn.split(_cwd, "/"), sep)
     end,
   },
   {

@@ -1,12 +1,6 @@
-local config = function()
-  require("gitsigns").setup()
-end
-
-local M = {
+return {
   {
     "lewis6991/gitsigns.nvim",
-    config = config,
+    opts = {},
   },
 }
-
-return M
