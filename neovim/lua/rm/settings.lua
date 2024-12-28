@@ -4,37 +4,16 @@ local config = require("rm.config")
 
 vim.g.python3_host_prog = config.path.python_path -- Set python path
 
---Disable internal plugins we aren't to use
-vim.g.loaded_gzip = 1
-vim.g.loaded_zip = 1
-vim.g.loaded_zipPlugin = 1
-vim.g.loaded_tar = 1
-vim.g.loaded_tarPlugin = 1
-vim.g.loaded_getscript = 1
-vim.g.loaded_getscriptPlugin = 1
-vim.g.loaded_vimball = 1
-vim.g.loaded_vimballPlugin = 1
-vim.g.loaded_2html_plugin = 1
-vim.g.loaded_logiPat = 1
-vim.g.loaded_rrhelper = 1
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-vim.g.loaded_netrwSettings = 1
-vim.g.loaded_matchit = 1
-vim.g.loaded_matchparen = 1
-
--- Neovim options
-
 vim.opt.clipboard = { "unnamedplus" } -- Use system clip board for copy/paste
-vim.opt.cmdheight = 0 -- Don't show command window
-vim.opt.complete = "" -- Completion
-vim.opt.completeopt = "" -- Completion options
+vim.o.cmdheight = 0 -- Don't show command window
+vim.o.complete = "" -- Completion
+vim.o.completeopt = "" -- Completion options
 vim.opt.diffopt = { -- Diff options
   filler = true, -- Blank lines to keep sides aligned
-  iwhite = true, -- Ignore whitespace changes
+  followwrap = true, -- Use current wrap option
   vertical = true, -- Vertical diff mode
 }
-vim.opt.exrc = true -- Enable '.nvim.lua' project config
+vim.o.exrc = true -- Enable '.nvim.lua' project config
 vim.opt.fillchars = { diff = "⣿" }
 vim.opt.formatoptions = { -- Paragraph formatting options
   --default jcroql
@@ -50,14 +29,14 @@ vim.opt.formatoptions = { -- Paragraph formatting options
 }
 vim.opt.formatoptions:append("1") -- Break before 1-letter words
 vim.opt.formatoptions:append("2") -- Use indent from 2nd line of a paragraph
-vim.opt.grepprg = "grep -nH" -- Use grep
+vim.o.grepprg = "grep -nH" -- Use grep
 vim.opt.guifont = { "Hack NF FC Ligatured:h09" } -- Set GUI font
-vim.opt.hidden = true --Do not save when switching buffers
-vim.opt.ignorecase = true -- Ignore case when searching
-vim.opt.laststatus = 3 -- Display status line across all windows
-vim.opt.inccommand = "split" -- Show partial search/replace results in a preview
-vim.opt.hlsearch = false -- No highlighting when searching
-vim.opt.keywordprg = ":vert bo help" -- Open help in vertical split
+vim.o.hidden = true --Do not save when switching buffers
+vim.o.ignorecase = true -- Ignore case when searching
+vim.o.laststatus = 3 -- Display status line across all windows
+vim.o.inccommand = "split" -- Show partial search/replace results in a preview
+vim.o.hlsearch = false -- No highlighting when searching
+vim.o.keywordprg = ":vert bo help" -- Open help in vertical split
 vim.opt.listchars = { -- Strings to use in list mode
   tab = "››", -- Character to show for tab
   extends = "›", -- Character to show when wrap is off an line extends beyond the screen
@@ -74,14 +53,14 @@ vim.opt.shortmess:append({ -- Avoid enter prompts for file messages
   S = true, -- Hide search info echoing
   W = true, -- Don't give "written" or "[w]" when writing a file
 })
-vim.opt.smartcase = true -- Overide ignore case if capital letter in search
-vim.opt.splitright = true -- Split window right by default
-vim.opt.splitbelow = true -- Split window bottom by default
-vim.opt.splitkeep = "screen" -- Keep text the same when opening, closing, or resizing splits
-vim.opt.termguicolors = true -- Enable true color
-vim.opt.undodir = config.path.nvim_data .. "/undos" -- Set the undo directory
-vim.opt.undofile = true -- Enable undo between neovim sessions
-vim.opt.updatetime = 2000 -- Time (ms) for swap write and cursor hold event
+vim.o.smartcase = true -- Overide ignore case if capital letter in search
+vim.o.splitright = true -- Split window right by default
+vim.o.splitbelow = true -- Split window bottom by default
+vim.o.splitkeep = "screen" -- Keep text the same when opening, closing, or resizing splits
+vim.o.termguicolors = true -- Enable true color
+vim.o.undodir = config.path.nvim_data .. "/undos" -- Set the undo directory
+vim.o.undofile = true -- Enable undo between neovim sessions
+vim.o.updatetime = 2000 -- Time (ms) for swap write and cursor hold event
 vim.opt.wildmode = { "list", "longest" } -- Command line completion mode
 vim.opt.wildignore = { -- Ignore these files and folders for command line completion
   "*/node_modules/*",
@@ -92,7 +71,7 @@ vim.opt.wildignore = { -- Ignore these files and folders for command line comple
   "*.pyc",
 }
 
--- Buffer options
+-- Buffer local options
 
 vim.bo.autoindent = true -- Insert indents automatically
 vim.bo.expandtab = true -- Expands tabs to spaces
@@ -101,16 +80,17 @@ vim.bo.smartindent = true -- Insert indents automatically
 vim.bo.softtabstop = 4 -- Number of spaces tabs count for
 vim.bo.tabstop = 4 -- Number of spaces in a tab
 
--- Window options
+-- Window local options
 
 vim.wo.list = true -- Show whitespace characters like tabs and spaces
 vim.wo.number = true -- Show line numbers
+vim.wo.relativenumber = true -- Use relative line numbers
 vim.wo.wrap = false -- Do not display text over multiple lines
 
 -- External options
 
 -- Use Rip grep instead of grep if supported
 if config.apps.rg then
-  vim.opt.grepprg = "rg --vimgrep --smart-case --hidden" -- Use rg instead of grep
-  vim.opt.grepformat = "%f:%l:%c:%m"
+  vim.o.grepprg = "rg --vimgrep --smart-case --hidden" -- Use rg instead of grep
+  vim.o.grepformat = "%f:%l:%c:%m"
 end

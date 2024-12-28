@@ -1,13 +1,3 @@
-local global = require("rm.global")
-
--- Remap space as leader key
---map('', '<Space>', '<Nop>', 'Leader')
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
-vim.keymap.set({ "n" }, "<leader>pc", [[<cmd>Telescope p4 clients<cr>]], { desc = "List perforce clients" })
-vim.keymap.set({ "n" }, "<leader>pl", [[<cmd>Telescope p4 change_lists<cr>]], { desc = "List perforce change lists" })
-
 vim.keymap.set({ "n" }, "<leader>qa", "<cmd>qa<cr>", { desc = "Quit all" })
 vim.keymap.set({ "n" }, "<leader>qf", "<cmd>qa!<cr>", { desc = "Force Quit all" })
 
@@ -101,7 +91,7 @@ vim.keymap.set({ "n", "v" }, "gx", "@:", { silent = false, desc = "Repeat last c
 vim.keymap.set({ "n", "v" }, "<c-q>", "q:", { silent = false, desc = "Open cmdline window" })
 
 -- quickfix list navigation yay
-vim.keymap.set({ "n" }, "<leader>co", "<cmd>copen<cr>", { desc = "Open qflist" })
+vim.keymap.set({ "n" }, "<lader>co", "<cmd>copen<cr>", { desc = "Open qflist" })
 vim.keymap.set({ "n" }, "<leader>ce", "<cmd>cclose<cr>", { desc = "Close/exit qflist" })
 vim.keymap.set({ "n" }, "<leader>cn", "<cmd>cnext<cr>", { desc = "Next item in qflist" })
 vim.keymap.set({ "n" }, "<leader>cp", "<cmd>cprev<cr>", { desc = "Prev item in qflist" })
@@ -121,40 +111,12 @@ vim.keymap.set({ "n" }, "<leader>wl", [[<cmd>wincmd r | wincmd l<cr>]], { desc =
 
 -- Toggle relative line numbers
 vim.keymap.set({ "n" }, "<leader>tn", function()
-  if vim.api.nvim_get_option_value("relativenumber", { buf = 0 }) then
+  if vim.api.nvim_get_option_value("relativenumber", { win = 0 }) then
     vim.cmd("windo set norelativenumber")
   else
     vim.cmd("windo set relativenumber")
   end
 end, { desc = "Toogle relative line numbers" })
-
--- Reload current buffer if it is a vim or lua file (Source Here)
-vim.keymap.set({ "n" }, "<leader>sh", function()
-  local ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
-  if ft == "vim" then
-    vim.cmd("source %")
-    vim.notify("vim file reloaded!", vim.log.levels.INFO)
-  elseif ft == "lua" then
-    vim.cmd("luafile %")
-    vim.notify("lua file reloaded!", vim.log.levels.INFO)
-  else
-    vim.notify("Not a lua or vim file", vim.log.levels.INFO)
-  end
-end, { desc = "Source Here (reload current file)" })
-
--- Search dev docs
-vim.keymap.set({ "n" }, "<leader>dd", function()
-  local query = vim.fn.input({ default = "Search DevDocs: " })
-  local encodedURL = nil
-
-  if global.os_open_cmd ~= "" then
-    encodedURL = global.os_open_cmd .. string.format(' "https://devdocs.io/#q=%s"', query:gsub("%s", "%%20"))
-
-    os.execute(encodedURL)
-  else
-    vim.notify("Open command not supported by OS", vim.log.levels.ERROR)
-  end
-end, { desc = "Search DevDocs" })
 
 -- Change a split between horizontal and vertical
 vim.keymap.set({ "n" }, "<leader>ws", function()
