@@ -1,15 +1,15 @@
 local M = {
   extension = {
-    h = "c",
-    scons = "python",
-    api = "python",
-    dh = "dh",
+    h = 'c',
+    scons = 'python',
+    api = 'python',
+    dh = 'dh',
   },
   filename = {
-    [".clangd"] = "yaml",
+    ['.clangd'] = 'yaml',
   },
   pattern = {
-    [".*/sway/config%.d/.*"] = { "swayconfig", priority = 10 },
+    ['.*/sway/config%.d/.*'] = { 'swayconfig', priority = 10 },
   },
 }
 

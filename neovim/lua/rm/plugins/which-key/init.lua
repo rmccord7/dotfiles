@@ -1,8 +1,8 @@
 return {
-  "folke/which-key.nvim",
+  'folke/which-key.nvim',
   dependencies = {
-    "kyazdani42/nvim-web-devicons",
+    'kyazdani42/nvim-web-devicons',
   },
-  event = "VeryLazy",
+  event = 'VeryLazy',
   opts = {},
 }

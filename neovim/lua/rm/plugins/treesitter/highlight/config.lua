@@ -1,11 +1,11 @@
-local config = require("rm.plugins.treesitter.config")
+local config = require('rm.plugins.treesitter.config')
 
 --- Helper function to get buffer file extension
 local function GetBufFileExtension(bufnr)
   -- Telescope buffer preview will have a name of nil unless buffer
   -- has been opened previously
 
-  local ext = vim.api.nvim_buf_get_name(bufnr):match("^.+(%..+)$")
+  local ext = vim.api.nvim_buf_get_name(bufnr):match('^.+(%..+)$')
 
   if ext then
     ext = string.sub(ext, 2)
@@ -19,7 +19,7 @@ end
 --- language.
 local function Disable(_, bufnr)
   local buf = {
-    ext = "",
+    ext = '',
     size = 0,
     lc = 0,
   }

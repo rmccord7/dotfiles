@@ -1,6 +1,6 @@
-require("telescope")
+require('telescope')
 
-local default_capabilities = vim.tbl_deep_extend("force", require("blink.cmp").get_lsp_capabilities(), {
+local default_capabilities = vim.tbl_deep_extend('force', require('blink.cmp').get_lsp_capabilities(), {
   textDocument = {
     completion = {
       completionItem = {
@@ -10,16 +10,16 @@ local default_capabilities = vim.tbl_deep_extend("force", require("blink.cmp").g
   },
 })
 
-vim.lsp.config("*", {
-  root_markers = { ".git", ".nvim.lua" },
+vim.lsp.config('*', {
+  root_markers = { '.git', '.nvim.lua' },
   capabilities = default_capabilities,
 })
 
 local lsp_servers = {
-  "clangd",
-  "lua_ls",
-  "rust_analyzer",
-  "yaml",
+  'clangd',
+  'lua_ls',
+  'rust_analyzer',
+  'yaml',
 }
 
 -- Log level
@@ -28,12 +28,12 @@ vim.lsp.set_log_level(vim.log.levels.WARN)
 
 -- Close signature_help on following events
 vim.lsp.buf.signature_help({
-  border = "shadow",
-  close_events = { "CursorMoved", "BufHidden", "InsertCharPre" },
+  border = 'shadow',
+  close_events = { 'CursorMoved', 'BufHidden', 'InsertCharPre' },
 })
 
 vim.lsp.buf.hover({
-  border = "shadow",
+  border = 'shadow',
 })
 
 vim.diagnostic.config({
@@ -44,9 +44,9 @@ vim.diagnostic.config({
 local hooks = {}
 
 local lsp_rename = function()
-  local curr_name = vim.fn.expand("<cword>")
+  local curr_name = vim.fn.expand('<cword>')
   vim.ui.input({
-    prompt = "LSP Rename: ",
+    prompt = 'LSP Rename: ',
     default = curr_name,
   }, function(new_name)
     if new_name then
@@ -60,7 +60,7 @@ local lsp_rename = function()
       -- request lsp rename
       ---@diagnostic disable-next-line: inject-field
       lsp_params.newName = new_name
-      vim.lsp.buf_request(0, "textDocument/rename", lsp_params, function(_, res, ctx)
+      vim.lsp.buf_request(0, 'textDocument/rename', lsp_params, function(_, res, ctx)
         if not res then
           return
         end
@@ -92,12 +92,12 @@ local lsp_rename = function()
           -- compose the right print message
           vim.notify(
             string.format(
-              "Renamed %s instance%s in %s file%s. %s",
+              'Renamed %s instance%s in %s file%s. %s',
               changed_instances_count,
-              changed_instances_count == 1 and "" or "s",
+              changed_instances_count == 1 and '' or 's',
               changed_files_count,
-              changed_files_count == 1 and "" or "s",
-              changed_files_count > 1 and "To save them run ':cfdo w'" or ""
+              changed_files_count == 1 and '' or 's',
+              changed_files_count > 1 and "To save them run ':cfdo w'" or ''
             ),
             vim.log.levels.INFO
           )
@@ -111,53 +111,53 @@ end
 ---@param _ any a reference to the lsp client
 ---@param bufnr number the buffer number
 hooks.my_on_attach = function(_, bufnr)
-  vim.keymap.set({ "n" }, "gh", vim.lsp.buf.hover, { buffer = bufnr, desc = "LSP Hover" })
+  vim.keymap.set({ 'n' }, 'gh', vim.lsp.buf.hover, { buffer = bufnr, desc = 'LSP Hover' })
 
-  vim.keymap.set({ "n" }, "gi", vim.lsp.buf.implementation, { buffer = bufnr, desc = "LSP GoTo implementation" })
+  vim.keymap.set({ 'n' }, 'gi', vim.lsp.buf.implementation, { buffer = bufnr, desc = 'LSP GoTo implementation' })
 
-  vim.keymap.set({ "n" }, "gt", vim.lsp.buf.type_definition, { buffer = bufnr, desc = "LSP GoTo Type" })
+  vim.keymap.set({ 'n' }, 'gt', vim.lsp.buf.type_definition, { buffer = bufnr, desc = 'LSP GoTo Type' })
 
-  vim.keymap.set({ "n" }, "gd", function()
-    require("telescope.builtin").lsp_definitions()
-  end, { buffer = bufnr, desc = "LSP GoTo Definition" })
+  vim.keymap.set({ 'n' }, 'gd', function()
+    require('telescope.builtin').lsp_definitions()
+  end, { buffer = bufnr, desc = 'LSP GoTo Definition' })
 
-  vim.keymap.set({ "n" }, "gD", vim.lsp.buf.definition, { buffer = bufnr, desc = "LSP GoTo Definition" })
+  vim.keymap.set({ 'n' }, 'gD', vim.lsp.buf.definition, { buffer = bufnr, desc = 'LSP GoTo Definition' })
 
-  vim.keymap.set({ "n" }, "<C-s>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP Signatute Help" })
+  vim.keymap.set({ 'n' }, '<C-s>', vim.lsp.buf.signature_help, { buffer = bufnr, desc = 'LSP Signatute Help' })
 
-  vim.keymap.set({ "n" }, "<leader>rn", lsp_rename, { buffer = bufnr, desc = "LSP Rename" })
+  vim.keymap.set({ 'n' }, '<leader>rn', lsp_rename, { buffer = bufnr, desc = 'LSP Rename' })
 
-  vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "LSP Code Action" })
+  vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = 'LSP Code Action' })
 
-  vim.keymap.set({ "n" }, "<leader>lr", function()
-    require("telescope.builtin").lsp_references()
-  end, { buffer = bufnr, desc = "LSP List References" })
+  vim.keymap.set({ 'n' }, '<leader>lr', function()
+    require('telescope.builtin').lsp_references()
+  end, { buffer = bufnr, desc = 'LSP List References' })
 
-  vim.keymap.set({ "n" }, "<leader>f", function()
+  vim.keymap.set({ 'n' }, '<leader>f', function()
     vim.lsp.buf.format({ async = true })
-  end, { buffer = bufnr, desc = "LSP Format" })
+  end, { buffer = bufnr, desc = 'LSP Format' })
 
   vim.keymap.set(
-    { "n" },
-    "<leader>li",
+    { 'n' },
+    '<leader>li',
     vim.lsp.buf.implementation,
-    { buffer = bufnr, desc = "LSP GoTo Implementation" }
+    { buffer = bufnr, desc = 'LSP GoTo Implementation' }
   )
 
-  vim.keymap.set({ "n" }, "<leader>ps", function()
-    require("telescope.builtin").lsp_dynamic_workspace_symbols()
-  end, { buffer = bufnr, desc = "LSP Dynamic Workspace Symbols" })
+  vim.keymap.set({ 'n' }, '<leader>ps', function()
+    require('telescope.builtin').lsp_dynamic_workspace_symbols()
+  end, { buffer = bufnr, desc = 'LSP Dynamic Workspace Symbols' })
 
-  vim.keymap.set({ "n" }, "<leader>lw", function()
-    require("telescope.builtin").lsp_workspace_symbols()
-  end, { buffer = bufnr, desc = "LSP Workspace Symbols" })
+  vim.keymap.set({ 'n' }, '<leader>lw', function()
+    require('telescope.builtin').lsp_workspace_symbols()
+  end, { buffer = bufnr, desc = 'LSP Workspace Symbols' })
 
-  vim.keymap.set({ "n" }, "<leader>gs", function()
-    require("telescope.builtin").lsp_document_symbols()
-  end, { buffer = bufnr, desc = "LSP Document Symbols" })
+  vim.keymap.set({ 'n' }, '<leader>gs', function()
+    require('telescope.builtin').lsp_document_symbols()
+  end, { buffer = bufnr, desc = 'LSP Document Symbols' })
 end
 
-hooks.my_capabilities = vim.tbl_deep_extend("force", require("blink.cmp").get_lsp_capabilities(), {
+hooks.my_capabilities = vim.tbl_deep_extend('force', require('blink.cmp').get_lsp_capabilities(), {
   textDocument = {
     completion = {
       completionItem = {
@@ -177,5 +177,5 @@ hooks.my_capabilities = vim.tbl_deep_extend("force", require("blink.cmp").get_ls
 --
 
 for _, server in ipairs(lsp_servers) do
-  require("rm.lsp.config." .. server).setup(hooks)
+  require('rm.lsp.config.' .. server).setup(hooks)
 end

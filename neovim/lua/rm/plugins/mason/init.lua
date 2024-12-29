@@ -1,9 +1,9 @@
 return {
-  "williamboman/mason.nvim",
+  'williamboman/mason.nvim',
   opts = {
     providers = {
-      "mason.providers.client",
-      "mason.providers.registry-api",
+      'mason.providers.client',
+      'mason.providers.registry-api',
     },
   },
 }

@@ -1,39 +1,39 @@
 return {
-  "marko-cerovac/material.nvim",
+  'marko-cerovac/material.nvim',
   lazy = false,
   priority = 1000,
   opts = {
     plugins = {
-      "indent-blankline",
-      "gitsigns",
-      "nvim-cmp",
-      "telescope",
-      "trouble",
-      "which-key",
+      'indent-blankline',
+      'gitsigns',
+      'nvim-cmp',
+      'telescope',
+      'trouble',
+      'which-key',
     },
     custom_colors = function(c)
-      c.editor.fg = "#717CB4"
-      c.syntax.variable = "#717CB4"
-      c.syntax.comments = "#5A6077"
-      c.editor.line_numbers = "#5A6077"
+      c.editor.fg = '#717CB4'
+      c.syntax.variable = '#717CB4'
+      c.syntax.comments = '#5A6077'
+      c.editor.line_numbers = '#5A6077'
     end,
   },
   config = function(_, opts)
-    local colors = require("material.colors")
+    local colors = require('material.colors')
 
     opts.custom_highlights = {
       -- Command mode
-      MsgArea = { fg = "#E2795B", bold = true },
+      MsgArea = { fg = '#E2795B', bold = true },
 
       -- Treesitter
-      ["@type.qualifier"] = { fg = colors.main.orange },
+      ['@type.qualifier'] = { fg = colors.main.orange },
 
-      ["@keyword"] = { fg = colors.main.orange },
+      ['@keyword'] = { fg = colors.main.orange },
 
-      ["@macro"] = { fg = colors.main.orange },
-      ["@preproc"] = { fg = colors.main.orange },
+      ['@macro'] = { fg = colors.main.orange },
+      ['@preproc'] = { fg = colors.main.orange },
 
-      ["@constant.macro"] = { fg = colors.main.orange },
+      ['@constant.macro'] = { fg = colors.main.orange },
 
       -- CmpItemKindSnippet = { fg = colors.editor.fg, bg = colors.main.orange },
       -- CmpItemKindKeyword = { fg = colors.editor.fg, bg = colors.main.red },
@@ -67,11 +67,11 @@ return {
       -- IblIndex = {fg = colors.editor.disabled },
     }
 
-    require("material").setup(opts)
+    require('material').setup(opts)
 
-    vim.cmd("colorscheme material")
+    vim.cmd('colorscheme material')
   end,
   init = function(_)
-    vim.g.material_style = "deep ocean"
+    vim.g.material_style = 'deep ocean'
   end,
 }

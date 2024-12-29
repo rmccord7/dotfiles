@@ -1,9 +1,9 @@
 return {
-  "AckslD/nvim-neoclip.lua",
+  'AckslD/nvim-neoclip.lua',
   opts = {},
   config = function(_, opts)
-    require("neoclip").setup(opts)
+    require('neoclip').setup(opts)
 
-    vim.keymap.set({ "n" }, '<leader>"', [[:Telescope neoclip<CR>]], { desc = "Neoclip" })
+    vim.keymap.set({ 'n' }, '<leader>"', [[:Telescope neoclip<CR>]], { desc = 'Neoclip' })
   end,
 }

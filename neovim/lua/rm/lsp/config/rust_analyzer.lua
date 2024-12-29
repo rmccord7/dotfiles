@@ -1,4 +1,4 @@
-local lspconfig = require("lspconfig")
+local lspconfig = require('lspconfig')
 
 local M = {}
 
@@ -9,16 +9,16 @@ function M.setup(hooks)
     capabilities = hooks.my_capabilities,
 
     cmd = {
-      "rust_analyzer",
+      'rust_analyzer',
     },
 
     settings = {
-      ["rust-analyzer"] = {
+      ['rust-analyzer'] = {
         imports = {
           granularity = {
-            group = "module",
+            group = 'module',
           },
-          prefix = "self",
+          prefix = 'self',
         },
         cargo = {
           buildScripts = {

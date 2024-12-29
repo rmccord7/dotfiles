@@ -1,8 +1,8 @@
 return {
-  "junegunn/vim-easy-align",
+  'junegunn/vim-easy-align',
   init = function()
     -- Map vim-easy-align to ga
-    vim.keymap.set({ "n", "x" }, "ga", "<Plug>(EasyAlign)", { desc = "Easy align" })
+    vim.keymap.set({ 'n', 'x' }, 'ga', '<Plug>(EasyAlign)', { desc = 'Easy align' })
 
     -- Alignment for c-style variable declarations
     -- Cannot add/update/store keys from a dictionary without a WAR
@@ -16,12 +16,12 @@ return {
     }
 
     t.p = {
-      pattern = " ",
+      pattern = ' ',
       left_margin = 0,
       right_margin = 1,
       stick_to_left = 0,
-      align = "ll",
-      filter = "g/@param/",
+      align = 'll',
+      filter = 'g/@param/',
     }
 
     vim.g.easy_align_delimiters = t

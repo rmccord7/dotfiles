@@ -1,6 +1,6 @@
-local utils = require("heirline.utils")
+local utils = require('heirline.utils')
 
-local colors = require("material.colors")
+local colors = require('material.colors')
 
 local M = {}
 
@@ -14,9 +14,9 @@ M.Mode = {
     -- execute this only once, this is required if you want the ViMode
     -- component to be updated on operator pending mode
     if not self.once then
-      vim.api.nvim_create_autocmd("ModeChanged", {
-        pattern = "*:*o",
-        command = "redrawstatus",
+      vim.api.nvim_create_autocmd('ModeChanged', {
+        pattern = '*:*o',
+        command = 'redrawstatus',
       })
       self.once = true
     end
@@ -26,54 +26,54 @@ M.Mode = {
   -- them at initialisation time.
   static = {
     mode_names = { -- change the strings if you like it vvvvverbose!
-      n = "N",
-      no = "N?",
-      nov = "N?",
-      noV = "N?",
-      ["no\22"] = "N?",
-      niI = "Ni",
-      niR = "Nr",
-      niV = "Nv",
-      nt = "Nt",
-      v = "V",
-      vs = "Vs",
-      V = "V_",
-      Vs = "Vs",
-      ["\22"] = "^V",
-      ["\22s"] = "^V",
-      s = "S",
-      S = "S_",
-      ["\19"] = "^S",
-      i = "I",
-      ic = "Ic",
-      ix = "Ix",
-      R = "R",
-      Rc = "Rc",
-      Rx = "Rx",
-      Rv = "Rv",
-      Rvc = "Rv",
-      Rvx = "Rv",
-      c = "C",
-      cv = "Ex",
-      r = "...",
-      rm = "M",
-      ["r?"] = "?",
-      ["!"] = "!",
-      t = "T",
+      n = 'N',
+      no = 'N?',
+      nov = 'N?',
+      noV = 'N?',
+      ['no\22'] = 'N?',
+      niI = 'Ni',
+      niR = 'Nr',
+      niV = 'Nv',
+      nt = 'Nt',
+      v = 'V',
+      vs = 'Vs',
+      V = 'V_',
+      Vs = 'Vs',
+      ['\22'] = '^V',
+      ['\22s'] = '^V',
+      s = 'S',
+      S = 'S_',
+      ['\19'] = '^S',
+      i = 'I',
+      ic = 'Ic',
+      ix = 'Ix',
+      R = 'R',
+      Rc = 'Rc',
+      Rx = 'Rx',
+      Rv = 'Rv',
+      Rvc = 'Rv',
+      Rvx = 'Rv',
+      c = 'C',
+      cv = 'Ex',
+      r = '...',
+      rm = 'M',
+      ['r?'] = '?',
+      ['!'] = '!',
+      t = 'T',
     },
     mode_colors = {
       n = colors.main.red,
       i = colors.main.green,
       v = colors.main.cyan,
       V = colors.main.cyan,
-      ["\22"] = colors.main.cyan,
+      ['\22'] = colors.main.cyan,
       c = colors.main.orange,
       s = colors.main.purple,
       S = colors.main.purple,
-      ["\19"] = colors.main.purple,
+      ['\19'] = colors.main.purple,
       R = colors.main.orange,
       r = colors.main.orange,
-      ["!"] = colors.main.red,
+      ['!'] = colors.main.red,
       t = colors.main.red,
     },
   },
@@ -85,7 +85,7 @@ M.Mode = {
   -- control the padding and make sure our string is always at least 2
   -- characters long. Plus a nice Icon.
   provider = function(self)
-    return " %2(" .. self.mode_names[self.mode] .. "%)"
+    return ' %2(' .. self.mode_names[self.mode] .. '%)'
   end,
 
   -- Same goes for the highlight. Now the foreground will change according to the current mode.
@@ -93,7 +93,7 @@ M.Mode = {
     local mode = self.mode:sub(1, 1) -- get only the first mode character
     return {
       fg = self.mode_colors[mode],
-      bg = utils.get_highlight("StatusLine").bg,
+      bg = utils.get_highlight('StatusLine').bg,
       bold = true,
     }
   end,
@@ -102,10 +102,10 @@ M.Mode = {
   -- performance improvement.
   -- Also allorws the statusline to be re-evaluated when entering operator-pending mode
   update = {
-    "ModeChanged",
-    pattern = "*:*",
+    'ModeChanged',
+    pattern = '*:*',
     callback = vim.schedule_wrap(function()
-      vim.cmd("redrawstatus")
+      vim.cmd('redrawstatus')
     end),
   },
 }

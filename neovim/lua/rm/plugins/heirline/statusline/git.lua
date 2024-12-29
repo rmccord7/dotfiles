@@ -1,7 +1,7 @@
-local conditions = require("heirline.conditions")
-local utils = require("heirline.utils")
+local conditions = require('heirline.conditions')
+local utils = require('heirline.utils')
 
-local colors = require("material.colors")
+local colors = require('material.colors')
 
 local M = {}
 
@@ -16,12 +16,12 @@ M.Git = {
 
   hl = {
     fg = colors.main.orange,
-    bg = utils.get_highlight("StatusLine").bg,
+    bg = utils.get_highlight('StatusLine').bg,
   },
 
   { -- git branch name
     provider = function(self)
-      return " " .. self.status_dict.head
+      return ' ' .. self.status_dict.head
     end,
     hl = { bold = true },
   },
@@ -30,26 +30,26 @@ M.Git = {
     condition = function(self)
       return self.has_changes
     end,
-    provider = "(",
+    provider = '(',
   },
   {
     provider = function(self)
       local count = self.status_dict.added or 0
-      return count > 0 and ("+" .. count)
+      return count > 0 and ('+' .. count)
     end,
     hl = { fg = colors.git.added },
   },
   {
     provider = function(self)
       local count = self.status_dict.removed or 0
-      return count > 0 and ("-" .. count)
+      return count > 0 and ('-' .. count)
     end,
     hl = { fg = colors.git.removed },
   },
   {
     provider = function(self)
       local count = self.status_dict.changed or 0
-      return count > 0 and ("~" .. count)
+      return count > 0 and ('~' .. count)
     end,
     hl = { fg = colors.git.modified },
   },
@@ -57,7 +57,7 @@ M.Git = {
     condition = function(self)
       return self.has_changes
     end,
-    provider = ")",
+    provider = ')',
   },
 }
 

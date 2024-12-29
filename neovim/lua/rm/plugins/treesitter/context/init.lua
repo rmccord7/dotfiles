@@ -1,7 +1,7 @@
 return {
-  "romgrk/nvim-treesitter-context",
+  'romgrk/nvim-treesitter-context',
   dependencies = {
-    "nvim-treesitter/nvim-treesitter",
+    'nvim-treesitter/nvim-treesitter',
   },
   opts = {},
 }

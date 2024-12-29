@@ -1,4 +1,4 @@
-local path = require("rm.util.path")
+local path = require('rm.util.path')
 
 local M = {
   enable = false, -- Enable neovim config debug messages

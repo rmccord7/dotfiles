@@ -1,15 +1,15 @@
 return {
-  "rebelot/heirline.nvim",
+  'rebelot/heirline.nvim',
   dependencies = {
-    "lewis6991/gitsigns.nvim",
-    "kyazdani42/nvim-web-devicons",
+    'lewis6991/gitsigns.nvim',
+    'kyazdani42/nvim-web-devicons',
   },
-  event = "VeryLazy",
+  event = 'VeryLazy',
   config = function(_, _)
     local opts = {
-      statusline = require("rm.plugins.heirline.statusline"),
+      statusline = require('rm.plugins.heirline.statusline'),
     }
 
-    require("heirline").setup(opts)
+    require('heirline').setup(opts)
   end,
 }

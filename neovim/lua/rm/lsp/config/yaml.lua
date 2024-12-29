@@ -1,4 +1,4 @@
-local lspconfig = require("lspconfig")
+local lspconfig = require('lspconfig')
 
 local M = {}
 
@@ -9,8 +9,8 @@ function M.setup(hooks)
     capabilities = hooks.my_capabilities,
 
     cmd = {
-      "yaml-language-server",
-      "--stdio",
+      'yaml-language-server',
+      '--stdio',
     },
 
     settings = {
@@ -22,10 +22,10 @@ function M.setup(hooks)
           singleQuote = true,
         },
         schemaStore = {
-          url = "https://www.schemastore.org/api/json/catalog.json",
+          url = 'https://www.schemastore.org/api/json/catalog.json',
         },
         schemas = {
-          ["uwb.logging.schema.json"] = "log_*.yaml",
+          ['uwb.logging.schema.json'] = 'log_*.yaml',
         },
       },
     },

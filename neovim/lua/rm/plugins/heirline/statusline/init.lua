@@ -1,43 +1,43 @@
 local M = {}
 
-local config = require("rm.config")
+local config = require('rm.config')
 
-require("heirline")
-local conditions = require("heirline.conditions")
-local utils = require("heirline.utils")
+require('heirline')
+local conditions = require('heirline.conditions')
+local utils = require('heirline.utils')
 
-local colors = require("material.colors")
+local colors = require('material.colors')
 
-local file = require("rm.plugins.heirline.statusline.file")
-local git = require("rm.plugins.heirline.statusline.git")
-local lsp = require("rm.plugins.heirline.statusline.lsp")
-local mode = require("rm.plugins.heirline.statusline.mode")
+local file = require('rm.plugins.heirline.statusline.file')
+local git = require('rm.plugins.heirline.statusline.git')
+local lsp = require('rm.plugins.heirline.statusline.lsp')
+local mode = require('rm.plugins.heirline.statusline.mode')
 
 -- Filetypes where certain elements of the statusline will not be shown
 local filetypes = {
-  "^git.*",
-  "fugitive",
-  "^toggleterm$",
+  '^git.*',
+  'fugitive',
+  '^toggleterm$',
 }
 
 -- Buftypes which should cause elements to be hidden
 local buftypes = {
-  "nofile",
-  "prompt",
-  "help",
-  "quickfix",
+  'nofile',
+  'prompt',
+  'help',
+  'quickfix',
 }
 
 -- Filetypes which force the statusline to be inactive
 local force_inactive_filetypes = {
-  "^lazy$",
-  "^netrw$",
-  "^TelescopePrompt$",
-  "^NvimTree$",
+  '^lazy$',
+  '^netrw$',
+  '^TelescopePrompt$',
+  '^NvimTree$',
 }
 
-local Align = { provider = "%=" }
-local Space = { provider = " " }
+local Align = { provider = '%=' }
+local Space = { provider = ' ' }
 
 -- We're getting minimalists here!
 local Ruler = {
@@ -45,10 +45,10 @@ local Ruler = {
   -- %L = number of lines in the buffer
   -- %c = column number
   -- %P = percentage through file of displayed window
-  provider = "%7(%l/%3L%):%2c %P",
+  provider = '%7(%l/%3L%):%2c %P',
   hl = {
     fg = colors.main.green,
-    bg = utils.get_highlight("StatusLine").bg,
+    bg = utils.get_highlight('StatusLine').bg,
   },
 }
 
@@ -69,29 +69,29 @@ local Lazy = {
   condition = function(self)
     return not conditions.buffer_matches({
       filetype = self.filetypes,
-    }) and require("lazy.status").has_updates()
+    }) and require('lazy.status').has_updates()
   end,
-  update = { "User", pattern = "LazyUpdate" },
+  update = { 'User', pattern = 'LazyUpdate' },
   provider = function()
-    return "  " .. require("lazy.status").updates() .. " "
+    return '  ' .. require('lazy.status').updates() .. ' '
   end,
   on_click = {
     callback = function()
-      require("lazy").update()
+      require('lazy').update()
     end,
-    name = "update_plugins",
+    name = 'update_plugins',
   },
   hl = {
     fg = colors.main.green,
-    bg = utils.get_highlight("StatusLine").bg,
+    bg = utils.get_highlight('StatusLine').bg,
   },
 }
 
 local Treesitter = {
-  provider = "TS",
+  provider = 'TS',
   condition = function(_)
     local buf = vim.api.nvim_get_current_buf()
-    local highlighter = require("vim.treesitter.highlighter")
+    local highlighter = require('vim.treesitter.highlighter')
     if highlighter.active[buf] then
       return true
     else
@@ -100,40 +100,40 @@ local Treesitter = {
   end,
   hl = {
     fg = colors.main.green,
-    bg = utils.get_highlight("StatusLine").bg,
+    bg = utils.get_highlight('StatusLine').bg,
   },
 }
 
-local sep = "  "
+local sep = '  '
 local cwd = {
   init = function(self)
     self.cwd = vim.fn.getcwd(0)
-    self.cwd = string.gsub(self.cwd, config.path.home, "~")
-    self.cwd = string.gsub(self.cwd, "\\", "/")
+    self.cwd = string.gsub(self.cwd, config.path.home, '~')
+    self.cwd = string.gsub(self.cwd, '\\', '/')
   end,
   hl = {
-    fg = utils.get_highlight("Directory").fg,
-    bg = utils.get_highlight("StatusLine").bg,
+    fg = utils.get_highlight('Directory').fg,
+    bg = utils.get_highlight('StatusLine').bg,
     italic = true,
   },
   flexible = 1,
   {
     -- evaluates to the full-length path
     provider = function(self)
-      local trail = self.cwd:sub(-1) == "/" and "" or "/"
-      return "  " .. table.concat(vim.fn.split(self.cwd .. trail, "/"), sep)
+      local trail = self.cwd:sub(-1) == '/' and '' or '/'
+      return '  ' .. table.concat(vim.fn.split(self.cwd .. trail, '/'), sep)
     end,
   },
   {
     -- evaluates to the shortened path
     provider = function(self)
       local _cwd = vim.fn.pathshorten(self.cwd)
-      return "  " .. table.concat(vim.fn.split(_cwd, "/"), sep)
+      return '  ' .. table.concat(vim.fn.split(_cwd, '/'), sep)
     end,
   },
   {
     -- evaluates to "", hiding the component
-    provider = "",
+    provider = '',
   },
 }
 

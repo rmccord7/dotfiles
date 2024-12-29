@@ -1,6 +1,6 @@
 return {
-  "HiPhish/rainbow-delimiters.nvim",
+  'HiPhish/rainbow-delimiters.nvim',
   dependencies = {
-    "nvim-treesitter/nvim-treesitter",
+    'nvim-treesitter/nvim-treesitter',
   },
 }

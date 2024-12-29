@@ -1,5 +1,5 @@
 return {
-  "ntpeters/vim-better-whitespace",
+  'ntpeters/vim-better-whitespace',
   init = function()
     -- Disable whitespace highlighting
     vim.g.better_whitespace_enabled = 0
@@ -16,16 +16,16 @@ return {
 
     -- Disable plugin for the following file types
     vim.g.better_whitespace_filetypes_blacklist = {
-      "dashboard",
-      "diff",
-      "git",
-      "gitcommit",
-      "unite",
-      "nvimtree",
-      "markdown",
-      "fugitive",
-      "qf",
-      "help",
+      'dashboard',
+      'diff',
+      'git',
+      'gitcommit',
+      'unite',
+      'nvimtree',
+      'markdown',
+      'fugitive',
+      'qf',
+      'help',
     }
   end,
 }

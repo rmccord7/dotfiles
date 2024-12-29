@@ -1,13 +1,13 @@
 local M = {}
 
-local conditions = require("heirline.conditions")
-local utils = require("heirline.utils")
+local conditions = require('heirline.conditions')
+local utils = require('heirline.utils')
 
-local colors = require("material.colors")
+local colors = require('material.colors')
 
 M.LSPActive = {
   condition = conditions.lsp_attached,
-  update = { "LspAttach", "LspDetach" },
+  update = { 'LspAttach', 'LspDetach' },
 
   -- You can keep it simple,
   -- provider = " [LSP]",
@@ -18,11 +18,11 @@ M.LSPActive = {
     for _, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
       table.insert(names, server.name)
     end
-    return " [" .. table.concat(names, " ") .. "]"
+    return ' [' .. table.concat(names, ' ') .. ']'
   end,
   hl = {
     fg = colors.main.green,
-    bg = utils.get_highlight("StatusLine").bg,
+    bg = utils.get_highlight('StatusLine').bg,
     bold = true,
   },
 }
@@ -32,10 +32,10 @@ M.Diagnostics = {
   condition = conditions.has_diagnostics,
 
   static = {
-    error_icon = "  ",
-    warn_icon = "  ",
-    info_icon = "  ",
-    hint_icon = "  ",
+    error_icon = '  ',
+    warn_icon = '  ',
+    info_icon = '  ',
+    hint_icon = '  ',
   },
 
   init = function(self)
@@ -45,27 +45,27 @@ M.Diagnostics = {
     self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
   end,
 
-  update = { "DiagnosticChanged", "BufEnter" },
+  update = { 'DiagnosticChanged', 'BufEnter' },
 
   {
-    provider = "![",
+    provider = '![',
   },
   {
     provider = function(self)
       -- 0 is just another output, we can decide to print it or not!
-      return self.errors > 0 and (self.error_icon .. self.errors .. " ")
+      return self.errors > 0 and (self.error_icon .. self.errors .. ' ')
     end,
     hl = { fg = colors.lsp.error },
   },
   {
     provider = function(self)
-      return self.warnings > 0 and (self.warn_icon .. self.warnings .. " ")
+      return self.warnings > 0 and (self.warn_icon .. self.warnings .. ' ')
     end,
     hl = { fg = colors.lsp.warning },
   },
   {
     provider = function(self)
-      return self.info > 0 and (self.info_icon .. self.info .. " ")
+      return self.info > 0 and (self.info_icon .. self.info .. ' ')
     end,
     hl = { fg = colors.lsp.info },
   },
@@ -76,7 +76,7 @@ M.Diagnostics = {
     hl = { fg = colors.lsp.hint },
   },
   {
-    provider = "]",
+    provider = ']',
   },
 }
 

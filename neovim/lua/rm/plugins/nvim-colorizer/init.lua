@@ -1,9 +1,9 @@
 return {
-  "catgoose/nvim-colorizer.lua",
-  event = "BufReadPre",
+  'catgoose/nvim-colorizer.lua',
+  event = 'BufReadPre',
   opts = {
     user_default_options = {
-      mode = "virtualtext",
+      mode = 'virtualtext',
       names = false,
     },
   },
