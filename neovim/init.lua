@@ -3,6 +3,8 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.g.minimal = vim.env.VIM_MIN ~= nil or vim.g.minimal ~= nil
+
 require('rm.global')
 require('rm.config')
 require('rm.settings')
