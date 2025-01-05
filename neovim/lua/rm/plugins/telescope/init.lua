@@ -238,6 +238,6 @@ return {
     vim.keymap.set({ 'n' }, '<leader>te', ':Telescope env<CR>', { desc = 'List Environment Variables' })
     vim.keymap.set({ 'n' }, '<leader>tp', ':Telescope lazy<CR>', { desc = 'Plugin Browser' })
 
-    vim.keymap.set({ 'n' }, '<leader>rw', ':Telescope fecency<CR>', { desc = 'Telescope frecency' })
+    vim.keymap.set({ 'n' }, '<leader>rw', ':Telescope frecency<CR>', { desc = 'Telescope frecency' })
   end,
 }
