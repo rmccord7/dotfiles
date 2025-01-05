@@ -20,31 +20,33 @@ return {
     },
 
     keymap = {
-      preset = 'default',
+      preset = 'enter',
 
-      -- ["<CR>"] = { "select_and_accept", "fallback" },
-      --
-      -- ["<C-k>"] = { "select_prev", "fallback" },
-      -- ["<C-j>"] = { "select_next", "fallback" },
+      ['<C-h>'] = { 'show', 'show_documentation', 'hide_documentation' },
 
-      -- ["<Tab>"] = {
-      --   function(cmp)
-      --     if cmp.snippet_active() then
-      --       return cmp.accept()
-      --     else
-      --       return cmp.select_and_accept()
-      --     end
-      --   end,
-      --   "snippet_forward",
-      --   "fallback",
-      -- },
-      -- ["<S-Tab>"] = { "snippet_backward", "fallback" },
+      ["<C-k>"] = { "select_prev", "fallback" },
+      ["<C-j>"] = { "select_next", "fallback" },
 
-      -- ["<C-l>"] = {
+      ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
+      ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
+
+      -- ["<C-space>"] = {
       --   function(cmp)
       --     cmp.show({ providers = { "luasnip" } })
       --   end,
       -- },
+
+      cmdline = {
+        preset = 'super-tab',
+
+        ['<C-h>'] = { 'show', 'show_documentation', 'hide_documentation' },
+
+        ["<C-k>"] = { "select_prev", "fallback" },
+        ["<C-j>"] = { "select_next", "fallback" },
+
+        ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
+        ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
+      },
     },
 
     sources = {
@@ -68,11 +70,11 @@ return {
         -- winhighlight = 'Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None',
         winhighlight = 'Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None',
         draw = {
-          align_to_component = 'kind_icon',
+          align_to = 'kind_icon',
           columns = {
             { 'kind_icon' },
-            { 'label', 'label_description', gap = 1 },
-            { 'kind', 'source_name', gap = 1 },
+            { 'label',    'label_description', gap = 1 },
+            { 'kind',     'source_name',       gap = 1 },
           },
           components = {
 
@@ -92,7 +94,6 @@ return {
       },
 
       documentation = {
-        auto_show = true,
         window = {
           -- winhighlight = 'Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,EndOfBuffer:BlinkCmpDoc',
           winhighlight = 'Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None',
