@@ -72,14 +72,20 @@ return {
         draw = {
           align_to = 'kind_icon',
           columns = {
-            { 'kind_icon' },
-            { 'label',    'label_description', gap = 1 },
-            { 'kind',     'source_name',       gap = 1 },
+            { 'label', gap = 1 },
+            { 'kind_icon', gap = 1 },
+            { 'kind', gap = 1 },
+            { 'source_name' },
           },
           components = {
 
             kind = {
               ellipsis = true,
+            },
+
+            label = {
+              text = require("colorful-menu").blink_components_text,
+              highlight = require("colorful-menu").blink_components_highlight,
             },
 
             label_description = {
