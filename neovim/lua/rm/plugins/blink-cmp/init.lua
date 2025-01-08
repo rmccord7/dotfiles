@@ -49,8 +49,12 @@ return {
       },
     },
 
+    snippets = {
+      preset = 'luasnip',
+    },
+
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'luasnip', 'buffer', 'lazydev' },
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
 
       providers = {
         -- Dont show LuaLS require statements when lazydev has items
