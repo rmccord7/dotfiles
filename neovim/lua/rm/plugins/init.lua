@@ -1,6 +1,7 @@
 return {
-  require('rm.plugins.comment'),
+  require('rm.plugins.c-format-comment'),
   require('rm.plugins.colorful-menu'),
+  require('rm.plugins.comment'),
   require('rm.plugins.diagflow'),
   require('rm.plugins.diffview'),
   require('rm.plugins.gitsigns'),
