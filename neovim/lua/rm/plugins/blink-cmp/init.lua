@@ -1,3 +1,10 @@
+local source_priority = {
+  snippets = 4,
+  lsp = 3,
+  path = 2,
+  buffer = 1,
+}
+
 return {
   'saghen/blink.cmp',
   dependencies = {
@@ -10,13 +17,26 @@ return {
     },
   },
   lazy = false,
-  version = 'v0.*',
+  -- version = 'v0.*',
+  build = 'cargo build --release',
 
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
     appearance = {
       use_nvim_cmp_as_default = true,
+    },
+
+    fuzzy = {
+      sorts = {
+        function(a, b)
+          if a.source_id ~= 'cmdline' and b.source_id ~= 'cmdline' then
+            return(source_priority[a.source_id] > source_priority[b.source_id])
+          end
+        end,
+        'score',
+        'sort_text',
+      },
     },
 
     keymap = {
@@ -29,12 +49,6 @@ return {
 
       ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
       ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
-
-      -- ["<C-space>"] = {
-      --   function(cmp)
-      --     cmp.show({ providers = { "luasnip" } })
-      --   end,
-      -- },
 
       cmdline = {
         preset = 'super-tab',
@@ -63,9 +77,6 @@ return {
           fallbacks = { 'lsp' },
           module = 'lazydev.integrations.blink',
         },
-        -- luasnip = {
-        --   score_offset = -99
-        -- },
       },
     },
 
