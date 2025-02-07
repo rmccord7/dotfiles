@@ -56,7 +56,6 @@ return {
       },
 
       buffers = {
-        path_display = { 'smart' },
         show_all_buffers = true,
         attach_mappings = function(_, local_map)
           local_map('n', 'd', actions.delete_buffer)
@@ -75,16 +74,17 @@ return {
       },
 
       find_files = {
-        path_display = { 'smart' },
         find_command = { 'rg', '--files', '-L' },
         hidden = true,
       },
-
-      oldfiles = {
-        path_display = { 'smart' },
-      },
     },
     defaults = {
+      path_display = {
+        filename_first = {
+          reverse_directories = true
+        }
+      },
+
       vimgrep_arguments = {
         'rg',
         '--color=never',
