@@ -49,8 +49,10 @@ return {
 
       ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
       ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
+    },
 
-      cmdline = {
+    cmdline = {
+      keymap = {
         preset = 'super-tab',
 
         ['<C-h>'] = { 'show', 'show_documentation', 'hide_documentation' },
