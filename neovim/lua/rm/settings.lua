@@ -12,6 +12,7 @@ vim.opt.diffopt = { -- Diff options
   filler = true, -- Blank lines to keep sides aligned
   followwrap = true, -- Use current wrap option
   vertical = true, -- Vertical diff mode
+  linematch = 60, -- Vertical diff mode
 }
 vim.o.exrc = true -- Enable '.nvim.lua' project config
 vim.opt.fillchars = { diff = '⣿' }
