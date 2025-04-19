@@ -18,6 +18,8 @@ return {
       '~/.config/*',
       '~/perforce/ganges/rel/*',
       '~/perforce/ganges/dev/*',
+      '~/perforce/zealis/mainline',
+      '~/perforce/zealis/congo/*',
       require('rm.config.path').dev_plugins .. '/*',
     },
     last_session_on_startup = false,
