@@ -14,7 +14,7 @@ return {
     vim.keymap.set(
       { 'n' },
       '<leader>pc',
-      [[:P4 Clients display<CR>]],
+      [[:P4 Client display_cls<CR>]],
       { nowait = true, desc = "Open picker for the current client's CLs" }
     )
 
