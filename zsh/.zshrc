@@ -211,15 +211,15 @@ function pu {
   fi
 }
 
+alias mr='mise run'
+
 # Load local aliases.
 if [ -f "$HOME"/.zshrc.local.aliases ]; then
   source $HOME/.zshrc.local.aliases
 fi
 
-# Direnv
-if command -v direnv > /dev/null; then
-  eval "$(direnv hook zsh)"
-fi
+# Mise
+eval "$(mise activate zsh)"
 
 # Perforce
 if command -v p4 > /dev/null; then
