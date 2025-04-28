@@ -133,3 +133,7 @@ vim.lsp.config('*', {
   capabilities = default_capabilities,
   on_attach = default_on_attach,
 })
+
+return {
+  on_attach = default_on_attach,
+}

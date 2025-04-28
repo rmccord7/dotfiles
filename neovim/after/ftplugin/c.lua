@@ -17,3 +17,14 @@ vim.bo.tabstop = 4        -- Number of spaces in a tab
 -- Map to align C variable declarations by both identifier and = when visually
 -- selected
 vim.keymap.set({ "x" }, '<leader>ad', 'gadgvga=', { desc = 'Align c style variables' })
+
+-- https://github.com/neovim/neovim/issues/33577
+-- https://github.com/neovim/neovim/pull/33579
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client and client.name == "clangd" then
+            require("rm.lsp.defaults").on_attach(client, bufnr)
+        end
+    end,
+})
