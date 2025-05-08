@@ -1,8 +1,7 @@
 require('telescope')
 
 -- Log level
--- ~/.local/state/nvim/lsp.log
-vim.lsp.set_log_level(vim.log.levels.WARN)
+vim.lsp.set_log_level(vim.log.levels.OFF)
 
 -- Close signature_help on following events
 vim.lsp.buf.signature_help({
