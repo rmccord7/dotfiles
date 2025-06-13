@@ -2,6 +2,7 @@ return {
   'rmccord7/p4.nvim',
   dependencies = {
     'nvim-neotest/nvim-nio',
+    'MunifTanjim/nui.nvim',
     'nvim-telescope/telescope.nvim',
     {
       "ColinKennedy/mega.cmdparse",
