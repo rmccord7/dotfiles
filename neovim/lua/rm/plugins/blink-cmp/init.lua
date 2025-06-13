@@ -29,11 +29,7 @@ return {
 
     fuzzy = {
       sorts = {
-        function(a, b)
-          if a.source_id ~= 'cmdline' and b.source_id ~= 'cmdline' then
-            return(source_priority[a.source_id] > source_priority[b.source_id])
-          end
-        end,
+        'exact',
         'score',
         'sort_text',
       },
