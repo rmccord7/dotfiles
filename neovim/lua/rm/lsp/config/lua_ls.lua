@@ -23,7 +23,7 @@ vim.lsp.config('lua_ls', {
   },
 
   filetypes = {
-   'lua',
+    'lua',
   },
 
   settings = {
@@ -45,15 +45,6 @@ vim.lsp.config('lua_ls', {
         checkThirdParty = false, -- Look for external lua modules
         library = library_files, -- Point to external lua modules
       },
-    },
-  },
-
-  commands = { -- LSP commands
-    Format = { -- LSP format command
-      -- Format the lua buffer using the stylua-nvim plugin.
-      function()
-        require('stylua-nvim').format_file()
-      end,
     },
   },
 })

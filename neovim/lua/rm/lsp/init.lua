@@ -23,6 +23,7 @@ require('rm.lsp.defaults')
 
 -- Configure each LSP server.
 local lsp_servers = {
+  'basedpyright',
   'clangd',
   'lua_ls',
   'rust_analyzer',

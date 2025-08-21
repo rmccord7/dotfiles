@@ -1,20 +1,45 @@
+local events = {
+  'BufReadPost',
+  'BufWritePost',
+  'InsertLeave',
+  -- 'FileReadPost',
+  -- 'TextChanged',
+  -- 'ModeChanged',
+  -- 'FocusGained',
+}
+
 return {
   'mfussenegger/nvim-lint',
-  config = function(_, _)
-    local lint_group = vim.api.nvim_create_augroup('lint', { clear = true })
+  event = events,
+  config = function()
+    local lint = require('lint')
 
-    vim.api.nvim_create_autocmd({
-      'FileReadPost',
-      'InsertLeave',
-      'BufWritePost',
-      'TextChanged',
-      'ModeChanged',
-      'FocusGained',
-    }, {
-      group = lint_group,
+    lint.linters_by_ft = {
+      lua = { 'selene' },
+      python = { 'ruff' },
+    }
+
+    vim.api.nvim_create_autocmd(events, {
       callback = function()
-        require('lint').try_lint()
+        lint.try_lint()
       end,
     })
+
+    local linters = {
+      'ruff',
+      'selene',
+    }
+
+    for _, linter in ipairs(linters) do
+      local ns = lint.get_namespace(linter)
+      vim.diagnostic.config(
+        vim.tbl_deep_extend('force', vim.diagnostic.config(), {
+          virtual_text = {
+            suffix = ' ⁅' .. linter .. '⁆',
+          },
+        }),
+        ns
+      )
+    end
   end,
 }

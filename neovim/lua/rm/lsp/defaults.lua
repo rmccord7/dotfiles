@@ -1,18 +1,18 @@
 local default_root_markers = {
   '.git',
   '.nvim.lua',
-  "mise.toml",
+  'mise.toml',
 }
 
-local default_capabilities = vim.tbl_deep_extend('force', require('blink.cmp').get_lsp_capabilities(), {
-  textDocument = {
-    completion = {
-      completionItem = {
-        snippetSupport = false,
-      },
-    },
-  },
-})
+-- local default_capabilities = vim.tbl_deep_extend('force', require('blink.cmp').get_lsp_capabilities(), {
+--   textDocument = {
+--     completion = {
+--       completionItem = {
+--         snippetSupport = false,
+--       },
+--     },
+--   },
+-- })
 
 local lsp_rename = function()
   local curr_name = vim.fn.expand('<cword>')
@@ -104,10 +104,6 @@ local default_on_attach = function(_, bufnr)
     require('telescope.builtin').lsp_references()
   end, { buffer = bufnr, desc = 'LSP List References' })
 
-  vim.keymap.set({ 'n' }, '<leader>f', function()
-    vim.lsp.buf.format({ async = true })
-  end, { buffer = bufnr, desc = 'LSP Format' })
-
   vim.keymap.set(
     { 'n' },
     '<leader>li',
@@ -130,7 +126,7 @@ end
 
 vim.lsp.config('*', {
   root_markers = default_root_markers,
-  capabilities = default_capabilities,
+  -- capabilities = default_capabilities,
   on_attach = default_on_attach,
 })
 

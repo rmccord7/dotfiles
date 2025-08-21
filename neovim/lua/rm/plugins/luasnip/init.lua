@@ -10,6 +10,7 @@ return {
     -- Set up actual snippets
     require('luasnip.loaders.from_vscode').lazy_load({
       paths = { config.path.plugin_config .. path_util.os_path('/luasnip/vscode/') },
+      include = { "c", "lua" },
     })
     require('luasnip.loaders.from_lua').load()
   end,

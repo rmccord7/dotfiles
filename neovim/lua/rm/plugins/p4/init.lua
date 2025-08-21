@@ -2,12 +2,11 @@ return {
   'rmccord7/p4.nvim',
   dependencies = {
     'nvim-neotest/nvim-nio',
-    'MunifTanjim/nui.nvim',
     'nvim-telescope/telescope.nvim',
     {
-      "ColinKennedy/mega.cmdparse",
-      dependencies = { "ColinKennedy/mega.logging" },
-      version = "v1.*",
+      'ColinKennedy/mega.cmdparse',
+      dependencies = { 'ColinKennedy/mega.logging' },
+      version = 'v1.*',
     },
   },
   dev = true,
